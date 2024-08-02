@@ -2,11 +2,11 @@
 // import { FaCircleDot } from 'react-icons/fa6'
 import { Poppins, Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
+import Testimonials from '@/components/testimonials'
 import { getProducts } from '../../../api'
 import styles from '../../styles/styles.module.scss'
 import CityProduct from './components/city-product'
 import Products from './components/products'
-import Testimonials from '@/components/testimonials'
 
 const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
