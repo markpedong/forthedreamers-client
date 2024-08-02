@@ -9,14 +9,6 @@ import Image from 'next/image'
 const roboto = Roboto_Condensed({ weight: ['400', '800'], subsets: ['latin'] })
 
 const Page = () => {
-	const HOW_TO_ANSWERS = [
-		`After receiving your UNIQUE GIFT CARD CODE, you may shop in our webstore.`,
-		`Proceed to Check Out and you will be directed to Customer Information Page with the Gift Card option on the right side.`,
-		`Enter your UNIQUE GIFT CARD CODE and click APPLY. Amount will be automatically deducted on your SUB-TOTAL (Shipping will be calculated at next step).`,
-		`Continue to Shipping and Payment pages with your new total amount and then Complete Order.`,
-		`Complete order.`
-	]
-
 	return (
 		<div className={styles.mainWrapper}>
 			<PageTitle title="GIFT CARD MANUAL" />

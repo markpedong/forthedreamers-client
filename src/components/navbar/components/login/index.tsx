@@ -7,7 +7,6 @@ import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { IoMdClose } from 'react-icons/io'
 import { FcGoogle } from 'react-icons/fc'
-import { handleGoogleSignin } from '@/lib/auth/googleSignInServerAction'
 import { LOGIN_STATE } from '@/app/(main)/constants/enums'
 
 const inter = Inter({ weight: ['300', '400', '800'], subsets: ['latin'] })
@@ -63,11 +62,7 @@ const Login: FC<{ setShowLogin: () => void }> = ({ setShowLogin }) => {
 								</span>
 							</div>
 							<div className={styles.btn}>Login</div>
-							<motion.div
-								className={styles.googleBtnContainer}
-								whileTap={{ scale: 0.9 }}
-								onClick={() => handleGoogleSignin()}
-							>
+							<motion.div className={styles.googleBtnContainer} whileTap={{ scale: 0.9 }}>
 								<FcGoogle />
 								<span>Google</span>
 							</motion.div>
@@ -88,19 +83,12 @@ const Login: FC<{ setShowLogin: () => void }> = ({ setShowLogin }) => {
 								>
 									forgot password?
 								</span>
-								<span
-									className="capitalize text-black font-bold mt-1"
-									onClick={() => setLoginState(LOGIN_STATE.LOGIN)}
-								>
+								<span className="capitalize text-black font-bold mt-1" onClick={() => setLoginState(LOGIN_STATE.LOGIN)}>
 									Already have an account?
 								</span>
 							</div>
 							<div className={styles.btn}>Register</div>
-							<motion.div
-								className={styles.googleBtnContainer}
-								whileTap={{ scale: 0.9 }}
-								onClick={() => handleGoogleSignin()}
-							>
+							<motion.div className={styles.googleBtnContainer} whileTap={{ scale: 0.9 }}>
 								<FcGoogle />
 								<span>Google</span>
 							</motion.div>

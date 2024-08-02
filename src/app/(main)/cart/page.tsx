@@ -1,6 +1,5 @@
 'use client'
 
-import classNames from 'classnames'
 import { Roboto_Condensed } from 'next/font/google'
 import React, { FC, useState } from 'react'
 import styles from './styles.module.scss'

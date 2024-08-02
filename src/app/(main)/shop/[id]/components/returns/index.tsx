@@ -1,5 +1,5 @@
 import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/app/(main)/constants'
-import { ListAnswers, PageTitle, Question } from '@/components/page-components'
+import { ListAnswers, Question } from '@/components/page-components'
 import React from 'react'
 
 type Props = {}

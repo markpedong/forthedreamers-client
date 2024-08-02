@@ -2,7 +2,6 @@ import React from 'react'
 import Testimonial from '../testimonial'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
-import classNames from 'classnames'
 
 const Testimonials = () => {
 	const [sliderRef] = useKeenSlider<HTMLDivElement>(
