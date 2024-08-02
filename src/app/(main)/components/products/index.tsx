@@ -9,10 +9,10 @@ import { TProductItem } from '../../../../../api/types'
 const Products: FC<{ products: TProductItem[] }> = ({ products }) => {
 	const [ref] = useKeenSlider<HTMLDivElement>({
 		loop: true,
-		mode: 'free',
+		mode: 'snap',
 		breakpoints: {
 			'(min-width: 976px)': {
-				slides: { perView: 4, spacing: 150 }
+				slides: { perView: products?.length < 4 ? products?.length : 4, spacing: 150 }
 			},
 			'(max-width: 976px)': {
 				slides: { perView: 2, spacing: 150 }

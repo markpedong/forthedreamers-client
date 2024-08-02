@@ -3,6 +3,10 @@
     @apply fcol items-center justify-center gap-4;
     height: toRem(300);
 
+    img {
+        @apply cursor-pointer
+    }
+
     div {
         @apply fcol text-center;
     }
@@ -12,7 +16,7 @@
     @apply fcol gap-1;
 
     span:not(:last-child) {
-        @apply uppercase;
+        @apply uppercase cursor-pointer;
         font-size: toRem(16);
     }
 
