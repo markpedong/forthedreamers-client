@@ -48,7 +48,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			...(token ? { token: String(token)?.replaceAll(`"`, '') } : {})
+			...(token ? { 'Authorization': `Bearer ${String(token).replace(/"/g, '')}` } : {})
 		},
 		body: JSON.stringify(data) || '{}'
 	})
@@ -68,16 +68,13 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 
 const get = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 	const token = getLocalStorage('token')
-	const apiResponse = await fetch(
-		`${process.env.NEXT_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`,
-		{
-			method: 'GET',
-			headers: {
-				...(token ? { token: String(token)?.replaceAll(`"`, '') } : {})
-			},
-			next: { revalidate: 0 }
-		}
-	)
+	const apiResponse = await fetch(`${process.env.NEXT_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`, {
+		method: 'GET',
+		headers: {
+			...(token ? { token: String(token)?.replaceAll(`"`, '') } : {})
+		},
+		next: { revalidate: 0 }
+	})
 	//prettier-ignore
 	const response = await apiResponse.json() as ApiResponse<T>
 
@@ -87,7 +84,6 @@ const get = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 		if (response?.status === 401) {
 			redirect('/unauthorized')
 		}
-
 	}
 
 	return response as ApiResponse<T>

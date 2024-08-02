@@ -1,7 +1,7 @@
 export type TProductItem = {
 	id: string
 	name: string
-	Description: string
+	description: string
 	collection_id: string
 	images: string[]
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import Product from '@/components/product'
@@ -23,7 +23,6 @@ const Products: FC<{ products: TProductItem[] }> = ({ products }) => {
 		}
 	})
 
-	console.log(products)
 	return (
 		<div className="keen-slider" ref={ref}>
 			{products?.map(product => (
@@ -33,4 +32,4 @@ const Products: FC<{ products: TProductItem[] }> = ({ products }) => {
 	)
 }
 
-export default Products
+export default memo(Products)

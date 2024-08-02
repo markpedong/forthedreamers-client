@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"noImplicitAny": false,
 		"noUnusedLocals": true,
 		"noUnusedParameters": false,
 		"lib": ["dom", "dom.iterable", "esnext"],

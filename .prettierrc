@@ -1,0 +1,26 @@
+{
+  "printWidth": 140,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "semi": false,
+  "singleAttributePerLine": false,
+  "arrowParens": "avoid",
+  "importOrder": [
+    "^next/(.*)$",
+    "^react(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/components/(.*)$",
+    "^@/public/(.*)$",
+    "^@/store(.*)$",
+    "^@/redux/(.*)$",
+    "^@/api_slices/(.*)$",
+    "^@/utils/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/game-99-interface/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
+}

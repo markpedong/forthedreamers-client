@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import styles from './styles.module.scss'
 import Image from 'next/image'
 import { Roboto_Condensed } from 'next/font/google'
@@ -12,6 +12,8 @@ const roboto = Roboto_Condensed({ weight: ['300', '400', '600'], subsets: ['lati
 
 const Product: FC<{ className?: string; product?: TProductItem }> = ({ className, product }) => {
 	const { push } = useRouter()
+
+	console.log(product)
 
 	return (
 		<div className={classNames(styles.productContainer, className)}>
@@ -31,4 +33,4 @@ const Product: FC<{ className?: string; product?: TProductItem }> = ({ className
 	)
 }
 
-export default Product
+export default memo(Product)
