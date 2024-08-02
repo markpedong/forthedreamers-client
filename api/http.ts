@@ -20,7 +20,7 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
 
 	form.append('file', data)
 
-	const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`, {
+	const response = await fetch(`${process.env.NEXT_DOMAIN}${url}`, {
 		method: 'POST',
 		headers: {
 			...(token ? { token: String(token)?.replaceAll(`"`, '') } : {})
@@ -44,7 +44,7 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
 
 const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 	const token = getLocalStorage('token')
-	const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`, {
+	const apiResponse = await fetch(`${process.env.NEXT_DOMAIN}${url}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 const get = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 	const token = getLocalStorage('token')
 	const apiResponse = await fetch(
-		`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}${stringify(data) ? '?' + stringify(data) : ''}`,
+		`${process.env.NEXT_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`,
 		{
 			method: 'GET',
 			headers: {

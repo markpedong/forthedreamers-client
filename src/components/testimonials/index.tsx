@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Testimonial from '../testimonial'
 import { useKeenSlider } from 'keen-slider/react'

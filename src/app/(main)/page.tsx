@@ -1,41 +1,41 @@
-'use client'
-
 import styles from '../../styles/styles.module.scss'
-import { GoDotFill } from 'react-icons/go'
-import { FaCircleDot } from 'react-icons/fa6'
+// import { GoDotFill } from 'react-icons/go'
+// import { FaCircleDot } from 'react-icons/fa6'
 import { Poppins, Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
 import Testimonials from '@/components/testimonials'
 import Products from './components/products'
 import CityProduct from './components/city-product'
+import { getProducts } from '../../../api'
 
 const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
 
-const Home = () => {
+const Home = async () => {
+	const [products] = await Promise.all([getProducts()])
+
 	return (
 		<div>
 			<div className={styles.mainWrapper}>
-				<div className={styles.timelessContainer}>
+				{/* <div className={styles.timelessContainer}>
 					<span>timeless silhouettes</span>
 					<span className={roboto.className}>live now</span>
 					<div>
 						<FaCircleDot />
 						<GoDotFill />
 					</div>
-				</div>
+				</div> */}
 			</div>
-			<Products />
+			<Products products={products?.data ?? []} />
 			<div className={styles.marqueeWrapper}>
 				<div className={roboto.className}>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid et optio unde id ullam quis,
-					similique, voluptatum, corporis eligendi aperiam reprehenderit distinctio? Natus culpa suscipit ea
-					ex quae voluptate quaerat. Quae nostrum modi dolor quasi minus, dolorum, recusandae iste optio
-					facere numquam laboriosam possimus velit adipisci voluptas necessitatibus placeat tenetur harum
-					corrupti repellat. Sit repellendus, in expedita odit aperiam possimus eum ad explicabo fugit ipsum
-					tempora, sint sequi placeat eius culpa, pariatur voluptatum eaque eos labore unde modi. Eum
-					repellendus neque nemo blanditiis autem? Placeat suscipit fugit numquam eos minus magnam ipsum,
-					repellat, officiis dolores voluptatibus animi error voluptatum inventore.
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid et optio unde id ullam quis, similique,
+					voluptatum, corporis eligendi aperiam reprehenderit distinctio? Natus culpa suscipit ea ex quae voluptate
+					quaerat. Quae nostrum modi dolor quasi minus, dolorum, recusandae iste optio facere numquam laboriosam
+					possimus velit adipisci voluptas necessitatibus placeat tenetur harum corrupti repellat. Sit repellendus, in
+					expedita odit aperiam possimus eum ad explicabo fugit ipsum tempora, sint sequi placeat eius culpa, pariatur
+					voluptatum eaque eos labore unde modi. Eum repellendus neque nemo blanditiis autem? Placeat suscipit fugit
+					numquam eos minus magnam ipsum, repellat, officiis dolores voluptatibus animi error voluptatum inventore.
 				</div>
 			</div>
 			<div className={styles.dudeWrapper}>
