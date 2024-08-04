@@ -1,10 +1,12 @@
 'use client'
 
 import 'keen-slider/keen-slider.min.css'
-import { useKeenSlider } from 'keen-slider/react'
+
 import React, { FC } from 'react'
-import Product from '@/components/product'
 import { TProductItem } from '@/api/types'
+import { useKeenSlider } from 'keen-slider/react'
+
+import Product from '@/components/product'
 
 const CityProduct: FC<{ products: TProductItem[] }> = ({ products }) => {
   const [ref] = useKeenSlider<HTMLDivElement>({
@@ -20,9 +22,9 @@ const CityProduct: FC<{ products: TProductItem[] }> = ({ products }) => {
   })
 
   return (
-    <div className='keen-slider' ref={ref}>
-      <Product className='keen-slider__slide' product={products?.[0]} />
-      <Product className='keen-slider__slide' product={products?.[1]} />
+    <div className="keen-slider" ref={ref}>
+      <Product className="keen-slider__slide" product={products?.[0]} />
+      <Product className="keen-slider__slide" product={products?.[1]} />
     </div>
   )
 }
