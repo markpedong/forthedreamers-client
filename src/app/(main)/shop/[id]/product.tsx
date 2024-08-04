@@ -1,38 +1,85 @@
 'use client'
 
-import { CARE_GUIDE } from '@/app/(main)/constants/enums'
-import classNames from 'classnames'
-import { AnimatePresence, motion } from 'framer-motion'
+import React, { FC, memo, useMemo, useState } from 'react'
 import { Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { FC, memo, useState } from 'react'
+import { TProductItem, TVariationItem } from '@/api/types'
+import classNames from 'classnames'
+import { AnimatePresence, motion } from 'framer-motion'
 import { BsBox } from 'react-icons/bs'
-import { FaPlus, FaMinus } from 'react-icons/fa6'
+import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoIosReturnLeft } from 'react-icons/io'
 import { MdLocalLaundryService } from 'react-icons/md'
+
 import Header from '@/components/header'
 import { ListAnswers } from '@/components/page-components'
-import { TProductItem } from '../../../../../api/types'
+import { CARE_GUIDE } from '@/app/(main)/constants/enums'
+
 import CareGuide from './components/care-guide'
 import styles from './styles.module.scss'
 
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
+const roboto = Roboto_Condensed({ weight: ['300', '400', '500', '800'], subsets: ['latin'] })
 
-const Product: FC<{ product: TProductItem }> = ({ product }) => {
+const getUniqueVariations = (variations, type) => {
+  const uniqueValues = new Set()
+  return variations.filter((item) => {
+    const value = type === 'size' ? item.size : item.color
+    if (uniqueValues.has(value)) return false
+    uniqueValues.add(value)
+    return true
+  })
+}
+
+const Variations = ({ variations, selectedId, setSelectedId, type, size, color }) => {
+  return (
+    <div className={styles.variations}>
+      {variations.map((item) => {
+        const isDisabled =
+          type === 'size' ? color && item.color !== color && selectedId !== item.id : size && item.size !== size && selectedId !== item.id
+
+        const handleClick = () => {
+          if (selectedId === item.id) {
+            setSelectedId(null)
+          } else if (!isDisabled) {
+            setSelectedId(item.id)
+          }
+        }
+        return (
+          <span
+            key={item.id}
+            role="button"
+            aria-selected={selectedId === item.id}
+            className={`${styles.variationItem} ${selectedId === item.id ? styles.selected : ''} ${isDisabled ? styles.disabled : ''}`}
+            onClick={handleClick}
+          >
+            {type === 'size' ? item.size : item.color}
+          </span>
+        )
+      })}
+    </div>
+  )
+}
+
+const Product: FC<{ product: TProductItem; variations: TVariationItem[] }> = ({ product, variations }) => {
   const { push } = useRouter()
-  const [selectedVariation, setSelectedVariation] = useState('')
+  const [size, setSize] = useState('')
+  const [color, setColor] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [openCareGuide, setOpenCareGuide] = useState(false)
   const [selectedCare, setSelectedCare] = useState<CARE_GUIDE>(CARE_GUIDE.CARE_GUIDE)
+  const uniqueSizes = useMemo(() => getUniqueVariations(variations, 'size'), [variations])
+  const uniqueColors = useMemo(() => getUniqueVariations(variations, 'color'), [variations])
 
-  console.log(product)
+  const selectedSize = variations.find((i) => i.id === size)?.size
+  const selectedColor = variations.find((i) => i.id === color)?.color
+
   return (
     <div className={styles.mainWrapper}>
       <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
       <div className={styles.productWrapper}>
         <div className={styles.productImgContainer}>
-          <Image src={'/assets/images/dog.jpg'} alt='product' width={500} height={500} draggable={false} />
+          <Image src={product?.images?.[0]} alt="product" width={500} height={500} draggable={false} />
         </div>
         <div className={classNames(styles.descriptionContainer, roboto.className)}>
           <h1>{product?.name}</h1>
@@ -42,32 +89,38 @@ const Product: FC<{ product: TProductItem }> = ({ product }) => {
           </p>
           <span className={styles.description}>{product?.description}</span>
           <div className={styles.features}>
-            <ListAnswers answers={['60% Cotton 40% Polyester', 'Regular Fit', 'Unisex', 'Silkscreen Print']} />
+            <ListAnswers answers={product?.features} />
           </div>
           <div className={styles.sizeContainer}>
             <span>SIZE:</span>
-            <span>{selectedVariation}</span>
+            <span>{selectedSize}</span>
           </div>
-          <div className={styles.variants}>
-            {['Small', 'Medium', 'Large']?.map(q => {
-              return (
-                <span
-                  key={q}
-                  style={{
-                    border: selectedVariation === q ? '0.1rem solid black' : ''
-                  }}
-                  onClick={() => setSelectedVariation(q)}
-                >
-                  {q}
-                </span>
-              )
-            })}
+          <Variations
+            variations={uniqueSizes}
+            selectedId={size}
+            setSelectedId={setSize}
+            type="size"
+            size={selectedSize}
+            color={selectedColor}
+          />
+
+          <div className={styles.sizeContainer}>
+            <span>COLOR:</span>
+            <span>{selectedColor}</span>
           </div>
+          <Variations
+            variations={uniqueColors}
+            selectedId={color}
+            setSelectedId={setColor}
+            type="color"
+            size={selectedSize}
+            color={selectedColor}
+          />
           <div className={styles.quantityContainer}>
             <div className={styles.addMinusContainer}>
-              <FaMinus onClick={() => setQuantity(quantity - 1)} />
+              <FaMinus onClick={() => setQuantity((qty) => (qty > 1 ? qty - 1 : qty))} />
               {quantity}
-              <FaPlus onClick={() => setQuantity(quantity + 1)} />
+              <FaPlus onClick={() => setQuantity((qty) => (qty < 10 ? (qty += 1) : qty))} />
             </div>
             <motion.div
               className={styles.addToCart}

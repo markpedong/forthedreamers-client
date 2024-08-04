@@ -3,8 +3,8 @@
 import { Poppins, Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
 import Testimonials from '@/components/testimonials'
-import { getProducts } from '../../../api'
-import styles from '../../styles/styles.module.scss'
+import { getProducts } from '@/api'
+import styles from '@/styles/styles.module.scss'
 import CityProduct from './components/city-product'
 import Products from './components/products'
 

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { Roboto_Condensed } from 'next/font/google'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import { TProductItem } from '../../../api/types'
+import { TProductItem } from '@/api/types'
 
 const roboto = Roboto_Condensed({ weight: ['300', '400', '600'], subsets: ['latin'] })
 

@@ -4,7 +4,7 @@ import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
 import React, { FC } from 'react'
 import Product from '@/components/product'
-import { TProductItem } from '../../../../../api/types'
+import { TProductItem } from '@/api/types'
 
 const CityProduct: FC<{ products: TProductItem[] }> = ({ products }) => {
   const [ref] = useKeenSlider<HTMLDivElement>({
