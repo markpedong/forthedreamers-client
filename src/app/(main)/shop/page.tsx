@@ -29,7 +29,7 @@ const Page = async () => {
         <div>
           <span className={styles.sort}>ALPHABETICALLY, A-Z</span>
           <FaAngleDown />
-          <span>152 PRODUCTS</span>
+          <span>{products?.data?.length} PRODUCTS</span>
         </div>
       </div>
       <div className={styles.productWrapper}>{products?.data?.map((item) => <Product product={item} />)}</div>

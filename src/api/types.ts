@@ -11,6 +11,8 @@ export type TProductItem = {
 }
 export type TShortVar = Omit<TVariationItem, 'quantity' | 'size'>
 
+export type TProductDetails = Omit<TProductItem, "variations">
+
 export type TVariationItem = {
   color: string
   id: string

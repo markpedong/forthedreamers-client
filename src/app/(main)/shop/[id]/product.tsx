@@ -4,7 +4,7 @@ import React, { FC, memo, useMemo, useState } from 'react'
 import { Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { TProductItem, TVariationItem } from '@/api/types'
+import { TProductDetails, TProductItem, TVariationItem } from '@/api/types'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BsBox } from 'react-icons/bs'
@@ -64,7 +64,7 @@ const Variations = ({ variations, selectedId, setSelectedId, type, size, color }
   )
 }
 
-const Product: FC<{ product: TProductItem; variations: TVariationItem[] }> = ({ product, variations }) => {
+const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = ({ product, variations }) => {
   const { push } = useRouter()
   const [size, setSize] = useState('')
   const [color, setColor] = useState('')

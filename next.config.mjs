@@ -11,6 +11,9 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
     additionalData: `@import "./src/styles/_helpers.scss";`
   },
+  env: {
+    NEXT_DOMAIN: process.env.NEXT_DOMAIN,
+  },
   images: {
     remotePatterns: [
       {

@@ -22,7 +22,7 @@ const CityProduct: FC<{ products: TProductItem[] }> = ({ products }) => {
   })
 
   return (
-    <div className="keen-slider" ref={ref}>
+    <div className="keen-slider mt-10" ref={ref}>
       <Product className="keen-slider__slide" product={products?.[0]} />
       <Product className="keen-slider__slide" product={products?.[1]} />
     </div>

@@ -3,7 +3,7 @@
     @apply py-5 flex gap-5;
 
     img {
-      @apply size-[5rem] object-contain;
+      @apply size-[5rem] object-contain cursor-pointer;
     }
   }
 

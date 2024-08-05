@@ -2,9 +2,11 @@
 // import { FaCircleDot } from 'react-icons/fa6'
 import { Poppins, Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
-import Testimonials from '@/components/testimonials'
 import { getProducts } from '@/api'
+
+import Testimonials from '@/components/testimonials'
 import styles from '@/styles/styles.module.scss'
+
 import CityProduct from './components/city-product'
 import Products from './components/products'
 
@@ -12,7 +14,7 @@ const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
 
 const Home = async () => {
-  const [products] = await Promise.all([getProducts()])
+  const [products] = await Promise.all([getProducts({})])
 
   return (
     <div>
@@ -38,7 +40,7 @@ const Home = async () => {
         </div>
       </div>
       <div className={styles.dudeWrapper}>
-        <Image src={'/assets/images/dude.webp'} alt='' height={1000} width={1000} />
+        <Image src={'/assets/images/dude.webp'} alt="" height={1000} width={1000} />
       </div>
       <div className={styles.afterProductWrapper}>
         <div className={styles.header}>
@@ -48,7 +50,7 @@ const Home = async () => {
         <CityProduct products={products?.data ?? []} />
       </div>
       <div className={styles.dudeWrapper}>
-        <Image src={'/assets/images/group.webp'} alt='' height={1000} width={1000} />
+        <Image src={'/assets/images/group.webp'} alt="" height={1000} width={1000} />
       </div>
       <Testimonials />
     </div>
