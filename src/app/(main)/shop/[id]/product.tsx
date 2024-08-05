@@ -50,7 +50,10 @@ const Variations = ({ variations, selectedId, setSelectedId, type, size, color }
             key={item.id}
             role="button"
             aria-selected={selectedId === item.id}
-            className={`${styles.variationItem} ${selectedId === item.id ? styles.selected : ''} ${isDisabled ? styles.disabled : ''}`}
+            className={classNames(styles.variationItem, {
+              [styles.selected]: selectedId === item.id,
+              [isDisabled]: styles.disabled
+            })}
             onClick={handleClick}
           >
             {type === 'size' ? item.size : item.color}
