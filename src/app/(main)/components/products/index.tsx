@@ -27,7 +27,7 @@ const Products: FC<{ products: TProductItem[] }> = ({ products }) => {
   })
 
   return (
-    <div className="keen-slider" ref={ref}>
+    <div className="keen-slider mt-10" ref={ref}>
       {products?.map((product) => <Product className="keen-slider__slide" product={product} key={product?.id} />)}
     </div>
   )

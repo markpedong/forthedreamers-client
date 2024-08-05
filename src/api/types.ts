@@ -1,3 +1,5 @@
+
+
 export type TProductItem = {
   id: string
   name: string
@@ -5,8 +7,9 @@ export type TProductItem = {
   collection_id: string
   images: string[]
   features: string[]
-  variations: TVariationItem[]
+  variations: TShortVar[]
 }
+export type TShortVar = Omit<TVariationItem, 'quantity' | 'size'>
 
 export type TVariationItem = {
   color: string

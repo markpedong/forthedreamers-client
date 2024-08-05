@@ -1,6 +1,5 @@
-
 .productContainer {
-    @apply fcol items-center justify-center gap-4;
+    @apply fcol items-center justify-start gap-4;
     height: toRem(300);
 
     img {
@@ -15,13 +14,23 @@
 .textContainer {
     @apply fcol gap-1;
 
-    span:not(:last-child) {
-        @apply uppercase cursor-pointer;
+   .title {
+        @apply uppercase cursor-pointer font-bold;
         font-size: toRem(16);
     }
 
-    span:last-child {
+    .avail {
         font-size: toRem(12);
         font-weight: 300;
+    }
+}
+
+.colors {
+    @apply flex gap-3 justify-center;
+    flex-direction: row !important;
+
+    span {
+        @apply text-white rounded-full size-4;
+        cursor: pointer !important;
     }
 }
