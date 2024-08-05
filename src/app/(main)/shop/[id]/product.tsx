@@ -76,6 +76,7 @@ const Product: FC<{ product: TProductItem; variations: TVariationItem[] }> = ({ 
 
   const selectedSize = variations.find((i) => i.id === size)?.size
   const selectedColor = variations.find((i) => i.id === color)?.color
+  const selectedVariation = variations.find((item) => item.size === selectedSize && item.color === selectedColor)
 
   return (
     <div className={styles.mainWrapper}>
@@ -86,7 +87,7 @@ const Product: FC<{ product: TProductItem; variations: TVariationItem[] }> = ({ 
         </div>
         <div className={classNames(styles.descriptionContainer, roboto.className)}>
           <h1>{product?.name}</h1>
-          <span className={styles.price}>₱1,490.00</span>
+          <span className={styles.price}>{selectedVariation?.id && <>₱{selectedVariation?.price}.00</>}</span>
           <p className={styles.shipping}>
             <span onClick={() => push('/support/shipping')}>Shipping</span> calculated at checkout.
           </p>
