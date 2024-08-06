@@ -1,0 +1,12 @@
+@import "@/styles/_helpers.scss";
+
+.marquee {
+    @apply relative w-dvw max-w-full overflow-x-hidden py-10 ;
+    height: toRem(135)
+}
+
+.track {
+    @apply absolute whitespace-nowrap text-black font-bold;
+    font-size: toRem(60);
+    line-height: toRem(60);
+}

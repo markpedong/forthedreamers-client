@@ -1,5 +1,3 @@
-
-
 export type TProductItem = {
   id: string
   name: string
@@ -11,7 +9,7 @@ export type TProductItem = {
 }
 export type TShortVar = Omit<TVariationItem, 'quantity' | 'size'>
 
-export type TProductDetails = Omit<TProductItem, "variations">
+export type TProductDetails = Omit<TProductItem, 'variations'>
 
 export type TVariationItem = {
   color: string
@@ -19,4 +17,13 @@ export type TVariationItem = {
   price: number
   quantity: number
   size: string
+}
+
+export type TWebsiteItem = {
+  landing_image1: string
+  landing_image2: string
+  landing_image3: string
+  marquee_text: string
+  promo_text: string
+  website_name: string
 }

@@ -15,14 +15,14 @@ const Product: FC<{ className?: string; product?: TProductItem }> = ({ className
   const { push } = useRouter()
   const [curr, setCurr] = useState<TShortVar>()
   //remove duplicates
-  const arr = product?.variations.filter((obj1, i, arr) => arr.findIndex((obj2) => obj2.color === obj1.color) === i)
+  const arr = product?.variations?.filter((obj1, i, arr) => arr.findIndex((obj2) => obj2.color === obj1.color) === i)
 
   return (
     <div className={classNames(styles.productContainer, className)}>
       <Image onClick={() => push(`/shop/${product?.id}`)} src={product?.images?.[0] ?? ''} alt="" height={150} width={150} />
       <div className={classNames(styles.textContainer, roboto.className)}>
         <span className={styles.title} onClick={() => push(`/shop/${product?.id}`)}>{product?.name}</span>
-        {product?.variations.length! > 0 && (
+        {product?.variations?.length! > 0 && (
           <>
             <span>₱{curr?.price || product?.variations?.[0]?.price}.00</span>
             <span className={styles.avail}>Available Colors</span>

@@ -1,5 +1,5 @@
 .mainWrapper {
-    @apply relative h-dvh bg-[url('/assets/images/main-bg.webp')] bg-center bg-cover bg-no-repeat;
+    @apply relative h-dvh bg-center bg-cover bg-no-repeat;
 
     &:after {
         @apply absolute top-0 left-0 size-full;
@@ -60,25 +60,5 @@
 
     @media screen and (max-width:576px) {
         @apply p-5;
-    }
-}
-
-.marqueeWrapper {
-    @apply overflow-hidden h-full py-10;
-
-    div {
-        @apply flex whitespace-nowrap uppercase font-bold;
-        animation: marquee 5s linear infinite;
-        font-size: toRem(60);
-    }
-}
-
-@keyframes marquee {
-    0% {
-        transform: translate(0, 0);
-    }
-
-    100% {
-        transform: translate(-50%, 0);
     }
 }

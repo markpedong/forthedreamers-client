@@ -1,5 +1,5 @@
 import { post } from './http'
-import { TProductDetails, TProductItem, TVariationItem } from './types'
+import { TProductDetails, TProductItem, TVariationItem, TWebsiteItem } from './types'
 
 export const getProducts = params => post<TProductItem[]>('/public/products', params)
 
@@ -8,3 +8,6 @@ export const getProductDetails = params => post<TProductDetails>('/public/produc
 
 // /products/variations
 export const getVariations = params => post<TVariationItem[]>('/public/products/variations', params)
+
+// /public/website
+export const getWebsiteData = params => post<TWebsiteItem>('/public/website', params)
