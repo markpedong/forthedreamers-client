@@ -12,14 +12,16 @@ const Page = async (searchParams: { [key: string]: string | string[] | undefined
   const page = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1
   const collections = await getCollections({ page })
 
+  console.log('@@@', collections?.data, page)
+
   return (
     <div className={styles.mainWrapper}>
       <PageTitle title="SHOP BY CATEGORY" />
       <div className={styles.categoryWrapper}>
         {collections?.data?.map(collection => <Category data={collection} key={collection?.id} />)}
       </div>
-      <Pagination type="collection" />
-      <Link
+      {/* <Pagination type="collection" /> */}
+      {/* <Link
         href={{
           pathname: '/collection',
           query: {
@@ -38,7 +40,7 @@ const Page = async (searchParams: { [key: string]: string | string[] | undefined
         }}
       >
         next
-      </Link>
+      </Link> */}
     </div>
   )
 }

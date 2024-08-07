@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
 import { TCollectionItem } from '@/api/types'
@@ -20,4 +20,4 @@ const Category: FC<{ data: TCollectionItem }> = ({ data }) => {
   )
 }
 
-export default Category
+export default memo(Category)
