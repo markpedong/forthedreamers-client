@@ -1,5 +1,4 @@
-import React from 'react'
-import Link from 'next/link'
+import React, { FC } from 'react'
 import { getCollections } from '@/api'
 
 import { PageTitle } from '@/components/page-components'
@@ -8,11 +7,13 @@ import Pagination from '@/components/pagination'
 import Category from './components/category'
 import styles from './styles.module.scss'
 
-const Page = async (searchParams: { [key: string]: string | string[] | undefined }) => {
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+const Page: FC<PageProps> = async ({ searchParams }) => {
   const page = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1
   const collections = await getCollections({ page })
-
-  console.log('@@@', collections?.data, page)
 
   return (
     <div className={styles.mainWrapper}>
@@ -20,27 +21,7 @@ const Page = async (searchParams: { [key: string]: string | string[] | undefined
       <div className={styles.categoryWrapper}>
         {collections?.data?.map(collection => <Category data={collection} key={collection?.id} />)}
       </div>
-      {/* <Pagination type="collection" /> */}
-      {/* <Link
-        href={{
-          pathname: '/collection',
-          query: {
-            page: page - 1,
-          },
-        }}
-      >
-        prev
-      </Link>
-      <Link
-        href={{
-          pathname: '/collection',
-          query: {
-            page: page + 1,
-          },
-        }}
-      >
-        next
-      </Link> */}
+      <Pagination type="collection" />
     </div>
   )
 }
