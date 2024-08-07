@@ -9,10 +9,13 @@ import styles from './styles.module.scss'
 
 const Page = async () => {
   const collections = await getCollections({})
+
   return (
     <div className={styles.mainWrapper}>
       <PageTitle title="SHOP BY CATEGORY" />
-      <div className={styles.categoryWrapper}>{collections?.data?.map(collection => <Category data={collection} />)}</div>
+      <div className={styles.categoryWrapper}>
+        {collections?.data?.map(collection => <Category data={collection} key={collection?.id} />)}
+      </div>
       <Pagination type="collection" />
     </div>
   )
