@@ -16,15 +16,15 @@ const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
 
 const Home = async () => {
-  const products = await getProducts({})
-  const website = await getWebsiteData({})
+  const [products, web] = await Promise.all([getProducts({}), getWebsiteData({})])
+  const website = web?.data
 
   return (
     <div>
       <div
         className={classNames(styles.mainWrapper)}
         style={{
-          backgroundImage: `url(${website?.data?.landing_image1})`,
+          backgroundImage: `url(${website?.landing_image1})`,
         }}
       >
         {/* <div className={styles.timelessContainer}>
@@ -37,9 +37,9 @@ const Home = async () => {
 				</div> */}
       </div>
       <Products products={products?.data ?? []} />
-      <Marquee text={website?.data?.marquee_text!} />
+      <Marquee text={website?.marquee_text ?? ""} />
       <div className={styles.dudeWrapper}>
-        <Image src={website?.data?.landing_image2!} alt="" height={1000} width={1000} />
+        <Image src={website?.landing_image2 ?? ""} alt="" height={1000} width={1000} />
       </div>
       <div className={styles.afterProductWrapper}>
         <div className={styles.header}>
@@ -49,7 +49,7 @@ const Home = async () => {
         <CityProduct products={products?.data ?? []} />
       </div>
       <div className={styles.dudeWrapper}>
-        <Image src={website?.data?.landing_image3!} alt="" height={1000} width={1000} />
+        <Image src={website?.landing_image3 ?? ""} alt="" height={1000} width={1000} />
       </div>
       <Testimonials />
     </div>
