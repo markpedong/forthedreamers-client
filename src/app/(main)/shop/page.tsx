@@ -2,6 +2,7 @@ import React from 'react'
 import { Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
 import { getProducts } from '@/api'
+import { TProductItem } from '@/api/types'
 import classNames from 'classnames'
 import { FaFilter } from 'react-icons/fa'
 import { FaAngleDown, FaArrowRight } from 'react-icons/fa6'
@@ -15,7 +16,9 @@ import styles from './styles.module.scss'
 const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
 const Page = async () => {
-  const [products] = await Promise.all([getProducts()])
+  const [products] = await Promise.all([getProducts({})])
+  const first: TProductItem = products?.[0]
+  const second: TProductItem = products?.[1]
 
   return (
     <div className={styles.mainWrapper}>
@@ -32,7 +35,7 @@ const Page = async () => {
           <span>{products?.data?.length} PRODUCTS</span>
         </div>
       </div>
-      <div className={styles.productWrapper}>{products?.data?.map((item) => <Product product={item} />)}</div>
+      <div className={styles.productWrapper}>{products?.data?.map(item => <Product product={item} />)}</div>
       <div className={classNames(styles.pagination, roboto.className)}>
         <span>1</span>
         <span>2</span>
@@ -46,12 +49,12 @@ const Page = async () => {
         <span className={styles.crowdTitle}>CROWD FAVORITES</span>
         <div className={styles.crowdItemsContainer}>
           <div>
-            <Image src={'/assets/images/dog.jpg'} width={500} height={500} alt="img1" />
-            <span>LOGO1</span>
+            <Image src={first?.images?.[0]} width={500} height={500} alt="img1" />
+            <span>{first?.name}</span>
           </div>
           <div>
-            <Image src={'/assets/images/dog.jpg'} width={500} height={500} alt="img1" />
-            <span>LOGO2</span>
+            <Image src={second?.images?.[0]} width={500} height={500} alt="img1" />
+            <span>{second?.name}</span>
           </div>
         </div>
       </div>

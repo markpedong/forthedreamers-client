@@ -1,27 +1,29 @@
-import { redirect } from 'next/navigation'
 import React from 'react'
-import AccountPage from './account'
-import Navbar from '@/components/navbar'
 import dynamic from 'next/dynamic'
+import { redirect } from 'next/navigation'
+
+import Navbar from '@/components/navbar'
+
+import AccountPage from './account'
 
 const Footer = dynamic(() => import('@/components/footer'), {
-	ssr: false
+  ssr: false,
 })
 
 const Page = () => {
-	const isAuthenticated = true
+  const isAuthenticated = true
 
-	if (!isAuthenticated) {
-		redirect('/')
-	} else {
-		return (
-			<>
-				<Navbar />
-				<AccountPage />
-				<Footer />
-			</>
-		)
-	}
+  if (!isAuthenticated) {
+    redirect('/')
+  } else {
+    return (
+      <>
+        <Navbar />
+        <AccountPage />
+        <Footer />
+      </>
+    )
+  }
 }
 
 export default Page

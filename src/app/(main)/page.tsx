@@ -19,7 +19,6 @@ const Home = async () => {
   const [products, web] = await Promise.all([getProducts({}), getWebsiteData({})])
   const website = web?.data
 
-  console.log(website)
   return (
     <div>
       <div
