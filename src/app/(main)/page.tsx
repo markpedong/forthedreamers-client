@@ -1,3 +1,4 @@
+//@ts-nocheck
 // import { GoDotFill } from 'react-icons/go'
 // import { FaCircleDot } from 'react-icons/fa6'
 import { Poppins, Roboto_Condensed } from 'next/font/google'
@@ -36,7 +37,7 @@ const Home = async () => {
 					</div>
 				</div> */}
       </div>
-      <Products products={products?.data ?? []} />
+      {/* <Products products={products?.data ?? []} />
       <Marquee text={website?.marquee_text ?? ""} />
       <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image2 ?? ""} alt="" height={1000} width={1000} />
@@ -51,7 +52,7 @@ const Home = async () => {
       <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image3 ?? ""} alt="" height={1000} width={1000} />
       </div>
-      <Testimonials />
+      <Testimonials /> */}
     </div>
   )
 }
