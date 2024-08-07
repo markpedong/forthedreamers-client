@@ -6,12 +6,15 @@ export type TAppDataState = {
 }
 const initialState: TAppDataState = {
   website: {
+    default_pageSize: 0,
     landing_image1: '',
     landing_image2: '',
     landing_image3: '',
     marquee_text: '',
     promo_text: '',
     website_name: '',
+    product_length: 0,
+    collection_length: 0,
   },
 }
 

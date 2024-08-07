@@ -1,30 +1,21 @@
 import React from 'react'
-import styles from './styles.module.scss'
-import Category from './components/category'
+import { getCollections } from '@/api'
+
 import { PageTitle } from '@/components/page-components'
 import Pagination from '@/components/pagination'
 
-const Page = () => {
-	return (
-		<div className={styles.mainWrapper}>
-			<PageTitle title="SHOP BY CATEGORY" />
-			<div className={styles.categoryWrapper}>
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-				<Category />
-			</div>
-			<Pagination />
-		</div>
-	)
+import Category from './components/category'
+import styles from './styles.module.scss'
+
+const Page = async () => {
+  const collections = await getCollections({})
+  return (
+    <div className={styles.mainWrapper}>
+      <PageTitle title="SHOP BY CATEGORY" />
+      <div className={styles.categoryWrapper}>{collections?.data?.map(collection => <Category data={collection} />)}</div>
+      <Pagination type="collection" />
+    </div>
+  )
 }
 
 export default Page

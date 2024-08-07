@@ -1,24 +1,28 @@
-import classNames from 'classnames'
-import React from 'react'
-import styles from './styles.module.scss'
+'use client'
+
+import React, { FC } from 'react'
 import { Roboto_Condensed } from 'next/font/google'
+import { useAppSelector } from '@/redux/store'
+import classNames from 'classnames'
 import { FaArrowRight } from 'react-icons/fa'
+
+import styles from './styles.module.scss'
 
 const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
-type Props = {}
-const Pagination = (props: Props) => {
-	return (
-		<div className={classNames(styles.pagination, roboto.className)}>
-			<span>1</span>
-			<span>2</span>
-			<span>3</span>
-			<span>4</span>
-			<span>
-				<FaArrowRight />
-			</span>
-		</div>
-	)
-}
+const Pagination: FC<{ type: 'collection' | 'products' }> = ({ type }) => {
+  const { collection_length, product_length, default_pageSize } = useAppSelector(state => state.appData.website)
+  const length = Math.round((type === 'collection' ? collection_length / default_pageSize : product_length / default_pageSize) + 1)
 
+  return (
+    <div className={classNames(styles.pagination, roboto.className)}>
+      {Array.from(Array(length), (_, x) => (
+        <span>{x + 1}</span>
+      ))}
+      <span>
+        <FaArrowRight />
+      </span>
+    </div>
+  )
+}
 export default Pagination

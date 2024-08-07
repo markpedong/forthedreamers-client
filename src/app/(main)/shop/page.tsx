@@ -4,11 +4,10 @@ import Image from 'next/image'
 import { getProducts } from '@/api'
 import { TProductItem } from '@/api/types'
 import classNames from 'classnames'
-import { FaFilter } from 'react-icons/fa'
-import { FaAngleDown, FaArrowRight } from 'react-icons/fa6'
 
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
+import Pagination from '@/components/pagination'
 import Product from '@/components/product'
 
 import styles from './styles.module.scss'
@@ -26,25 +25,17 @@ const Page = async () => {
       <PageTitle title="PRODUCTS" />
       <div className={classNames(styles.filterContainer, roboto.className)}>
         <div>
-          <FaFilter />
-          <span>FILTER AND SORT</span>
+          {/* <FaFilter /> */}
+          {/* <span>FILTER AND SORT</span> */}
         </div>
         <div>
-          <span className={styles.sort}>ALPHABETICALLY, A-Z</span>
-          <FaAngleDown />
-          <span>{products?.data?.length} PRODUCTS</span>
+          {/* <span className={styles.sort}>ALPHABETICALLY, A-Z</span> */}
+          {/* <FaAngleDown />
+          <span>{products?.data?.length} PRODUCTS</span> */}
         </div>
       </div>
       <div className={styles.productWrapper}>{products?.data?.map(item => <Product product={item} key={item?.id} />)}</div>
-      <div className={classNames(styles.pagination, roboto.className)}>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>
-          <FaArrowRight />
-        </span>
-      </div>
+      <Pagination type="products" />
       <div className={styles.crowdWrapper}>
         <span className={styles.crowdTitle}>CROWD FAVORITES</span>
         <div className={styles.crowdItemsContainer}>

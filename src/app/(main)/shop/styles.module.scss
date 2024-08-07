@@ -31,15 +31,6 @@
     }
 }
 
-.pagination {
-    @apply flex justify-center items-center gap-10;
-
-    >span {
-        @apply relative after:w-[1.5rem] after:h-[0.06rem] after:bg-black after:absolute after:bottom-[-0.1rem] after:left-[-0.5rem];
-        font-size: toRem(14);
-    }
-}
-
 .crowdWrapper {
     @apply py-12 w-full text-center;
 }

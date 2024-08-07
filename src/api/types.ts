@@ -26,4 +26,13 @@ export type TWebsiteItem = {
   marquee_text: string
   promo_text: string
   website_name: string
+  product_length: number
+  collection_length: number
+  default_pageSize: number
+}
+
+export type TCollectionItem = {
+  id: string
+  images: string[]
+  name: string
 }
