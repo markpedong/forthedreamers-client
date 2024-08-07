@@ -1,28 +1,28 @@
 import React from 'react'
-import { Roboto_Condensed } from 'next/font/google'
-import Image from 'next/image'
-import { getProducts } from '@/api'
-import { TProductItem } from '@/api/types'
-import classNames from 'classnames'
-import { FaFilter } from 'react-icons/fa'
-import { FaAngleDown, FaArrowRight } from 'react-icons/fa6'
+// import { Roboto_Condensed } from 'next/font/google'
+// import Image from 'next/image'
+// import { getProducts } from '@/api'
+// import { TProductItem } from '@/api/types'
+// import classNames from 'classnames'
+// import { FaFilter } from 'react-icons/fa'
+// import { FaAngleDown, FaArrowRight } from 'react-icons/fa6'
 
-import Header from '@/components/header'
-import { PageTitle } from '@/components/page-components'
-import Product from '@/components/product'
+// import Header from '@/components/header'
+// import { PageTitle } from '@/components/page-components'
+// import Product from '@/components/product'
 
 import styles from './styles.module.scss'
 
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
+// const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
 const Page = async () => {
-  const [products] = await Promise.all([getProducts({})])
-  const first: TProductItem = products?.[0] ?? {}
-  const second: TProductItem = products?.[1] ?? {}
+  // const [products] = await Promise.all([getProducts({})])
+  // const first: TProductItem = products?.[0] ?? {}
+  // const second: TProductItem = products?.[1] ?? {}
 
   return (
     <div className={styles.mainWrapper}>
-      <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
+      {/* <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
       <PageTitle title="PRODUCTS" />
       <div className={classNames(styles.filterContainer, roboto.className)}>
         <div>
@@ -57,7 +57,7 @@ const Page = async () => {
             <span>{second?.name}</span>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
