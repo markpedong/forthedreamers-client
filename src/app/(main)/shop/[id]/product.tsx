@@ -23,7 +23,7 @@ const roboto = Roboto_Condensed({ weight: ['300', '400', '500', '800'], subsets:
 
 const getUniqueVariations = (variations, type) => {
   const uniqueValues = new Set()
-  return variations.filter((item) => {
+  return variations?.filter((item) => {
     const value = type === 'size' ? item.size : item.color
     if (uniqueValues.has(value)) return false
     uniqueValues.add(value)
@@ -34,7 +34,7 @@ const getUniqueVariations = (variations, type) => {
 const Variations = ({ variations, selectedId, setSelectedId, type, size, color }) => {
   return (
     <div className={styles.variations}>
-      {variations.map((item) => {
+      {variations?.map((item) => {
         const isDisabled =
           type === 'size' ? color && item.color !== color && selectedId !== item.id : size && item.size !== size && selectedId !== item.id
 
@@ -74,9 +74,9 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
   const uniqueSizes = useMemo(() => getUniqueVariations(variations, 'size'), [variations])
   const uniqueColors = useMemo(() => getUniqueVariations(variations, 'color'), [variations])
 
-  const selectedSize = variations.find((i) => i.id === size)?.size
-  const selectedColor = variations.find((i) => i.id === color)?.color
-  const selectedVariation = variations.find((item) => item.size === selectedSize && item.color === selectedColor)
+  const selectedSize = variations?.find((i) => i.id === size)?.size
+  const selectedColor = variations?.find((i) => i.id === color)?.color
+  const selectedVariation = variations?.find((item) => item.size === selectedSize && item.color === selectedColor)
 
   return (
     <div className={styles.mainWrapper}>

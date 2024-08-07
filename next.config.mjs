@@ -12,7 +12,7 @@ const nextConfig = {
     additionalData: `@import "./src/styles/_helpers.scss";`
   },
   compiler: {
-    removeConsole: true,
+    removeConsole: process.env.NODE_ENV === "production",
   },
   env: {
     NEXT_DOMAIN: process.env.NEXT_DOMAIN,
