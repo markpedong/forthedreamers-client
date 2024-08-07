@@ -1,12 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import booleanReducer from './features/booleanSlice'
+import appDataReducer from './features/appData'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, createTransform } from 'redux-persist'
 import { compress, decompress } from 'lz-string'
 
 type RootType = {
-	boolData: ReturnType<typeof booleanReducer>
+	appData: ReturnType<typeof appDataReducer>
 }
 
 const persistConfig = {
@@ -22,7 +22,7 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-	boolean: booleanReducer
+	appData: appDataReducer
 })
 
 //@ts-ignore
