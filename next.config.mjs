@@ -15,7 +15,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
   env: {
-    NEXT_DOMAIN: process.env.NEXT_DOMAIN,
+    NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
   },
   images: {
     remotePatterns: [
