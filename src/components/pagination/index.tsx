@@ -1,15 +1,11 @@
 'use client'
 
-import React, { FC, useEffect, useState } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
+import { FC, useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useAppSelector } from '@/redux/store'
-import classNames from 'classnames'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa'
 
-import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
+import styles from './Pagination.module.css' // Adjust the import as necessary
 
 const Pagination: FC<{ type: 'collection' | 'products' }> = ({ type }) => {
   const router = useRouter()
@@ -19,6 +15,19 @@ const Pagination: FC<{ type: 'collection' | 'products' }> = ({ type }) => {
   const initialPage = parseInt(searchParams.get('page') || '1', 10)
   const length = Math.ceil(type === 'collection' ? collection_length / default_pageSize : product_length / default_pageSize)
   const [currentPage, setCurrentPage] = useState(initialPage)
+
+  useEffect(() => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()))
+    if (currentPage === 1) {
+      current.delete('page')
+    } else {
+      current.set('page', currentPage.toString())
+    }
+
+    const search = current.toString()
+    const query = search ? `?${search}` : ''
+    router.push(`${pathname}${query}`)
+  }, [currentPage, router, pathname, searchParams])
 
   const handleNextPage = () => {
     if (currentPage < length) {
@@ -32,34 +41,17 @@ const Pagination: FC<{ type: 'collection' | 'products' }> = ({ type }) => {
     }
   }
 
-  useEffect(() => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()))
-
-    if (currentPage === 1) {
-      current.delete('page')
-    } else {
-      current.set('page', currentPage.toString())
-    }
-
-    const search = current.toString()
-    const query = search ? `?${search}` : ''
-    router.push(`${pathname}${query}`)
-    router.refresh()
-  }, [currentPage, router, pathname, searchParams])
-
   return (
-    <div className={classNames(styles.pagination, roboto.className)}>
-      <span onClick={handlePreviousPage} className={currentPage === 1 ? styles.disabled : undefined}>
+    <div className={styles.pagination}>
+      <span onClick={handlePreviousPage}>
         <FaArrowLeft />
       </span>
       {Array.from(Array(length), (_, x) => (
-        <span key={x} className={currentPage === x + 1 ? styles.active : undefined} onClick={() => setCurrentPage(x + 1)}>
+        <span key={x} onClick={() => setCurrentPage(x + 1)}>
           {x + 1}
         </span>
       ))}
-      <span onClick={handleNextPage} className={currentPage === length ? styles.disabled : undefined}>
-        <FaArrowRight />
-      </span>
+      <span onClick={handleNextPage}>next</span>
     </div>
   )
 }
