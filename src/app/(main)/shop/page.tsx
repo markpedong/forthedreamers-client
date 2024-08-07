@@ -17,8 +17,8 @@ const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
 const Page = async () => {
   const [products] = await Promise.all([getProducts({})])
-  const first: TProductItem = products?.[0]
-  const second: TProductItem = products?.[1]
+  const first: TProductItem = products?.[0] ?? {}
+  const second: TProductItem = products?.[1] ?? {}
 
   return (
     <div className={styles.mainWrapper}>
