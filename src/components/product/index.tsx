@@ -19,7 +19,14 @@ const Product: FC<{ className?: string; product?: TProductItem }> = ({ className
 
   return (
     <div className={classNames(styles.productContainer, className)}>
-      <Image onClick={() => push(`/shop/${product?.id}`)} src={product?.images?.[0] ?? ''} alt="" height={150} width={150} />
+      <Image
+        onClick={() => push(`/shop/${product?.id}`)}
+        src={product?.images?.[0] ?? ''}
+        alt=""
+        height={150}
+        width={150}
+        draggable={false}
+      />
       <div className={classNames(styles.textContainer, roboto.className)}>
         <span className={styles.title} onClick={() => push(`/shop/${product?.id}`)}>
           {product?.name}
