@@ -48,7 +48,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			...(token ? { 'Authorization': `Bearer ${String(token).replace(/"/g, '')}` } : {})
+			...(token ? { 'token': `${String(token).replace(/"/g, '')}` } : {})
 		},
 		body: JSON.stringify(data) || '{}'
 	})
@@ -58,7 +58,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 	if (response?.status !== 200) {
 		throttleAlert(response.message)
 		if (response?.status === 401) {
-			window.location.replace('/unauthorized')
+			window.location.replace('/')
 		}
 		return response
 	}
@@ -82,7 +82,7 @@ const get = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 		throttleAlert(response.message)
 
 		if (response?.status === 401) {
-			redirect('/unauthorized')
+			redirect('/')
 		}
 	}
 
