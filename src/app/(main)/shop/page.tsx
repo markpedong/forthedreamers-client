@@ -35,7 +35,7 @@ const Page = async () => {
         </div>
       </div>
       <div className={styles.productWrapper}>{products?.data?.map(item => <Product product={item} key={item?.id} />)}</div>
-      <Pagination type="products" />
+      {/* <Pagination type="products" /> */}
       <div className={styles.crowdWrapper}>
         <span className={styles.crowdTitle}>CROWD FAVORITES</span>
         <div className={styles.crowdItemsContainer}>

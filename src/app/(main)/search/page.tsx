@@ -47,7 +47,7 @@ const Page = () => {
         <Product />
         <Product />
       </div>
-      <Pagination type="products" />
+      {/* <Pagination type="products" /> */}
     </div>
   )
 }
