@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import appDataReducer from './features/appData'
-import storage from 'redux-persist/lib/storage'
+import storage from './storage'
 import { persistReducer, createTransform } from 'redux-persist'
 import { compress, decompress } from 'lz-string'
 

@@ -17,8 +17,8 @@ const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
 const Page = async () => {
   const [products] = await Promise.all([getProducts({})])
-  const first: TProductItem = products?.[0] ?? {}
-  const second: TProductItem = products?.[1] ?? {}
+  const first: TProductItem = products?.data?.[0]!
+  const second: TProductItem = products?.data?.[1]!
 
   return (
     <div className={styles.mainWrapper}>
@@ -35,7 +35,7 @@ const Page = async () => {
           <span>{products?.data?.length} PRODUCTS</span>
         </div>
       </div>
-      <div className={styles.productWrapper}>{products?.data?.map(item => <Product product={item} />)}</div>
+      <div className={styles.productWrapper}>{products?.data?.map(item => <Product product={item} key={item?.id} />)}</div>
       <div className={classNames(styles.pagination, roboto.className)}>
         <span>1</span>
         <span>2</span>
@@ -49,11 +49,11 @@ const Page = async () => {
         <span className={styles.crowdTitle}>CROWD FAVORITES</span>
         <div className={styles.crowdItemsContainer}>
           <div>
-            <Image src={first?.images?.[0]} width={500} height={500} alt="img1" />
+            <Image src={first?.images?.[0] ?? ''} width={500} height={500} alt="img1" priority />
             <span>{first?.name}</span>
           </div>
           <div>
-            <Image src={second?.images?.[0]} width={500} height={500} alt="img1" />
+            <Image src={second?.images?.[0] ?? ''} width={500} height={500} alt="img1" priority />
             <span>{second?.name}</span>
           </div>
         </div>

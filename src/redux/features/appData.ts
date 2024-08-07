@@ -20,7 +20,7 @@ const appDataSlice = createSlice({
   initialState,
   reducers: {
     resetAppDataSlice: () => initialState,
-    setWebsiteData: (state, { payload }: PayloadAction<TWebsiteItem>) => ({ ...state, website: payload }),
+    setWebsiteData: (state, action: PayloadAction<TWebsiteItem>) => ({ ...state, website: action.payload }),
   },
 })
 
