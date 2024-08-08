@@ -27,7 +27,7 @@ const Page = async ({ params: { id } }: PageProps) => {
         <div></div>
         {!!data?.products?.length && <div>{data?.products?.length} PRODUCTS</div>}
       </div>
-      <div className={styles.productWrapper}>{data?.products?.map(item => <Product product={item} />)}</div>
+      <div className={styles.productWrapper}>{data?.products?.map(item => <Product product={item} key={item?.id} />)}</div>
     </div>
   )
 }

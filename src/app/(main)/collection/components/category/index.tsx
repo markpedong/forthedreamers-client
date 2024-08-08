@@ -15,14 +15,16 @@ const Category: FC<{ data: TCollectionItem }> = ({ data }) => {
   const router = useRouter()
 
   return (
-    <motion.div className={styles.categoryContainer} whileHover={{ scale: 1.1 }}>
-      <div className={styles.imgContainer} onClick={() => router.push(`/collection/${data?.id}`)}>
-        {data?.images.map(img => <Image src={img ?? ''} key={img} alt="" height={100} width={100} />)}
-      </div>
-      <span className={roboto.className} onClick={() => router.push(`/collection/${data?.id}`)}>
-        {data?.name}
-      </span>
-    </motion.div>
+    <div key={data?.id}>
+      <motion.div className={styles.categoryContainer} whileHover={{ scale: 1.1 }}>
+        <div className={styles.imgContainer} onClick={() => router.push(`/collection/${data?.id}`)}>
+          {data?.images.map(img => <Image src={img ?? ''} key={img} alt="" height={100} width={100} />)}
+        </div>
+        <span className={roboto.className} onClick={() => router.push(`/collection/${data?.id}`)}>
+          {data?.name}
+        </span>
+      </motion.div>
+    </div>
   )
 }
 

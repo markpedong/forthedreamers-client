@@ -9,7 +9,6 @@ import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CiShoppingCart } from 'react-icons/ci'
 import { FaChevronDown } from 'react-icons/fa'
-import { FiUser } from 'react-icons/fi'
 import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
@@ -22,7 +21,7 @@ import Search from './components/search'
 import styles from './style.module.scss'
 
 const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
-const roboto = Roboto_Condensed({ weight: '300', subsets: ['latin'] })
+const roboto = Roboto_Condensed({ weight: ['300', '400', '500'], subsets: ['latin'] })
 
 const Navbar: FC = () => {
   const { push, refresh } = useRouter()
@@ -109,10 +108,12 @@ const Navbar: FC = () => {
             </AnimatePresence>
           </div>
         )}
-        <div className={classNames(styles.navTitle, poppins.className)}>{website?.website_name}</div>
+        <div className={classNames(styles.navTitle, poppins.className)} onClick={() => handlePush('/')}>
+          {website?.website_name}
+        </div>
         <div className={classNames(styles.rightBtnWrapper, roboto.className)}>
           <div className={styles.loginBtn}>
-            <span
+            {/* <span
               onClick={() => {
                 setOpen(false)
                 setShowCart(false)
@@ -121,11 +122,12 @@ const Navbar: FC = () => {
               }}
             >
               LOGIN
-            </span>
-            <FiUser size={25} />
+            </span> */}
+            {/* <FiUser size={20} /> */}
           </div>
           <IoSearchOutline
-            size={25}
+            className="cursor-pointer"
+            size={20}
             onClick={() => {
               setOpen(false)
               setShowCart(false)
@@ -134,7 +136,8 @@ const Navbar: FC = () => {
             }}
           />
           <CiShoppingCart
-            size={25}
+            className="cursor-pointer"
+            size={20}
             onClick={() => {
               setOpen(false)
               setShowCart(true)
