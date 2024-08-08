@@ -1,51 +1,42 @@
 import React from 'react'
 import { Roboto_Condensed } from 'next/font/google'
+import { getProducts } from '@/api'
 import classNames from 'classnames'
-import { CiSearch } from 'react-icons/ci'
 import { MdFilterListAlt } from 'react-icons/md'
 
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
 import Product from '@/components/product'
 
+import Search from './search'
 import styles from './styles.module.scss'
 
 const roboto = Roboto_Condensed({ weight: ['200', '300', '400', '500', '600', '800'], subsets: ['latin'] })
 
-const Page = () => {
+interface PageProps {
+  searchParams?: {
+    search?: string
+  }
+}
+
+const Page = async ({ searchParams }: PageProps) => {
+  const search = searchParams && typeof searchParams.search === 'string' ? searchParams.search : ''
+  const products = await getProducts({ search })
+
   return (
     <div className={classNames(styles.mainWrapper, roboto.className)}>
       <Header arr={['HOME', 'SEARCH']} />
-      <PageTitle title="SEARCH RESULTS" className="!pb-1" />
-      <div className={styles.inputContainer}>
-        <div>
-          <input type="text" />
-          <CiSearch color="black" />
-        </div>
-      </div>
-      <div className={styles.searchText}>24 results found for “hoodie”</div>
+      <PageTitle title="SEARCH RESULTS" className="!py-5 !text-center" medium />
+      <Search />
+      <div className={styles.searchText}>{search !== '' && `${products?.data?.length ?? 0} results found for "${search}"`}</div>
       <div className={styles.filterContainer}>
         <div>
           <MdFilterListAlt />
           <span>FILTER AND SORT</span>
         </div>
-        <span>24 results</span>
+        <span>{products?.data?.length ?? 0} results</span>
       </div>
-      <div className={styles.productWrapper}>
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-      </div>
+      <div className={styles.productWrapper}>{products?.data?.map(product => <Product product={product} key={product?.id} />)}</div>
       {/* <Pagination type="products" /> */}
     </div>
   )
