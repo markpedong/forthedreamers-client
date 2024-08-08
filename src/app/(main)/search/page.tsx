@@ -37,7 +37,6 @@ const Page = async ({ searchParams }: PageProps) => {
         <span>{products?.data?.length ?? 0} results</span>
       </div>
       <div className={styles.productWrapper}>{products?.data?.map(product => <Product product={product} key={product?.id} />)}</div>
-      {/* <Pagination type="products" /> */}
     </div>
   )
 }

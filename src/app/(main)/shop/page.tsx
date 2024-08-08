@@ -7,8 +7,8 @@ import classNames from 'classnames'
 
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
-import Product from '@/components/product'
 
+import ShopPagination from './shop-pagination'
 import styles from './styles.module.scss'
 
 const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
@@ -33,8 +33,7 @@ const Page = async () => {
           <span>{products?.data?.length} PRODUCTS</span> */}
         </div>
       </div>
-      <div className={styles.productWrapper}>{products?.data?.map(item => <Product product={item} key={item?.id} />)}</div>
-      {/* <Pagination type="products" /> */}
+      <ShopPagination data={products?.data} />
       <div className={styles.crowdWrapper}>
         <span className={styles.crowdTitle}>CROWD FAVORITES</span>
         <div className={styles.crowdItemsContainer}>
