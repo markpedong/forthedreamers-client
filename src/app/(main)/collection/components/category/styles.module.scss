@@ -3,7 +3,7 @@
     @apply fcol items-center justify-center;
 
     >span {
-        @apply underline-offset-8 underline pt-5 uppercase text-center;
+        @apply underline-offset-8 underline pt-5 uppercase text-center cursor-pointer;
         font-size: toRem(15)
     }
 }

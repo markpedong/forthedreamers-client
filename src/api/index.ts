@@ -14,3 +14,6 @@ export const getWebsiteData = params => post<TWebsiteItem>('/public/website', pa
 
 // /public/collections
 export const getCollections = params => post<TCollectionItem[]>('/public/collections', params)
+
+// /public/collectionsByID
+export const getCollectionsByID = params => post<TCollectionItem[]>('/public/collectionsByID', params)
