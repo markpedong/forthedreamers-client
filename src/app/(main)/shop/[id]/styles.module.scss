@@ -81,10 +81,10 @@
 .variations {
     @apply pb-4 pt-1 flex items-center justify-center;
 
-    >span {
+    .variationItem {
         @apply py-2 cursor-pointer uppercase relative w-[5rem] text-center;
-        font-size: toRem(12);
-        line-height: toRem(12);
+        font-size: toRem(10);
+        line-height: toRem(10);
         border: toRem(1) solid rgba(0, 0, 0, 0.5);
         border-right: none;
 
@@ -92,7 +92,7 @@
             border-right: toRem(1) solid rgba(0, 0, 0, 0.5);
         }
 
-        &.selected{
+        &.selected {
             @apply bg-black text-white
         }
 
@@ -120,8 +120,9 @@
 }
 
 .addMinusContainer {
-    @apply flex gap-4 h-10 w-24 items-center justify-evenly select-none;
+    @apply flex gap-4 h-8 w-20 items-center justify-evenly select-none;
     border: toRem(1) solid rgba(0, 0, 0, 1);
+    font-size: toRem(12);
 
     svg {
         @apply opacity-25 size-3 cursor-pointer;
@@ -129,7 +130,7 @@
 }
 
 .addToCart {
-    @apply flex h-10 items-center justify-center uppercase font-bold cursor-pointer flex-grow;
+    @apply flex h-8 items-center justify-center uppercase font-bold cursor-pointer flex-grow;
     font-size: toRem(12);
     border: toRem(1) solid rgba(0, 0, 0, 1);
     transition: background-color 0.25s linear, color 0.25s linear;
@@ -143,6 +144,7 @@
 
         span {
             @apply underline underline-offset-4 pl-1 cursor-pointer;
+            font-size: toRem(12);
         }
     }
 }

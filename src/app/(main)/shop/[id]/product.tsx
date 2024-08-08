@@ -23,7 +23,7 @@ const roboto = Roboto_Condensed({ weight: ['300', '400', '500', '800'], subsets:
 
 const getUniqueVariations = (variations, type) => {
   const uniqueValues = new Set()
-  return variations?.filter((item) => {
+  return variations?.filter(item => {
     const value = type === 'size' ? item.size : item.color
     if (uniqueValues.has(value)) return false
     uniqueValues.add(value)
@@ -34,7 +34,7 @@ const getUniqueVariations = (variations, type) => {
 const Variations = ({ variations, selectedId, setSelectedId, type, size, color }) => {
   return (
     <div className={styles.variations}>
-      {variations?.map((item) => {
+      {variations?.map(item => {
         const isDisabled =
           type === 'size' ? color && item.color !== color && selectedId !== item.id : size && item.size !== size && selectedId !== item.id
 
@@ -45,14 +45,12 @@ const Variations = ({ variations, selectedId, setSelectedId, type, size, color }
             setSelectedId(item.id)
           }
         }
+
         return (
           <span
             key={item.id}
-            role="button"
-            aria-selected={selectedId === item.id}
-            className={classNames(styles.variationItem, {
+            className={classNames(styles.variationItem, `${isDisabled && styles.disabled}`, {
               [styles.selected]: selectedId === item.id,
-              [isDisabled]: styles.disabled
             })}
             onClick={handleClick}
           >
@@ -74,9 +72,9 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
   const uniqueSizes = useMemo(() => getUniqueVariations(variations, 'size'), [variations])
   const uniqueColors = useMemo(() => getUniqueVariations(variations, 'color'), [variations])
 
-  const selectedSize = variations?.find((i) => i.id === size)?.size
-  const selectedColor = variations?.find((i) => i.id === color)?.color
-  const selectedVariation = variations?.find((item) => item.size === selectedSize && item.color === selectedColor)
+  const selectedSize = variations?.find(i => i.id === size)?.size
+  const selectedColor = variations?.find(i => i.id === color)?.color
+  const selectedVariation = variations?.find(item => item.size === selectedSize && item.color === selectedColor)
 
   return (
     <div className={styles.mainWrapper}>
@@ -122,15 +120,15 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
           />
           <div className={styles.quantityContainer}>
             <div className={styles.addMinusContainer}>
-              <FaMinus onClick={() => setQuantity((qty) => (qty > 1 ? qty - 1 : qty))} />
+              <FaMinus onClick={() => setQuantity(qty => (qty > 1 ? qty - 1 : qty))} />
               {quantity}
-              <FaPlus onClick={() => setQuantity((qty) => (qty < 10 ? (qty += 1) : qty))} />
+              <FaPlus onClick={() => setQuantity(qty => (qty < 10 ? (qty += 1) : qty))} />
             </div>
             <motion.div
               className={styles.addToCart}
               whileHover={{
                 background: 'black',
-                color: 'white'
+                color: 'white',
               }}
             >
               add to cart

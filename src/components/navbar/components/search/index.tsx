@@ -1,10 +1,11 @@
-import React, { FC, useState } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
 import { getProducts } from '@/api'
 import { useQuery } from '@tanstack/react-query'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Roboto_Condensed } from 'next/font/google'
+import { useRouter } from 'next/navigation'
+import { FC, useState } from 'react'
 import { IoIosCloseCircle } from 'react-icons/io'
 
 import Drawer from '@/components/drawer'
@@ -17,6 +18,7 @@ const roboto = Roboto_Condensed({ weight: ['300', '400', '800'], subsets: ['lati
 
 const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
   const [value, setValue] = useState('')
+  const { push } = useRouter()
   const sample = ['hoodie', 'hoodies', 'casual', 'apparel']
   const { data: products } = useQuery({
     queryKey: ['search', value?.toLowerCase()],
@@ -34,11 +36,11 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
     <Drawer>
       <div className="h-full fcol">
         <div className={classNames(styles.header, roboto.className)}>
-          <input placeholder="Search for anything" value={value} onChange={e => setValue(e.target.value)} />
+          <input placeholder="Search for anything" value={value} onChange={e => setValue(e.target.value || '')} />
           <IoIosCloseCircle onClick={setSearch} color="black" />
         </div>
         <AnimatePresence>
-          {sample.some(word => !!value && word.includes(value)) && (
+          {!!products?.length && value !== '' && (
             <>
               <div className={classNames(styles.suggestions, roboto.className)}>
                 <motion.span className={styles.suggestions__header} initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -62,7 +64,11 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
               >
                 {products?.map(product => <SearchProduct isCart={false} product={product} />)}
               </motion.div>
-              <motion.div whileTap={{ scale: 0.97 }} className={classNames(styles.footer, roboto.className)}>
+              <motion.div
+                whileTap={{ scale: 0.97 }}
+                className={classNames(styles.footer, roboto.className)}
+                onClick={() => push(`/search?search=${value?.toLowerCase()}`)}
+              >
                 view all results
               </motion.div>
             </>

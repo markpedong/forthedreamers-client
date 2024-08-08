@@ -12,7 +12,7 @@
   input:focus {
     font-size: toRem(16);
     color: black;
-    height: toRem(48);
+    height: toRem(35);
     outline: none
   }
 
@@ -51,8 +51,9 @@
 }
 
 .footer {
-  @apply h-[5.5rem] grid place-content-center bg-black text-white uppercase font-bold tracking-wider m-5;
+  @apply h-[3rem] grid place-content-center bg-black text-white uppercase font-bold tracking-wider m-5;
   border-top: toRem(1) solid rgba(0, 0, 0, 0.1);
+  font-size: toRem(12)
 }
 
 .productHeader {

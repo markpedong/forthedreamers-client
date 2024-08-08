@@ -17,3 +17,6 @@ export const getCollections = params => post<TCollectionItem[]>('/public/collect
 
 // /public/collectionsByID
 export const getCollectionsByID = params => post<TCollectionDetails>('/public/collectionsByID', params)
+
+// /cart/get
+export const getCart = params => post<TProductItem[]>('/cart/get', params)
