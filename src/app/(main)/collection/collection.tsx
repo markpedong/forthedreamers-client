@@ -11,19 +11,12 @@ import Category from './components/category'
 import styles from './styles.module.scss'
 
 const Collection: FC<{ data: TCollectionItem[] }> = ({ data }) => {
-  const { collection_length } = useAppSelector(state => state.appData.website)
+  const { collection_length, default_pageSize } = useAppSelector(state => state.appData.website)
   const [collections, setCollections] = useState(data)
   const [currentPage, setCurrentPage] = useState(1)
-  //   const { data: newCollection } = useQuery({
-  //     queryKey: ['collections'],
-  //     staleTime: STALE_TIME,
-  //     queryFn: async () => {
-  //       const res = await getCollections({ page })
+  const totalPages = Math.ceil(collection_length / default_pageSize)
+  const validCurrentPage = Math.max(1, Math.min(currentPage, totalPages))
 
-  //       if (res?.status !== 200) return []
-  //       return res?.data
-  //     },
-  //   })
   const handlePageChange = async (type: 'next' | 'prev' | 'current', page?: number) => {
     let newPage = currentPage
 
@@ -36,10 +29,15 @@ const Collection: FC<{ data: TCollectionItem[] }> = ({ data }) => {
     const res = await getCollections({ page: newPage })
     setCollections(res?.data ?? [])
   }
+  
   return (
     <>
       <div className={styles.categoryWrapper}>{collections?.map(collection => <Category data={collection} key={collection?.id} />)}</div>
-      <Pagination pageTotal={collection_length / 10 < 1 ? 1 : collection_length / 10} handlePageChange={handlePageChange} />
+      <Pagination
+        currentPage={validCurrentPage}
+        pageTotal={collection_length / default_pageSize < 1 ? 1 : collection_length / default_pageSize}
+        handlePageChange={handlePageChange}
+      />
     </>
   )
 }
