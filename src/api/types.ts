@@ -36,3 +36,7 @@ export type TCollectionItem = {
   images: string[]
   name: string
 }
+
+export type TCollectionDetails = TCollectionItem & {
+  products: TProductItem[]
+}

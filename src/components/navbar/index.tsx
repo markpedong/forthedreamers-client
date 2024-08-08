@@ -7,7 +7,6 @@ import { useAppSelector } from '@/redux/store'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import Marquee from 'react-fast-marquee'
 import { CiShoppingCart } from 'react-icons/ci'
 import { FaChevronDown } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
@@ -15,6 +14,7 @@ import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
+import Marquee from '../marquee'
 import Cart from './components/cart'
 import Login from './components/login'
 import MobileMenu from './components/mobile-menu'
@@ -52,11 +52,7 @@ const Navbar: FC = () => {
 
   return (
     <>
-      {pathname !== '/' && (
-        <Marquee className={classNames(roboto.className, 'bg-black py-2 font-normal tracking-wide text-white')} direction="right">
-          <span className="text-[0.82rem]">{website?.promo_text}</span>
-        </Marquee>
-      )}
+      {pathname !== '/' && <Marquee text={website?.promo_text ?? ''} landing />}
       <motion.div
         className={styles.navbarWrapper}
         onHoverStart={() => setIsHovering(!search && true)}

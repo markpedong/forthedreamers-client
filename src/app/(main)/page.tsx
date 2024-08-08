@@ -35,7 +35,7 @@ const Home = async () => {
 				</div> */}
       </div>
       <Products products={products?.data ?? []} />
-      <Marquee text={website?.marquee_text ?? ''} />
+      <Marquee text={website?.marquee_text ?? ''} landing />
       <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image2 ?? ''} alt="" height={1000} width={1000} />
       </div>

@@ -21,7 +21,7 @@ const Page = async () => {
   return (
     <div className={styles.mainWrapper}>
       <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
-      <PageTitle title="PRODUCTS" />
+      <PageTitle title="PRODUCTS" medium />
       <div className={classNames(styles.filterContainer, roboto.className)}>
         <div>
           {/* <FaFilter /> */}

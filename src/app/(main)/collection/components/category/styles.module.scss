@@ -9,7 +9,7 @@
 }
 
 .imgContainer {
-    @apply grid grid-cols-2 grid-rows-2 gap-0 justify-items-center w-fit;
+    @apply grid grid-cols-2 grid-rows-2 gap-0 justify-items-center w-fit cursor-pointer;
 
     img {
         @apply object-contain object-center  size-[6.5rem];

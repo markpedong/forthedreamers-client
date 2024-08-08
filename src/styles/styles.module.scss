@@ -42,7 +42,7 @@
 
 .dudeWrapper {
     img {
-        @apply object-contain size-full;
+        @apply object-contain object-center h-dvh w-full;
     }
 }
 

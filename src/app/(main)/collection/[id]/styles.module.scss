@@ -1,0 +1,27 @@
+.mainWrapper {
+    @apply p-5;
+    margin-top: toRem(90);
+}
+
+.productWrapper {
+    @apply grid grid-cols-5 py-10;
+
+    @media screen and (max-width: 992px) {
+        @apply grid grid-cols-3;
+    }
+
+    @media screen and (max-width: 699px) {
+        @apply grid grid-cols-1;
+    }
+}
+
+.titleContainer {
+    @apply text-center py-10;
+    font-size: toRem(50);
+    line-height: toRem(50);
+}
+
+.filterContainer {
+    font-size: toRem(12);
+    @apply flex justify-between
+}

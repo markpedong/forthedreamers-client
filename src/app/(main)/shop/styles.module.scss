@@ -40,13 +40,13 @@
 }
 
 .crowdItemsContainer {
-    @apply grid grid-cols-2 gap-10 mt-10;
+    @apply grid grid-cols-2 gap-10 mt-10 justify-items-center;
 
     >div {
         @apply fcol gap-4;
 
         img {
-            @apply object-cover size-full flex-1;
+            @apply object-cover w-[20rem] h-auto flex-1;
         }
 
         span {

@@ -10,7 +10,7 @@ const Header: FC<{ arr: string[] }> = ({ arr }) => {
 		<div className={classNames('flex gap-3', roboto.className)}>
 			{arr?.map((q, i) => (
 				<div className="flex gap-4" key={`${q}${i}`}>
-					<span className="underline underline-offset-4 text-[1rem] last:no-underline">{q}</span>
+					<span className="underline underline-offset-4 text-[0.75rem] last:no-underline">{q}</span>
 					{i !== arr.length - 1 && <span className="no-underline">/</span>}
 				</div>
 			))}

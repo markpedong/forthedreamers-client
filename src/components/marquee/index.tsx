@@ -9,15 +9,15 @@ import styles from './styles.module.scss'
 
 const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
-const Marquee: FC<{ text: string }> = ({ text }) => {
+const Marquee: FC<{ text: string; landing?: boolean }> = ({ text, landing }) => {
   const marqueeVariants = {
     animate: {
-      x: ['200%', '-100%'],
+      x: ['1000%', '-100%'],
       transition: {
         x: {
           repeat: Infinity,
           repeatType: 'loop',
-          duration: 7,
+          duration: landing ? 7 : 3,
           ease: 'linear',
         },
       },
@@ -25,7 +25,7 @@ const Marquee: FC<{ text: string }> = ({ text }) => {
   }
 
   return (
-    <div className={classNames(styles.marquee, roboto.className)}>
+    <div className={classNames(styles.marquee, styles.landing, roboto.className)}>
       <motion.div className={styles.track} animate="animate" variants={marqueeVariants}>
         {text}
       </motion.div>
