@@ -7,7 +7,6 @@ import classNames from 'classnames'
 
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
-import Pagination from '@/components/pagination'
 import Product from '@/components/product'
 
 import styles from './styles.module.scss'
