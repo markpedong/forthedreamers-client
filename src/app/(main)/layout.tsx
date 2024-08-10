@@ -25,6 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/assets/images/dog.jpg" sizes="any" />
       <body className={inter.className}>
         <ReduxProvider>
           <Navbar />
