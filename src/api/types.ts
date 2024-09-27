@@ -40,3 +40,10 @@ export type TCollectionItem = {
 export type TCollectionDetails = TCollectionItem & {
   products: TProductItem[]
 }
+
+export type TTestimonials = {
+  id: string
+  author: string
+  product_id: string
+  title: string
+}

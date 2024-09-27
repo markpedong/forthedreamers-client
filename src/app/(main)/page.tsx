@@ -1,6 +1,6 @@
 import { Poppins, Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
-import { getProducts, getWebsiteData } from '@/api'
+import { getProducts, getTestimonials, getWebsiteData } from '@/api'
 import classNames from 'classnames'
 
 import Marquee from '@/components/marquee'
@@ -14,7 +14,7 @@ const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
 
 const Home = async () => {
-  const [products, web] = await Promise.all([getProducts({}), getWebsiteData({})])
+  const [products, web, testimonials] = await Promise.all([getProducts({}), getWebsiteData({}), getTestimonials({})])
   const website = web?.data
 
   return (
@@ -49,7 +49,7 @@ const Home = async () => {
       <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image3 ?? ''} alt="" height={1000} width={1000} />
       </div>
-      <Testimonials />
+      <Testimonials data={testimonials?.data ?? []} />
     </div>
   )
 }
