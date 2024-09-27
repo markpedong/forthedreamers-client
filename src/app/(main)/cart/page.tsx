@@ -1,9 +1,8 @@
-import { Roboto_Condensed } from 'next/font/google'
 import { getProducts } from '@/api'
+import { Roboto_Condensed } from 'next/font/google'
 
-import { PageTitle } from '@/components/page-components'
 
-import { Cart, CheckoutSectionWrapper, Suggestions } from './cart'
+import { CheckoutSectionWrapper, Suggestions } from './cart'
 import styles from './styles.module.scss'
 
 const roboto = Roboto_Condensed({ weight: ['300', '400', '800'], subsets: ['latin'] })

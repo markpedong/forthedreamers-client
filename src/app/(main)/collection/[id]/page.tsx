@@ -1,5 +1,5 @@
 import { Roboto_Condensed } from 'next/font/google'
-import { getCollectionsByID } from '@/api'
+import { getCollections, getCollectionsByID } from '@/api'
 import classNames from 'classnames'
 
 import Header from '@/components/header'
@@ -14,6 +14,17 @@ interface PageProps {
 }
 
 const roboto = Roboto_Condensed({ weight: ['400', '600', '800'], subsets: ['latin'] })
+
+export async function generateStaticParams() {
+  const collections = await getCollections({ page: 1 })
+
+  const params =
+    collections?.data?.map(collection => ({
+      id: collection.id,
+    })) || []
+
+  return params
+}
 
 const Page = async ({ params: { id } }: PageProps) => {
   const collections = await getCollectionsByID({ id })
