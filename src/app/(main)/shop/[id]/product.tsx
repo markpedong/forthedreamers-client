@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC, memo, useMemo, useState } from 'react'
+import { FC, memo, useMemo, useState } from 'react'
 import { Roboto_Condensed } from 'next/font/google'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -12,6 +12,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoIosReturnLeft } from 'react-icons/io'
 import { MdLocalLaundryService } from 'react-icons/md'
 
+import { useWithDispatch } from '@/hooks/useWithDispatch'
 import Header from '@/components/header'
 import { ListAnswers } from '@/components/page-components'
 import { CARE_GUIDE } from '@/app/(main)/constants/enums'
@@ -64,6 +65,8 @@ const Variations = ({ variations, selectedId, setSelectedId, type, size, color }
 
 const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = ({ product, variations }) => {
   const { push } = useRouter()
+  const { addItemToCart } = useWithDispatch()
+
   const [size, setSize] = useState('')
   const [color, setColor] = useState('')
   const [quantity, setQuantity] = useState(1)
@@ -93,31 +96,38 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
           <div className={styles.features}>
             <ListAnswers answers={product?.features} />
           </div>
-          <div className={styles.sizeContainer}>
-            <span>SIZE:</span>
-            <span>{selectedSize}</span>
-          </div>
-          <Variations
-            variations={uniqueSizes}
-            selectedId={size}
-            setSelectedId={setSize}
-            type="size"
-            size={selectedSize}
-            color={selectedColor}
-          />
-
-          <div className={styles.sizeContainer}>
-            <span>COLOR:</span>
-            <span>{selectedColor}</span>
-          </div>
-          <Variations
-            variations={uniqueColors}
-            selectedId={color}
-            setSelectedId={setColor}
-            type="color"
-            size={selectedSize}
-            color={selectedColor}
-          />
+          {variations?.length && (
+            <>
+              <div className={styles.sizeContainer}>
+                <span>SIZE:</span>
+                <span>{selectedSize}</span>
+              </div>
+              <Variations
+                variations={uniqueSizes}
+                selectedId={size}
+                setSelectedId={setSize}
+                type="size"
+                size={selectedSize}
+                color={selectedColor}
+              />
+            </>
+          )}
+          {variations?.length && (
+            <>
+              <div className={styles.sizeContainer}>
+                <span>COLOR:</span>
+                <span>{selectedColor}</span>
+              </div>
+              <Variations
+                variations={uniqueColors}
+                selectedId={color}
+                setSelectedId={setColor}
+                type="color"
+                size={selectedSize}
+                color={selectedColor}
+              />
+            </>
+          )}
           <div className={styles.quantityContainer}>
             <div className={styles.addMinusContainer}>
               <FaMinus onClick={() => setQuantity(qty => (qty > 1 ? qty - 1 : qty))} />
@@ -129,6 +139,13 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
               whileHover={{
                 background: 'black',
                 color: 'white',
+              }}
+              onClick={() => {
+                addItemToCart({
+                  product_id: product?.id,
+                  quantity,
+                  ...(selectedVariation ? { variation_id: selectedVariation?.id } : {}),
+                })
               }}
             >
               add to cart

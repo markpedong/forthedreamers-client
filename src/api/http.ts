@@ -48,7 +48,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${String(token).replace(/"/g, '')}` } : {}),
+      ...(token ? { Token: token } : {}),
     },
     body: JSON.stringify(data) || '{}',
   })

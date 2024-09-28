@@ -47,3 +47,21 @@ export type TTestimonials = {
   product_id: string
   title: string
 }
+
+export type TCartItem = {
+  id: string
+  quantity: number
+  product_id: string
+  variation_id?: string
+}
+
+export type TUserDataState = {
+  cart: TCartItem[]
+  user: { id: string }
+}
+
+export type TAddCartPayload = {
+  product_id: string
+  variation_id?: string
+  quantity: number
+}
