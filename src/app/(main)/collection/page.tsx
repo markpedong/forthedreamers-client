@@ -10,7 +10,7 @@ const Page = async () => {
 
   return (
     <div className={styles.mainWrapper}>
-      <PageTitle title="SHOP BY CATEGORY" medium  className='!text-center !py-10'/>
+      <PageTitle title="SHOP BY CATEGORY" medium className="!py-10 !text-center" />
       <Collection data={collections?.data ?? []} />
     </div>
   )
