@@ -1,3 +1,5 @@
+'use client'
+
 import classNames from 'classnames'
 import { Poppins, Roboto_Condensed } from 'next/font/google'
 import React, { FC, ReactNode } from 'react'
