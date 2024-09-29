@@ -8,8 +8,8 @@ import { useWindowSize } from '@uidotdev/usehooks'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
-import { PageTitle } from '../../../components/page-components'
-import Product from '../../../components/product'
+import { PageTitle } from '@/components/page-components'
+import Product from '@/components/product'
 
 import styles from './styles.module.scss'
 
