@@ -43,6 +43,24 @@
     }
 }
 
-.copyright{
+.copyright {
     @apply text-[0.8rem] text-[#8897AD] font-[300] w-full text-center;
+}
+
+@media screen and (max-width: 768px) {
+    .loginWrapper {
+        @apply grid-cols-1;
+    }
+
+    .formContainer {
+        @apply order-1
+    }
+
+    .imgWrapper {
+        height: 10rem;
+
+        img {
+            @apply object-cover rounded-lg object-center;
+        }
+    }
 }
