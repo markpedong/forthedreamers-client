@@ -5,8 +5,8 @@ import { Roboto_Condensed } from 'next/font/google'
 import React from 'react'
 import styles from './styles.module.scss'
 import Image from 'next/image'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Input } from '../../../components/ui/input'
+import { Label } from '../../../components/ui/label'
 import { PageTitle } from '../../../components/page-components'
 
 const roboto = Roboto_Condensed({ weight: ['200', '300', '400', '500', '600', '800'], subsets: ['latin'] })

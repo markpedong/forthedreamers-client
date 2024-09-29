@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.module.scss'
-import { Question } from '@/components/page-components'
+import { Question } from '../../../../../components/page-components'
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from 'react-tooltip'
 import { FaQuestionCircle } from 'react-icons/fa'
