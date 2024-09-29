@@ -59,6 +59,33 @@
   }
 }
 
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/public/fonts/SF-Pro-Display-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/public/fonts/SF-Pro-Display-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/public/fonts/SF-Pro-Display-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+body {
+  font-family: 'SF Pro Display', sans-serif;
+  /* Apply the font globally */
+}
+
+
 // @layer base {
 //   * {
 //     @apply border-border;

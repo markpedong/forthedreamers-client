@@ -1,11 +1,10 @@
 import ReduxProvider from '@/redux/provider'
 
+import { Toaster } from '@/components/ui/sonner'
+
 import '@/styles/global.scss'
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'For the Dreamers',
@@ -19,8 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ReduxProvider>{children}</ReduxProvider>
+      <body>
+        <ReduxProvider>
+          <Toaster />
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   )

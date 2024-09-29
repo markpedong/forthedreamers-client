@@ -1,0 +1,48 @@
+.loginWrapper {
+    @apply grid grid-cols-2 gap-2 w-full h-dvh p-2;
+}
+
+.imgWrapper {
+    @apply size-full max-h-full relative;
+
+    img {
+        @apply object-contain max-h-full;
+    }
+}
+
+.formContainer {
+    @apply flex items-start justify-center flex-col w-full max-w-[20rem] mx-auto text-[0.8rem] relative;
+
+
+    h1 {
+        @apply text-[0C1421] text-[2rem] font-[500];
+    }
+
+    .subHeader {
+        @apply my-6 font-normal;
+    }
+}
+
+.forgot {
+    @apply text-[#1E4AE9] font-normal self-end;
+}
+
+.signInBtn {
+    @apply bg-[#162D3A] text-white w-full flex items-center justify-center py-3 mt-4 rounded-lg;
+}
+
+.or {
+    @apply text-[0.8rem] text-[#8897AD] font-[300];
+}
+
+.dontHaveAccount {
+    @apply w-full text-center text-[0.8rem] text-[#8897AD] font-[300] mt-4;
+
+    span {
+        @apply text-[#1E4AE9] font-normal;
+    }
+}
+
+.copyright{
+    @apply text-[0.8rem] text-[#8897AD] font-[300] w-full text-center;
+}

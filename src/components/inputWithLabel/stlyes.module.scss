@@ -1,0 +1,15 @@
+.container {
+    @apply mb-3 grid w-full items-center gap-1.5;
+
+    label {
+        @apply text-[0.8rem] font-[300];
+    }
+
+    input {
+        @apply bg-[#F7FBFF];
+
+        &::placeholder {
+            @apply text-[0.8rem] text-[#8897AD] tracking-wider font-[300];
+        }
+    }
+}

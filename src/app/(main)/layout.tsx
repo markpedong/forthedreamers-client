@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import ReduxProvider from '@/redux/provider'
 
 import Navbar from '@/components/navbar'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +29,7 @@ export default function RootLayout({
       <link rel="icon" href="/assets/images/dog.jpg" sizes="any" />
       <body className={inter.className}>
         <ReduxProvider>
+          <Toaster />
           <Navbar />
           {children}
           <Footer />
