@@ -17,13 +17,6 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
   },
-  webpack: config => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.resolve(__dirname, './'),
-    }
-    return config
-  },
   images: {
     remotePatterns: [
       {
