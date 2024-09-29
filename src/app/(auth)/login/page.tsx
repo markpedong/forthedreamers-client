@@ -1,9 +1,9 @@
 import Image from 'next/image'
+import classNames from 'classnames'
 
 import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from './styles.module.scss'
-import classNames from 'classnames'
 
 const Login = () => {
   return (
