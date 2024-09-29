@@ -15,6 +15,7 @@ export const PageTitle: FC<{ title: string; medium?: boolean, className?: string
 		</div>
 	)
 }
+PageTitle.displayName = 'PageTitle'
 
 export const Question: FC<{ question?: string; className?: string; normal?: boolean; renderJSX?: () => ReactNode }> = ({
 	question,
@@ -30,6 +31,7 @@ export const Question: FC<{ question?: string; className?: string; normal?: bool
 		<div className={commonClassName}>{renderJSX?.()}</div>
 	)
 }
+Question.displayName = 'Question'
 
 export const ListAnswers: FC<{ answers: ReactNode[]; numbers?: boolean; className?: string }> = ({
 	answers,
@@ -44,3 +46,4 @@ export const ListAnswers: FC<{ answers: ReactNode[]; numbers?: boolean; classNam
 		</ul>
 	)
 }
+ListAnswers.displayName = 'ListAnswers'
