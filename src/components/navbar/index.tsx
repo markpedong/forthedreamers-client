@@ -1,21 +1,21 @@
 'use client'
 
-import { FC, useEffect, useState } from 'react'
-import { Poppins, Roboto_Condensed } from 'next/font/google'
-import { usePathname, useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/store'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Poppins, Roboto_Condensed } from 'next/font/google'
+import { usePathname, useRouter } from 'next/navigation'
+import { FC, useEffect, useState } from 'react'
 import { CiShoppingCart } from 'react-icons/ci'
 import { FaChevronDown } from 'react-icons/fa'
+import { FiUser } from 'react-icons/fi'
 import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
 import Marquee from '../marquee'
 import Cart from './components/cart'
-import Login from './components/login'
 import MobileMenu from './components/mobile-menu'
 import Search from './components/search'
 import styles from './style.module.scss'
@@ -32,7 +32,6 @@ const Navbar: FC = () => {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState(false)
   const [showCart, setShowCart] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
   const { width } = useWindowSize()
   const [{ y }] = useWindowScroll()
   const [showDropdown, setShowDropdown] = useState(false)
@@ -101,7 +100,6 @@ const Navbar: FC = () => {
                   setOpen={() => setOpen(false)}
                   setShowLogin={() => {
                     setOpen(false)
-                    setShowLogin(true)
                   }}
                 />
               )}
@@ -113,17 +111,17 @@ const Navbar: FC = () => {
         </div>
         <div className={classNames(styles.rightBtnWrapper, roboto.className)}>
           <div className={styles.loginBtn}>
-            {/* <span
+            <span
               onClick={() => {
                 setOpen(false)
                 setShowCart(false)
-                setShowLogin(true)
                 setSearch(false)
+                push('/login')
               }}
             >
               LOGIN
-            </span> */}
-            {/* <FiUser size={20} /> */}
+            </span>
+            <FiUser size={20} />
           </div>
           <IoSearchOutline
             className="cursor-pointer"
@@ -131,7 +129,6 @@ const Navbar: FC = () => {
             onClick={() => {
               setOpen(false)
               setShowCart(false)
-              setShowLogin(false)
               setSearch(true)
             }}
           />
@@ -141,26 +138,12 @@ const Navbar: FC = () => {
             onClick={() => {
               setOpen(false)
               setShowCart(true)
-              setShowLogin(false)
               setSearch(false)
             }}
           />
         </div>
         <AnimatePresence>{showCart && <Cart setShowCart={() => setShowCart(false)} />}</AnimatePresence>
         <AnimatePresence>{search && <Search setSearch={() => setSearch(false)} />}</AnimatePresence>
-        <AnimatePresence>
-          {showLogin && (
-            <Login
-              setShowLogin={() => {
-                if (width! < 992) {
-                  setOpen(true)
-                }
-
-                setShowLogin(false)
-              }}
-            />
-          )}
-        </AnimatePresence>
         <AnimatePresence>
           {width! > 1068 && showDropdown && (
             <motion.div
