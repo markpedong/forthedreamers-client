@@ -17,18 +17,18 @@ export const PageTitle: FC<{ title: string; medium?: boolean; className?: string
   )
 }
 
-export const Question: FC<{ question?: string; className?: string; normal?: boolean; renderJSX?: () => ReactNode }> = ({
+export const Question: FC<{ question?: string; className?: string; normal?: boolean; children?: ReactNode }> = ({
   question,
   className,
   normal,
-  renderJSX,
+  children,
 }) => {
   const commonClassName = classNames(className, roboto.className, `font-${normal ? 'normal' : 'bold'}`, styles.question)
 
   return question ? (
     <div className={commonClassName} dangerouslySetInnerHTML={{ __html: question }} />
   ) : (
-    <div className={commonClassName}>{renderJSX ? renderJSX() : null}</div>
+    <div className={commonClassName}>{children}</div>
   )
 }
 
