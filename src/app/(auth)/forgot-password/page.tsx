@@ -12,15 +12,14 @@ const Login = () => {
   const router = useRouter()
 
   return (
-    <div className={styles.loginWrapper}>
+    <div className={styles.forgotPassWrapper}>
       <div className={styles.formContainer}>
-        <h1>Welcome Back 👋</h1>
-        <span className={styles.subHeader}>Today is a new day. It's your day. You shape it. Sign in to start managing your projects.</span>
+        <h1>Forgotten your Password? 👋</h1>
+        <span className={styles.subHeader}>Don't worry, we're here to help!</span>
         <InputWithLabel key="email" label="Email" placeholder="Example@gmail.com" type="email" />
-        <InputWithLabel key="password" label="Password" placeholder="Atleast 8 characters" type="password" />
-        <span className={styles.forgot} onClick={() => router.push('/forgot-password')}>
-          Forgot Password?
-        </span>
+        {/*AFTER USER SENDS EMAIL <InputWithLabel key="otp" label="OTP Code" placeholder="182373" type="email" /> */}
+        {/*AFTER VERIFYING OTP <InputWithLabel key="password" label="Password" placeholder="********" type="password" />
+        <InputWithLabel key="confirm_password" label="Confirm Password" placeholder="********" type="password" /> */}
         <div className={styles.signInBtn}>Sign In</div>
         <div className="relative flex w-full items-center py-5">
           <div className="flex-grow border-t border-gray-400"></div>
@@ -46,9 +45,6 @@ const Login = () => {
           </span>
         </div>
         <div className={classNames(styles.copyright, 'absolute bottom-0')}>© 2023 ALL RIGHTS RESERVED</div>
-      </div>
-      <div className={styles.imgWrapper}>
-        <Image src={'/assets/login_cover.webp'} fill quality={100} priority alt="login_cover" />
       </div>
     </div>
   )
