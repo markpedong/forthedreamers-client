@@ -83,7 +83,7 @@ const AccountPage = () => {
           <CommandList>
             <CommandGroup heading="Display Picture">
               <Upload
-                className="flex justify-center"
+                className="!flex justify-center"
                 listType="picture-circle"
                 name="avatar"
                 showUploadList={false}
