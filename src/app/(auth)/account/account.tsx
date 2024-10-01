@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { GetProp, message, Upload, UploadProps } from 'antd'
+import Image from 'next/image'
+import { useState } from 'react'
 import { FaAddressCard, FaRegCreditCard, FaShoppingCart, FaStar, FaUser } from 'react-icons/fa'
 
-import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
 import { PageTitle } from '@/components/page-components'
+import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
 
 import styles from '../styles.module.scss'
 import Address from './address'
