@@ -77,7 +77,7 @@ const AccountPage = () => {
 
   return (
     <div className={styles.mainWrapper}>
-      <PageTitle title="account" medium className="!text-[1.5rem] !capitalize" />
+      <PageTitle title={menus[currTab - 1 ]?.name} medium className="!text-[1.3rem] !capitalize" />
       <div className={styles.menuWrapper}>
         <Command className="max-w-[200px] rounded-lg border shadow-md">
           <CommandList>
