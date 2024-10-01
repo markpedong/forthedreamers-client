@@ -65,3 +65,13 @@ export type TAddCartPayload = {
   variation_id?: string
   quantity: number
 }
+
+export type InfoItem = {
+  is_default: number
+  first_name: string
+  id: string
+  last_name: string
+  phone: string
+  user_id: string
+  address: string
+}
