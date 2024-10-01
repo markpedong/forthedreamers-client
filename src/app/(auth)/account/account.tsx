@@ -13,6 +13,39 @@ import Profile from './profile'
 import Reviews from './reviews'
 import styles from './styles.module.scss'
 
+const menus = [
+  {
+    id: 1,
+    name: 'Profile',
+    icon: <FaUser className="mr-2 h-4 w-4" />,
+    component: <Profile />,
+  },
+  {
+    id: 2,
+    name: 'Address',
+    icon: <FaAddressCard className="mr-2 h-4 w-4" />,
+    component: <Address />,
+  },
+  {
+    id: 3,
+    name: 'Payment Methods',
+    icon: <FaRegCreditCard className="mr-2 h-4 w-4" />,
+    component: <PaymentMethods />,
+  },
+  {
+    id: 4,
+    name: 'Orders',
+    icon: <FaShoppingCart className="mr-2 h-4 w-4" />,
+    component: <Orders />,
+  },
+  {
+    id: 5,
+    name: 'Reviews',
+    icon: <FaStar className="mr-2 h-4 w-4" />,
+    component: <Reviews />,
+  },
+]
+
 const AccountPage = () => {
   const [currTab, setCurrTab] = useState(1)
 
@@ -23,29 +56,21 @@ const AccountPage = () => {
         <Command className="max-w-[200px] rounded-lg border shadow-md">
           <CommandList>
             <CommandGroup heading="Settings">
-              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(1)}>
-                <FaUser className="mr-2 h-4 w-4" />
-                <span>Profile</span>
-              </CommandItem>
-              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(2)}>
-                <FaAddressCard className="mr-2 h-4 w-4" />
-                <span>Address</span>
-              </CommandItem>
-              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(3)}>
-                <FaRegCreditCard className="mr-2 h-4 w-4" />
-                <span>Payment Methods</span>
-              </CommandItem>
+              {menus?.slice(0, 3)?.map(menu => (
+                <CommandItem className="cursor-pointer" key={menu.id} onSelect={() => setCurrTab(menu.id)}>
+                  {menu.icon}
+                  <span>{menu.name}</span>
+                </CommandItem>
+              ))}
             </CommandGroup>
             <CommandSeparator />
             <CommandGroup heading="Other Details">
-              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(4)}>
-                <FaShoppingCart className="mr-2 h-4 w-4" />
-                <span>Orders</span>
-              </CommandItem>
-              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(5)}>
-                <FaStar className="mr-2 h-4 w-4" />
-                <span>Reviews</span>
-              </CommandItem>
+              {menus?.slice(3)?.map(menu => (
+                <CommandItem className="cursor-pointer" key={menu.id} onSelect={() => setCurrTab(menu.id)}>
+                  {menu.icon}
+                  <span>{menu.name}</span>
+                </CommandItem>
+              ))}
             </CommandGroup>
           </CommandList>
         </Command>
