@@ -11,7 +11,7 @@ import Orders from './orders'
 import PaymentMethods from './payment-methods'
 import Profile from './profile'
 import Reviews from './reviews'
-import styles from './styles.module.scss'
+import styles from '../styles.module.scss'
 
 const menus = [
   {

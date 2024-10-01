@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 import InputWithLabel from '@/components/inputWithLabel'
 
-import styles from './styles.module.scss'
+import styles from '../styles.module.scss'
 
 const Signup = () => {
   const router = useRouter()
@@ -14,7 +14,7 @@ const Signup = () => {
   return (
     <div className={styles.registerWrapper}>
       <div className={styles.imgWrapper}>
-        <Image src={'/assets/login_cover.webp'} fill quality={100} priority alt="login_cover" />
+        <Image src={'/assets/login_cover-2.webp'} fill quality={100} priority alt="login_cover" />
       </div>
       <div className={styles.formContainer}>
         <h1>Create New Account 👋</h1>

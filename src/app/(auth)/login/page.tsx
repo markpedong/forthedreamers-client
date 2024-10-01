@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 import InputWithLabel from '@/components/inputWithLabel'
 
-import styles from './styles.module.scss'
+import styles from '../styles.module.scss'
 
 const Login = () => {
   const router = useRouter()

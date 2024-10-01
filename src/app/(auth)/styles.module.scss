@@ -1,5 +1,24 @@
+.mainWrapper {
+    @apply max-w-[56rem] mx-auto p-5;
+    margin-top: toRem(90);
+    font-family: 'SF Pro Display';
+}
+
+.menuWrapper {
+    @apply flex gap-3;
+}
+
+.detailsWrapper {
+    @apply rounded-lg border shadow-md flex-1
+}
+
 .forgotPassWrapper {
     @apply grid grid-cols-1 w-full h-dvh p-2;
+}
+
+.loginWrapper,
+.registerWrapper {
+    @apply grid grid-cols-2 gap-2 w-full h-dvh p-2;
 }
 
 .imgWrapper {
@@ -19,7 +38,7 @@
     }
 
     .subHeader {
-        @apply my-6 font-normal text-center w-full; 
+        @apply my-6 font-normal text-center w-full;
     }
 }
 
@@ -45,4 +64,24 @@
 
 .copyright {
     @apply text-[0.8rem] text-[#8897AD] font-[300] w-full text-center;
+}
+
+@media screen and (max-width: 768px) {
+
+    .loginWrapper,
+    .registerWrapper {
+        @apply grid-cols-1;
+    }
+
+    .formContainer {
+        @apply order-1
+    }
+
+    .imgWrapper {
+        height: 10rem;
+
+        img {
+            @apply object-cover rounded-lg object-center;
+        }
+    }
 }
