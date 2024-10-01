@@ -12,7 +12,7 @@ const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
       <div>
         <span>
           {data?.first_name} {data?.last_name}
-        </span>{' '}
+        </span>
         | <span>+{data?.phone}</span>
       </div>
       <div>{data?.address}</div>

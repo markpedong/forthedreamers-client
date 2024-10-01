@@ -40,10 +40,19 @@
     .subHeader {
         @apply my-6 font-normal text-center w-full;
     }
+
+    form.loginForm {
+        @apply w-full;
+
+        input {
+            @apply mb-3;
+        }
+
+    }
 }
 
 .forgot {
-    @apply text-[#1E4AE9] font-normal self-end;
+    @apply text-[#1E4AE9] font-normal text-end;
 }
 
 .signInBtn {
