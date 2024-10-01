@@ -7,7 +7,10 @@ import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } fro
 import { PageTitle } from '@/components/page-components'
 
 import Address from './address'
+import Orders from './orders'
+import PaymentMethods from './payment-methods'
 import Profile from './profile'
+import Reviews from './reviews'
 import styles from './styles.module.scss'
 
 const AccountPage = () => {
@@ -20,51 +23,26 @@ const AccountPage = () => {
         <Command className="max-w-[200px] rounded-lg border shadow-md">
           <CommandList>
             <CommandGroup heading="Settings">
-              <CommandItem
-                onClick={() => {
-                  console.log('1')
-                  setCurrTab(1)
-                }}
-              >
+              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(1)}>
                 <FaUser className="mr-2 h-4 w-4" />
                 <span>Profile</span>
               </CommandItem>
-              <CommandItem
-                onClick={() => {
-                  console.log('1')
-                  setCurrTab(2)
-                }}
-              >
+              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(2)}>
                 <FaAddressCard className="mr-2 h-4 w-4" />
                 <span>Address</span>
               </CommandItem>
-              <CommandItem
-                onClick={() => {
-                  console.log('1')
-                  setCurrTab(3)
-                }}
-              >
+              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(3)}>
                 <FaRegCreditCard className="mr-2 h-4 w-4" />
                 <span>Payment Methods</span>
               </CommandItem>
             </CommandGroup>
             <CommandSeparator />
             <CommandGroup heading="Other Details">
-              <CommandItem
-                onClick={() => {
-                  console.log('1')
-                  setCurrTab(4)
-                }}
-              >
+              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(4)}>
                 <FaShoppingCart className="mr-2 h-4 w-4" />
                 <span>Orders</span>
               </CommandItem>
-              <CommandItem
-                onClick={() => {
-                  console.log('1')
-                  setCurrTab(5)
-                }}
-              >
+              <CommandItem className="cursor-pointer" onSelect={() => setCurrTab(5)}>
                 <FaStar className="mr-2 h-4 w-4" />
                 <span>Reviews</span>
               </CommandItem>
@@ -74,6 +52,9 @@ const AccountPage = () => {
         <div className={styles.detailsWrapper}>
           {currTab === 1 && <Profile />}
           {currTab === 2 && <Address />}
+          {currTab === 3 && <PaymentMethods />}
+          {currTab === 4 && <Orders />}
+          {currTab === 5 && <Reviews />}
         </div>
       </div>
     </div>
