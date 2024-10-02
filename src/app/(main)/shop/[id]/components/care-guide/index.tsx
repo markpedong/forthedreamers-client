@@ -1,3 +1,5 @@
+'use client'
+
 import { CARE_GUIDE_ANSWERS } from '@/app/(main)/constants'
 import { CARE_GUIDE } from '@/app/(main)/constants/enums'
 import Drawer from '@/components/drawer'
