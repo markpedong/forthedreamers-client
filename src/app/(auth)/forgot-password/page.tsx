@@ -55,9 +55,6 @@ const Login = () => {
                 err={errors?.email?.message as string}
                 {...register('email')}
               />
-              {/*AFTER USER SENDS EMAIL <InputWithLabel key="otp" label="OTP Code" placeholder="182373" type="email" /> */}
-              {/*AFTER VERIFYING OTP <InputWithLabel key="password" label="Password" placeholder="********" type="password" />
-         <InputWithLabel key="confirm_password" label="Confirm Password" placeholder="********" type="password" /> */}
               <motion.button type="submit" whileTap={{ scale: 0.99 }} className={styles.signInBtn}>
                 Send OTP
               </motion.button>
