@@ -1,20 +1,18 @@
 'use client'
 
+import { useState } from 'react'
+import Image from 'next/image'
+import { useAppSelector } from '@/redux/store'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { GetProp, message, Upload, UploadProps } from 'antd'
-import Image from 'next/image'
-import { useState } from 'react'
 import { FaAddressCard, FaRegCreditCard, FaShoppingCart, FaStar, FaUser } from 'react-icons/fa'
 
-import { PageTitle } from '@/components/page-components'
 import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
+import { DynamicAddress, DynamicOrders, DynamicPaymentMethods, DynamicProfile, DynamicReviews } from '@/components/dynamic-import'
+import { PageTitle } from '@/components/page-components'
+import withAuth from '@/components/withAuth'
 
 import styles from '../styles.module.scss'
-import Address from './address'
-import Orders from './orders'
-import PaymentMethods from './payment-methods'
-import Profile from './profile'
-import Reviews from './reviews'
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0]
 
@@ -23,38 +21,34 @@ const menus = [
     id: 1,
     name: 'Profile',
     icon: <FaUser className="mr-2 h-4 w-4" />,
-    component: <Profile />,
   },
   {
     id: 2,
     name: 'Address',
     icon: <FaAddressCard className="mr-2 h-4 w-4" />,
-    component: <Address />,
   },
   {
     id: 3,
     name: 'Payment Methods',
     icon: <FaRegCreditCard className="mr-2 h-4 w-4" />,
-    component: <PaymentMethods />,
   },
   {
     id: 4,
     name: 'Orders',
     icon: <FaShoppingCart className="mr-2 h-4 w-4" />,
-    component: <Orders />,
   },
   {
     id: 5,
     name: 'Reviews',
     icon: <FaStar className="mr-2 h-4 w-4" />,
-    component: <Reviews />,
   },
 ]
 
 const AccountPage = () => {
+  const dp = useAppSelector(s => s.userData.user.image)
   const [currTab, setCurrTab] = useState(1)
   const [loading, setLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState<string>()
+  const [imageUrl, setImageUrl] = useState<string>(dp)
 
   const uploadButton = (
     <button style={{ border: 0, background: 'none' }} type="button">
@@ -77,13 +71,13 @@ const AccountPage = () => {
 
   return (
     <div className={styles.mainWrapper}>
-      <PageTitle title={menus[currTab - 1 ]?.name} medium className="!text-[1.3rem] !capitalize" />
+      <PageTitle title={menus[currTab - 1]?.name} medium className="!select-none !text-[1.3rem] !capitalize" />
       <div className={styles.menuWrapper}>
         <Command className="max-w-[200px] rounded-lg border shadow-md">
           <CommandList>
             <CommandGroup heading="Display Picture">
               <Upload
-                className="!flex justify-center"
+                className={`!flex justify-center ${currTab !== 1 && '!pointer-events-none'}`}
                 listType="picture-circle"
                 name="avatar"
                 showUploadList={false}
@@ -130,15 +124,15 @@ const AccountPage = () => {
           </CommandList>
         </Command>
         <div className={styles.detailsWrapper}>
-          {currTab === 1 && <Profile />}
-          {currTab === 2 && <Address />}
-          {currTab === 3 && <PaymentMethods />}
-          {currTab === 4 && <Orders />}
-          {currTab === 5 && <Reviews />}
+          {currTab === 1 && <DynamicProfile />}
+          {currTab === 2 && <DynamicAddress />}
+          {currTab === 3 && <DynamicPaymentMethods />}
+          {currTab === 4 && <DynamicOrders />}
+          {currTab === 5 && <DynamicReviews />}
         </div>
       </div>
     </div>
   )
 }
 
-export default AccountPage
+export default withAuth(AccountPage)

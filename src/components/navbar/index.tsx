@@ -1,11 +1,13 @@
 'use client'
 
+import { FC, useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { isLoggedIn } from '@/constants/helper'
 import { useAppSelector } from '@/redux/store'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { usePathname, useRouter } from 'next/navigation'
-import { FC, useEffect, useState } from 'react'
+import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 import { CiShoppingCart } from 'react-icons/ci'
 import { FaChevronDown } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
@@ -13,7 +15,6 @@ import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
-import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 import { DynamicCart, DynamicSearch } from '../dynamic-import'
 import Marquee from '../marquee'
 import MobileMenu from './components/mobile-menu'
@@ -107,36 +108,44 @@ const Navbar: FC = () => {
         </div>
         <div className={classNames(styles.rightBtnWrapper, SF_PRO_DISPLAY.className)}>
           <div className={styles.loginBtn}>
-            <span
+            {!isLoggedIn && (
+              <span
+                onClick={() => {
+                  setOpen(false)
+                  setShowCart(false)
+                  setSearch(false)
+                  push('/login')
+                }}
+              >
+                LOGIN
+              </span>
+            )}
+            <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
+              <FiUser className="cursor-pointer" size={20} onClick={() => (isLoggedIn() ? push('/account') : push('/login'))} />
+            </motion.span>
+          </div>
+          <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
+            <IoSearchOutline
+              className="cursor-pointer"
+              size={20}
               onClick={() => {
                 setOpen(false)
                 setShowCart(false)
-                setSearch(false)
-                push('/login')
+                setSearch(true)
               }}
-            >
-              LOGIN
-            </span>
-            <FiUser size={20} />
-          </div>
-          <IoSearchOutline
-            className="cursor-pointer"
-            size={20}
-            onClick={() => {
-              setOpen(false)
-              setShowCart(false)
-              setSearch(true)
-            }}
-          />
-          <CiShoppingCart
-            className="cursor-pointer"
-            size={20}
-            onClick={() => {
-              setOpen(false)
-              setShowCart(true)
-              setSearch(false)
-            }}
-          />
+            />
+          </motion.span>
+          <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
+            <CiShoppingCart
+              className="cursor-pointer"
+              size={20}
+              onClick={() => {
+                setOpen(false)
+                setShowCart(true)
+                setSearch(false)
+              }}
+            />
+          </motion.span>
         </div>
         <AnimatePresence>{showCart && <DynamicCart setShowCart={() => setShowCart(false)} />}</AnimatePresence>
         <AnimatePresence>{search && <DynamicSearch setSearch={() => setSearch(false)} />}</AnimatePresence>

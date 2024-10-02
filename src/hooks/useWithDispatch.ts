@@ -1,7 +1,7 @@
-import { addToCart, getCart, getWebsiteData } from '@/api'
+import { addToCart, getCart, getNewUserInfo, getWebsiteData } from '@/api'
 import { TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
-import { setCartData } from '@/redux/features/userData'
+import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
 
 export const useWithDispatch = () => {
@@ -29,7 +29,16 @@ export const useWithDispatch = () => {
       dispatch(setCartData(res?.data ?? []))
     }
   }
+
+  const getUserInfo = async () => {
+    const res = await getNewUserInfo()
+    if (res?.status === 200) {
+      dispatch(setUserData(res?.data))
+    }
+  }
+
   return {
+    getUserInfo,
     dispatchWebData,
     getNewCartData,
     addItemToCart,

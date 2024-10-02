@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
@@ -33,7 +35,7 @@ const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
             <FormItem>
               {label && <FormLabel>{label}</FormLabel>}
               <FormControl>
-                <div>
+                <>
                   <Input
                     placeholder={placeholder}
                     type={isPasswords ? (isEyeOpen ? 'text' : 'password') : type}
@@ -46,7 +48,7 @@ const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
                   />
                   {isPasswords && (
                     <Image
-                      className="absolute right-1 top-[1.7rem] cursor-pointer"
+                      className="absolute right-1 top-1/2 cursor-pointer"
                       src={`/assets/images/eye-${isEyeOpen ? 'open' : 'hidden'}.webp`}
                       width={20}
                       height={20}
@@ -54,7 +56,7 @@ const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
                       onClick={() => setIsEyeOpen(!isEyeOpen)}
                     />
                   )}
-                </div>
+                </>
               </FormControl>
               {err && (
                 <motion.span
