@@ -13,11 +13,10 @@ import { MdLocalLaundryService } from 'react-icons/md'
 
 import { CARE_GUIDE } from '@/app/(main)/constants/enums'
 import Header from '@/components/header'
-import { ListAnswers } from '@/components/page-components'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
+import { DynamicCareGuide, DynamicListAnswers } from '@/components/dynamic-import'
 import { roboto } from 'public/fonts'
-import CareGuide from './components/care-guide'
 import styles from './styles.module.scss'
 
 const getUniqueVariations = (variations, type) => {
@@ -92,7 +91,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
           </p>
           <span className={styles.description}>{product?.description}</span>
           <div className={styles.features}>
-            <ListAnswers answers={product?.features} />
+            <DynamicListAnswers answers={product?.features} />
           </div>
           {variations?.length && (
             <>
@@ -190,7 +189,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
         </div>
       </div>
       <AnimatePresence>
-        {openCareGuide && <CareGuide setOpenCareGuide={() => setOpenCareGuide(false)} activeTab={selectedCare} />}
+        {openCareGuide && <DynamicCareGuide setOpenCareGuide={() => setOpenCareGuide(false)} activeTab={selectedCare} />}
       </AnimatePresence>
     </div>
   )
