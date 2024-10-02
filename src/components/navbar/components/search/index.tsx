@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Roboto_Condensed } from 'next/font/google'
 import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { IoIosCloseCircle } from 'react-icons/io'
@@ -13,10 +12,10 @@ import { IoIosCloseCircle } from 'react-icons/io'
 import Drawer from '@/components/drawer'
 import { Question } from '@/components/page-components'
 
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import SearchProduct from '../../products'
 import styles from './styles.module.scss'
 
-const roboto = Roboto_Condensed({ weight: ['300', '400', '800'], subsets: ['latin'] })
 
 const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
   const [value, setValue] = useState('')
@@ -37,14 +36,14 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
   return (
     <Drawer>
       <div className="h-full fcol">
-        <div className={classNames(styles.header, roboto.className)}>
+        <div className={classNames(styles.header, SF_PRO_DISPLAY.className)}>
           <input placeholder="Search for anything" value={value} onChange={e => setValue(e.target.value || '')} />
           <IoIosCloseCircle onClick={setSearch} color="black" />
         </div>
         <AnimatePresence>
           {!!products?.length && value !== '' && (
             <>
-              <div className={classNames(styles.suggestions, roboto.className)}>
+              <div className={classNames(styles.suggestions, SF_PRO_DISPLAY.className)}>
                 <motion.span className={styles.suggestions__header} initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 1 }}>
                   SUGGESTIONS
                 </motion.span>
@@ -68,7 +67,7 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
               </motion.div>
               <motion.div
                 whileTap={{ scale: 0.97 }}
-                className={classNames(styles.footer, roboto.className)}
+                className={classNames(styles.footer, SF_PRO_DISPLAY.className)}
                 onClick={() => push(`/search?search=${value?.toLowerCase()}`)}
               >
                 view all results

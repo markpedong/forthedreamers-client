@@ -16,7 +16,7 @@ import Header from '@/components/header'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
 import { DynamicCareGuide, DynamicListAnswers } from '@/components/dynamic-import'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
 const getUniqueVariations = (variations, type) => {
@@ -83,7 +83,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
         <div className={styles.productImgContainer}>
           <Image src={product?.images?.[0]} alt="product" width={500} height={500} draggable={false} />
         </div>
-        <div className={classNames(styles.descriptionContainer, roboto.className)}>
+        <div className={classNames(styles.descriptionContainer, SF_PRO_DISPLAY.className)}>
           <h1>{product?.name}</h1>
           <span className={styles.price}>{selectedVariation?.id && <>₱{selectedVariation?.price}.00</>}</span>
           <p className={styles.shipping}>
@@ -148,7 +148,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
               add to cart
             </motion.div>
           </div>
-          <div className={classNames(styles.guideContainer, roboto.className)}>
+          <div className={classNames(styles.guideContainer, SF_PRO_DISPLAY.className)}>
             <div>
               <MdLocalLaundryService />
               <motion.span

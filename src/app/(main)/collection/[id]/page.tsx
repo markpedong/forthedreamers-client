@@ -5,7 +5,7 @@ import Header from '@/components/header'
 import Product from '@/components/product'
 
 import styles from './styles.module.scss'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 
 interface PageProps {
   params: {
@@ -29,7 +29,7 @@ const Page = async ({ params: { id } }: PageProps) => {
   const data = collections?.data
 
   return (
-    <div className={classNames(styles.mainWrapper, roboto.className)}>
+    <div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
       <Header arr={['HOME', 'SHOP', `${data?.name}`]} />
       <div className={styles.titleContainer}>{data?.name}</div>
       <div className={styles.filterContainer}>

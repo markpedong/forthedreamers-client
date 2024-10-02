@@ -4,12 +4,12 @@ import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/(main)/constants'
 import { PageTitle, Question } from '@/components/page-components'
 
 import { DynamicListAnswers } from '@/components/dynamic-import'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
 const Page = () => {
   return (
-    <div className={classNames(styles.mainWrapper, roboto.className)}>
+    <div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
       <PageTitle title="SHIPPING" />
       <Question question="WHAT PAYMENT METHODS DO YOU ACCEPT?" />
       <Question question="STANDARD" />

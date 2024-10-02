@@ -2,12 +2,12 @@ import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from
 import { DynamicListAnswers } from '@/components/dynamic-import'
 import { PageTitle, Question } from '@/components/page-components'
 import classNames from 'classnames'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
 const Page = () => {
 	return (
-		<div className={classNames(styles.mainWrapper, roboto.className)}>
+		<div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
 			<PageTitle title="returns" />
 			<Question question="WHAT IS FOR THE DREAMERS RETURN POLICY?" />
 			<DynamicListAnswers answers={RETURN_POLICY} />

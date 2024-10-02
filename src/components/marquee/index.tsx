@@ -1,13 +1,11 @@
 'use client'
 
-import React, { FC } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
+import { FC } from 'react'
 
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
 const Marquee: FC<{ text: string; landing?: boolean }> = ({ text, landing }) => {
   const marqueeVariants = {
@@ -25,7 +23,7 @@ const Marquee: FC<{ text: string; landing?: boolean }> = ({ text, landing }) => 
   }
 
   return (
-    <div className={classNames(styles.marquee, styles.landing, roboto.className)}>
+    <div className={classNames(styles.marquee, styles.landing, SF_PRO_DISPLAY.className)}>
       <motion.div className={styles.track} animate="animate" variants={marqueeVariants}>
         {text}
       </motion.div>

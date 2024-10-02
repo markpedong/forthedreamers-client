@@ -75,3 +75,8 @@ export type InfoItem = {
   user_id: string
   address: string
 }
+
+export type TLoginPayload = {
+  username: string
+  password: string
+}

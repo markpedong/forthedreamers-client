@@ -1,15 +1,14 @@
-import React, { FC, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import styles from './styles.module.scss'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
+import classNames from 'classnames'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import { SF_PRO_DISPLAY } from 'public/fonts'
+import { FC, useState } from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import { FaArrowLeft } from 'react-icons/fa6'
 import { FiUser } from 'react-icons/fi'
-import classNames from 'classnames'
-import { Roboto_Condensed } from 'next/font/google'
+import styles from './styles.module.scss'
 
-const roboto = Roboto_Condensed({ weight: ['300', '400'], subsets: ['latin'] })
 
 const MobileMenu: FC<{ setOpen: () => void; setShowLogin: () => void }> = ({ setOpen, setShowLogin }) => {
 	const { push } = useRouter()
@@ -25,7 +24,7 @@ const MobileMenu: FC<{ setOpen: () => void; setShowLogin: () => void }> = ({ set
 
 	return (
 		<motion.div
-			className={classNames(styles.drawerContainer, roboto.className)}
+			className={classNames(styles.drawerContainer, SF_PRO_DISPLAY.className)}
 			initial={{ opacity: 0, top: '150%%' }}
 			exit={{ opacity: 0, top: '150%%' }}
 			animate={{ opacity: 1, top: '5.6rem', animation: 'ease-out', transition: { duration: 0.5 } }}

@@ -6,7 +6,7 @@ import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
 import Product from '@/components/product'
 
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import Search from './search'
 import styles from './styles.module.scss'
 
@@ -21,7 +21,7 @@ const Page = async ({ searchParams }: PageProps) => {
   const products = await getProducts({ search })
 
   return (
-    <div className={classNames(styles.mainWrapper, roboto.className)}>
+    <div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
       <Header arr={['HOME', 'SEARCH']} />
       <PageTitle title="SEARCH RESULTS" className="!py-5 !text-center" medium />
       <Search />

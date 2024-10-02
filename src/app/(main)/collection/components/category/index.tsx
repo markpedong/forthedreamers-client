@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FC, memo } from 'react'
 
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
 const Category: FC<{ data: TCollectionItem }> = ({ data }) => {
@@ -18,7 +18,7 @@ const Category: FC<{ data: TCollectionItem }> = ({ data }) => {
         <div className={styles.imgContainer} onClick={() => router.push(`/collection/${data?.id}`)}>
           {data?.images.map(img => <Image src={img ?? ''} key={img} alt="" height={100} width={100} />)}
         </div>
-        <span className={roboto.className} onClick={() => router.push(`/collection/${data?.id}`)}>
+        <span className={SF_PRO_DISPLAY.className} onClick={() => router.push(`/collection/${data?.id}`)}>
           {data?.name}
         </span>
       </motion.div>

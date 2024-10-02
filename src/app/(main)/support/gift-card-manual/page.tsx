@@ -3,7 +3,7 @@ import { DynamicListAnswers } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
 import classNames from 'classnames'
 import Image from 'next/image'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
 const Page = () => {
@@ -16,7 +16,7 @@ const Page = () => {
 			<PageTitle title="FAQ'S" medium />
 			<DynamicListAnswers answers={FAQ_ANSWERS} />
 			<PageTitle title="HOW TO USE THE GIFT CARD (WEB)" medium />
-			<ul className={classNames(styles.answers, roboto.className)}>
+			<ul className={classNames(styles.answers, SF_PRO_DISPLAY.className)}>
 				<li>After receiving your UNIQUE GIFT CARD CODE, you may shop in our webstore.</li>
 				<li>
 					Proceed to Check Out and you will be directed to Customer Information Page with the Gift Card option
@@ -31,7 +31,7 @@ const Page = () => {
 				<li>Continue to Shipping and Payment pages with your new total amount and then Complete Order.</li>
 			</ul>
 			<PageTitle title="HOW TO USE GIFT CARD (Mobile)" medium />
-			<ul className={classNames(styles.answers, roboto.className)}>
+			<ul className={classNames(styles.answers, SF_PRO_DISPLAY.className)}>
 				<li>
 					After receiving your UNIQUE GIFT CARD CODE, you may shop in our webstore then proceed to Check Out.
 				</li>

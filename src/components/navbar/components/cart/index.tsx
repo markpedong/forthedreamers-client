@@ -1,22 +1,20 @@
 'use client'
 
-import React, { FC, useState } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
-import { useRouter } from 'next/navigation'
 import { STALE_TIME } from '@/constants'
 import { useQuery } from '@tanstack/react-query'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import { FC, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
 
 import Drawer from '@/components/drawer'
 
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import SearchProduct from '../../products'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['300', '400', '800'], subsets: ['latin'] })
 
 const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   const [showNote, setShowNote] = useState(false)
@@ -34,7 +32,7 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   useLockBodyScroll()
   return (
     <Drawer>
-      <div className={classNames('relative h-full fcol', roboto.className)}>
+      <div className={classNames('relative h-full fcol', SF_PRO_DISPLAY.className)}>
         <div className={styles.header}>
           <span>Cart</span>
           <IoMdClose onClick={setShowCart} color="black" />

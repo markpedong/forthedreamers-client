@@ -10,7 +10,7 @@ import { HiOutlineQuestionMarkCircle } from 'react-icons/hi'
 
 import { Question } from '@/components/page-components'
 
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import Inputs from './components/inputs'
 import ShippingModal from './components/shippingModal'
 import styles from './styles.module.scss'
@@ -44,7 +44,7 @@ const Page = () => {
 
   return (
     <>
-      <div className={classNames(styles.mainWrapper, roboto.className)}>
+      <div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
         <div className={styles.section1}>
           <div className={styles.header}>
             <Question question="Contact" />
@@ -71,11 +71,11 @@ const Page = () => {
           <div className={styles.radioContainer}>
             <label className={classNames({ [styles.activeAddress]: address === '1' })}>
               <input type="radio" value="1" checked={address === '1'} onChange={() => setAddress('1')} />
-              <span className={roboto.className}>Same as shipping address</span>
+              <span className={SF_PRO_DISPLAY.className}>Same as shipping address</span>
             </label>
             <label className={classNames({ [styles.activeAddress]: address === '2' })}>
               <input type="radio" value="2" checked={address === '2'} onChange={() => setAddress('2')} />
-              <span className={roboto.className}>Use a different billing address</span>
+              <span className={SF_PRO_DISPLAY.className}>Use a different billing address</span>
             </label>
           </div>
           <AnimatePresence>
@@ -111,7 +111,7 @@ const Page = () => {
             <span>Terms of Service</span>
           </div>
         </div>
-        <div className={classNames(styles.productsWrapper, roboto.className)}>
+        <div className={classNames(styles.productsWrapper, SF_PRO_DISPLAY.className)}>
           <div className={styles.showSummary}>
             <div className="flex items-center gap-2 text-[0.9rem]" onClick={() => setSummary(!summary)}>
               <span>Show order summary</span> <FaChevronDown size={10} className={`transition-all rotate-${summary ? '180' : '0'}`} />
