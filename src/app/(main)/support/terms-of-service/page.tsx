@@ -1,7 +1,3 @@
-import classNames from 'classnames'
-import { Roboto_Condensed } from 'next/font/google'
-import styles from './styles.module.scss'
-import { PageTitle } from '@/components/page-components'
 import {
 	CANCELLATION_TERMS,
 	CHANGE_OF_MIND_RETURNS_TERMS,
@@ -19,9 +15,11 @@ import {
 	TERMS_ARRAY,
 	USER_GENERATED_CONTENT_TERMS
 } from '@/app/(main)/constants'
+import { PageTitle } from '@/components/page-components'
+import classNames from 'classnames'
+import { roboto } from 'public/fonts'
 import { FC } from 'react'
-
-const roboto = Roboto_Condensed({ weight: ['400', '600', '800'], subsets: ['latin'] })
+import styles from './styles.module.scss'
 
 const TermsSection: FC<{ terms: string[]; title: string }> = ({ title, terms }) => {
 	return (

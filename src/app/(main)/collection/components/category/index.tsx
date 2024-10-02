@@ -1,15 +1,13 @@
 'use client'
 
-import React, { FC, memo } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { TCollectionItem } from '@/api/types'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { FC, memo } from 'react'
 
+import { roboto } from 'public/fonts'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: '300', subsets: ['latin'] })
 
 const Category: FC<{ data: TCollectionItem }> = ({ data }) => {
   const router = useRouter()

@@ -1,26 +1,20 @@
-import { Poppins, Roboto_Condensed } from 'next/font/google'
-import Image from 'next/image'
 import { getProducts, getTestimonials, getWebsiteData } from '@/api'
-import classNames from 'classnames'
+import Image from 'next/image'
 
+import { DCityProduct, DProducts } from '@/components/dynamic-import'
 import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
 import styles from '@/styles/styles.module.scss'
-
-import CityProduct from './components/city-product'
-import Products from './components/products'
-
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
-const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
+import { poppins, roboto } from 'public/fonts'
 
 const Home = async () => {
   const [products, web, testimonials] = await Promise.all([getProducts({}), getWebsiteData({}), getTestimonials({})])
   const website = web?.data
 
   return (
-    <div>
+    <>
       <div
-        className={classNames(styles.mainWrapper)}
+        className={styles.mainWrapper}
         style={{
           backgroundImage: `url(${website?.landing_image1})`,
         }}
@@ -34,23 +28,23 @@ const Home = async () => {
 					</div>
 				</div> */}
       </div>
-      <Products products={products?.data ?? []} />
+      <DProducts products={products?.data ?? []} />
       <Marquee text={website?.marquee_text ?? ''} landing />
       <div className={styles.dudeWrapper}>
-        <Image src={website?.landing_image2 ?? ''} alt="" height={1000} width={1000} />
+        <Image src={website?.landing_image2 ?? ''} alt="" height={300} width={300} sizes="100vw" />
       </div>
       <div className={styles.afterProductWrapper}>
         <div className={styles.header}>
           <span className={poppins.className}>FOR THE DREAMERS CITY</span>
           <span className={roboto.className}>Inspired by the vibrant aesthetics of the urban and the cozy spirit of a hometown.</span>
         </div>
-        <CityProduct products={products?.data ?? []} />
+        <DCityProduct products={products?.data ?? []} />
       </div>
       <div className={styles.dudeWrapper}>
-        <Image src={website?.landing_image3 ?? ''} alt="" height={1000} width={1000} />
+        <Image src={website?.landing_image3 ?? ''} alt="" height={300} width={300} sizes="100vw" />
       </div>
       <Testimonials data={testimonials?.data ?? []} />
-    </div>
+    </>
   )
 }
 

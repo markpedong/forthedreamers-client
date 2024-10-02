@@ -1,11 +1,8 @@
 import { getProducts } from '@/api'
-import { Roboto_Condensed } from 'next/font/google'
-
+import { roboto } from 'public/fonts'
 
 import { CheckoutSectionWrapper, Suggestions } from './cart'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['300', '400', '800'], subsets: ['latin'] })
 
 const Page = async () => {
   const products = await getProducts({})
@@ -13,9 +10,7 @@ const Page = async () => {
     <div className={roboto.className}>
       <div className={styles.mainWrapper}>
         {/* <PageTitle title="Your Cart" medium className="!capitalize" /> */}
-        <div className={styles.cartWrapper}>
-          {/* <Cart /> */}
-        </div>
+        <div className={styles.cartWrapper}>{/* <Cart /> */}</div>
         <CheckoutSectionWrapper />
       </div>
       <Suggestions products={products?.data?.slice(0, 4) ?? []} />

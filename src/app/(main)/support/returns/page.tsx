@@ -1,10 +1,8 @@
+import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/app/(main)/constants'
 import { ListAnswers, PageTitle, Question } from '@/components/page-components'
 import classNames from 'classnames'
-import { Roboto_Condensed } from 'next/font/google'
+import { roboto } from 'public/fonts'
 import styles from './styles.module.scss'
-import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/app/(main)/constants'
-
-const roboto = Roboto_Condensed({ weight: ['400', '600', '800'], subsets: ['latin'] })
 
 const Page = () => {
 	return (

@@ -1,5 +1,3 @@
-import React from 'react'
-import { Roboto_Condensed } from 'next/font/google'
 import { getProducts } from '@/api'
 import classNames from 'classnames'
 import { MdFilterListAlt } from 'react-icons/md'
@@ -8,10 +6,9 @@ import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
 import Product from '@/components/product'
 
+import { roboto } from 'public/fonts'
 import Search from './search'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['200', '300', '400', '500', '600', '800'], subsets: ['latin'] })
 
 interface PageProps {
   searchParams?: {

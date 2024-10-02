@@ -1,26 +1,24 @@
 'use client'
 
-import { FC, memo, useMemo, useState } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { TProductDetails, TVariationItem } from '@/api/types'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { FC, memo, useMemo, useState } from 'react'
 import { BsBox } from 'react-icons/bs'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoIosReturnLeft } from 'react-icons/io'
 import { MdLocalLaundryService } from 'react-icons/md'
 
-import { useWithDispatch } from '@/hooks/useWithDispatch'
+import { CARE_GUIDE } from '@/app/(main)/constants/enums'
 import Header from '@/components/header'
 import { ListAnswers } from '@/components/page-components'
-import { CARE_GUIDE } from '@/app/(main)/constants/enums'
+import { useWithDispatch } from '@/hooks/useWithDispatch'
 
+import { roboto } from 'public/fonts'
 import CareGuide from './components/care-guide'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['300', '400', '500', '800'], subsets: ['latin'] })
 
 const getUniqueVariations = (variations, type) => {
   const uniqueValues = new Set()
