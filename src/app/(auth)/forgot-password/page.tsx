@@ -55,7 +55,7 @@ const Login = () => {
                 err={errors?.email?.message as string}
                 {...register('email')}
               />
-              <motion.button type="submit" whileTap={{ scale: 0.99 }} className={styles.signInBtn}>
+              <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
                 Send OTP
               </motion.button>
             </form>
@@ -74,7 +74,7 @@ const Login = () => {
                 })}
                 name="otp"
               />
-              <motion.button type="submit" whileTap={{ scale: 0.99 }} className={styles.signInBtn}>
+              <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
                 Verify OTP
               </motion.button>
             </form>
@@ -101,7 +101,7 @@ const Login = () => {
                 {...register('confirm_password')}
                 name="confirm_password"
               />
-              <motion.button type="submit" whileTap={{ scale: 0.99 }} className={styles.signInBtn}>
+              <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
                 Verify OTP
               </motion.button>
             </form>

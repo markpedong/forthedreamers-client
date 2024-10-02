@@ -1,13 +1,13 @@
 'use client'
 
-import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import classNames from 'classnames'
+import { motion } from 'framer-motion'
 
-import InputWithLabel from '@/components/inputWithLabel'
-import { Form } from '@/components/ui/form'
 import { useProfileSchema } from '@/hooks/useProfileSchema'
+import { Form } from '@/components/ui/form'
+import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from '../styles.module.scss'
 
@@ -102,10 +102,10 @@ const Signup = () => {
               />
             </div>
 
-            <span className={styles.forgot} onClick={() => router.push('/forgot-password')}>
-              Forgot Password?
-            </span>
-            <motion.button type="submit" className={styles.signInBtn}>
+            <div className={styles.forgot}>
+              <span onClick={() => router.push('/forgot-password')}>Forgot Password?</span>
+            </div>
+            <motion.button whileTap={{ scale: 0.97 }} type="submit" className={styles.signInBtn}>
               Sign Up
             </motion.button>
           </form>
