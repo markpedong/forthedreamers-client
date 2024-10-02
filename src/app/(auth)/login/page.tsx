@@ -69,7 +69,7 @@ const Login = () => {
             <div className={styles.forgot}>
               <span onClick={() => router.push('/forgot-password')}>Forgot Password?</span>
             </div>
-            <motion.button type="submit" whileTap={{ scale: 0.99 }} className={styles.signInBtn}>
+            <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
               Sign In
             </motion.button>
           </form>
