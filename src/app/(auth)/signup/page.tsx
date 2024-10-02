@@ -7,13 +7,13 @@ import { useRouter } from 'next/navigation'
 
 import InputWithLabel from '@/components/inputWithLabel'
 import { Form } from '@/components/ui/form'
-import { useProfileSchema } from '@/hooks/useProfileSchema'
 
+import { useSignupSchema } from '@/hooks/useSignupSchema'
 import styles from '../styles.module.scss'
 
 const Signup = () => {
   const router = useRouter()
-  const { form, handleSubmit, register, errors } = useProfileSchema({
+  const { form, handleSubmit, register, errors } = useSignupSchema({
     username: '',
     phone: '',
     confirm_password: '',

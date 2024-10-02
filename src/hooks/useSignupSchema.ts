@@ -14,7 +14,7 @@ const profileSchema = z.object({
 
 type FormSchema = z.infer<typeof profileSchema>
 
-export const useProfileSchema = (defaultValues: Partial<FormSchema> = {}) => {
+export const useSignupSchema = (defaultValues: Partial<FormSchema> = {}) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
