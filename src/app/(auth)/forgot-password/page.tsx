@@ -63,16 +63,15 @@ const Login = () => {
           {steps === 2 && (
             <form className={styles.forgotPasswordForm} onSubmit={handleSubmit(onVerifyOTP, onError)}>
               <InputWithLabel
-                form={form}
-                err={errors?.otp?.message as string}
                 key="otp"
                 label="OTP Code"
                 placeholder="182373"
                 type="text"
+                form={form}
+                err={errors?.otp?.message as string}
                 {...register('otp', {
                   onChange: e => setValue('otp', e.target.value.replace(/\D/g, '')),
                 })}
-                name="otp"
               />
               <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
                 Verify OTP
@@ -82,24 +81,22 @@ const Login = () => {
           {steps === 3 && (
             <form className={styles.forgotPasswordForm} onSubmit={handleSubmit(onSubmitNewPass, onError)}>
               <InputWithLabel
-                form={form}
-                err={errors?.otp?.message as string}
                 key="password"
                 label="Password"
                 placeholder="********"
                 type="password"
-                {...register('password')}
-                name="password"
-              />
-              <InputWithLabel
                 form={form}
                 err={errors?.otp?.message as string}
+                {...register('password')}
+              />
+              <InputWithLabel
                 key="confirm_password"
                 label="Confirm Password"
                 placeholder="********"
                 type="password"
+                form={form}
+                err={errors?.otp?.message as string}
                 {...register('confirm_password')}
-                name="confirm_password"
               />
               <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
                 Verify OTP
