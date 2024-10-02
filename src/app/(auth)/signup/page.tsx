@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation'
 import InputWithLabel from '@/components/inputWithLabel'
 import { Form } from '@/components/ui/form'
 
-import { useSignupSchema } from '@/hooks/useSignupSchema'
 import styles from '../styles.module.scss'
+import { useSignupSchema } from '@/hooks/useUserSchema'
 
 const Signup = () => {
   const router = useRouter()
@@ -88,7 +88,7 @@ const Signup = () => {
                 placeholder="Atleast 8 characters"
                 type="password"
                 form={form}
-                err={errors?.password?.message}
+                err={errors?.password?.message as string}
                 {...register('password')}
               />
               <InputWithLabel

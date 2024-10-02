@@ -6,12 +6,12 @@ import { useAppSelector } from '@/redux/store'
 import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 
-import { useProfileSchema } from '@/hooks/useProfileSchema'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from '../styles.module.scss'
+import { useProfileSchema } from '@/hooks/useUserSchema'
 
 const Profile = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -122,7 +122,7 @@ const Profile = () => {
             placeholder="Atleast 8 characters"
             type="password"
             form={form}
-            err={errors?.old_password?.message}
+            err={errors?.old_password?.message as string}
             {...register('old_password')}
           />
           <div className="flex gap-2">
@@ -132,7 +132,7 @@ const Profile = () => {
               placeholder="Atleast 8 characters"
               type="password"
               form={form}
-              err={errors?.new_password?.message}
+              err={errors?.new_password?.message as string}
               {...register('new_password')}
             />
             <InputWithLabel
