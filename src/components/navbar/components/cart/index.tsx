@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC, useState } from 'react'
 import { Roboto_Condensed } from 'next/font/google'
 import { useRouter } from 'next/navigation'

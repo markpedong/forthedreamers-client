@@ -14,4 +14,18 @@ const DynamicReturns = dynamic(() => import('../app/(main)/shop/[id]/components/
 
 const DynamicListAnswers = dynamic(() => import('../components/page-components/index').then(m => m.ListAnswers), { loading: () => <></> })
 
-export { DProduct, DProducts, DCityProduct, DynamicCareGuide, DynamicListAnswers, DynamicReturns, DynamicShipping }
+const DynamicCart = dynamic(() => import('../components/navbar/components/cart'), { loading: () => <></> })
+
+const DynamicSearch = dynamic(() => import('../components/navbar/components/search'), { loading: () => <></> })
+
+export {
+  DProduct,
+  DProducts,
+  DCityProduct,
+  DynamicCareGuide,
+  DynamicListAnswers,
+  DynamicReturns,
+  DynamicShipping,
+  DynamicCart,
+  DynamicSearch,
+}
