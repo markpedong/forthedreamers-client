@@ -1,5 +1,17 @@
 import { post } from './http'
-import { TCartItem, TCollectionDetails, TCollectionItem, TProductDetails, TProductItem, TTestimonials, TVariationItem, TWebsiteItem } from './types'
+import {
+  TCartItem,
+  TCollectionDetails,
+  TCollectionItem,
+  TLoginPayload,
+  TProductDetails,
+  TProductItem,
+  TTestimonials,
+  TVariationItem,
+  TWebsiteItem,
+} from './types'
+
+export const login = (params: TLoginPayload) => post('/public/login', params)
 
 export const getProducts = params => post<TProductItem[]>('/public/products', params)
 
@@ -17,7 +29,6 @@ export const getCollections = params => post<TCollectionItem[]>('/public/collect
 
 // /public/collectionsByID
 export const getCollectionsByID = params => post<TCollectionDetails>('/public/collectionsByID', params)
-
 
 // /public/testimonials
 export const getTestimonials = params => post<TTestimonials[]>('/public/testimonials', params)

@@ -17,7 +17,7 @@ import {
 } from '@/app/(main)/constants'
 import { PageTitle } from '@/components/page-components'
 import classNames from 'classnames'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FC } from 'react'
 import styles from './styles.module.scss'
 
@@ -34,7 +34,7 @@ const TermsSection: FC<{ terms: string[]; title: string }> = ({ title, terms }) 
 
 const Page = () => {
 	return (
-		<div className={classNames(styles.mainWrapper, roboto.className)}>
+		<div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
 			<PageTitle title="Terms of Service" className="!capitalize" />
 			<div className="fcol gap-3">
 				<span className="font-bold">Welcome to CHARLOTTE FOLK.</span>

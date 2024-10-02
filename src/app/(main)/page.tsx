@@ -5,7 +5,7 @@ import { DCityProduct, DProducts } from '@/components/dynamic-import'
 import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
 import styles from '@/styles/styles.module.scss'
-import { poppins, roboto } from 'public/fonts'
+import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 
 const Home = async () => {
   const [products, web, testimonials] = await Promise.all([getProducts({}), getWebsiteData({}), getTestimonials({})])
@@ -21,7 +21,7 @@ const Home = async () => {
       >
         {/* <div className={styles.timelessContainer}>
 					<span>timeless silhouettes</span>
-					<span className={roboto.className}>live now</span>
+					<span className={SF_PRO_DISPLAY.className}>live now</span>
 					<div>
 						<FaCircleDot />
 						<GoDotFill />
@@ -36,7 +36,7 @@ const Home = async () => {
       <div className={styles.afterProductWrapper}>
         <div className={styles.header}>
           <span className={poppins.className}>FOR THE DREAMERS CITY</span>
-          <span className={roboto.className}>Inspired by the vibrant aesthetics of the urban and the cozy spirit of a hometown.</span>
+          <span className={SF_PRO_DISPLAY.className}>Inspired by the vibrant aesthetics of the urban and the cozy spirit of a hometown.</span>
         </div>
         <DCityProduct products={products?.data ?? []} />
       </div>

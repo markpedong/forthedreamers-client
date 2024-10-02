@@ -3,7 +3,7 @@ import { DynamicListAnswers } from '@/components/dynamic-import'
 import { Question } from '@/components/page-components'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FC } from 'react'
 import { IoCloseCircle } from 'react-icons/io5'
 import styles from './styles.module.scss'
@@ -21,7 +21,7 @@ const ShippingModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
 					className="absolute top-4 right-4 z-[9999]"
 					size={30}
 				/>
-				<Question question="Shipping Policy" className={classNames(roboto.className, styles.header)} />
+				<Question question="Shipping Policy" className={classNames(SF_PRO_DISPLAY.className, styles.header)} />
 				<div>
 					<Question normal question="WHAT SHIPPING TYPES DO YOU HAVE?" />
 					<DynamicListAnswers

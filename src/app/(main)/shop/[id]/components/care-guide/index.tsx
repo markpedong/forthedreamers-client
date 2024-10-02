@@ -2,7 +2,7 @@
 
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FC, useState } from 'react'
 import { IoIosCloseCircle } from 'react-icons/io'
 
@@ -21,11 +21,11 @@ const CareGuide: FC<{ setOpenCareGuide: () => void; activeTab: string }> = ({ se
 
   return (
     <Drawer>
-      <div className={classNames(styles.header, roboto.className)}>
+      <div className={classNames(styles.header, SF_PRO_DISPLAY.className)}>
         <span>PRODUCT INFORMATION</span>
         <IoIosCloseCircle onClick={setOpenCareGuide} />
       </div>
-      <div className={classNames(styles.tabs, roboto.className)}>
+      <div className={classNames(styles.tabs, SF_PRO_DISPLAY.className)}>
         {tabs?.map(q => (
           <span key={q} onClick={() => setSelectedTab(q)} data-isActive={q === selectedTab}>
             {q}

@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { login } from '@/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
@@ -16,7 +17,7 @@ import styles from '../styles.module.scss'
 type FormSchema = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
-  email: z.string().email('Invalid email format'),
+  username: z.string().min(6, 'Username should be at least 6 characters'),
   password: z.string({ message: 'Password is required' }).min(8, 'Password should be at least 8 characters'),
 })
 
@@ -24,7 +25,7 @@ const Login = () => {
   const router = useRouter()
   const form = useForm<FormSchema>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: '', password: '' },
+    defaultValues: { username: '', password: '' },
   })
 
   const {
@@ -33,8 +34,10 @@ const Login = () => {
     formState: { errors },
   } = form
 
-  const onSubmitForm = (data: FormSchema) => {
-    console.log(data)
+  const onSubmitForm = async (data: FormSchema) => {
+    const res = await login(data)
+
+    console.log(res)
   }
 
   const onError = (errors: any) => {
@@ -49,22 +52,22 @@ const Login = () => {
         <Form {...form}>
           <form className={styles.loginForm} onSubmit={handleSubmit(onSubmitForm, onError)}>
             <InputWithLabel
-              key="email"
-              label="Email"
-              placeholder="Example@gmail.com"
-              type="email"
+              key="username"
+              label="Username"
+              placeholder="johnmayer"
+              type="text"
               form={form}
-              err={errors?.email?.message}
-              {...register('email')}
+              err={errors?.username?.message}
+              {...register('username')}
             />
             <InputWithLabel
-              key="password"
               label="Password"
               placeholder="Atleast 8 characters"
               type="password"
               form={form}
               err={errors?.password?.message}
               {...register('password')}
+              name="password"
             />
             <div className={styles.forgot}>
               <span onClick={() => router.push('/forgot-password')}>Forgot Password?</span>
@@ -74,23 +77,9 @@ const Login = () => {
             </motion.button>
           </form>
         </Form>
-        <div className="relative flex w-full items-center py-5">
-          <div className="flex-grow border-t border-gray-400"></div>
-          <span className="mx-4 flex-shrink text-gray-400">Or</span>
-          <div className="flex-grow border-t border-gray-400"></div>
-        </div>
-        <div className="mb-2 flex w-full items-center justify-center bg-[#F3F9FA]">
-          <button className="flex items-center gap-2 px-6 py-2 text-xs text-[#313957]">
-            <Image src={'/assets/google.svg'} width={20} height={20} alt="google_logo" />
-            <span>Sign in with Google</span>
-          </button>
-        </div>
-        <div className="mb-2 flex w-full items-center justify-center bg-[#F3F9FA]">
-          <button className="flex items-center gap-2 px-6 py-2 text-xs text-[#313957]">
-            <Image src={'/assets/facebook.svg'} width={20} height={20} alt="google_logo" />
-            <span>Sign in with Facebook</span>
-          </button>
-        </div>
+        {/* <OrDivider /> */}
+        {/* <GoogleButton />
+        <FacebookButton /> */}
         <div className={styles.dontHaveAccount}>
           Don't you have an account?{' '}
           <span className="cursor-pointer" onClick={() => router.push('/signup')}>

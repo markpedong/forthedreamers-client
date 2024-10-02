@@ -4,12 +4,12 @@ import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/(main)/constants'
 import { Question } from '@/components/page-components'
 
 import { DynamicListAnswers } from '@/components/dynamic-import'
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
 const Shipping = () => {
   return (
-    <div className={classNames(styles.wrapper, roboto.className)}>
+    <div className={classNames(styles.wrapper, SF_PRO_DISPLAY.className)}>
       <Question question="WHAT SHIPPING TYPES DO YOU HAVE?" />
       <Question question="STANDARD" normal className="mb-0 mt-4" />
       <DynamicListAnswers answers={SHIPPING_ANSWERS} />

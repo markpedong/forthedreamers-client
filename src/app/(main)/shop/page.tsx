@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
 
-import { roboto } from 'public/fonts'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import ShopPagination from './shop-pagination'
 import styles from './styles.module.scss'
 
@@ -19,7 +19,7 @@ const Page = async () => {
     <div className={styles.mainWrapper}>
       <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
       <PageTitle title="PRODUCTS" />
-      <div className={classNames(styles.filterContainer, roboto.className)}>
+      <div className={classNames(styles.filterContainer, SF_PRO_DISPLAY.className)}>
         <div>
           {/* <FaFilter /> */}
           {/* <span>FILTER AND SORT</span> */}

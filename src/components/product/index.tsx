@@ -1,15 +1,14 @@
 'use client'
 
-import React, { FC, memo, useState } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { TProductItem, TShortVar } from '@/api/types'
 import classNames from 'classnames'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { FC, memo, useState } from 'react'
 
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
-const roboto = Roboto_Condensed({ weight: ['300', '400', '600'], subsets: ['latin'] })
 
 const Product: FC<{ className?: string; product?: TProductItem }> = ({ className, product }) => {
   const { push } = useRouter()
@@ -27,7 +26,7 @@ const Product: FC<{ className?: string; product?: TProductItem }> = ({ className
         width={150}
         draggable={false}
       />
-      <div className={classNames(styles.textContainer, roboto.className)}>
+      <div className={classNames(styles.textContainer, SF_PRO_DISPLAY.className)}>
         <span className={styles.title} onClick={() => push(`/shop/${product?.id}`)}>
           {product?.name}
         </span>

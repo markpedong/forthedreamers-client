@@ -1,14 +1,13 @@
 'use client'
 
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
+import InputWithLabel from '@/components/inputWithLabel'
+import { Form } from '@/components/ui/form'
 import { useFormSchemas } from '@/hooks/useFormSchemas'
 import useValidate from '@/hooks/useFormValidate'
-import { Form } from '@/components/ui/form'
-import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from '../styles.module.scss'
 
@@ -104,23 +103,9 @@ const Login = () => {
             </form>
           )}
         </Form>
-        <div className="relative flex w-full items-center py-5">
-          <div className="flex-grow border-t border-gray-400"></div>
-          <span className="mx-4 flex-shrink text-gray-400">Or</span>
-          <div className="flex-grow border-t border-gray-400"></div>
-        </div>
-        <div className="mb-2 flex w-full items-center justify-center bg-[#F3F9FA]">
-          <button className="flex items-center gap-2 px-6 py-2 text-xs text-[#313957]">
-            <Image src={'/assets/google.svg'} width={20} height={20} alt="google_logo" />
-            <span>Sign in with Google</span>
-          </button>
-        </div>
-        <div className="mb-2 flex w-full items-center justify-center bg-[#F3F9FA]">
-          <button className="flex items-center gap-2 px-6 py-2 text-xs text-[#313957]">
-            <Image src={'/assets/facebook.svg'} width={20} height={20} alt="google_logo" />
-            <span>Sign in with Facebook</span>
-          </button>
-        </div>
+        {/* <OrDivider /> */}
+        {/* <GoogleButton />
+        <FacebookButton /> */}
         <div className={styles.dontHaveAccount}>
           Don't you have an account?
           <span className="cursor-pointer" onClick={() => router.push('/signup')}>

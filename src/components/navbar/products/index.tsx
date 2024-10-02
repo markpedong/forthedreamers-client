@@ -1,14 +1,13 @@
-import React, { FC, useState } from 'react'
-import { Roboto_Condensed } from 'next/font/google'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { TProductItem } from '@/api/types'
 import classNames from 'classnames'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { FC, useState } from 'react'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
-const roboto = Roboto_Condensed({ weight: ['300', '400', '800'], subsets: ['latin'] })
 
 const SearchProduct: FC<{ isCart?: boolean; product?: TProductItem }> = ({ isCart, product }) => {
   const router = useRouter()
@@ -18,7 +17,7 @@ const SearchProduct: FC<{ isCart?: boolean; product?: TProductItem }> = ({ isCar
   return (
     <div className={styles.products__item} data-iscart={isCart}>
       <Image onClick={() => router.push(`/shop/${product?.id}`)} src={product?.images?.[0] ?? ''} alt="" height={100} width={100} />
-      <div className={classNames(styles.products__textContainer, roboto.className)}>
+      <div className={classNames(styles.products__textContainer, SF_PRO_DISPLAY.className)}>
         <div className={styles.products__titleContainer} onClick={() => router.push(`/shop/${product?.id}`)}>
           <span>{product?.name}</span>
           {variations?.length! > 0 && <span>₱{variations?.[0]?.price}.00</span>}

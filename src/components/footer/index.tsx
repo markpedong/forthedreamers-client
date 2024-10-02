@@ -1,16 +1,14 @@
 'use client'
 
-import React, { useState } from 'react'
-import styles from './styles.module.scss'
-import classNames from 'classnames'
-import { Roboto_Condensed } from 'next/font/google'
-import { IoLogoFacebook, IoLogoInstagram, IoLogoPinterest } from 'react-icons/io'
-import { FaTiktok } from 'react-icons/fa'
-import { FaMinus, FaPlus, FaAngleDown } from 'react-icons/fa6'
-import { AnimatePresence, motion } from 'framer-motion'
 import { useMediaQuery } from '@uidotdev/usehooks'
-
-const roboto = Roboto_Condensed({ weight: ['300', '400', '500', '800'], subsets: ['latin'] })
+import classNames from 'classnames'
+import { AnimatePresence, motion } from 'framer-motion'
+import { SF_PRO_DISPLAY } from 'public/fonts'
+import { useState } from 'react'
+import { FaTiktok } from 'react-icons/fa'
+import { FaAngleDown, FaMinus, FaPlus } from 'react-icons/fa6'
+import { IoLogoFacebook, IoLogoInstagram, IoLogoPinterest } from 'react-icons/io'
+import styles from './styles.module.scss'
 
 const Footer = () => {
 	const [open, setOpen] = useState(false)
@@ -20,7 +18,7 @@ const Footer = () => {
 	const medium = useMediaQuery('only screen and (min-width : 993px)')
 
 	return (
-		<div className={classNames(styles.footerContainer, roboto.className)}>
+		<div className={classNames(styles.footerContainer, SF_PRO_DISPLAY.className)}>
 			<div className={styles.footerWrapper}>
 				<div>
 					<h2>

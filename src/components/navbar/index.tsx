@@ -4,7 +4,6 @@ import { useAppSelector } from '@/redux/store'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Poppins, Roboto_Condensed } from 'next/font/google'
 import { usePathname, useRouter } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 import { CiShoppingCart } from 'react-icons/ci'
@@ -14,13 +13,11 @@ import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
+import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 import { DynamicCart, DynamicSearch } from '../dynamic-import'
 import Marquee from '../marquee'
 import MobileMenu from './components/mobile-menu'
 import styles from './style.module.scss'
-
-const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] })
-const roboto = Roboto_Condensed({ weight: ['300', '400', '500'], subsets: ['latin'] })
 
 const Navbar: FC = () => {
   const { push, refresh } = useRouter()
@@ -66,7 +63,7 @@ const Navbar: FC = () => {
           animate={pathname === '/' ? { y: isWhiteBG ? 0 : '-100%', transition: { duration: 0.15, ease: 'easeIn' } } : {}}
         />
         {width! > 992 && (
-          <div className={classNames(styles.leftBtnWrapper, roboto.className)}>
+          <div className={classNames(styles.leftBtnWrapper, SF_PRO_DISPLAY.className)}>
             <span onClick={() => handlePush('/')}>HOME</span>
             <span onClick={() => handlePush('/shop')}>SHOP</span>
             <span onClick={() => handlePush('/collection')}>COLLECTIONS</span>
@@ -108,7 +105,7 @@ const Navbar: FC = () => {
         <div className={classNames(styles.navTitle, poppins.className)} onClick={() => handlePush('/')}>
           {website?.website_name}
         </div>
-        <div className={classNames(styles.rightBtnWrapper, roboto.className)}>
+        <div className={classNames(styles.rightBtnWrapper, SF_PRO_DISPLAY.className)}>
           <div className={styles.loginBtn}>
             <span
               onClick={() => {
