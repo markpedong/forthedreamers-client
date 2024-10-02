@@ -44,13 +44,13 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
 }
 
 const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
-  const token = getLocalStorage('token')
+  const token = getLocalStorage('token') || ''
   console.log(process.env.NEXT_PUBLIC_DOMAIN)
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Token: token?.replaceAll(`"`, '') } : {}),
+      ...(token ? { Token: String(token)?.replaceAll(/"/g, '') } : {}),
     },
     body: JSON.stringify(data) || '{}',
   })
