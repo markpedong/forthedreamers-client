@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
 type ApiResponse<T> = {
-  data?: T
+  data: T
   message: string
   success: boolean
   status: number
@@ -50,7 +50,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Token: token } : {}),
+      ...(token ? { Token: token?.replaceAll(`"`, '') } : {}),
     },
     body: JSON.stringify(data) || '{}',
   })
@@ -74,6 +74,10 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
         window.location.href = '/login'
       }, 4000)
     }
+
+    toast(response?.message + ' ⚠️', {
+      description: 'Please try again',
+    })
     return response
   }
 

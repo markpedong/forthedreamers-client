@@ -3,10 +3,13 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { login } from '@/api'
+import { setUserData } from '@/redux/features/userData'
+import { useAppDispatch } from '@/redux/store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Form } from '@/components/ui/form'
@@ -23,6 +26,7 @@ const loginSchema = z.object({
 
 const Login = () => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
   const form = useForm<FormSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: { username: '', password: '' },
@@ -37,7 +41,21 @@ const Login = () => {
   const onSubmitForm = async (data: FormSchema) => {
     const res = await login(data)
 
-    console.log(res)
+    dispatch(setUserData(res?.data?.userInfo))
+    toast(res?.message, {
+      description: 'Redirecting you to account page',
+      action: {
+        label: 'View Account',
+        onClick: () => {
+          router.push('/account')
+        },
+      },
+      duration: 1500,
+    })
+
+    setTimeout(() => {
+      router.push('/account')
+    }, 1500)
   }
 
   const onError = (errors: any) => {

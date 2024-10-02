@@ -4,8 +4,7 @@ import { z } from 'zod'
 
 const profileSchema = z.object({
   email: z.string().email('Invalid email format'),
-  old_password: z.string({ message: 'Password is required' }).min(8, 'Old Password should be at least 8 characters'),
-  new_password: z.string({ message: 'Password is required' }).min(8, 'New Password should be at least 8 characters'),
+  password: z.string({ message: 'Password is required' }).min(8, 'Password should be at least 8 characters'),
   confirm_password: z.string({ message: 'Confirm Password is required' }).min(8, 'Confirm Password should be at least 8 characters'),
   phone: z.string({ message: 'Phone is required' }),
   first_name: z.string({ message: 'First Name is required' }).min(3, 'First Name should be at least 3 characters'),
@@ -20,7 +19,7 @@ export const useProfileSchema = (defaultValues: Partial<FormSchema> = {}) => {
     resolver: zodResolver(profileSchema),
     defaultValues: {
       email: '',
-      old_password: '',
+      password: '',
       confirm_password: '',
       phone: '',
       first_name: '',

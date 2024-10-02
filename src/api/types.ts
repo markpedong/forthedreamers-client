@@ -55,9 +55,19 @@ export type TCartItem = {
   variation_id?: string
 }
 
+export type TUserInfo = {
+  email: string
+  first_name: string
+  id: string
+  image: string
+  last_name: string
+  phone: string
+  username: string
+}
+
 export type TUserDataState = {
   cart: TCartItem[]
-  user: { id: string }
+  user: TUserInfo
 }
 
 export type TAddCartPayload = {

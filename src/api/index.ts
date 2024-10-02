@@ -7,11 +7,12 @@ import {
   TProductDetails,
   TProductItem,
   TTestimonials,
+  TUserInfo,
   TVariationItem,
   TWebsiteItem,
 } from './types'
 
-export const login = (params: TLoginPayload) => post('/public/login', params)
+export const login = (params: TLoginPayload) => post<{ userInfo: TUserInfo }>('/public/login', params)
 
 export const getProducts = params => post<TProductItem[]>('/public/products', params)
 
@@ -38,3 +39,9 @@ export const addToCart = params => post('/carts/add', params)
 
 // /cart/get
 export const getCart = params => post<TCartItem[]>('/carts/get', params)
+
+// /users/update
+export const updateUser = params => post('/users/update', params)
+
+// /users/info
+export const getNewUserInfo = () => post<TUserInfo>('/users/info')
