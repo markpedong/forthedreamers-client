@@ -1,13 +1,10 @@
-import React from 'react'
-import { Roboto_Condensed } from 'next/font/google'
 import classNames from 'classnames'
 
-import { ListAnswers, Question } from '@/components/page-components'
 import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/(main)/constants'
+import { ListAnswers, Question } from '@/components/page-components'
 
+import { roboto } from 'public/fonts'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
 const Shipping = () => {
   return (

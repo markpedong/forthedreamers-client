@@ -1,12 +1,9 @@
-import React from 'react'
-import styles from './styles.module.scss'
-import { ListAnswers, PageTitle } from '@/components/page-components'
 import { FAQ_ANSWERS, TERMS_CONDITIONS } from '@/app/(main)/constants'
-import { Roboto_Condensed } from 'next/font/google'
+import { ListAnswers, PageTitle } from '@/components/page-components'
 import classNames from 'classnames'
 import Image from 'next/image'
-
-const roboto = Roboto_Condensed({ weight: ['400', '800'], subsets: ['latin'] })
+import { roboto } from 'public/fonts'
+import styles from './styles.module.scss'
 
 const Page = () => {
 	return (

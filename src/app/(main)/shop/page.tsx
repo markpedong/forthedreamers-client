@@ -1,17 +1,14 @@
-import React from 'react'
-import { Roboto_Condensed } from 'next/font/google'
-import Image from 'next/image'
 import { getProducts } from '@/api'
 import { TProductItem } from '@/api/types'
 import classNames from 'classnames'
+import Image from 'next/image'
 
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
 
+import { roboto } from 'public/fonts'
 import ShopPagination from './shop-pagination'
 import styles from './styles.module.scss'
-
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
 
 const Page = async () => {
   const [products] = await Promise.all([getProducts({})])

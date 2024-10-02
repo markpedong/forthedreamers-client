@@ -1,19 +1,17 @@
 import { getCollections, getCollectionsByID } from '@/api'
 import classNames from 'classnames'
-import { Roboto_Condensed } from 'next/font/google'
 
 import Header from '@/components/header'
 import Product from '@/components/product'
 
 import styles from './styles.module.scss'
+import { roboto } from 'public/fonts'
 
 interface PageProps {
   params: {
     id: string
   }
 }
-
-const roboto = Roboto_Condensed({ weight: ['400', '600', '800'], subsets: ['latin'] })
 
 export async function generateStaticParams() {
   const collections = await getCollections({})
