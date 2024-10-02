@@ -8,6 +8,10 @@ const DCityProduct = dynamic(() => import('../app/(main)/components/city-product
 
 const DynamicCareGuide = dynamic(() => import('../app/(main)/shop/[id]/components/care-guide'), { loading: () => <></> })
 
+const DynamicShipping = dynamic(() => import('../app/(main)/shop/[id]/components/shipping'), { loading: () => <></> })
+
+const DynamicReturns = dynamic(() => import('../app/(main)/shop/[id]/components/returns'), { loading: () => <></> })
+
 const DynamicListAnswers = dynamic(() => import('../components/page-components/index').then(m => m.ListAnswers), { loading: () => <></> })
 
-export { DProduct, DProducts, DCityProduct, DynamicCareGuide, DynamicListAnswers }
+export { DProduct, DProducts, DCityProduct, DynamicCareGuide, DynamicListAnswers, DynamicReturns, DynamicShipping }
