@@ -4,7 +4,7 @@ import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
 import { toast } from 'sonner'
 
-import { getLocalStorage } from '@/lib/xLocalStorage'
+import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
 type ApiResponse<T> = {
   data?: T
@@ -45,6 +45,7 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
 
 const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
   const token = getLocalStorage('token')
+  console.log(process.env.NEXT_PUBLIC_DOMAIN)
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: {
@@ -62,7 +63,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
       toast(response?.message, {
         description: 'Redirecting you to login page',
         action: {
-          label: 'Login',
+          label: response?.message,
           onClick: () => {
             window.location.href = '/login'
           },
@@ -74,6 +75,10 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
       }, 4000)
     }
     return response
+  }
+
+  if (['/public/login', '/public/signup'].includes(url)) {
+    setLocalStorage('token', (response.data as { token: string }).token)
   }
 
   return response as ApiResponse<T>

@@ -1,13 +1,12 @@
-import React, { FC } from 'react'
-import styles from './styles.module.scss'
-import { useLockBodyScroll } from '@uidotdev/usehooks'
-import { IoCloseCircle } from 'react-icons/io5'
-import { ListAnswers, Question } from '@/components/page-components'
-import { Roboto_Condensed } from 'next/font/google'
-import classNames from 'classnames'
 import { SHIPPING_ANSWERS, SHIPPING_MODAL } from '@/app/(main)/constants'
-
-const roboto = Roboto_Condensed({ weight: ['300', '800'], subsets: ['latin'] })
+import { DynamicListAnswers } from '@/components/dynamic-import'
+import { Question } from '@/components/page-components'
+import { useLockBodyScroll } from '@uidotdev/usehooks'
+import classNames from 'classnames'
+import { roboto } from 'public/fonts'
+import { FC } from 'react'
+import { IoCloseCircle } from 'react-icons/io5'
+import styles from './styles.module.scss'
 
 const ShippingModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
 	useLockBodyScroll()
@@ -25,12 +24,12 @@ const ShippingModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
 				<Question question="Shipping Policy" className={classNames(roboto.className, styles.header)} />
 				<div>
 					<Question normal question="WHAT SHIPPING TYPES DO YOU HAVE?" />
-					<ListAnswers
+					<DynamicListAnswers
 						className="!mt-0"
 						answers={SHIPPING_ANSWERS?.map(q => `For ${q}`).concat(SHIPPING_MODAL)}
 					/>
 					<Question normal question="HOW LONG WILL IT TAKE TO RECEIVE MY ORDER?" />
-					<ListAnswers
+					<DynamicListAnswers
 						className="!mt-0"
 						answers={[
 							`Metro Manila: Within 3-5 business days`,
@@ -38,7 +37,7 @@ const ShippingModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
 						]}
 					/>
 					<Question normal question="DO YOU SHIP INTERNATIONALLY?" />
-					<ListAnswers
+					<DynamicListAnswers
 						className="!mt-0"
 						answers={[
 							`Yes we do! You may place an order thru this form and send us a message on Instagram at @forthedreamers if you have questions.`

@@ -1,0 +1,26 @@
+.container {
+    @apply mb-[1.5rem] grid w-full items-center gap-1.5 relative ;
+
+    label {
+        @apply text-[0.8rem] font-[300];
+    }
+
+    input {
+        @apply bg-[#F7FBFF] focus-visible:outline-none;
+        margin-top: 0 !important;
+
+        &::placeholder {
+            @apply text-[0.8rem] text-[#8897AD] tracking-wider font-[300];
+        }
+    }
+}
+
+
+.defaultInput {
+    @apply focus-visible:ring-1 focus-visible:ring-ring ring-1 ring-ring;
+}
+
+.errorInput {
+    @apply focus-visible:ring-0;
+    border: toRem(1) solid red;
+}

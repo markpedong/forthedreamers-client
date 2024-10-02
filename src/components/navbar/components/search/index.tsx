@@ -1,3 +1,5 @@
+'use client'
+
 import { getProducts } from '@/api'
 import { useQuery } from '@tanstack/react-query'
 import { useLockBodyScroll } from '@uidotdev/usehooks'

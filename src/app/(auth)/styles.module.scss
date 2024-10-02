@@ -1,0 +1,151 @@
+.mainWrapper {
+  @apply mx-auto max-w-[56rem] p-5;
+  margin-top: toRem(90);
+  font-family: 'SF Pro Display';
+}
+
+.menuWrapper {
+  @apply flex gap-3;
+}
+
+.detailsWrapper {
+  @apply flex-1 rounded-lg border shadow-md;
+}
+
+.forgotPassWrapper {
+  @apply grid h-dvh w-full grid-cols-1 p-2;
+}
+
+.loginWrapper,
+.registerWrapper {
+  @apply grid h-dvh w-full grid-cols-2 gap-2 p-2;
+}
+
+.imgWrapper {
+  @apply relative size-full max-h-full;
+
+  img {
+    @apply max-h-full object-contain;
+  }
+}
+
+.formContainer {
+  @apply relative mx-auto flex w-full max-w-[30rem] flex-col items-start justify-center text-[0.8rem];
+
+  h1 {
+    @apply w-full text-center text-[2rem] font-[500] text-[0C1421];
+  }
+
+  .subHeader {
+    @apply my-6 w-full text-center font-normal;
+  }
+
+  form.forgotPasswordForm,
+  form.loginForm {
+    @apply w-full;
+
+    input {
+      @apply mb-3;
+    }
+  }
+}
+
+.forgot {
+  @apply text-end font-normal text-[#1E4AE9];
+
+  span {
+    @apply cursor-pointer;
+  }
+}
+
+.signInBtn {
+  @apply mt-4 flex w-full items-center justify-center rounded-lg bg-[#162D3A] py-3 text-white;
+}
+
+.or {
+  @apply text-[0.8rem] font-[300] text-[#8897AD];
+}
+
+.dontHaveAccount {
+  @apply mt-4 w-full text-center text-[0.8rem] font-[300] text-[#8897AD];
+
+  span {
+    @apply ml-3 font-normal text-[#1E4AE9];
+  }
+}
+
+.copyright {
+  @apply w-full text-center text-[0.8rem] font-[300] text-[#8897AD];
+}
+
+@media screen and (max-width: 768px) {
+  .loginWrapper,
+  .registerWrapper {
+    @apply grid-cols-1;
+  }
+
+  .formContainer {
+    @apply order-1;
+  }
+
+  .imgWrapper {
+    height: 10rem;
+
+    img {
+      @apply rounded-lg object-cover object-center;
+    }
+  }
+}
+
+.addressWrapper,
+.profileWrapper {
+  @apply p-3 py-6;
+}
+
+.btnContainer {
+  @apply mt-5 flex justify-center gap-3;
+
+  button:first-child {
+    @apply flex items-center justify-center rounded-lg bg-[#eeeeee] px-4 py-2 text-[0.8rem] text-gray-800;
+  }
+
+  button:last-child {
+    @apply flex items-center justify-center rounded-lg bg-[#162D3A] px-4 py-2 text-[0.8rem] text-white;
+  }
+}
+
+.addressWrapper {
+  @apply flex flex-col gap-2;
+  font-family: 'SF Pro Display';
+
+  .addressContainer {
+    @apply flex flex-1 flex-col;
+
+    div {
+      font-size: toRem(11);
+    }
+
+    div:nth-child(2) {
+      font-weight: 600;
+      font-size: toRem(14);
+    }
+
+    div:nth-child(3) {
+      @apply flex gap-[0.5rem] pt-2;
+
+      > * {
+        @apply rounded-sm px-[1rem] py-[0.2rem];
+        background-color: var(--bg-secondary);
+        color: var(--color-primary);
+        font-weight: 500;
+        font-size: toRem(12);
+        line-height: toRem(12);
+      }
+    }
+  }
+
+  .activeAddress {
+    background-color: var(--color-primary) !important;
+    color: var(--white-color) !important;
+  }
+}

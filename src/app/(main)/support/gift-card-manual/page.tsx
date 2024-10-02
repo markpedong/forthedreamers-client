@@ -1,22 +1,20 @@
-import React from 'react'
-import styles from './styles.module.scss'
-import { ListAnswers, PageTitle } from '@/components/page-components'
 import { FAQ_ANSWERS, TERMS_CONDITIONS } from '@/app/(main)/constants'
-import { Roboto_Condensed } from 'next/font/google'
+import { DynamicListAnswers } from '@/components/dynamic-import'
+import { PageTitle } from '@/components/page-components'
 import classNames from 'classnames'
 import Image from 'next/image'
-
-const roboto = Roboto_Condensed({ weight: ['400', '800'], subsets: ['latin'] })
+import { roboto } from 'public/fonts'
+import styles from './styles.module.scss'
 
 const Page = () => {
 	return (
 		<div className={styles.mainWrapper}>
 			<PageTitle title="GIFT CARD MANUAL" />
 			<PageTitle title="TERMS AND CONDITIONS" medium />
-			<ListAnswers answers={TERMS_CONDITIONS} />
+			<DynamicListAnswers answers={TERMS_CONDITIONS} />
 			<div className="mt-10" />
 			<PageTitle title="FAQ'S" medium />
-			<ListAnswers answers={FAQ_ANSWERS} />
+			<DynamicListAnswers answers={FAQ_ANSWERS} />
 			<PageTitle title="HOW TO USE THE GIFT CARD (WEB)" medium />
 			<ul className={classNames(styles.answers, roboto.className)}>
 				<li>After receiving your UNIQUE GIFT CARD CODE, you may shop in our webstore.</li>

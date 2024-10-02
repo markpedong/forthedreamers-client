@@ -1,5 +1,3 @@
-@import "@/styles/_helpers.scss";
-
 .marquee {
     @apply relative w-dvw max-w-full overflow-hidden py-10;
     height: toRem(135);

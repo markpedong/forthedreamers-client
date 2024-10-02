@@ -2,13 +2,10 @@ import '@/styles/global.scss'
 
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import { Inter } from 'next/font/google'
 import ReduxProvider from '@/redux/provider'
 
-import Navbar from '@/components/navbar'
 import { Toaster } from '@/components/ui/sonner'
-
-const inter = Inter({ subsets: ['latin'] })
+import Navbar from '@/components/navbar'
 
 export const metadata: Metadata = {
   title: 'For the Dreamers',
@@ -26,8 +23,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/assets/images/dog.jpg" sizes="any" />
-      <body className={inter.className}>
+      <link rel="icon" href="/assets/images/login_cover.webp" sizes="any" />
+      <body>
         <ReduxProvider>
           <Toaster />
           <Navbar />

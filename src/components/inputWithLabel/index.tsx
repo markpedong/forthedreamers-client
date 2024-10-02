@@ -1,24 +1,60 @@
-import { FC } from 'react'
+import { forwardRef } from 'react'
 import classNames from 'classnames'
+import { motion } from 'framer-motion'
 
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 
-import styles from './stlyes.module.scss'
+import { FormControl, FormField, FormItem, FormLabel } from '../ui/form'
+import styles from './styles.module.scss'
 
 type InputWithLabelProps = {
   className?: string
   label?: string
   placeholder?: string
   type?: string
+  err?: string | undefined
+  form: any
+  name: string
 }
-const InputWithLabel: FC<InputWithLabelProps> = ({ className, label, placeholder, type }) => {
-  return (
-    <div className={classNames(styles.container, className)}>
-      <Label className={styles.label}>{label}</Label>
-      <Input type={type} placeholder={placeholder} />
-    </div>
-  )
-}
+
+const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
+  ({ className, label, placeholder, type, err, form, name }, ref) => {
+    return (
+      <div className={classNames(styles.container, className)}>
+        <FormField
+          control={form.control}
+          name={name}
+          render={({ field }) => (
+            <FormItem>
+              {label && <FormLabel>{label}</FormLabel>}
+              <FormControl>
+                <Input
+                  placeholder={placeholder}
+                  type={type}
+                  {...field}
+                  ref={ref}
+                  className={classNames({
+                    [styles.errorInput]: err,
+                    [styles.defaultInput]: !err,
+                  })}
+                />
+              </FormControl>
+              {err && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute bottom-[-1.2rem] left-0 mt-0 text-[0.7rem] text-red-500"
+                >
+                  {err}
+                </motion.p>
+              )}
+            </FormItem>
+          )}
+        />
+      </div>
+    )
+  },
+)
 
 export default InputWithLabel
