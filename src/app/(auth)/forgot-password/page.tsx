@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 
+import { useFormSchemas } from '@/hooks/useFormSchemas'
+import useValidate from '@/hooks/useFormValidate'
 import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from '../styles.module.scss'
-import { useFormSchemas } from './useFormSchemas'
-import useValidate from './useFormValidate'
 
 const Login = () => {
   const router = useRouter()

@@ -1,37 +1,24 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
-import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
+import { Form } from '@/components/ui/form'
+import { useProfileSchema } from '@/hooks/useProfileSchema'
 
 import styles from '../styles.module.scss'
 
-type FormSchema = z.infer<typeof profileSchema>
-
-const profileSchema = z.object({
-  email: z.string().email('Invalid email format'),
-  password: z.string({ message: 'Password is required' }).min(8, 'Password should be at least 8 characters'),
-  confirm_password: z.string({ message: 'Confirm Password is required' }).min(8, 'Confirm Password should be at least 8 characters'),
-  phone: z.string({ message: 'Phone is required' }),
-  first_name: z.string({ message: 'First Name is required' }),
-  last_name: z.string({ message: 'Last Name is required' }),
-})
-
 const Profile = () => {
-  const form = useForm<FormSchema>({
-    resolver: zodResolver(profileSchema),
-    defaultValues: { email: '', password: '', phone: '', confirm_password: '', first_name: '', last_name: '' },
+  const { form, handleSubmit, register, errors } = useProfileSchema({
+    username: '',
+    phone: '',
+    confirm_password: '',
+    password: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    
   })
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = form
-
-  const onSubmitForm = (data: FormSchema) => {
+  const onSubmitForm = data => {
     console.log(data)
   }
 
@@ -74,19 +61,28 @@ const Profile = () => {
               {...register('phone')}
             />
             <InputWithLabel
-              key="email"
-              label="Email"
-              placeholder="Example@gmail.com"
-              type="email"
-              form={form}
-              err={errors?.email?.message}
-              {...register('email')}
-            />
-          </div>
-          <div className="flex gap-2">
-            <InputWithLabel
               key="username"
               label="Username"
+              placeholder="johnmayer"
+              type="text"
+              form={form}
+              err={errors?.username?.message}
+              {...register('username')}
+            />
+          </div>
+          <InputWithLabel
+            key="email"
+            label="Email"
+            placeholder="Example@gmail.com"
+            type="email"
+            form={form}
+            err={errors?.email?.message}
+            {...register('email')}
+          />
+          <div className="flex gap-2">
+            <InputWithLabel
+              key="password"
+              label="Password"
               placeholder="Atleast 8 characters"
               type="password"
               form={form}
@@ -94,8 +90,8 @@ const Profile = () => {
               {...register('password')}
             />
             <InputWithLabel
-              key="password"
-              label="Password"
+              key="confirm_password"
+              label="Confirm Password"
               placeholder="Atleast 8 characters"
               type="password"
               form={form}
