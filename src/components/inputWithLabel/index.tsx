@@ -1,9 +1,9 @@
 'use client'
 
-import { forwardRef, useState } from 'react'
-import Image from 'next/image'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { forwardRef, useState } from 'react'
 
 import { Input } from '@/components/ui/input'
 
@@ -24,7 +24,7 @@ type InputWithLabelProps = {
 const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
   ({ className, label, placeholder, type, err, form, name }, ref) => {
     const [isEyeOpen, setIsEyeOpen] = useState(false)
-    const isPasswords = ['password', 'confirm_password'].includes(name)
+    const isPasswords = ['password', 'confirm_password', 'new_password', 'old_password'].includes(name)
 
     return (
       <div className={classNames(styles.container, className)}>
