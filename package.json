@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "rm -rf .next && npm i && next dev -p 6600",
-    "build": "rm -rf .next && npm i && next build",
+    "dev": "rm -rf .next && next dev -p 6600",
+    "build": "rm -rf .next && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -26,7 +26,7 @@
     "keen-slider": "^6.8.6",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
-    "next": "14.2.5",
+    "next": "^14.2.14",
     "next-auth": "^5.0.0-beta.19",
     "next-themes": "^0.3.0",
     "nodemailer": "^6.9.14",
