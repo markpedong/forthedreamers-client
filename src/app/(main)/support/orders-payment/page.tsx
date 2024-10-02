@@ -1,5 +1,6 @@
 import { AMEND_ANSWERS, PAYMENT_ANSWERS } from '@/app/(main)/constants'
-import { ListAnswers, PageTitle, Question } from '@/components/page-components'
+import { DynamicListAnswers } from '@/components/dynamic-import'
+import { PageTitle, Question } from '@/components/page-components'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 
@@ -8,7 +9,7 @@ const Page = () => {
 		<div className={styles.mainWrapper}>
 			<PageTitle title="ORDERS & PAYMENT" />
 			<Question question="WHAT PAYMENT METHODS DO YOU ACCEPT?" />
-			<ListAnswers answers={PAYMENT_ANSWERS} />
+			<DynamicListAnswers answers={PAYMENT_ANSWERS} />
 			<Image
 				className={styles.payments}
 				src={'/assets/images/payments.webp'}
@@ -17,7 +18,7 @@ const Page = () => {
 				height={1000}
 			/>
 			<Question question="CAN I AMEND OR CANCEL MY ORDER?" />
-			<ListAnswers answers={AMEND_ANSWERS} />
+			<DynamicListAnswers answers={AMEND_ANSWERS} />
 		</div>
 	)
 }

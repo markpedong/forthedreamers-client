@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 
 import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/(main)/constants'
-import { ListAnswers, PageTitle, Question } from '@/components/page-components'
+import { PageTitle, Question } from '@/components/page-components'
 
+import { DynamicListAnswers } from '@/components/dynamic-import'
 import { roboto } from 'public/fonts'
 import styles from './styles.module.scss'
 
@@ -12,7 +13,7 @@ const Page = () => {
       <PageTitle title="SHIPPING" />
       <Question question="WHAT PAYMENT METHODS DO YOU ACCEPT?" />
       <Question question="STANDARD" />
-      <ListAnswers answers={SHIPPING_ANSWERS} />
+      <DynamicListAnswers answers={SHIPPING_ANSWERS} />
       <Question question="SAME DAY DELIVERY" className="mt-10" />
       <Question
         normal
@@ -21,7 +22,7 @@ const Page = () => {
 				vary."
         className="text-[0.8rem]"
       />
-      <ListAnswers answers={SAMEDAY_ANSWERS} />
+      <DynamicListAnswers answers={SAMEDAY_ANSWERS} />
       <Question question="HOW LONG WILL IT TAKE TO RECEIVE MY ORDER?" className="mt-10" />
       <table>
         <tbody>

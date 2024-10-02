@@ -1,7 +1,7 @@
 import { CARE_GUIDE_ANSWERS } from '@/app/(main)/constants'
 import { CARE_GUIDE } from '@/app/(main)/constants/enums'
 import Drawer from '@/components/drawer'
-import { ListAnswers } from '@/components/page-components'
+import { DynamicListAnswers } from '@/components/dynamic-import'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { roboto } from 'public/fonts'
@@ -31,7 +31,7 @@ const CareGuide: FC<{ setOpenCareGuide: () => void; activeTab: string }> = ({ se
 				))}
 			</div>
 			<div className={styles.content}>
-				{selectedTab === CARE_GUIDE.CARE_GUIDE && <ListAnswers answers={CARE_GUIDE_ANSWERS} />}
+				{selectedTab === CARE_GUIDE.CARE_GUIDE && <DynamicListAnswers answers={CARE_GUIDE_ANSWERS} />}
 				{selectedTab === CARE_GUIDE.SHIPPING && <Shipping />}
 				{selectedTab === CARE_GUIDE.RETURNS && <Returns />}
 			</div>
