@@ -26,6 +26,7 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' },
   })
+
   const {
     register,
     handleSubmit,
@@ -48,7 +49,6 @@ const Login = () => {
         <Form {...form}>
           <form className={styles.loginForm} onSubmit={handleSubmit(onSubmitForm, onError)}>
             <InputWithLabel
-              className={styles.input}
               key="email"
               label="Email"
               placeholder="Example@gmail.com"
@@ -58,7 +58,6 @@ const Login = () => {
               {...register('email')}
             />
             <InputWithLabel
-              className={styles.input}
               key="password"
               label="Password"
               placeholder="Atleast 8 characters"

@@ -41,7 +41,7 @@
         @apply my-6 font-normal text-center w-full;
     }
 
-    form.loginForm {
+    form.forgotPasswordForm {
         @apply w-full;
 
         input {
@@ -53,6 +53,10 @@
 
 .forgot {
     @apply text-[#1E4AE9] font-normal text-end;
+
+    span {
+        @apply cursor-pointer
+    }
 }
 
 .signInBtn {
@@ -67,7 +71,7 @@
     @apply w-full text-center text-[0.8rem] text-[#8897AD] font-[300] mt-4;
 
     span {
-        @apply text-[#1E4AE9] font-normal;
+        @apply text-[#1E4AE9] font-normal ml-3;
     }
 }
 
@@ -103,11 +107,11 @@
 .btnContainer {
     @apply flex gap-3 justify-center mt-5;
 
-    div:first-child {
+    button:first-child {
         @apply bg-[#eeeeee] text-gray-800 flex items-center justify-center px-4 py-2 rounded-lg text-[0.8rem];
     }
 
-    div:last-child {
+    button:last-child {
         @apply bg-[#162D3A] text-white flex items-center justify-center px-4 py-2 rounded-lg text-[0.8rem];
     }
 }
