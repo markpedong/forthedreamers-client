@@ -1,10 +1,9 @@
-import Image from 'next/image'
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 
-import { getProducts, getTestimonials, getWebsiteData } from '@/lib/server'
 import { DCityProduct, DProducts } from '@/components/dynamic-import'
 import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
+import { getProducts, getTestimonials, getWebsiteData } from '@/lib/server'
 import styles from '@/styles/styles.module.scss'
 
 export const revalidate = 60 * 60
@@ -31,9 +30,9 @@ const Home = async () => {
       </div>
       <DProducts products={products ?? []} />
       <Marquee text={website?.marquee_text ?? ''} landing />
-      <div className={styles.dudeWrapper}>
+      {/* <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image2 ?? ''} alt="" height={300} width={300} sizes="100vw" />
-      </div>
+      </div> */}
       <div className={styles.afterProductWrapper}>
         <div className={styles.header}>
           <span className={poppins.className}>FOR THE DREAMERS CITY</span>
@@ -43,9 +42,9 @@ const Home = async () => {
         </div>
         <DCityProduct products={products ?? []} />
       </div>
-      <div className={styles.dudeWrapper}>
+      {/* <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image3 ?? ''} alt="" height={300} width={300} sizes="100vw" />
-      </div>
+      </div> */}
       <Testimonials data={testimonials ?? []} />
     </>
   )
