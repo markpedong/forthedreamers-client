@@ -14,7 +14,7 @@ import { z } from 'zod'
 
 import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
-import { GoogleButton } from '@/components/page-components/button'
+import { GoogleButton, OrDivider } from '@/components/page-components/button'
 
 import styles from '../styles.module.scss'
 
@@ -96,7 +96,7 @@ const Login = () => {
             </motion.button>
           </form>
         </Form>
-        {/* <OrDivider /> */}
+        <OrDivider />
         <GoogleButton />
         {/* <FacebookButton /> */}
         <div className={styles.dontHaveAccount}>

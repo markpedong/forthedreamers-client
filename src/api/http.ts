@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation'
-import { clearUserData } from '@/constants/helper'
 import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
 import { toast } from 'sonner'
 
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
+import { clearUserData } from '@/lib/helper'
 
 type ApiResponse<T> = {
   data: T
@@ -54,11 +54,10 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     body: JSON.stringify(data) || '{}',
   })
 
-
   if (!apiResponse.ok) {
     throw new Error(`HTTP error! status: ${apiResponse.status}, URL: ${url}`)
   }
-  
+
   //prettier-ignore
   const response = await apiResponse.json() as ApiResponse<T>
 

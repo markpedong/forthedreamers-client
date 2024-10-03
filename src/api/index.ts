@@ -1,15 +1,7 @@
-
 import { post } from './http'
-import {
-  TCartItem,
-  TCollectionDetails,
-  TCollectionItem,
-  TLoginPayload,
-  TProductDetails,
-  TUserInfo,
-  TVariationItem
-} from './types'
+import { TCartItem, TCollectionDetails, TCollectionItem, TLoginPayload, TProductDetails, TUserInfo, TVariationItem } from './types'
 
+// /public/login
 export const login = (params: TLoginPayload) => post<{ userInfo: TUserInfo }>('/public/login', params)
 
 // /products/details
