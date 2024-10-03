@@ -1,5 +1,6 @@
-import { addToCart, getCart, getNewUserInfo, getWebsiteData } from '@/api'
+import { addToCart, getCart, getNewUserInfo } from '@/api'
 import { TAddCartPayload } from '@/api/types'
+import { getWebsiteData } from '@/lib/server'
 import { setWebsiteData } from '@/redux/features/appData'
 import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
@@ -8,8 +9,8 @@ export const useWithDispatch = () => {
   const dispatch = useAppDispatch()
 
   const dispatchWebData = async () => {
-    const res = await getWebsiteData({})
-    dispatch(setWebsiteData(res?.data!))
+    const res = await getWebsiteData()
+    dispatch(setWebsiteData(res))
   }
 
   const addItemToCart = async ({ product_id, variation_id, quantity }: TAddCartPayload) => {

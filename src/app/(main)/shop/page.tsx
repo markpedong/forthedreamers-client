@@ -1,19 +1,19 @@
-import { getProducts } from '@/api'
+import Image from 'next/image'
 import { TProductItem } from '@/api/types'
 import classNames from 'classnames'
-import Image from 'next/image'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
 
-import { SF_PRO_DISPLAY } from 'public/fonts'
 import ShopPagination from './shop-pagination'
 import styles from './styles.module.scss'
+import { getProducts } from '@/lib/server'
 
 const Page = async () => {
-  const [products] = await Promise.all([getProducts({})])
-  const first: TProductItem = products?.data?.[0]!
-  const second: TProductItem = products?.data?.[1]!
+  const products = await getProducts({})
+  const first: TProductItem = products?.[0]!
+  const second: TProductItem = products?.[1]!
 
   return (
     <div className={styles.mainWrapper}>
@@ -30,7 +30,7 @@ const Page = async () => {
           <span>{products?.data?.length} PRODUCTS</span> */}
         </div>
       </div>
-      <ShopPagination data={products?.data} />
+      <ShopPagination data={products} />
       <div className={styles.crowdWrapper}>
         <span className={styles.crowdTitle}>CROWD FAVORITES</span>
         <div className={styles.crowdItemsContainer}>

@@ -1,4 +1,6 @@
-import { getProductDetails, getProducts, getVariations } from '@/api'
+import { getProductDetails, getVariations } from '@/api'
+
+import { getProducts } from '@/lib/server'
 
 import Product from './product'
 
@@ -6,7 +8,7 @@ export async function generateStaticParams() {
   const products = await getProducts({})
 
   const params =
-    products?.data?.map(product => ({
+    products?.map(product => ({
       id: product.id,
     })) || []
 

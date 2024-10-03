@@ -1,6 +1,5 @@
 'use client'
 
-import { getProducts } from '@/api'
 import { useQuery } from '@tanstack/react-query'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
@@ -15,6 +14,7 @@ import { Question } from '@/components/page-components'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import SearchProduct from '../../products'
 import styles from './styles.module.scss'
+import { getProducts } from '@/lib/server'
 
 
 const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
@@ -27,8 +27,7 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
     queryFn: async () => {
       const res = await getProducts({ search: value?.toLowerCase() })
 
-      if (res?.status !== 200) return []
-      return res?.data
+      return res
     },
   })
 
