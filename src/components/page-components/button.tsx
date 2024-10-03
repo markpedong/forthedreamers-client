@@ -1,16 +1,38 @@
+import { useEffect } from 'react'
 import Image from 'next/image'
 
+import { setLocalStorage } from '@/lib/xLocalStorage'
+import { useWithDispatch } from '@/hooks/useWithDispatch'
+
 export const GoogleButton = () => {
+  const { storeUserInfo } = useWithDispatch()
+
   const handleLogin = () => {
-    const popup = window.open('http://localhost:6601/public/googleLogin', 'Google Login', 'width=600,height=600')
+    const popup = window.open(`${process.env.NEXT_PUBLIC_DOMAIN}/public/googleLogin`, 'Google Login', 'width=600,height=600')
 
     const timer = setInterval(() => {
       if (popup?.closed) {
         clearInterval(timer)
-        console.log('Popup closed')
       }
     }, 1000)
   }
+
+  useEffect(() => {
+    const handleMessage = event => {
+      if (event.origin === process.env.NEXT_PUBLIC_DOMAIN) {
+        if (event?.data?.code === 200) {
+          setLocalStorage('token', event?.data?.token)
+          storeUserInfo(event)
+        }
+      }
+    }
+
+    window.addEventListener('message', handleMessage)
+
+    return () => {
+      window.removeEventListener('message', handleMessage)
+    }
+  }, [])
 
   return (
     <div className="mb-2 flex w-full items-center justify-center bg-[#F3F9FA]">

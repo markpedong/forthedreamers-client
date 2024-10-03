@@ -4,6 +4,19 @@ import path from 'path'
 const __dirname = new URL('.', import.meta.url).pathname
 
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/login',
+        headers: [
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'unsafe-none',
+          },
+        ],
+      },
+    ]
+  },
   output: 'standalone',
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
@@ -24,6 +37,10 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
       },
     ],
   },
