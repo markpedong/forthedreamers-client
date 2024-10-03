@@ -1,13 +1,14 @@
 'use client'
 
+import { forwardRef, LegacyRef, useState } from 'react'
+import Image from 'next/image'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { forwardRef, useState } from 'react'
 
 import { Input } from '@/components/ui/input'
 
 import { FormControl, FormField, FormItem, FormLabel } from '../ui/form'
+import { Textarea } from '../ui/textarea'
 import styles from './styles.module.scss'
 
 type InputWithLabelProps = {
@@ -19,10 +20,11 @@ type InputWithLabelProps = {
   key?: string
   form: any
   name: string
+  textarea?: boolean
 }
 
-const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
-  ({ className, label, placeholder, type, err, form, name }, ref) => {
+const InputWithLabel = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputWithLabelProps>(
+  ({ className, label, placeholder, type, err, form, name, textarea }, ref) => {
     const [isEyeOpen, setIsEyeOpen] = useState(false)
     const isPasswords = ['password', 'confirm_password', 'new_password', 'old_password'].includes(name)
 
@@ -36,16 +38,28 @@ const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
               {label && <FormLabel>{label}</FormLabel>}
               <FormControl>
                 <>
-                  <Input
-                    placeholder={placeholder}
-                    type={isPasswords ? (isEyeOpen ? 'text' : 'password') : type}
-                    {...field}
-                    ref={ref}
-                    className={classNames({
-                      [styles.errorInput]: err,
-                      [styles.defaultInput]: !err,
-                    })}
-                  />
+                  {!textarea ? (
+                    <Input
+                      placeholder={placeholder}
+                      type={isPasswords ? (isEyeOpen ? 'text' : 'password') : type}
+                      {...field}
+                      ref={ref as LegacyRef<HTMLInputElement>}
+                      className={classNames({
+                        [styles.errorInput]: err,
+                        [styles.defaultInput]: !err,
+                      })}
+                    />
+                  ) : (
+                    <Textarea
+                      placeholder={placeholder}
+                      {...field}
+                      ref={ref as LegacyRef<HTMLTextAreaElement>}
+                      className={classNames({
+                        [styles.errorInput]: err,
+                        [styles.defaultInput]: !err,
+                      })}
+                    />
+                  )}
                   {isPasswords && (
                     <Image
                       className="absolute right-1 top-1/2 cursor-pointer"
