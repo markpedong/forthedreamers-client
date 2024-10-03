@@ -14,6 +14,7 @@ import { z } from 'zod'
 
 import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
+import { GoogleButton } from '@/components/page-components/button'
 
 import styles from '../styles.module.scss'
 
@@ -96,8 +97,8 @@ const Login = () => {
           </form>
         </Form>
         {/* <OrDivider /> */}
-        {/* <GoogleButton />
-        <FacebookButton /> */}
+        <GoogleButton />
+        {/* <FacebookButton /> */}
         <div className={styles.dontHaveAccount}>
           Don't you have an account?{' '}
           <span className="cursor-pointer" onClick={() => router.push('/signup')}>
