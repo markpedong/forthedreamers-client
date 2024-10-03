@@ -1,5 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import Navbar from '@/components/navbar'
@@ -11,10 +12,11 @@ const Footer = dynamic(() => import('@/components/footer'), {
 })
 
 const Page = () => {
-  const isAuthenticated = true
+  const headersList = headers()
+  const token = headersList.get('token')
 
-  if (!isAuthenticated) {
-    redirect('/')
+  if (!token) {
+    redirect('/not-found')
   } else {
     return (
       <>

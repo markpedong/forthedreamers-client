@@ -17,3 +17,6 @@ export const getWebsiteData = async () => (await get<TWebsiteItem>({ url: '/publ
 
 // /public/testimonials
 export const getTestimonials = async () => (await get<TTestimonials[]>({ url: '/public/testimonials', tags: API_TAGS.TESTIMONIALS }))?.data
+
+// /address/get
+export const getAddress = async () => (await get({ url: '/address/get', tags: API_TAGS.ADDRESS }))?.data

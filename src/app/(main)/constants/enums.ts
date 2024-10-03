@@ -14,4 +14,5 @@ export enum API_TAGS {
   PRODUCTS = 'products',
   WEBSITE = 'website',
   TESTIMONIALS = 'testimonials',
+  ADDRESS = 'address',
 }
