@@ -6,8 +6,8 @@ import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
-import { clearUserData } from '@/lib/helper'
 import { getWebsiteData } from '@/lib/server'
+import { clearUserData } from '@/lib/helper'
 
 export const useWithDispatch = () => {
   const dispatch = useAppDispatch()
