@@ -45,7 +45,6 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
 
 const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
   const token = getLocalStorage('token') || ''
-  console.log(process.env.NEXT_PUBLIC_DOMAIN)
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: {
@@ -54,6 +53,12 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     },
     body: JSON.stringify(data) || '{}',
   })
+
+
+  if (!apiResponse.ok) {
+    throw new Error(`HTTP error! status: ${apiResponse.status}, URL: ${url}`)
+  }
+  
   //prettier-ignore
   const response = await apiResponse.json() as ApiResponse<T>
 
@@ -88,14 +93,28 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
   return response as ApiResponse<T>
 }
 
-const get = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
+type Params = {
+  url: string
+  data?: any
+  tags?: string
+}
+const get = async <T>({ url, data, tags }: Params): Promise<ApiResponse<T>> => {
   const token = getLocalStorage('token')
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`, {
     method: 'GET',
     headers: {
       ...(token ? { token: String(token)?.replaceAll(`"`, '') } : {}),
     },
+    next: {
+      tags: [tags || ''],
+      revalidate: 60 * 60,
+    },
   })
+
+  if (!apiResponse.ok) {
+    throw new Error(`HTTP error! status: ${apiResponse.status}, URL: ${url}`)
+  }
+
   //prettier-ignore
   const response = await apiResponse.json() as ApiResponse<T>
 

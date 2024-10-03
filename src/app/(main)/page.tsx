@@ -1,15 +1,16 @@
-import { getProducts, getTestimonials, getWebsiteData } from '@/api'
 import Image from 'next/image'
+import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 
+import { getProducts, getTestimonials, getWebsiteData } from '@/lib/server'
 import { DCityProduct, DProducts } from '@/components/dynamic-import'
 import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
 import styles from '@/styles/styles.module.scss'
-import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
+
+export const revalidate = 60 * 60
 
 const Home = async () => {
-  const [products, web, testimonials] = await Promise.all([getProducts({}), getWebsiteData({}), getTestimonials({})])
-  const website = web?.data
+  const [products, website, testimonials] = await Promise.all([getProducts({}), getWebsiteData(), getTestimonials()])
 
   return (
     <>
@@ -28,7 +29,7 @@ const Home = async () => {
 					</div>
 				</div> */}
       </div>
-      <DProducts products={products?.data ?? []} />
+      <DProducts products={products ?? []} />
       <Marquee text={website?.marquee_text ?? ''} landing />
       <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image2 ?? ''} alt="" height={300} width={300} sizes="100vw" />
@@ -36,14 +37,16 @@ const Home = async () => {
       <div className={styles.afterProductWrapper}>
         <div className={styles.header}>
           <span className={poppins.className}>FOR THE DREAMERS CITY</span>
-          <span className={SF_PRO_DISPLAY.className}>Inspired by the vibrant aesthetics of the urban and the cozy spirit of a hometown.</span>
+          <span className={SF_PRO_DISPLAY.className}>
+            Inspired by the vibrant aesthetics of the urban and the cozy spirit of a hometown.p
+          </span>
         </div>
-        <DCityProduct products={products?.data ?? []} />
+        <DCityProduct products={products ?? []} />
       </div>
       <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image3 ?? ''} alt="" height={300} width={300} sizes="100vw" />
       </div>
-      <Testimonials data={testimonials?.data ?? []} />
+      <Testimonials data={testimonials ?? []} />
     </>
   )
 }

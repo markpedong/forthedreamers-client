@@ -1,4 +1,3 @@
-import { getProducts } from '@/api'
 import classNames from 'classnames'
 import { MdFilterListAlt } from 'react-icons/md'
 
@@ -9,6 +8,7 @@ import Product from '@/components/product'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import Search from './search'
 import styles from './styles.module.scss'
+import { getProducts } from '@/lib/server'
 
 interface PageProps {
   searchParams?: {
@@ -25,15 +25,15 @@ const Page = async ({ searchParams }: PageProps) => {
       <Header arr={['HOME', 'SEARCH']} />
       <PageTitle title="SEARCH RESULTS" className="!py-5 !text-center" medium />
       <Search />
-      <div className={styles.searchText}>{search !== '' && `${products?.data?.length ?? 0} results found for "${search}"`}</div>
+      <div className={styles.searchText}>{search !== '' && `${products?.length ?? 0} results found for "${search}"`}</div>
       <div className={styles.filterContainer}>
         <div>
           <MdFilterListAlt />
           <span>FILTER AND SORT</span>
         </div>
-        <span>{products?.data?.length ?? 0} results</span>
+        <span>{products?.length ?? 0} results</span>
       </div>
-      <div className={styles.productWrapper}>{products?.data?.map(product => <Product product={product} key={product?.id} />)}</div>
+      <div className={styles.productWrapper}>{products?.map(product => <Product product={product} key={product?.id} />)}</div>
     </div>
   )
 }
