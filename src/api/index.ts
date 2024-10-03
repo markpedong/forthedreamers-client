@@ -1,4 +1,4 @@
-import { post } from './http'
+import { get, post } from './http'
 import {
   TCartItem,
   TCollectionDetails,
@@ -14,7 +14,7 @@ import {
 
 export const login = (params: TLoginPayload) => post<{ userInfo: TUserInfo }>('/public/login', params)
 
-export const getProducts = params => post<TProductItem[]>('/public/products', params)
+export const getProducts = params => get<TProductItem[]>('/public/products', params)
 
 // /products/details
 export const getProductDetails = params => post<TProductDetails>('/public/products/details', params)
