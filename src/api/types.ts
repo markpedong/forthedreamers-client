@@ -90,3 +90,12 @@ export type TLoginPayload = {
   username: string
   password: string
 }
+
+export type TAddressItem = {
+  address: string
+  first_name: string
+  id: string
+  last_name: string
+  phone: string
+  is_default: number
+}

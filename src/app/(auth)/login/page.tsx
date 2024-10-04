@@ -22,7 +22,7 @@ type FormSchema = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
   username: z.string().min(6, 'Username should be at least 6 characters'),
-  password: z.string({ message: 'Password is required' }).min(8, 'Password should be at least 8 characters'),
+  password: z.string({ message: 'Password is required' }).min(6, 'Password should be at least 6 characters'),
 })
 
 const Login = () => {
@@ -42,21 +42,23 @@ const Login = () => {
   const onSubmitForm = async (data: FormSchema) => {
     const res = await login(data)
 
-    dispatch(setUserData(res?.data?.userInfo))
-    toast(res?.message, {
-      description: 'Redirecting you to account page',
-      action: {
-        label: 'View Account',
-        onClick: () => {
-          router.push('/account')
+    if (res?.status === 200) {
+      dispatch(setUserData(res?.data?.userInfo))
+      toast(res?.message, {
+        description: 'Redirecting you to account page',
+        action: {
+          label: 'View Account',
+          onClick: () => {
+            router.push('/account')
+          },
         },
-      },
-      duration: 1500,
-    })
+        duration: 1500,
+      })
 
-    setTimeout(() => {
-      router.push('/account')
-    }, 1500)
+      setTimeout(() => {
+        router.push('/account')
+      }, 1500)
+    }
   }
 
   const onError = (errors: any) => {

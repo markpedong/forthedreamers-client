@@ -3,8 +3,8 @@ import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
 import { toast } from 'sonner'
 
-import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 import { clearUserData } from '@/lib/helper'
+import { getCookie, setCookie } from '@/lib/server'
 
 type ApiResponse<T> = {
   data: T
@@ -16,7 +16,6 @@ type ApiResponse<T> = {
 export const throttleAlert = (msg: string) => throttle(() => console.error(msg), 1500, { trailing: false, leading: true })
 
 const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
-  const token = getLocalStorage('token')
   const form = new FormData()
 
   form.append('file', data)
@@ -24,7 +23,7 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: {
-      ...(token ? { token: String(token)?.replaceAll(`"`, '') } : {}),
+      Token: await getCookie('token') || '',
     },
     body: form,
   })
@@ -44,12 +43,11 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
 }
 
 const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
-  const token = getLocalStorage('token') || ''
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Token: String(token)?.replaceAll(/"/g, '') } : {}),
+      Token: await getCookie('token') || '',
     },
     body: JSON.stringify(data) || '{}',
   })
@@ -77,6 +75,8 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
       setTimeout(() => {
         window.location.href = '/login'
       }, 4000)
+
+      return response
     }
 
     toast(response?.message + ' ⚠️', {
@@ -86,7 +86,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
   }
 
   if (['/public/login', '/public/signup'].includes(url)) {
-    setLocalStorage('token', (response.data as { token: string }).token)
+    setCookie('token', (response.data as { token: string }).token)
   }
 
   return response as ApiResponse<T>
@@ -98,11 +98,10 @@ type Params = {
   tags?: string
 }
 const get = async <T>({ url, data, tags }: Params): Promise<ApiResponse<T>> => {
-  const token = getLocalStorage('token')
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`, {
     method: 'GET',
     headers: {
-      ...(token ? { token: String(token)?.replaceAll(`"`, '') } : {}),
+      Token: await getCookie('token') || '',
     },
     next: {
       tags: [tags || ''],

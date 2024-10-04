@@ -75,7 +75,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .loginWrapper,
   .registerWrapper {
     @apply grid-cols-1;
@@ -100,7 +99,7 @@
 }
 
 .btnContainer {
-  @apply mt-5 flex justify-center gap-3 select-none;
+  @apply mt-5 flex select-none justify-end gap-3;
 
   button:first-child {
     @apply flex items-center justify-center rounded-lg bg-[#eeeeee] px-4 py-2 text-[0.8rem] text-gray-800;
@@ -111,18 +110,18 @@
   }
 }
 
-.addressWrapper {
-  @apply flex flex-col gap-2;
-  font-family: 'SF Pro Display';
+.detailsContainer {
+  @apply my-4 flex gap-3;
 
-  .addressContainer {
-    @apply flex flex-1 flex-col;
+  div {
+    font-size: toRem(11);
+  }
 
-    div {
-      font-size: toRem(11);
-    }
+  .details {
+    @apply flex-1;
 
-    div:nth-child(2) {
+    div:nth-child(1) {
+      @apply capitalize;
       font-weight: 600;
       font-size: toRem(14);
     }
@@ -130,10 +129,8 @@
     div:nth-child(3) {
       @apply flex gap-[0.5rem] pt-2;
 
-      >* {
-        @apply rounded-sm px-[1rem] py-[0.2rem];
-        background-color: var(--bg-secondary);
-        color: var(--color-primary);
+      > * {
+        @apply rounded-sm bg-gray-50 px-[1rem] py-[0.2rem] text-gray-800;
         font-weight: 500;
         font-size: toRem(12);
         line-height: toRem(12);
@@ -141,13 +138,24 @@
     }
   }
 
-  .activeAddress {
-    background-color: var(--color-primary) !important;
-    color: var(--white-color) !important;
+  .actions {
+    @apply flex items-center justify-center gap-3;
+
+    span {
+      @apply cursor-pointer select-none rounded-sm bg-gray-800 px-4 py-1 text-gray-50;
+
+      &:last-child {
+        @apply bg-red-700;
+      }
+    }
   }
 }
 
+.activeAddress {
+  @apply bg-gray-800 text-gray-50;
+}
+
 .profileImage {
-  @apply object-cover h-full rounded-full;
+  @apply h-full rounded-full object-cover;
   background-color: #f8f8f8;
 }
