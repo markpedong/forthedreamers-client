@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { TAddressItem } from '@/api/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
@@ -12,6 +12,15 @@ import { z } from 'zod'
 import { getAddress } from '@/lib/server'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
 
@@ -56,6 +65,7 @@ const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
 }
 
 const Address = () => {
+  const [position, setPosition] = useState('')
   const { data: address = [] } = useQuery({
     queryKey: ['address'],
     queryFn: async () => {
@@ -141,6 +151,20 @@ const Address = () => {
                 textarea
                 {...register('address')}
               />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">Open</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+                    <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <DialogFooter>
                 <Button type="submit">Save</Button>
               </DialogFooter>
