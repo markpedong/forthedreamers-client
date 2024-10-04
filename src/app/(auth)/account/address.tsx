@@ -1,13 +1,15 @@
 'use client'
 
 import React, { FC } from 'react'
-import { InfoItem } from '@/api/types'
+import { TAddressItem } from '@/api/types'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { getAddress } from '@/lib/server'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
@@ -16,7 +18,7 @@ import InputWithLabel from '@/components/inputWithLabel'
 import styles from '../styles.module.scss'
 
 interface AddressProps extends React.HTMLAttributes<HTMLDivElement> {
-  data?: InfoItem
+  data?: TAddressItem
 }
 
 type TAddressSchema = z.infer<typeof addressSchema>
@@ -30,30 +32,38 @@ const addressSchema = z.object({
 
 const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
   return (
-    <div className={styles.addressContainer} {...props}>
-      <div>
-        <span>
-          {data?.first_name} {data?.last_name}
-        </span>
-        | <span>+{data?.phone}</span>
+    <div className={styles.detailsContainer} {...props}>
+      <div className={styles.details}>
+        <div>
+          <span>
+            {data?.first_name} {data?.first_name}
+          </span>{' '}
+          | <span>{data?.phone}</span>
+        </div>
+        <div>{data?.address}</div>
+        <div>
+          <span className={data?.is_default === 1 ? styles.activeAddress : ''}>Default</span>
+          <span className={data?.is_default === 2 ? styles.activeAddress : ''}>Pickup Address</span>
+          <span className={data?.is_default === 3 ? styles.activeAddress : ''}>Return Address</span>
+        </div>
       </div>
-      <div>{data?.address}</div>
-      {/* <div>
-        {data?.house}, {data?.street}
-      </div> */}
-      {/* <div>
-        {data?.city}, {data?.pin_code}
-      </div> */}
-      <div>
-        <span className={data?.is_default === 1 ? styles.activeAddress : ''}>Default</span>
-        <span className={data?.is_default === 2 ? styles.activeAddress : ''}>Pickup Address</span>
-        <span className={data?.is_default === 3 ? styles.activeAddress : ''}>Return Address</span>
+      <div className={styles.actions}>
+        <motion.span whileTap={{ scale: 0.95 }}>EDIT</motion.span>
+        <motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>
       </div>
     </div>
   )
 }
 
 const Address = () => {
+  const { data: address = [] } = useQuery({
+    queryKey: ['address'],
+    queryFn: async () => {
+      const res = await getAddress()
+
+      return res ?? []
+    },
+  })
   const form = useForm<TAddressSchema>({
     resolver: zodResolver(addressSchema),
     defaultValues: { address: '', first_name: '', last_name: '', phone: '' },
@@ -77,7 +87,7 @@ const Address = () => {
     <div className={styles.addressWrapper}>
       <Dialog>
         <DialogTrigger asChild>
-          <div className={classNames(styles.btnContainer, '!mt-0 !self-end')}>
+          <div className={classNames(styles.btnContainer, '!mt-0')}>
             <motion.button whileTap={{ scale: 0.95 }} type="submit">
               New Address
             </motion.button>
@@ -138,11 +148,7 @@ const Address = () => {
           </Form>
         </DialogContent>
       </Dialog>
-
-      <AddressItem />
-      <AddressItem />
-      <AddressItem />
-      <AddressItem />
+      {address?.map(item => <AddressItem data={item} key={item.id} />)}
     </div>
   )
 }

@@ -1,7 +1,4 @@
-import React from 'react'
 import dynamic from 'next/dynamic'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
 
 import Navbar from '@/components/navbar'
 
@@ -12,20 +9,28 @@ const Footer = dynamic(() => import('@/components/footer'), {
 })
 
 const Page = () => {
-  const headersList = headers()
-  const token = headersList.get('token')
+  // const token = cookies().get('token')?.value
 
-  if (!token) {
-    redirect('/not-found')
-  } else {
-    return (
-      <>
-        <Navbar />
-        <AccountPage />
-        <Footer />
-      </>
-    )
-  }
+  // console.log(token)
+  // if (!token) {
+  //   // redirect('/not-found')
+  // } else {
+  //   return (
+  //     <>
+  //       <Navbar />
+  //       <AccountPage />
+  //       <Footer />
+  //     </>
+  //   )
+  // }
+
+  return (
+    <div>
+      <Navbar />
+      <AccountPage />
+      <Footer />
+    </div>
+  )
 }
 
 export default Page

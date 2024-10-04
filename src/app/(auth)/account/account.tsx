@@ -44,7 +44,7 @@ const menus = [
 ]
 
 const AccountPage = () => {
-  const dp = useAppSelector(s => s.userData.user.image)
+  const dp = useAppSelector(s => s.userData.user?.image)
   const [currTab, setCurrTab] = useState(1)
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState<string>(dp)

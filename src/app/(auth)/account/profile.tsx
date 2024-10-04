@@ -6,16 +6,16 @@ import { useAppSelector } from '@/redux/store'
 import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 
+import { useProfileSchema } from '@/hooks/useUserSchema'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from '../styles.module.scss'
-import { useProfileSchema } from '@/hooks/useUserSchema'
 
 const Profile = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { email, first_name, last_name, phone, username } = useAppSelector(s => s.userData.user)
+  const { email, first_name, last_name, phone, username } = useAppSelector(s => s.userData.user) || {}
   const { form, handleSubmit, register, errors } = useProfileSchema({
     username,
     phone,
