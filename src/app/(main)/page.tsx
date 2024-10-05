@@ -1,18 +1,18 @@
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 
+import { getProducts, getTestimonials, getWebsiteData } from '@/lib/server'
 import { DCityProduct, DProducts } from '@/components/dynamic-import'
 import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
-import { getProducts, getTestimonials, getWebsiteData } from '@/lib/server'
 import styles from '@/styles/styles.module.scss'
 
 export const revalidate = 60 * 60
 
-const Home = async () => {
+const Page = async () => {
   const [products, website, testimonials] = await Promise.all([getProducts({}), getWebsiteData(), getTestimonials()])
 
   return (
-    <>
+    <div>
       <div
         className={styles.mainWrapper}
         style={{
@@ -46,8 +46,8 @@ const Home = async () => {
         <Image src={website?.landing_image3 ?? ''} alt="" height={300} width={300} sizes="100vw" />
       </div> */}
       <Testimonials data={testimonials ?? []} />
-    </>
+    </div>
   )
 }
 
-export default Home
+export default Page

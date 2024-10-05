@@ -1,27 +1,28 @@
 'use client'
 
+import React, { FC, useState } from 'react'
 import { TAddressItem } from '@/api/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import InputWithLabel from '@/components/inputWithLabel'
+import { getAddress } from '@/lib/server'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Form } from '@/components/ui/form'
-import { getAddress } from '@/lib/server'
+import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from '../styles.module.scss'
 
@@ -64,13 +65,7 @@ const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
 }
 
 const Address = () => {
-  const [selectedOption, setSelectedOption] = useState('Select an option')
-
-  const handleSelect = option => {
-    setSelectedOption(option)
-  }
-
-  const options = ['Option 1', 'Option 2', 'Option 3']
+  const [position, setPosition] = useState('bottom')
 
   const { data: address = [] } = useQuery({
     queryKey: ['address'],
@@ -158,11 +153,17 @@ const Address = () => {
                 {...register('address')}
               />
               <DropdownMenu>
-                <DropdownMenuTrigger>{selectedOption}</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">Open</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="!left-[10rem] w-[27rem]">
+                  <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  {options?.map(option => <DropdownMenuItem onClick={handleSelect}>{option}</DropdownMenuItem>)}
+                  <DropdownMenuRadioGroup className="!left-[1rem]" value={position} onValueChange={setPosition}>
+                    <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
               <DialogFooter>

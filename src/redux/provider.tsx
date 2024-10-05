@@ -13,11 +13,13 @@ const queryClient = new QueryClient()
 
 const ReduxProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <PersistGate persistor={persistor}>{children}</PersistGate>
-      </QueryClientProvider>
-    </Provider>
+    <>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <PersistGate persistor={persistor}>{children}</PersistGate>
+        </QueryClientProvider>
+      </Provider>
+    </>
   )
 }
 

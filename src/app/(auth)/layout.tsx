@@ -18,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/assets/login_cover.webp" sizes="any" />
       <body>
         <ReduxProvider>
           <Toaster />
