@@ -3,6 +3,7 @@
 import React, { FC, useState } from 'react'
 import { TAddressItem } from '@/api/types'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
@@ -10,18 +11,12 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { getAddress } from '@/lib/server'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { Form } from '@/components/ui/form'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import InputWithLabel from '@/components/inputWithLabel'
 
 import styles from '../styles.module.scss'
@@ -38,6 +33,21 @@ const addressSchema = z.object({
   phone: z.string({ message: 'Phone is required' }).min(9, 'Phone should be at least 9 characters'),
   address: z.string({ message: 'Address is required' }).min(3, 'Address should be at least 3 characters'),
 })
+
+const addressTypes = [
+  {
+    label: 'Default Address',
+    value: '1',
+  },
+  {
+    label: 'Pickup Address',
+    value: '2',
+  },
+  {
+    label: 'Return Address',
+    value: '3',
+  },
+]
 
 const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
   return (
@@ -65,7 +75,8 @@ const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
 }
 
 const Address = () => {
-  const [position, setPosition] = useState('bottom')
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
 
   const { data: address = [] } = useQuery({
     queryKey: ['address'],
@@ -113,7 +124,7 @@ const Address = () => {
                   Enter your new address information and click save to add it to your list of addresses.
                 </DialogDescription>
               </DialogHeader>
-              <div className="flex flex-col gap-2 sm:flex-row">
+              <div className="mt-[1rem] flex flex-col gap-2 sm:flex-row">
                 <InputWithLabel
                   key="first_name"
                   label="First Name"
@@ -152,20 +163,35 @@ const Address = () => {
                 textarea
                 {...register('address')}
               />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">Open</Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="!left-[10rem] w-[27rem]">
-                  <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuRadioGroup className="!left-[1rem]" value={position} onValueChange={setPosition}>
-                    <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" role="combobox" aria-expanded={open} className="mb-[2rem] w-full justify-between">
+                    {value ? addressTypes.find(framework => framework.value === value)?.label : 'Select Address type...'}
+                    <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[29rem] p-0">
+                  <Command>
+                    <CommandList>
+                      <CommandGroup>
+                        {addressTypes.map(framework => (
+                          <CommandItem
+                            key={framework.value}
+                            value={framework.value}
+                            onSelect={currentValue => {
+                              setValue(currentValue === value ? '' : currentValue)
+                              setOpen(false)
+                            }}
+                          >
+                            <CheckIcon className={cn('mr-2 h-4 w-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
+                            {framework.label}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <DialogFooter>
                 <Button type="submit">Save</Button>
               </DialogFooter>
