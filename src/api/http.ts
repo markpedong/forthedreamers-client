@@ -48,7 +48,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Token: getLocalStorage('token') || '',
+      Token: String(getLocalStorage('token')).replaceAll(`"`, ''),
     },
     body: JSON.stringify(data) || '{}',
   })
@@ -62,23 +62,24 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 
   if (response?.status !== 200) {
     throttleAlert(response.message)
-    if (response?.status === 401) {
-      toast(response?.message, {
-        description: 'Redirecting you to login page',
-        action: {
-          label: response?.message,
-          onClick: () => {
-            window.location.href = '/login'
-          },
-        },
-      })
 
-      setTimeout(() => {
-        window.location.href = '/login'
-      }, 4000)
+    // if (response?.status === 401) {
+    //   toast(response?.message, {
+    //     description: 'Redirecting you to login page',
+    //     action: {
+    //       label: response?.message,
+    //       onClick: () => {
+    //         window.location.href = '/login'
+    //       },
+    //     },
+    //   })
 
-      return response
-    }
+    //   setTimeout(() => {
+    //     window.location.href = '/login'
+    //   }, 4000)
+
+    //   return response
+    // }
 
     toast(response?.message + ' ⚠️', {
       description: 'Please try again',
@@ -109,7 +110,6 @@ const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<
     },
     next: {
       tags: [tags || ''],
-      revalidate: 60 * 60,
     },
   })
 

@@ -101,3 +101,7 @@ export type TAddressItem = {
 }
 
 export type LoginResponse = { userInfo: TUserInfo; token: string }
+
+export interface AddressProps extends React.HTMLAttributes<HTMLDivElement> {
+  data?: TAddressItem
+}

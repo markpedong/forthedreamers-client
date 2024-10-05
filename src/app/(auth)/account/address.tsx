@@ -1,16 +1,19 @@
 'use client'
 
-import React, { FC, useState } from 'react'
-import { TAddressItem } from '@/api/types'
+import { useState } from 'react'
+import { addNewAddress } from '@/api'
+import { AddressProps } from '@/api/types'
+import { addressTypes } from '@/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { getAddress } from '@/lib/server'
+import { getAddress, revalidate } from '@/lib/server'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
@@ -18,12 +21,9 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import InputWithLabel from '@/components/inputWithLabel'
+import { API_TAGS } from '@/app/(main)/constants/enums'
 
 import styles from '../styles.module.scss'
-
-interface AddressProps extends React.HTMLAttributes<HTMLDivElement> {
-  data?: TAddressItem
-}
 
 type TAddressSchema = z.infer<typeof addressSchema>
 
@@ -34,58 +34,48 @@ const addressSchema = z.object({
   address: z.string({ message: 'Address is required' }).min(3, 'Address should be at least 3 characters'),
 })
 
-const addressTypes = [
-  {
-    label: 'Default Address',
-    value: '1',
-  },
-  {
-    label: 'Pickup Address',
-    value: '2',
-  },
-  {
-    label: 'Return Address',
-    value: '3',
-  },
-]
-
-const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
-  return (
-    <div className={styles.detailsContainer} {...props}>
-      <div className={styles.details}>
-        <div>
-          <span>
-            {data?.first_name} {data?.first_name}
-          </span>{' '}
-          | <span>{data?.phone}</span>
-        </div>
-        <div>{data?.address}</div>
-        <div>
-          <span className={data?.is_default === 1 ? styles.activeAddress : ''}>Default</span>
-          <span className={data?.is_default === 2 ? styles.activeAddress : ''}>Pickup Address</span>
-          <span className={data?.is_default === 3 ? styles.activeAddress : ''}>Return Address</span>
-        </div>
+const AddressItem = ({ data, ...props }: AddressProps) => (
+  <div className={styles.detailsContainer} {...props}>
+    <div className={styles.details}>
+      <div>
+        <span>
+          {data?.first_name} {data?.last_name}
+        </span>{' '}
+        | <span>{data?.phone}</span>
       </div>
-      <div className={styles.actions}>
-        <motion.span whileTap={{ scale: 0.95 }}>EDIT</motion.span>
-        <motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>
+      <div>{data?.address}</div>
+      <div className={styles.addressType}>
+        {addressTypes.map(type => (
+          <span
+            key={type.value}
+            className={classNames({
+              [styles.activeAddress]: data?.is_default === +type.value,
+            })}
+          >
+            {type.label}
+          </span>
+        ))}
       </div>
     </div>
-  )
-}
+    <div className={styles.actions}>
+      <motion.span whileTap={{ scale: 0.95 }}>EDIT</motion.span>
+      <motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>
+    </div>
+  </div>
+)
 
 const Address = () => {
-  const [open, setOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
   const [value, setValue] = useState('')
-
   const { data: address = [] } = useQuery({
-    queryKey: ['address'],
+    queryKey: ['addresses'],
     queryFn: async () => {
       const res = await getAddress()
-
       return res ?? []
     },
   })
+
   const form = useForm<TAddressSchema>({
     resolver: zodResolver(addressSchema),
     defaultValues: { address: '', first_name: '', last_name: '', phone: '' },
@@ -97,8 +87,19 @@ const Address = () => {
     formState: { errors },
   } = form
 
-  const onSubmitForm = data => {
-    console.log(data)
+  const onSubmitForm = async data => {
+    const res = await addNewAddress({ ...data, is_default: +value })
+
+    if (res?.status === 200) {
+      revalidate(API_TAGS.ADDRESS)
+      toast(res?.message, {
+        description: 'Added new address successfully',
+        duration: 1500,
+      })
+
+      setDropdownOpen(false)
+      setIsModalOpen(false)
+    }
   }
 
   const onError = (errors: any) => {
@@ -107,15 +108,15 @@ const Address = () => {
 
   return (
     <div className={styles.addressWrapper}>
-      <Dialog>
+      <Dialog open={isModalOpen}>
         <DialogTrigger asChild>
           <div className={classNames(styles.btnContainer, '!mt-0')}>
-            <motion.button whileTap={{ scale: 0.95 }} type="submit">
+            <motion.button whileTap={{ scale: 0.95 }} onClick={() => setIsModalOpen(true)}>
               New Address
             </motion.button>
           </div>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[550px]">
+        <DialogContent className="sm:max-w-[550px]" onClose={() => setIsModalOpen(false)}>
           <Form {...form}>
             <form className={styles.profileWrapper} onSubmit={handleSubmit(onSubmitForm, onError)}>
               <DialogHeader>
@@ -163,9 +164,9 @@ const Address = () => {
                 textarea
                 {...register('address')}
               />
-              <Popover open={open} onOpenChange={setOpen}>
+              <Popover open={dropdownOpen} onOpenChange={setDropdownOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" role="combobox" aria-expanded={open} className="mb-[2rem] w-full justify-between">
+                  <Button variant="outline" role="combobox" aria-expanded={dropdownOpen} className="mb-[2rem] w-full justify-between">
                     {value ? addressTypes.find(framework => framework.value === value)?.label : 'Select Address type...'}
                     <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
@@ -180,7 +181,7 @@ const Address = () => {
                             value={framework.value}
                             onSelect={currentValue => {
                               setValue(currentValue === value ? '' : currentValue)
-                              setOpen(false)
+                              setDropdownOpen(false)
                             }}
                           >
                             <CheckIcon className={cn('mr-2 h-4 w-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
