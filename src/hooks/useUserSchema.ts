@@ -37,6 +37,7 @@ const useCustomForm = (schema: z.ZodSchema<any>, defaultFormValues: Partial<Form
     register,
     handleSubmit,
     clearErrors,
+    reset,
     formState: { errors },
   } = form
 
@@ -46,6 +47,7 @@ const useCustomForm = (schema: z.ZodSchema<any>, defaultFormValues: Partial<Form
     register,
     errors,
     clearErrors,
+    reset,
   }
 }
 

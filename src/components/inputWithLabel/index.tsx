@@ -35,53 +35,60 @@ const InputWithLabel = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputW
           name={name}
           render={({ field }) => (
             <FormItem>
-              {label && <FormLabel>{label}</FormLabel>}
-              <FormControl>
-                <>
-                  {!textarea ? (
-                    <Input
-                      placeholder={placeholder}
-                      type={isPasswords ? (isEyeOpen ? 'text' : 'password') : type}
-                      {...field}
-                      ref={ref as LegacyRef<HTMLInputElement>}
-                      className={classNames({
-                        [styles.errorInput]: err,
-                        [styles.defaultInput]: !err,
-                      })}
-                    />
-                  ) : (
-                    <Textarea
-                      placeholder={placeholder}
-                      {...field}
-                      ref={ref as LegacyRef<HTMLTextAreaElement>}
-                      className={classNames({
-                        [styles.errorInput]: err,
-                        [styles.defaultInput]: !err,
-                      })}
-                    />
-                  )}
-                  {isPasswords && (
-                    <Image
-                      className="absolute right-1 top-1/2 cursor-pointer"
-                      src={`/assets/images/eye-${isEyeOpen ? 'open' : 'hidden'}.webp`}
-                      width={20}
-                      height={20}
-                      alt="eye"
-                      onClick={() => setIsEyeOpen(!isEyeOpen)}
-                    />
-                  )}
-                </>
-              </FormControl>
-              {err && (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute bottom-[-0.9rem] left-0 mt-0 text-[0.7rem] leading-tight text-red-500"
-                >
-                  {err}
-                </motion.span>
-              )}
+              <fieldset>
+                {label && (
+                  <FormLabel asChild>
+                    <legend>{label}</legend>
+                  </FormLabel>
+                )}
+                <FormControl>
+                  <>
+                    {!textarea ? (
+                      <Input
+                        placeholder={placeholder}
+                        type={isPasswords ? (isEyeOpen ? 'text' : 'password') : type}
+                        {...field}
+                        autoComplete="on"
+                        ref={ref as LegacyRef<HTMLInputElement>}
+                        className={classNames({
+                          [styles.errorInput]: err,
+                          [styles.defaultInput]: !err,
+                        })}
+                      />
+                    ) : (
+                      <Textarea
+                        placeholder={placeholder}
+                        {...field}
+                        ref={ref as LegacyRef<HTMLTextAreaElement>}
+                        className={classNames({
+                          [styles.errorInput]: err,
+                          [styles.defaultInput]: !err,
+                        })}
+                      />
+                    )}
+                    {isPasswords && (
+                      <Image
+                        className="absolute right-1 top-1/2 cursor-pointer"
+                        src={`/assets/images/eye-${isEyeOpen ? 'open' : 'hidden'}.webp`}
+                        width={20}
+                        height={20}
+                        alt="eye"
+                        onClick={() => setIsEyeOpen(!isEyeOpen)}
+                      />
+                    )}
+                  </>
+                </FormControl>
+                {err && (
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute bottom-[-0.9rem] left-0 mt-0 text-[0.7rem] leading-tight text-red-500"
+                  >
+                    {err}
+                  </motion.span>
+                )}
+              </fieldset>
             </FormItem>
           )}
         />

@@ -1,15 +1,15 @@
 'use client'
 
+import { useState } from 'react'
+import Image from 'next/image'
 import { useAppSelector } from '@/redux/store'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { GetProp, message, Upload, UploadProps } from 'antd'
-import Image from 'next/image'
-import { useState } from 'react'
 import { FaAddressCard, FaRegCreditCard, FaShoppingCart, FaStar, FaUser } from 'react-icons/fa'
 
+import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
 import { DynamicAddress, DynamicOrders, DynamicPaymentMethods, DynamicProfile, DynamicReviews } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
-import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
 
 import styles from '../styles.module.scss'
 
@@ -72,6 +72,7 @@ const AccountPage = () => {
     <div className={styles.mainWrapper}>
       <PageTitle title={menus[currTab - 1]?.name} medium className="!select-none !text-[1.3rem] !capitalize" />
       <div className={styles.menuWrapper}>
+        {/* causes error on console #incorrect use of label */}
         <Command className="max-w-[200px] rounded-lg border shadow-md">
           <CommandList>
             <CommandGroup heading="Display Picture">
