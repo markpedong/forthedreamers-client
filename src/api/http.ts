@@ -5,6 +5,7 @@ import { toast } from 'sonner'
 
 import { clearUserData } from '@/lib/helper'
 import { getCookie, setCookie } from '@/lib/server'
+import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
 type ApiResponse<T> = {
   data: T
@@ -23,7 +24,7 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: {
-      Token: await getCookie('token') || '',
+      Token: getLocalStorage('token') || '',
     },
     body: form,
   })
@@ -47,7 +48,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Token: await getCookie('token') || '',
+      Token: getLocalStorage('token') || '',
     },
     body: JSON.stringify(data) || '{}',
   })
@@ -87,6 +88,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
 
   if (['/public/login', '/public/signup'].includes(url)) {
     setCookie('token', (response.data as { token: string }).token)
+    setLocalStorage('token', (response.data as { token: string }).token)
   }
 
   return response as ApiResponse<T>
@@ -98,10 +100,11 @@ type Params = {
   tags?: string
 }
 const get = async <T>({ url, data, tags }: Params): Promise<ApiResponse<T>> => {
+  const token = typeof window !== 'undefined' ? getLocalStorage('token') : await getCookie('token')
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`, {
     method: 'GET',
     headers: {
-      Token: await getCookie('token') || '',
+      token: String(token).replaceAll(`"`, ''),
     },
     next: {
       tags: [tags || ''],
@@ -109,13 +112,9 @@ const get = async <T>({ url, data, tags }: Params): Promise<ApiResponse<T>> => {
     },
   })
 
-  if (!apiResponse.ok) {
-    throw new Error(`HTTP error! status: ${apiResponse.status}, URL: ${url}`)
-  }
-
   //prettier-ignore
   const response = await apiResponse.json() as ApiResponse<T>
-
+  console.log(response?.status, url)
   if (response?.status !== 200) {
     throttleAlert(response.message)
 

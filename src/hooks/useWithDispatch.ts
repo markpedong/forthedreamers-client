@@ -1,13 +1,13 @@
 import { useRouter } from 'next/navigation'
 import { addToCart, getCart, getNewUserInfo } from '@/api'
-import { TAddCartPayload } from '@/api/types'
+import { LoginResponse, TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
 import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
-import { getWebsiteData } from '@/lib/server'
 import { clearUserData } from '@/lib/helper'
+import { getWebsiteData } from '@/lib/server'
 
 export const useWithDispatch = () => {
   const dispatch = useAppDispatch()
@@ -43,9 +43,9 @@ export const useWithDispatch = () => {
     }
   }
 
-  const storeUserInfo = async (event: any) => {
-    dispatch(setUserData(event?.data?.data))
-    toast(event?.data?.message, {
+  const storeUserInfo = async (res: { data: LoginResponse; message: string }) => {
+    dispatch(setUserData(res?.data?.userInfo))
+    toast(res?.message, {
       description: 'Redirecting you to account page',
       action: {
         label: 'View Account',

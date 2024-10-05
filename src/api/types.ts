@@ -99,3 +99,5 @@ export type TAddressItem = {
   phone: string
   is_default: number
 }
+
+export type LoginResponse = { userInfo: TUserInfo; token: string }
