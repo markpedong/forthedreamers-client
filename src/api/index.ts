@@ -36,3 +36,6 @@ export const updateUser = params => post('/users/update', params)
 
 // /users/info
 export const getNewUserInfo = () => post<TUserInfo>('/users/info')
+
+// /address/add
+export const addNewAddress = params => post('/address/add', params)
