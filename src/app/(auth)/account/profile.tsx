@@ -16,7 +16,7 @@ import styles from '../styles.module.scss'
 const Profile = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { email, first_name, last_name, phone, username } = useAppSelector(s => s.userData.user) || {}
-  const { form, handleSubmit, register, errors } = useProfileSchema({
+  const { form, handleSubmit, register, errors, reset } = useProfileSchema({
     username,
     phone,
     confirm_password: '',
@@ -146,7 +146,7 @@ const Profile = () => {
             />
           </div>
           <div className={styles.btnContainer}>
-            <motion.button whileTap={{ scale: 0.95 }} type="reset">
+            <motion.button whileTap={{ scale: 0.95 }} onClick={() => reset()}>
               Reset
             </motion.button>
             <motion.button whileTap={{ scale: 0.95 }} type="submit" className={isSubmitting ? 'pointer-events-none' : ''}>
