@@ -28,7 +28,7 @@ export const getCookie = async name => cookies().get(name)?.value || ''
 
 // /public/products
 export const getProducts = async params =>
-  (await get<TProductItem[]>({ url: '/public/products', data: params, tags: API_TAGS.PRODUCTS }))?.data
+  (await get<TProductItem[]>({ url: '/public/products', data: params, tags: API_TAGS.PRODUCTS, passCookies: params.passCookies }))?.data
 
 // /public/website
 export const getWebsiteData = async () => (await get<TWebsiteItem>({ url: '/public/website', tags: API_TAGS.WEBSITE }))?.data

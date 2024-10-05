@@ -24,6 +24,7 @@ const Product: FC<{ className?: string; product?: TProductItem }> = ({ className
         alt=""
         height={150}
         width={150}
+        quality={50}
         draggable={false}
       />
       <div className={classNames(styles.textContainer, SF_PRO_DISPLAY.className)}>

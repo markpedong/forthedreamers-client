@@ -5,7 +5,7 @@ import { getProducts } from '@/lib/server'
 import Product from './product'
 
 export async function generateStaticParams() {
-  const products = await getProducts({})
+  const products = await getProducts({ passCookies: false })
 
   const params =
     products?.map(product => ({

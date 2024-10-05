@@ -98,9 +98,10 @@ type Params = {
   url: string
   data?: any
   tags?: string
+  passCookies?: boolean
 }
-const get = async <T>({ url, data, tags }: Params): Promise<ApiResponse<T>> => {
-  const token = typeof window !== 'undefined' ? getLocalStorage('token') : await getCookie('token')
+const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<ApiResponse<T>> => {
+  const token = typeof window !== 'undefined' ? getLocalStorage('token') : passCookies && (await getCookie('token'))
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`, {
     method: 'GET',
     headers: {
