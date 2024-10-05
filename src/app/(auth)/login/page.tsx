@@ -1,20 +1,18 @@
 'use client'
 
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { login } from '@/api'
-import { setUserData } from '@/redux/features/userData'
-import { useAppDispatch } from '@/redux/store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
 import { GoogleButton, OrDivider } from '@/components/page-components/button'
+import { Form } from '@/components/ui/form'
+import { useWithDispatch } from '@/hooks/useWithDispatch'
 
 import styles from '../styles.module.scss'
 
@@ -27,7 +25,7 @@ const loginSchema = z.object({
 
 const Login = () => {
   const router = useRouter()
-  const dispatch = useAppDispatch()
+  const { storeUserInfo } = useWithDispatch()
   const form = useForm<FormSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: { username: '', password: '' },
@@ -43,21 +41,7 @@ const Login = () => {
     const res = await login(data)
 
     if (res?.status === 200) {
-      dispatch(setUserData(res?.data?.userInfo))
-      toast(res?.message, {
-        description: 'Redirecting you to account page',
-        action: {
-          label: 'View Account',
-          onClick: () => {
-            router.push('/account')
-          },
-        },
-        duration: 1500,
-      })
-
-      setTimeout(() => {
-        router.push('/account')
-      }, 1500)
+      storeUserInfo(res)
     }
   }
 

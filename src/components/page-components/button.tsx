@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Image from 'next/image'
 
+import { setLocalStorage } from '@/lib/xLocalStorage'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { setCookie } from '@/lib/server'
 
@@ -21,8 +22,11 @@ export const GoogleButton = () => {
     const handleMessage = event => {
       if (event.origin === process.env.NEXT_PUBLIC_DOMAIN) {
         if (event?.data?.code === 200) {
-          setCookie('token', event?.data?.token)
+          setLocalStorage('token', event?.data?.token)
           storeUserInfo(event)
+          setCookie('token', event?.data?.token)
+
+          window.opener?.postMessage({ action: 'closePopup' }, '*')
         }
       }
     }

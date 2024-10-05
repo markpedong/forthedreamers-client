@@ -8,29 +8,20 @@ const Footer = dynamic(() => import('@/components/footer'), {
   ssr: false,
 })
 
-const Page = () => {
+const Page = async () => {
   // const token = cookies().get('token')?.value
 
-  // console.log(token)
-  // if (!token) {
-  //   // redirect('/not-found')
-  // } else {
-  //   return (
-  //     <>
-  //       <Navbar />
-  //       <AccountPage />
-  //       <Footer />
-  //     </>
-  //   )
-  // }
-
+  // if (token) {
   return (
-    <div>
+    <>
       <Navbar />
       <AccountPage />
       <Footer />
-    </div>
+    </>
   )
+  // } else {
+  //   redirect('/not-found')
+  // }
 }
 
 export default Page
