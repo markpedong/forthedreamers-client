@@ -9,9 +9,6 @@ const Footer = dynamic(() => import('@/components/footer'), {
 })
 
 const Page = async () => {
-  // const token = cookies().get('token')?.value
-
-  // if (token) {
   return (
     <>
       <Navbar />
@@ -19,9 +16,6 @@ const Page = async () => {
       <Footer />
     </>
   )
-  // } else {
-  //   redirect('/not-found')
-  // }
 }
 
 export default Page
