@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { addNewAddress } from '@/api'
 import { AddressProps } from '@/api/types'
 import { addressTypes } from '@/constants'
@@ -34,7 +34,7 @@ const addressSchema = z.object({
   address: z.string({ message: 'Address is required' }).min(3, 'Address should be at least 3 characters'),
 })
 
-const AddressItem = ({ data, ...props }: AddressProps) => (
+const AddressItem: FC<AddressProps> = ({ data, ...props }) => (
   <div className={styles.detailsContainer} {...props}>
     <div className={styles.details}>
       <div>
@@ -45,7 +45,7 @@ const AddressItem = ({ data, ...props }: AddressProps) => (
       </div>
       <div>{data?.address}</div>
       <div className={styles.addressType}>
-        {addressTypes.map(type => (
+        {addressTypes?.slice(1).map(type => (
           <span
             key={type.value}
             className={classNames({
@@ -68,7 +68,7 @@ const Address = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [value, setValue] = useState('')
-  const { data: address = [] } = useQuery({
+  const { data: address = [], refetch } = useQuery({
     queryKey: ['addresses'],
     queryFn: async () => {
       const res = await getAddress()
@@ -84,6 +84,7 @@ const Address = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = form
 
@@ -97,6 +98,9 @@ const Address = () => {
         duration: 1500,
       })
 
+      refetch()
+      reset()
+      setValue('')
       setDropdownOpen(false)
       setIsModalOpen(false)
     }
@@ -200,7 +204,7 @@ const Address = () => {
           </Form>
         </DialogContent>
       </Dialog>
-      {address?.map(item => <AddressItem data={item} key={item?.id} />)}
+      <div className="divide-y-2">{address?.map(item => <AddressItem data={item} key={item?.id} />)}</div>
     </div>
   )
 }

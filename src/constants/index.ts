@@ -8,6 +8,10 @@ export const STALE_TIME = 1000 * 60 * 10
 
 export const addressTypes = [
   {
+    label: '-',
+    value: '0',
+  },
+  {
     label: 'Default Address',
     value: '1',
   },
