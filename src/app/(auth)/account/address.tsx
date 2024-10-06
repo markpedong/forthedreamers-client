@@ -1,8 +1,7 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { addNewAddress } from '@/api'
-import { AddressProps } from '@/api/types'
 import { addressTypes } from '@/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons'
@@ -24,6 +23,7 @@ import InputWithLabel from '@/components/inputWithLabel'
 import { API_TAGS } from '@/app/(main)/constants/enums'
 
 import styles from '../styles.module.scss'
+import { AddressItem } from './components'
 
 type TAddressSchema = z.infer<typeof addressSchema>
 
@@ -33,36 +33,6 @@ const addressSchema = z.object({
   phone: z.string({ message: 'Phone is required' }).min(9, 'Phone should be at least 9 characters'),
   address: z.string({ message: 'Address is required' }).min(3, 'Address should be at least 3 characters'),
 })
-
-const AddressItem: FC<AddressProps> = ({ data, ...props }) => (
-  <div className={styles.detailsContainer} {...props}>
-    <div className={styles.details}>
-      <div>
-        <span>
-          {data?.first_name} {data?.last_name}
-        </span>{' '}
-        | <span>{data?.phone}</span>
-      </div>
-      <div>{data?.address}</div>
-      <div className={styles.addressType}>
-        {addressTypes?.slice(1).map(type => (
-          <span
-            key={type.value}
-            className={classNames({
-              [styles.activeAddress]: data?.is_default === +type.value,
-            })}
-          >
-            {type.label}
-          </span>
-        ))}
-      </div>
-    </div>
-    <div className={styles.actions}>
-      <motion.span whileTap={{ scale: 0.95 }}>EDIT</motion.span>
-      <motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>
-    </div>
-  </div>
-)
 
 const Address = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -110,11 +80,16 @@ const Address = () => {
     console.log(errors)
   }
 
+  useEffect(() => {
+    reset()
+    setValue('')
+  }, [isModalOpen])
+
   return (
     <div className={styles.addressWrapper}>
       <Dialog open={isModalOpen}>
         <DialogTrigger asChild>
-          <div className={classNames(styles.btnContainer, '!mt-0')}>
+          <div className={classNames(styles.btnContainer, styles.addAddressBtn, '!mt-0')}>
             <motion.button whileTap={{ scale: 0.95 }} onClick={() => setIsModalOpen(true)}>
               New Address
             </motion.button>
@@ -204,7 +179,11 @@ const Address = () => {
           </Form>
         </DialogContent>
       </Dialog>
-      <div className="divide-y-2">{address?.map(item => <AddressItem data={item} key={item?.id} />)}</div>
+      <div className="divide-y-2">
+        {address?.map(item => (
+          <AddressItem data={item} key={item?.id} refetch={() => refetch()} editAddress={() => setIsModalOpen(true)} />
+        ))}
+      </div>
     </div>
   )
 }

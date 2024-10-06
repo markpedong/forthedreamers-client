@@ -63,27 +63,25 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
   if (response?.status !== 200) {
     throttleAlert(response.message)
 
-    // if (response?.status === 401) {
-    //   toast(response?.message, {
-    //     description: 'Redirecting you to login page',
-    //     action: {
-    //       label: response?.message,
-    //       onClick: () => {
-    //         window.location.href = '/login'
-    //       },
-    //     },
-    //   })
+    if (response?.status === 401) {
+      toast(response?.message, {
+        description: 'Redirecting you to login page',
+        action: {
+          label: response?.message,
+          onClick: () => redirect('/login'),
+        },
+      })
 
-    //   setTimeout(() => {
-    //     window.location.href = '/login'
-    //   }, 4000)
+      setTimeout(() => {
+        window.location.href = '/login'
+      }, 4000)
 
-    //   return response
-    // }
-
-    toast(response?.message + ' ⚠️', {
-      description: 'Please try again',
+      return response
+    }
+    toast(response?.message, {
+      description: 'Please try again!',
     })
+
     return response
   }
 

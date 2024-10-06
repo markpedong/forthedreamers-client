@@ -39,3 +39,6 @@ export const getNewUserInfo = () => post<TUserInfo>('/users/info')
 
 // /address/add
 export const addNewAddress = params => post('/address/add', params)
+
+// /address/delete
+export const deleteAddress = params => post('/address/delete', params)

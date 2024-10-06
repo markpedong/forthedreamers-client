@@ -94,6 +94,10 @@
   }
 }
 
+.addressWrapper{
+  @apply relative;
+}
+
 .addressWrapper,
 .profileWrapper {
   @apply p-3 py-6;
@@ -154,9 +158,17 @@
       }
     }
   }
+
+  &:first-child{
+    @apply mt-0;
+  }
 }
 
 .profileImage {
   @apply h-full rounded-full object-cover;
   background-color: #f8f8f8;
+}
+
+.addAddressBtn {
+  @apply absolute top-[-2.5rem] right-[0.8rem]
 }

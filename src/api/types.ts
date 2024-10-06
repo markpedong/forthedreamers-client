@@ -104,4 +104,16 @@ export type LoginResponse = { userInfo: TUserInfo; token: string }
 
 export interface AddressProps extends React.HTMLAttributes<HTMLDivElement> {
   data?: TAddressItem
+  refetch: () => void
+  editAddress: () => void
+}
+
+export type TToastParams = {
+  msg: string
+  desc?: string
+  act?: {
+    lbl: string
+    clicked: () => void
+  }
+  sec?: number
 }
