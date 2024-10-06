@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { addNewAddress } from '@/api'
+import { useCallback, useEffect, useState } from 'react'
+import { addNewAddress, updateAddress } from '@/api'
+import { TAddressItem } from '@/api/types'
 import { addressTypes } from '@/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons'
@@ -38,6 +39,7 @@ const Address = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [value, setValue] = useState('')
+  const [currAddress, setCurrAddress] = useState<TAddressItem>()
   const { data: address = [], refetch } = useQuery({
     queryKey: ['addresses'],
     queryFn: async () => {
@@ -55,26 +57,29 @@ const Address = () => {
     register,
     handleSubmit,
     reset,
+    setValue: setFormValue,
     formState: { errors },
   } = form
 
-  const onSubmitForm = async data => {
-    const res = await addNewAddress({ ...data, is_default: +value })
+  const onSubmitForm = useCallback(
+    async data => {
+      const res = currAddress?.id
+        ? await updateAddress({ ...data, user_id: currAddress?.user_id, id: currAddress?.id, is_default: +value })
+        : await addNewAddress({ ...data, is_default: +value })
 
-    if (res?.status === 200) {
-      revalidate(API_TAGS.ADDRESS)
-      toast(res?.message, {
-        description: 'Added new address successfully',
-        duration: 1500,
-      })
-
-      refetch()
-      reset()
-      setValue('')
-      setDropdownOpen(false)
-      setIsModalOpen(false)
-    }
-  }
+      if (res?.status === 200) {
+        revalidate(API_TAGS.ADDRESS)
+        toast(res?.message || 'Address added successfully', { duration: 1500 })
+        refetch()
+        reset()
+        setValue('')
+        setDropdownOpen(false)
+        setIsModalOpen(false)
+        setCurrAddress(undefined)
+      }
+    },
+    [currAddress, refetch, reset, setValue, value],
+  )
 
   const onError = (errors: any) => {
     console.log(errors)
@@ -85,17 +90,39 @@ const Address = () => {
     setValue('')
   }, [isModalOpen])
 
+  useEffect(() => {
+    if (currAddress?.id) {
+      setFormValue('address', currAddress?.address)
+      setFormValue('first_name', currAddress?.first_name)
+      setFormValue('last_name', currAddress?.last_name)
+      setFormValue('phone', currAddress?.phone)
+      setValue(String(currAddress?.is_default))
+    }
+  }, [currAddress?.id])
+
   return (
     <div className={styles.addressWrapper}>
-      <Dialog open={isModalOpen}>
+      <Dialog open={isModalOpen || !!currAddress?.id}>
         <DialogTrigger asChild>
           <div className={classNames(styles.btnContainer, styles.addAddressBtn, '!mt-0')}>
-            <motion.button whileTap={{ scale: 0.95 }} onClick={() => setIsModalOpen(true)}>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                currAddress?.id && setCurrAddress(undefined)
+                setIsModalOpen(true)
+              }}
+            >
               New Address
             </motion.button>
           </div>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[550px]" onClose={() => setIsModalOpen(false)}>
+        <DialogContent
+          className="sm:max-w-[550px]"
+          onClose={() => {
+            setIsModalOpen(false)
+            setCurrAddress(undefined)
+          }}
+        >
           <Form {...form}>
             <form className={styles.profileWrapper} onSubmit={handleSubmit(onSubmitForm, onError)}>
               <DialogHeader>
@@ -180,9 +207,7 @@ const Address = () => {
         </DialogContent>
       </Dialog>
       <div className="divide-y-2">
-        {address?.map(item => (
-          <AddressItem data={item} key={item?.id} refetch={() => refetch()} editAddress={() => setIsModalOpen(true)} />
-        ))}
+        {address?.map(item => <AddressItem data={item} key={item?.id} refetch={refetch} setCurrAddress={setCurrAddress} />)}
       </div>
     </div>
   )

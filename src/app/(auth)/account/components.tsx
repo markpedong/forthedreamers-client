@@ -1,19 +1,19 @@
+import { FC, useState } from 'react'
 import { deleteAddress } from '@/api'
-import { AddressProps } from '@/api/types'
+import { AddressProps, TAddressItem } from '@/api/types'
 import { addressTypes } from '@/constants'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import { FC, useState } from 'react'
 import { RiErrorWarningFill } from 'react-icons/ri'
 import { toast } from 'sonner'
 
-import { API_TAGS } from '@/app/(main)/constants/enums'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { revalidate } from '@/lib/server'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { API_TAGS } from '@/app/(main)/constants/enums'
 
 import styles from '../styles.module.scss'
 
-export const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
+export const AddressItem: FC<AddressProps> = ({ data, refetch, setCurrAddress, ...props }) => {
   const [open, setOpen] = useState(false)
 
   const handleDelete = async () => {
@@ -21,8 +21,8 @@ export const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
     if (res?.status === 200) {
       setOpen(false)
       revalidate(API_TAGS.ADDRESS)
-      toast('address deleted', )
-      props.refetch()
+      toast('address deleted')
+      refetch()
     }
   }
 
@@ -50,7 +50,9 @@ export const AddressItem: FC<AddressProps> = ({ data, ...props }) => {
         </div>
       </div>
       <div className={styles.actions}>
-        <motion.span whileTap={{ scale: 0.95 }} onClick={() => props.editAddress()}>EDIT</motion.span>
+        <motion.span whileTap={{ scale: 0.95 }} onClick={() => setCurrAddress(data as TAddressItem)}>
+          EDIT
+        </motion.span>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger>
             <motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>

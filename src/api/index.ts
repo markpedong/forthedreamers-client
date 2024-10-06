@@ -42,3 +42,6 @@ export const addNewAddress = params => post('/address/add', params)
 
 // /address/delete
 export const deleteAddress = params => post('/address/delete', params)
+
+// /address/update
+export const updateAddress = params => post('/address/update', params)

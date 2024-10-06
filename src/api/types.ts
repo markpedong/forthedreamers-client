@@ -93,6 +93,7 @@ export type TLoginPayload = {
 
 export type TAddressItem = {
   address: string
+  user_id: string
   first_name: string
   id: string
   last_name: string
@@ -105,7 +106,7 @@ export type LoginResponse = { userInfo: TUserInfo; token: string }
 export interface AddressProps extends React.HTMLAttributes<HTMLDivElement> {
   data?: TAddressItem
   refetch: () => void
-  editAddress: () => void
+  setCurrAddress: (address: TAddressItem) => void
 }
 
 export type TToastParams = {
