@@ -7,9 +7,15 @@ export type TProductItem = {
   features: string[]
   variations: TShortVar[]
 }
+
 export type TShortVar = Omit<TVariationItem, 'quantity' | 'size'>
 
 export type TProductDetails = Omit<TProductItem, 'variations'>
+
+export type TCartItem = Omit<TProductItem, 'variations' | 'features' | 'collection_id'> & {
+  quantity: number
+  variation_id?: string
+}
 
 export type TVariationItem = {
   color: string
@@ -46,13 +52,6 @@ export type TTestimonials = {
   author: string
   product_id: string
   title: string
-}
-
-export type TCartItem = {
-  id: string
-  quantity: number
-  product_id: string
-  variation_id?: string
 }
 
 export type TUserInfo = {

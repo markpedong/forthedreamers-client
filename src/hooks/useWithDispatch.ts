@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation'
-import { addToCart, getCart, getNewUserInfo } from '@/api'
+import { addToCart, getNewUserInfo } from '@/api'
 import { LoginResponse, TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
 import { setCartData, setUserData } from '@/redux/features/userData'
@@ -7,7 +7,7 @@ import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
 import { clearUserData } from '@/lib/helper'
-import { getWebsiteData } from '@/lib/server'
+import { getCart, getWebsiteData } from '@/lib/server'
 
 export const useWithDispatch = () => {
   const dispatch = useAppDispatch()
@@ -25,15 +25,15 @@ export const useWithDispatch = () => {
       ...(variation_id ? { variation_id } : {}),
     })
     if (res?.status === 200) {
+      toast(res?.message)
       getNewCartData()
     }
   }
 
   const getNewCartData = async () => {
-    const res = await getCart({})
-    if (res?.status === 200) {
-      dispatch(setCartData(res?.data ?? []))
-    }
+    const res = await getCart()
+
+    dispatch(setCartData(res ?? []))
   }
 
   const getUserInfo = async () => {

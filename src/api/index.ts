@@ -1,13 +1,12 @@
 import { post } from './http'
 import {
   LoginResponse,
-  TCartItem,
   TCollectionDetails,
   TCollectionItem,
   TLoginPayload,
   TProductDetails,
   TUserInfo,
-  TVariationItem,
+  TVariationItem
 } from './types'
 
 // /public/login
@@ -27,9 +26,6 @@ export const getCollectionsByID = params => post<TCollectionDetails>('/public/co
 
 // /cart/add
 export const addToCart = params => post('/carts/add', params)
-
-// /cart/get
-export const getCart = params => post<TCartItem[]>('/carts/get', params)
 
 // /users/update
 export const updateUser = params => post('/users/update', params)

@@ -1,33 +1,41 @@
 'use client'
 
+import { FC, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { TCartItem } from '@/api/types'
 import { STALE_TIME } from '@/constants'
 import { useQuery } from '@tanstack/react-query'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
-import { FC, useState } from 'react'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
 
+import { getCart } from '@/lib/server'
 import Drawer from '@/components/drawer'
 
-import { SF_PRO_DISPLAY } from 'public/fonts'
 import SearchProduct from '../../products'
 import styles from './styles.module.scss'
 
 const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   const [showNote, setShowNote] = useState(false)
   const { push } = useRouter()
-  const { data: products } = useQuery({
+  const { data: carts } = useQuery<TCartItem[]>({
     queryKey: ['cart'],
     staleTime: STALE_TIME,
     queryFn: async () => {
-      //   const res = await getCart({ id: '' })
+      const res = await getCart()
 
-      return []
+      console.log('@@@@', res)
+
+      return res ?? []
     },
   })
+
+  useEffect(() => {
+    console.log('@@@@', carts)
+  }, [])
 
   useLockBodyScroll()
   return (
@@ -37,7 +45,9 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
           <span>Cart</span>
           <IoMdClose onClick={setShowCart} color="black" />
         </div>
-        <div className={styles.products}>{products?.map(product => <SearchProduct isCart product={product} />)}</div>
+        <div className={styles.products}>
+          {!!carts?.length && carts?.map(product => <SearchProduct isCart product={product as any} key={product?.id} />)}
+        </div>
         <div className={styles.addNoteContainer}>
           <span>Add order note</span>
           <FaPlus onClick={() => setShowNote(true)} />
