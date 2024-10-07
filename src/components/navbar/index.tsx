@@ -1,24 +1,24 @@
 'use client'
 
+import { FC, useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/store'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { usePathname, useRouter } from 'next/navigation'
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
-import { FC, useEffect, useState } from 'react'
 import { CiShoppingCart } from 'react-icons/ci'
 import { FaChevronDown } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
 import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
+import { isLoggedIn } from '@/lib/helper'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
 import { DynamicCart, DynamicSearch } from '../dynamic-import'
 import Marquee from '../marquee'
 import MobileMenu from './components/mobile-menu'
 import styles from './style.module.scss'
-import { isLoggedIn } from '@/lib/helper'
 
 const Navbar: FC = () => {
   const { push, refresh } = useRouter()
@@ -92,14 +92,7 @@ const Navbar: FC = () => {
               />
             )}
             <AnimatePresence>
-              {open && (
-                <MobileMenu
-                  setOpen={() => setOpen(false)}
-                  setShowLogin={() => {
-                    setOpen(false)
-                  }}
-                />
-              )}
+              {open && <MobileMenu setOpen={() => setOpen(false)} setShowLogin={() => (isLoggedIn() ? logoutUser() : push('/login'))} />}
             </AnimatePresence>
           </div>
         )}
@@ -137,17 +130,19 @@ const Navbar: FC = () => {
               }}
             />
           </motion.span>
-          <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
-            <CiShoppingCart
-              className="cursor-pointer"
-              size={20}
-              onClick={() => {
-                setOpen(false)
-                setShowCart(true)
-                setSearch(false)
-              }}
-            />
-          </motion.span>
+          {isLoggedIn() && (
+            <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
+              <CiShoppingCart
+                className="cursor-pointer"
+                size={20}
+                onClick={() => {
+                  setOpen(false)
+                  setShowCart(true)
+                  setSearch(false)
+                }}
+              />
+            </motion.span>
+          )}
         </div>
         <AnimatePresence>{showCart && <DynamicCart setShowCart={() => setShowCart(false)} />}</AnimatePresence>
         <AnimatePresence>{search && <DynamicSearch setSearch={() => setSearch(false)} />}</AnimatePresence>

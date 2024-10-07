@@ -118,7 +118,12 @@ const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<
     throttleAlert(response.message)
 
     if (response?.status === 401) {
-      redirect('/unauthorized')
+      if (typeof window !== 'undefined') {
+        clearUserData()
+        window.location.href = '/login'
+      } else {
+        redirect('/unauthorized')
+      }
     }
   }
 

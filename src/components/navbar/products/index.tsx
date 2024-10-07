@@ -1,18 +1,19 @@
-import { TProductItem } from '@/api/types'
-import classNames from 'classnames'
+import { FC, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { FC, useState } from 'react'
+import { TProductItem } from '@/api/types'
+import classNames from 'classnames'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
-import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
-
 
 const SearchProduct: FC<{ isCart?: boolean; product?: TProductItem }> = ({ isCart, product }) => {
   const router = useRouter()
   const variations = product?.variations
   const [quantity, setQuantity] = useState(1)
+
+  console.log(product)
 
   return (
     <div className={styles.products__item} data-iscart={isCart}>
@@ -24,7 +25,7 @@ const SearchProduct: FC<{ isCart?: boolean; product?: TProductItem }> = ({ isCar
         </div>
         {isCart && (
           <>
-            <div className={styles.products__variation}>medium</div>
+            <div className={styles.products__variation}>{product?.size}</div>
             <div className={styles.quantityContainer}>
               <div className={styles.addMinusContainer}>
                 <FaMinus onClick={() => setQuantity(qty => (qty > 1 ? qty - 1 : qty))} />

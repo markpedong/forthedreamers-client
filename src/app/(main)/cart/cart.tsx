@@ -1,11 +1,11 @@
 'use client'
 
-import { FC, useState } from 'react'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { TProductItem } from '@/api/types'
 import { useWindowSize } from '@uidotdev/usehooks'
 import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { FC, useState } from 'react'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
 import { PageTitle } from '@/components/page-components'
