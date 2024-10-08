@@ -2,14 +2,15 @@
 
 import { FC, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { STALE_TIME } from '@/constants'
 import { useQuery } from '@tanstack/react-query'
-import { useLockBodyScroll } from '@uidotdev/usehooks'
+import { useDebounce, useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import { IoIosCloseCircle } from 'react-icons/io'
 
-import { getProducts } from '@/lib/server'
+import { getCollections, getProducts } from '@/lib/server'
 import Drawer from '@/components/drawer'
 import { Question } from '@/components/page-components'
 
@@ -19,15 +20,17 @@ import styles from './styles.module.scss'
 const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
   const [value, setValue] = useState('')
   const { push } = useRouter()
-  const sample = ['hoodie', 'hoodies', 'casual', 'apparel']
+  const delayedValue = useDebounce(value, 500)
   const { data: products } = useQuery({
-    queryKey: ['search', value?.toLowerCase()],
-    staleTime: 1000 * 60 * 10,
-    queryFn: async () => {
-      const res = await getProducts({ search: value?.toLowerCase() })
-
-      return res
-    },
+    queryKey: ['search', delayedValue?.toLowerCase()],
+    staleTime: STALE_TIME,
+    enabled: !!delayedValue,
+    queryFn: async () => await getProducts({ search: delayedValue?.toLowerCase() }),
+  })
+  const { data: collections } = useQuery({
+    queryKey: ['collections'],
+    staleTime: Infinity,
+    queryFn: async () => await getCollections({}),
   })
 
   useLockBodyScroll()
@@ -51,7 +54,11 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
                   exit={{ x: 100, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                 >
-                  {sample?.map(q => <span className={styles.suggestions__item}>{q}</span>)}
+                  {collections?.slice(0, 4)?.map(collection => (
+                    <span className={styles.suggestions__item} onClick={() => push(`/collection/${collection?.id}`)}>
+                      {collection?.name}
+                    </span>
+                  ))}
                 </motion.div>
               </div>
               <Question normal question="PRODUCTS" className={styles.productHeader} />
@@ -66,7 +73,10 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
               <motion.div
                 whileTap={{ scale: 0.97 }}
                 className={classNames(styles.footer, SF_PRO_DISPLAY.className)}
-                onClick={() => push(`/search?search=${value?.toLowerCase()}`)}
+                onClick={() => {
+                  push(`/search?search=${delayedValue?.toLowerCase()}`)
+                  setSearch()
+                }}
               >
                 view all results
               </motion.div>

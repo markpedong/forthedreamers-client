@@ -36,10 +36,13 @@
   }
 
   &__item {
-    @apply cursor-pointer rounded-full px-4 py-1 font-[500] uppercase tracking-wide;
+    @apply cursor-pointer rounded-full px-4 py-1 font-medium uppercase tracking-wide;
     border: toRem(1) solid rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease-in;
     font-size: toRem(12);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     &:hover {
       @apply bg-black text-white;
@@ -48,7 +51,7 @@
 }
 
 .footer {
-  @apply m-5 grid h-[3rem] place-content-center bg-black font-bold uppercase tracking-wider text-white;
+  @apply m-5 grid h-[3rem] cursor-pointer select-none place-content-center bg-black font-bold uppercase tracking-wider text-white;
   border-top: toRem(1) solid rgba(0, 0, 0, 0.1);
   font-size: toRem(12);
 }

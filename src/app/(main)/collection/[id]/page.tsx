@@ -1,11 +1,12 @@
-import { getCollections, getCollectionsByID } from '@/api'
+import { getCollectionsByID } from '@/api'
 import classNames from 'classnames'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 
+import { getCollections } from '@/lib/server'
 import Header from '@/components/header'
 import Product from '@/components/product'
 
 import styles from './styles.module.scss'
-import { SF_PRO_DISPLAY } from 'public/fonts'
 
 interface PageProps {
   params: {
@@ -14,10 +15,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const collections = await getCollections({})
+  const collections = await getCollections({ passCookies: false })
 
   const params =
-    collections?.data?.map(collection => ({
+    collections?.map(collection => ({
       id: collection.id,
     })) || []
 
