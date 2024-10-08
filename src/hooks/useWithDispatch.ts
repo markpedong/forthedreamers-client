@@ -7,7 +7,8 @@ import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
 import { clearUserData, invalidUser } from '@/lib/helper'
-import { getCart, getWebsiteData } from '@/lib/server'
+import { addQuantity, getCart, getWebsiteData, revalidate } from '@/lib/server'
+import { API_TAGS } from '@/app/(main)/constants/enums'
 
 export const useWithDispatch = () => {
   const dispatch = useAppDispatch()
@@ -27,6 +28,15 @@ export const useWithDispatch = () => {
     if (res?.status === 200) {
       toast(res?.message)
       getNewCartData()
+    }
+  }
+
+  const updateQty = async ({ id, quantity }: { id: string; quantity: number }) => {
+    const res = await addQuantity({ cart_id: id, quantity })
+
+    if (res?.status === 200) {
+      getNewCartData()
+      revalidate(API_TAGS.CART_QTY)
     }
   }
 
@@ -89,5 +99,6 @@ export const useWithDispatch = () => {
     getNewCartData,
     addItemToCart,
     logoutUser,
+    updateQty,
   }
 }
