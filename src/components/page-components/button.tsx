@@ -19,12 +19,12 @@ export const GoogleButton = () => {
   }
 
   useEffect(() => {
-    const handleMessage = event => {
-      if (event.origin === process.env.NEXT_PUBLIC_DOMAIN) {
-        if (event?.data?.code === 200) {
-          setLocalStorage('token', event?.data?.token)
-          storeUserInfo(event)
-          setCookie('token', event?.data?.token)
+    const handleMessage = (data) => {
+      if (data.origin === process.env.NEXT_PUBLIC_DOMAIN) {
+        if (data.data.data.code === 200) {
+          setLocalStorage('token', data.data.data.token)
+          storeUserInfo(data.data)
+          setCookie('token', data.data.data.token)
 
           window.opener?.postMessage({ action: 'closePopup' }, '*')
         }

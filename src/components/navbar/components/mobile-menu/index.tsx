@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -14,6 +14,7 @@ import styles from './styles.module.scss'
 
 const MobileMenu: FC<{ setOpen: () => void; setShowLogin: () => void }> = ({ setOpen, setShowLogin }) => {
   const { push } = useRouter()
+  const pathname = usePathname()
   const [showSupport, setShowSupport] = useState(false)
 
   const handlePush = (path: string) => {
@@ -26,10 +27,12 @@ const MobileMenu: FC<{ setOpen: () => void; setShowLogin: () => void }> = ({ set
 
   return (
     <motion.div
-      className={classNames(styles.drawerContainer, SF_PRO_DISPLAY.className)}
+      className={classNames(styles.drawerContainer, SF_PRO_DISPLAY.className, {
+        [styles.notHome]: pathname !== '/',
+      })}
       initial={{ opacity: 0, top: '150%%' }}
       exit={{ opacity: 0, top: '150%%' }}
-      animate={{ opacity: 1, top: '5.6rem', animation: 'ease-out', transition: { duration: 0.5 } }}
+      animate={{ opacity: 1, top: pathname === '/' ? '3.75rem' : '5.6rem', animation: 'ease-out', transition: { duration: 0.5 } }}
     >
       <div className={styles.menuContainer}>
         <span onClick={() => handlePush('/')}>HOME</span>
