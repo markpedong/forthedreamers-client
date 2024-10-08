@@ -1,17 +1,17 @@
 'use client'
 
+import { FC, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
 import { SF_PRO_DISPLAY } from 'public/fonts'
-import { FC, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
 
-import Drawer from '@/components/drawer'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
+import Drawer from '@/components/drawer'
 
 import { CartProduct } from '../../products'
 import styles from './styles.module.scss'
@@ -21,6 +21,10 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   const { getNewCartData } = useWithDispatch()
   const [showNote, setShowNote] = useState(false)
   const carts = useAppSelector(state => state.userData.cart)
+  const totalPrice = carts?.reduce((acc, curr) => {
+    acc += curr?.price * curr?.quantity
+    return acc
+  }, 0)
 
   useLockBodyScroll()
   return (
@@ -54,12 +58,7 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
                 <span className="fa fa-check" />
               </label>
             </div>
-            <div className={styles.btn}>
-              checkout •{' '}
-              {
-                // ₱1,590.00
-              }
-            </div>
+            <div className={styles.btn}>checkout • ₱{totalPrice}</div>
             <div
               className="uppercase tracking-wider underline underline-offset-8"
               onClick={() => {
