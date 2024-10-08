@@ -141,7 +141,7 @@ const Navbar: FC = () => {
                 setSearch(false)
               }}
             >
-              {cart?.length && <span>{cart?.length}</span>}
+              {!!cart?.length && <span>{cart?.length}</span>}
               <CiShoppingCart className="cursor-pointer" size={20} />
             </motion.div>
           )}
