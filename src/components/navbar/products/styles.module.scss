@@ -1,48 +1,52 @@
 .products {
   &__item {
-    @apply py-5 flex gap-5;
+    @apply flex gap-5 py-5;
 
     img {
-      @apply size-[5rem] object-contain cursor-pointer;
+      @apply size-[5rem] cursor-pointer object-contain;
     }
   }
 
   &__textContainer {
-    @apply fcol gap-2 font-[400] text-black;
+    @apply gap-2 font-[400] text-black fcol;
     font-size: toRem(14);
   }
-
 }
 
 .products__item {
-  &[data-iscart="true"] {
+  .products__titleContainer,
+  img {
+    @apply cursor-pointer;
+  }
+
+  &[data-iscart='true'] {
     .products__titleContainer {
-      @apply flex justify-between w-full
+      @apply flex w-full justify-between;
     }
 
     .products__textContainer {
-      @apply w-full gap-1;
+      @apply w-full cursor-pointer gap-1;
     }
 
-    .products__variation{
+    .products__variation {
       @apply w-full font-[300] uppercase;
-      font-size: toRem(11)
+      font-size: toRem(11);
     }
   }
 
-  &[data-iscart="false"] {
+  &[data-iscart='false'] {
     .products__titleContainer {
       @apply fcol;
     }
   }
 }
 
-.quantityContainer{
+.quantityContainer {
   @apply flex items-center gap-3;
 }
 
 .addMinusContainer {
-  @apply flex gap-1 h-9 w-24 items-center justify-evenly select-none;
+  @apply flex h-9 w-24 select-none items-center justify-evenly gap-1;
   border: toRem(1) solid rgba(0, 0, 0, 0.2);
 
   .qty {
@@ -50,6 +54,6 @@
   }
 
   svg {
-      @apply opacity-25 size-3;
+    @apply size-3 opacity-25;
   }
 }

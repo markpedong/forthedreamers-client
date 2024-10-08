@@ -24,7 +24,14 @@ export const clearUserData = () => {
   sessionStorage.clear()
 }
 
-export const isLoggedIn = () => localStorage && !!getLocalStorage('token')
+export const isLoggedIn = () => {
+  const tokenFromLocalStorage = localStorage && getLocalStorage('token')
+  const tokenFromCookies = document.cookie.split('; ').find(row => row.startsWith('token='))
+
+  const cookieToken = tokenFromCookies ? tokenFromCookies.split('=')[1] : null
+
+  return !!(tokenFromLocalStorage && cookieToken)
+}
 
 export const invalidUser = () => {
   clearUserData()

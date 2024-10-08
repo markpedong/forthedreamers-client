@@ -1,5 +1,5 @@
 .header {
-  @apply p-3 px-6 flex justify-between items-center gap-5;
+  @apply flex items-center justify-between gap-5 p-3 px-6;
   border-bottom: toRem(1) solid rgba(0, 0, 0, 0.1);
 
   input::placeholder {
@@ -11,55 +11,54 @@
     font-size: toRem(16);
     color: black;
     height: toRem(35);
-    outline: none
+    outline: none;
   }
 
   input {
-    @apply w-full
+    @apply w-full;
   }
 
   svg {
-    @apply size-[1.6rem]
+    @apply size-[1.6rem] cursor-pointer;
   }
 }
 
 .suggestions {
-  @apply text-black fcol gap-4 items-start justify-center p-5 px-7;
+  @apply items-start justify-center gap-4 p-5 px-7 text-black fcol;
 
   &__header {
-    @apply tracking-widest font-[600];
+    @apply font-[600] tracking-widest;
     font-size: toRem(12);
   }
 
   &__container {
-    @apply flex gap-3 overflow-x-auto w-full;
+    @apply flex w-full gap-3 overflow-x-auto;
   }
 
   &__item {
-    @apply py-1 px-4 rounded-full uppercase font-[500] tracking-wide cursor-pointer;
+    @apply cursor-pointer rounded-full px-4 py-1 font-[500] uppercase tracking-wide;
     border: toRem(1) solid rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease-in;
     font-size: toRem(12);
 
     &:hover {
-      @apply bg-black text-white
+      @apply bg-black text-white;
     }
   }
-
 }
 
 .footer {
-  @apply h-[3rem] grid place-content-center bg-black text-white uppercase font-bold tracking-wider m-5;
+  @apply m-5 grid h-[3rem] place-content-center bg-black font-bold uppercase tracking-wider text-white;
   border-top: toRem(1) solid rgba(0, 0, 0, 0.1);
-  font-size: toRem(12)
+  font-size: toRem(12);
 }
 
 .productHeader {
-  @apply w-full text-center py-4 tracking-wider self-start text-black;
+  @apply w-full self-start py-4 text-center tracking-wider text-black;
   font-size: toRem(12);
 }
 
 .products {
-  @apply px-5 overflow-y-auto fcol max-h-[39rem];
+  @apply max-h-[39rem] overflow-y-auto px-5 fcol;
   border-bottom: toRem(1) solid rgba(0, 0, 0, 0.1);
 }

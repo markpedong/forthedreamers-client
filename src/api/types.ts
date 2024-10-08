@@ -13,8 +13,13 @@ export type TShortVar = Omit<TVariationItem, 'quantity' | 'size'>
 export type TProductDetails = Omit<TProductItem, 'variations'>
 
 export type TCartItem = Omit<TProductItem, 'variations' | 'features' | 'collection_id'> & {
+  id: string
   quantity: number
-  variation_id?: string
+  name: string
+  size: string
+  color: string
+  price: number
+  images: string[]
 }
 
 export type TVariationItem = {
@@ -117,3 +122,5 @@ export type TToastParams = {
   }
   sec?: number
 }
+
+export type TSearchProduct = { isCart?: boolean; product?: TProductItem | TCartItem; setSearch: () => void }
