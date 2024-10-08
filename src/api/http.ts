@@ -6,12 +6,7 @@ import { clearUserData, invalidUser } from '@/lib/helper'
 import { getCookie, setCookie } from '@/lib/server'
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
-type ApiResponse<T> = {
-  data: T
-  message: string
-  success: boolean
-  status: number
-}
+import { ApiResponse, errorRootResponse } from './types'
 
 export const throttleAlert = (msg: string) => throttle(() => console.error(msg), 1500, { trailing: false, leading: true })
 
@@ -52,12 +47,8 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     body: JSON.stringify(data) || '{}',
   })
 
-  if (!apiResponse.ok) {
-    throw new Error(`HTTP error! status: ${apiResponse.status}, URL: ${url}`)
-  }
-
-  //prettier-ignore
-  const response = await apiResponse.json() as ApiResponse<T>
+  if (!apiResponse.ok) return errorRootResponse as ApiResponse<T>
+  const response = (await apiResponse.json()) as ApiResponse<T>
 
   if (response?.status !== 200) {
     throttleAlert(response.message)
@@ -92,29 +83,28 @@ const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<
   const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`, {
     method: 'GET',
     headers: {
-      token: String(token).replaceAll(`"`, ''),
+      token: String(token).replace(/"/g, ''),
     },
-    next: {
-      tags: [tags || ''],
-    },
+    next: { tags: [tags || ''] },
   })
 
-  //prettier-ignore
-  const response = await apiResponse.json() as ApiResponse<T>
+  if (!apiResponse.ok) return errorRootResponse as ApiResponse<T>
+
+  const response = (await apiResponse.json()) as ApiResponse<T>
+
   console.log(response?.status, url)
+
   if (response?.status !== 200) {
     throttleAlert(response.message)
 
-    if (response?.status === 401) {
-      if (typeof window !== 'undefined') {
-        invalidUser()
-      } else {
-        return response as ApiResponse<T>
-      }
+    if (response?.status === 401 && typeof window !== 'undefined') {
+      invalidUser()
     }
+
+    return response
   }
 
-  return response as ApiResponse<T>
+  return response
 }
 
 export { get, post, upload }
