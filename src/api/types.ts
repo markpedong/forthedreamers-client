@@ -1,3 +1,17 @@
+export type ApiResponse<T> = {
+  data: T
+  message: string
+  success: boolean
+  status: number
+}
+
+export const errorRootResponse = {
+  message: 'server error',
+  data: {},
+  status: 500,
+  success: false,
+} satisfies ApiResponse<any>
+
 export type TProductItem = {
   id: string
   name: string
