@@ -62,6 +62,6 @@
 }
 
 .products {
-  @apply max-h-[39rem] overflow-y-auto px-5 fcol;
+  @apply max-h-[39rem] overflow-y-auto px-5 fcol flex-1;
   border-bottom: toRem(1) solid rgba(0, 0, 0, 0.1);
 }
