@@ -82,3 +82,11 @@
         @apply hidden;
     }
 }
+
+.cartIcon {
+    @apply before:hidden relative;
+
+    span {
+        @apply absolute top-[-0.3rem] right-[-0.6rem] bg-black text-white size-[1rem] rounded-full flex items-center justify-center p-1 text-[0.4rem] before:hidden
+    }
+}

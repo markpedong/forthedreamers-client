@@ -20,11 +20,11 @@
     @apply cursor-pointer;
   }
 
-  &.isCart {
-    .products__titleContainer {
-      @apply flex w-full justify-between;
-    }
+  .products__titleContainer {
+    @apply flex w-full justify-between;
+  }
 
+  &.isCart {
     .products__textContainer {
       @apply w-full cursor-pointer gap-1;
     }
@@ -36,8 +36,15 @@
   }
 
   &.isSearch {
-    .products__titleContainer {
-      @apply fcol;
+    .products__textContainer {
+      span:last-child {
+        @apply overflow-hidden text-ellipsis text-xs;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        max-height: 4.5em;
+      }
     }
   }
 }

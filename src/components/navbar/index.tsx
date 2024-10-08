@@ -24,6 +24,7 @@ const Navbar: FC = () => {
   const { push, refresh } = useRouter()
   const { dispatchWebData, logoutUser } = useWithDispatch()
   const { website } = useAppSelector(state => state.appData)
+  const cart = useAppSelector(state => state.userData.cart)
   const pathname = usePathname()
   const [isHovering, setIsHovering] = useState(false)
   const [open, setOpen] = useState(false)
@@ -131,17 +132,18 @@ const Navbar: FC = () => {
             />
           </motion.span>
           {isLoggedIn() && (
-            <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
-              <CiShoppingCart
-                className="cursor-pointer"
-                size={20}
-                onClick={() => {
-                  setOpen(false)
-                  setShowCart(true)
-                  setSearch(false)
-                }}
-              />
-            </motion.span>
+            <motion.div
+              whileTap={{ scale: 0.9 }}
+              className={styles.cartIcon}
+              onClick={() => {
+                setOpen(false)
+                setShowCart(true)
+                setSearch(false)
+              }}
+            >
+              {cart?.length && <span>{cart?.length}</span>}
+              <CiShoppingCart className="cursor-pointer" size={20} />
+            </motion.div>
           )}
         </div>
         <AnimatePresence>{showCart && <DynamicCart setShowCart={() => setShowCart(false)} />}</AnimatePresence>
