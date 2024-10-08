@@ -72,6 +72,36 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
   return response as ApiResponse<T>
 }
 
+const postServer = async <T>({ url, data, tags, passCookies = true }: Params): Promise<ApiResponse<T>> => {
+  const token = passCookies ? await getCookie('token') : typeof window !== 'undefined' ? getLocalStorage('token') : ''
+  const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
+    method: 'POST',
+    headers: {
+      token: String(token).replace(/"/g, ''),
+    },
+    body: JSON.stringify(data) || '{}',
+    next: { tags: [tags || ''] },
+  })
+
+  if (!apiResponse.ok) return errorRootResponse as ApiResponse<T>
+
+  //prettier-ignore
+  const response = await apiResponse.json() as ApiResponse<T>
+
+  console.log(response)
+  if (response?.status !== 200) {
+    throttleAlert(response.message)
+
+    if (response?.status === 401 && typeof window !== 'undefined') {
+      invalidUser()
+    }
+
+    return response
+  }
+
+  return response
+}
+
 type Params = {
   url: string
   data?: any
@@ -106,5 +136,4 @@ const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<
   return response
 }
 
-export { get, post, upload }
-
+export { get, post, upload, postServer }

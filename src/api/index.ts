@@ -13,7 +13,7 @@ export const getVariations = params => post<TVariationItem[]>('/public/products/
 // /public/collectionsByID
 export const getCollectionsByID = params => post<TCollectionDetails>('/public/collectionsByID', params)
 
-// /cart/add
+// /carts/add
 export const addToCart = params => post('/carts/add', params)
 
 // /users/update

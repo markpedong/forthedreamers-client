@@ -1,17 +1,17 @@
 'use client'
 
-import { FC, useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { SF_PRO_DISPLAY } from 'public/fonts'
+import { FC, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
 
-import { useWithDispatch } from '@/hooks/useWithDispatch'
 import Drawer from '@/components/drawer'
+import { useWithDispatch } from '@/hooks/useWithDispatch'
 
 import { CartProduct } from '../../products'
 import styles from './styles.module.scss'
@@ -21,10 +21,6 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   const { getNewCartData } = useWithDispatch()
   const [showNote, setShowNote] = useState(false)
   const carts = useAppSelector(state => state.userData.cart)
-
-  useEffect(() => {
-    getNewCartData()
-  }, [])
 
   useLockBodyScroll()
   return (
