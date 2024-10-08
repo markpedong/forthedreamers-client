@@ -1,8 +1,7 @@
 import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
-import { toast } from 'sonner'
 
-import { clearUserData, invalidUser } from '@/lib/helper'
+import { invalidUser } from '@/lib/helper'
 import { getCookie, setCookie } from '@/lib/server'
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
@@ -15,26 +14,30 @@ const upload = async <T>(url: string, data: File): Promise<ApiResponse<T>> => {
 
   form.append('file', data)
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
+  const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: {
       Token: getLocalStorage('token') || '',
     },
     body: form,
   })
-  //prettier-ignore
-  const result = await response.json() as ApiResponse<T>
 
-  if (result?.status !== 200) {
-    if (response?.status === 401) {
-      clearUserData()
+  if (!apiResponse.ok) return errorRootResponse as ApiResponse<T>
+
+  //prettier-ignore
+  const response = await apiResponse.json() as ApiResponse<T>
+
+  if (response?.status !== 200) {
+    throttleAlert(response.message)
+
+    if (response?.status === 401 && typeof window !== 'undefined') {
+      invalidUser()
     }
 
-    throttleAlert(result?.message)
-    return result
+    return response
   }
 
-  return result as ApiResponse<T>
+  return response as ApiResponse<T>
 }
 
 const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
@@ -48,18 +51,15 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
   })
 
   if (!apiResponse.ok) return errorRootResponse as ApiResponse<T>
-  const response = (await apiResponse.json()) as ApiResponse<T>
 
+  //prettier-ignore
+  const response = await apiResponse.json() as ApiResponse<T>
   if (response?.status !== 200) {
     throttleAlert(response.message)
 
-    if (response?.status === 401) {
+    if (response?.status === 401 && typeof window !== 'undefined') {
       invalidUser()
-      return response
     }
-    toast(response?.message, {
-      description: 'Please try again!',
-    })
 
     return response
   }
@@ -90,9 +90,8 @@ const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<
 
   if (!apiResponse.ok) return errorRootResponse as ApiResponse<T>
 
-  const response = (await apiResponse.json()) as ApiResponse<T>
-
-  console.log(response?.status, url)
+  //prettier-ignore
+  const response = await apiResponse.json() as ApiResponse<T>
 
   if (response?.status !== 200) {
     throttleAlert(response.message)
@@ -108,3 +107,4 @@ const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<
 }
 
 export { get, post, upload }
+
