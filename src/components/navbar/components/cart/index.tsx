@@ -1,17 +1,17 @@
 'use client'
 
+import { FC, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
 import { SF_PRO_DISPLAY } from 'public/fonts'
-import { FC, useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
 
-import Drawer from '@/components/drawer'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
+import Drawer from '@/components/drawer'
 
 import SearchProduct from '../../products'
 import styles from './styles.module.scss'
@@ -35,7 +35,8 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
           <IoMdClose onClick={setShowCart} color="black" />
         </div>
         <div className={styles.products}>
-          {!!carts?.length && carts?.map(product => <SearchProduct isCart product={product as any} key={product?.id} />)}
+          {!!carts?.length &&
+            carts?.map(product => <SearchProduct isCart product={product as any} key={product?.id} setSearch={setShowCart} />)}
         </div>
         <div className={styles.addNoteContainer}>
           <span>Add order note</span>

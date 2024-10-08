@@ -1,21 +1,20 @@
 'use client'
 
+import { FC, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
-import { FC, useState } from 'react'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import { IoIosCloseCircle } from 'react-icons/io'
 
+import { getProducts } from '@/lib/server'
 import Drawer from '@/components/drawer'
 import { Question } from '@/components/page-components'
 
-import { SF_PRO_DISPLAY } from 'public/fonts'
 import SearchProduct from '../../products'
 import styles from './styles.module.scss'
-import { getProducts } from '@/lib/server'
-
 
 const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
   const [value, setValue] = useState('')
@@ -62,7 +61,7 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
                 exit={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
               >
-                {products?.map(product => <SearchProduct isCart={false} product={product} />)}
+                {products?.map(product => <SearchProduct isCart={false} product={product} setSearch={setSearch} />)}
               </motion.div>
               <motion.div
                 whileTap={{ scale: 0.97 }}

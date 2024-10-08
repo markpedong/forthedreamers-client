@@ -1,36 +1,47 @@
 import { FC, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { TProductItem } from '@/api/types'
+import { TCartItem, TProductItem, TSearchProduct } from '@/api/types'
 import classNames from 'classnames'
-import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
 import styles from './styles.module.scss'
 
-const SearchProduct: FC<{ isCart?: boolean; product?: TProductItem }> = ({ isCart, product }) => {
+const isProductType = (product: TProductItem | TCartItem | undefined): product is TProductItem => {
+  return product !== undefined && 'variations' in product
+}
+
+const isCartType = (product: TProductItem | TCartItem | undefined): product is TCartItem => {
+  return product !== undefined && 'size' in product
+}
+
+const SearchProduct: FC<TSearchProduct> = ({ isCart, product, setSearch }) => {
   const router = useRouter()
-  const variations = product?.variations
   const [quantity, setQuantity] = useState(1)
 
-  console.log(product)
+  const variations = isProductType(product) ? product.variations : []
+  const size = isCartType(product) ? product.size : undefined
 
+  const clickedHandler = () => {
+    product && router.push(`/shop/${product.id}`)
+    setSearch()
+  }
   return (
     <div className={styles.products__item} data-iscart={isCart}>
-      <Image onClick={() => router.push(`/shop/${product?.id}`)} src={product?.images?.[0] ?? ''} alt="" height={100} width={100} />
-      <div className={classNames(styles.products__textContainer, SF_PRO_DISPLAY.className)}>
-        <div className={styles.products__titleContainer} onClick={() => router.push(`/shop/${product?.id}`)}>
+      <Image onClick={clickedHandler} src={product?.images?.[0] ?? ''} alt={product?.name ?? ''} height={100} width={100} />
+      <div className={classNames(styles.products__textContainer)}>
+        <div className={styles.products__titleContainer} onClick={clickedHandler}>
           <span>{product?.name}</span>
-          {variations?.length! > 0 && <span>₱{variations?.[0]?.price}.00</span>}
+          {variations.length > 0 && <span>₱{variations[0]?.price}.00</span>}
         </div>
         {isCart && (
           <>
-            <div className={styles.products__variation}>{product?.size}</div>
+            {size && <div className={styles.products__variation}>{size}</div>}
             <div className={styles.quantityContainer}>
               <div className={styles.addMinusContainer}>
                 <FaMinus onClick={() => setQuantity(qty => (qty > 1 ? qty - 1 : qty))} />
                 <span className={styles.qty}>{quantity}</span>
-                <FaPlus onClick={() => setQuantity(qty => (qty < 10 ? (qty += 1) : qty))} />
+                <FaPlus onClick={() => setQuantity(qty => (qty < 10 ? qty + 1 : qty))} />
               </div>
               <FaRegTrashAlt color="red" />
             </div>
@@ -40,4 +51,5 @@ const SearchProduct: FC<{ isCart?: boolean; product?: TProductItem }> = ({ isCar
     </div>
   )
 }
+
 export default SearchProduct
