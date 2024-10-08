@@ -12,6 +12,7 @@ export enum LOGIN_STATE {
 
 export enum API_TAGS {
   CART = 'cart',
+  COLLECTIONS = 'collections',
   PRODUCTS = 'products',
   WEBSITE = 'website',
   TESTIMONIALS = 'testimonials',

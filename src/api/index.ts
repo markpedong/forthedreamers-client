@@ -2,7 +2,6 @@ import { post } from './http'
 import {
   LoginResponse,
   TCollectionDetails,
-  TCollectionItem,
   TLoginPayload,
   TProductDetails,
   TUserInfo,
@@ -17,9 +16,6 @@ export const getProductDetails = params => post<TProductDetails>('/public/produc
 
 // /products/variations
 export const getVariations = params => post<TVariationItem[]>('/public/products/variations', params)
-
-// /public/collections
-export const getCollections = params => post<TCollectionItem[]>('/public/collections', params)
 
 // /public/collectionsByID
 export const getCollectionsByID = params => post<TCollectionDetails>('/public/collectionsByID', params)
