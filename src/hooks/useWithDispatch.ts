@@ -1,9 +1,9 @@
+import { useRouter } from 'next/navigation'
 import { addToCart, getNewUserInfo } from '@/api'
 import { LoginResponse, TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
 import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
-import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { clearUserData, invalidUser } from '@/lib/helper'

@@ -11,7 +11,7 @@
   }
 
   svg {
-    @apply size-[1.2rem]
+    @apply size-[1.2rem] cursor-pointer;
   }
 }
 
@@ -22,7 +22,7 @@
 }
 
 .addNoteContainer {
-  @apply flex justify-between px-4 py-3 font-[400] text-black;
+  @apply flex justify-between px-4 py-3 font-[400] text-black select-none;
   font-size: toRem(12);
   border-bottom: toRem(1) solid rgba(0, 0, 0, 0.1);
 
@@ -33,6 +33,10 @@
 
 .footer {
   @apply py-4 px-6 fcol gap-3 items-center justify-center;
+
+  span {
+    @apply select-none;
+  }
 
   >* {
     font-size: toRem(12);

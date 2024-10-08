@@ -1,15 +1,14 @@
-import { FC, useState } from 'react'
 import { deleteAddress } from '@/api'
 import { AddressProps, TAddressItem } from '@/api/types'
 import { addressTypes } from '@/constants'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import { RiErrorWarningFill } from 'react-icons/ri'
+import { FC, useState } from 'react'
 import { toast } from 'sonner'
 
-import { revalidate } from '@/lib/server'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import PopOver from '@/app/(main)/components/popover'
 import { API_TAGS } from '@/app/(main)/constants/enums'
+import { revalidate } from '@/lib/server'
 
 import styles from '../styles.module.scss'
 
@@ -53,33 +52,14 @@ export const AddressItem: FC<AddressProps> = ({ data, refetch, setCurrAddress, .
         <motion.span whileTap={{ scale: 0.95 }} onClick={() => setCurrAddress(data as TAddressItem)}>
           EDIT
         </motion.span>
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger>
-            <motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>
-          </PopoverTrigger>
-          <PopoverContent className="w-[10rem] flex-col p-1" side="top">
-            <div className="flex items-center gap-2">
-              <RiErrorWarningFill color="rgb(153 27 27)" size={20} />
-              <span className="text-[0.8rem] leading-4">Are you sure you want to delete this address?</span>
-            </div>
-            <div className="mt-3 flex items-center justify-end gap-2">
-              <motion.span
-                whileTap={{ scale: 0.95 }}
-                onClick={handleDelete}
-                className="cursor-pointer select-none rounded-sm bg-red-800 px-2 py-1 text-[0.6rem] text-white"
-              >
-                Yes
-              </motion.span>
-              <motion.span
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setOpen(false)}
-                className="cursor-pointer select-none rounded-sm bg-gray-800 px-2 py-1 text-[0.6rem] text-white"
-              >
-                No
-              </motion.span>
-            </div>
-          </PopoverContent>
-        </Popover>
+        <PopOver
+          handleOk={handleDelete}
+          open={open}
+          setOpen={setOpen}
+          title="Are you sure you want to delete this address?"
+          trigger={<motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>}
+          key={data?.id}
+        />
       </div>
     </div>
   )

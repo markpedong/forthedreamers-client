@@ -13,7 +13,7 @@ import { IoMdClose } from 'react-icons/io'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import Drawer from '@/components/drawer'
 
-import SearchProduct from '../../products'
+import { CartProduct } from '../../products'
 import styles from './styles.module.scss'
 
 const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
@@ -36,7 +36,9 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
         </div>
         <div className={styles.products}>
           {!!carts?.length &&
-            carts?.map(product => <SearchProduct isCart product={product as any} key={product?.id} setSearch={setShowCart} />)}
+            carts?.map(product => (
+              <CartProduct cart={product} key={product?.id} setSearch={setShowCart} refetch={() => getNewCartData()} />
+            ))}
         </div>
         <div className={styles.addNoteContainer}>
           <span>Add order note</span>

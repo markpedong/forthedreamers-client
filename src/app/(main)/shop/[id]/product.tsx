@@ -1,22 +1,22 @@
 'use client'
 
+import { FC, memo, useMemo, useState } from 'react'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { TProductDetails, TVariationItem } from '@/api/types'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { FC, memo, useMemo, useState } from 'react'
+import { SF_PRO_DISPLAY } from 'public/fonts'
 import { BsBox } from 'react-icons/bs'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoIosReturnLeft } from 'react-icons/io'
 import { MdLocalLaundryService } from 'react-icons/md'
 
-import { CARE_GUIDE } from '@/app/(main)/constants/enums'
-import Header from '@/components/header'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
-
 import { DynamicCareGuide, DynamicListAnswers } from '@/components/dynamic-import'
-import { SF_PRO_DISPLAY } from 'public/fonts'
+import Header from '@/components/header'
+import { CARE_GUIDE } from '@/app/(main)/constants/enums'
+
 import styles from './styles.module.scss'
 
 const getUniqueVariations = (variations, type) => {
