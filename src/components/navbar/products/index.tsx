@@ -19,13 +19,17 @@ const SearchProduct: FC<TSearchProduct> = ({ product, setSearch }) => {
     setSearch()
   }
 
+  console.log(product)
+
   return (
     <div className={classNames(styles.products__item, styles.isSearch)}>
       <Image onClick={clickedHandler} src={product?.images?.[0] ?? ''} alt={product?.name ?? ''} height={100} width={100} />
       <div className={classNames(styles.products__textContainer)}>
         <div className={styles.products__titleContainer} onClick={clickedHandler}>
           <span>{product?.name}</span>
+          <span>₱ {product?.variations?.[0].price}</span>
         </div>
+        <span>{product?.description}</span>
       </div>
     </div>
   )
@@ -52,8 +56,11 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
       <div className={classNames(styles.products__textContainer)}>
         <div className={styles.products__titleContainer} onClick={clickedHandler}>
           <span>{cart?.name}</span>
+          <span>₱ {cart?.price}</span>
         </div>
-        {cart?.size && <div className={styles.products__variation}>{cart?.size}</div>}
+        <div className={styles.products__variation}>
+          {cart?.size}, {cart?.color}
+        </div>
         <div className={styles.quantityContainer}>
           <div className={styles.addMinusContainer}>
             <FaMinus onClick={() => setQuantity(qty => (qty > 1 ? qty - 1 : qty))} />

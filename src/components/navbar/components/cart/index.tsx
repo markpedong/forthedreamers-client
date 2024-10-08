@@ -40,37 +40,41 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
               <CartProduct cart={product} key={product?.id} setSearch={setShowCart} refetch={() => getNewCartData()} />
             ))}
         </div>
-        <div className={styles.addNoteContainer}>
-          <span>Add order note</span>
-          <FaPlus onClick={() => setShowNote(true)} />
-        </div>
-        <div className={styles.footer}>
-          <span>Taxes and shipping calculated at checkout</span>
-          <div className={styles.footer__checkbox}>
-            <input type="checkbox" id="agree_checkbox" /> I agree with the{' '}
-            <span className="underline underline-offset-4" onClick={() => push('/support/terms-of-service')}>
-              terms and conditions
-            </span>
-            <label htmlFor="agree_checkbox">
-              <span className="fa fa-check" />
-            </label>
+        {!!carts?.length && (
+          <div className={styles.addNoteContainer}>
+            <span>Add order note</span>
+            <FaPlus onClick={() => setShowNote(true)} />
           </div>
-          <div className={styles.btn}>
-            checkout •{' '}
-            {
-              // ₱1,590.00
-            }
+        )}
+        {!!carts?.length && (
+          <div className={styles.footer}>
+            <span>Taxes and shipping calculated at checkout</span>
+            <div className={styles.footer__checkbox}>
+              <input type="checkbox" id="agree_checkbox" /> I agree with the{' '}
+              <span className="underline underline-offset-4" onClick={() => push('/support/terms-of-service')}>
+                terms and conditions
+              </span>
+              <label htmlFor="agree_checkbox">
+                <span className="fa fa-check" />
+              </label>
+            </div>
+            <div className={styles.btn}>
+              checkout •{' '}
+              {
+                // ₱1,590.00
+              }
+            </div>
+            <div
+              className="uppercase tracking-wider underline underline-offset-8"
+              onClick={() => {
+                push('/cart')
+                setShowCart()
+              }}
+            >
+              view cart
+            </div>
           </div>
-          <div
-            className="uppercase tracking-wider underline underline-offset-8"
-            onClick={() => {
-              push('/cart')
-              setShowCart()
-            }}
-          >
-            view cart
-          </div>
-        </div>
+        )}
         <AnimatePresence>
           {showNote && (
             <>
