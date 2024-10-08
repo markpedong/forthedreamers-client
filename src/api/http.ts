@@ -1,9 +1,8 @@
-import { redirect } from 'next/navigation'
 import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
 import { toast } from 'sonner'
 
-import { clearUserData } from '@/lib/helper'
+import { clearUserData, invalidUser } from '@/lib/helper'
 import { getCookie, setCookie } from '@/lib/server'
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
@@ -64,18 +63,7 @@ const post = async <T>(url: string, data = {}): Promise<ApiResponse<T>> => {
     throttleAlert(response.message)
 
     if (response?.status === 401) {
-      toast(response?.message, {
-        description: 'Redirecting you to login page',
-        action: {
-          label: response?.message,
-          onClick: () => redirect('/login'),
-        },
-      })
-
-      setTimeout(() => {
-        window.location.href = '/login'
-      }, 4000)
-
+      invalidUser()
       return response
     }
     toast(response?.message, {
@@ -119,10 +107,9 @@ const get = async <T>({ url, data, tags, passCookies = true }: Params): Promise<
 
     if (response?.status === 401) {
       if (typeof window !== 'undefined') {
-        clearUserData()
-        window.location.href = '/login'
+        invalidUser()
       } else {
-        redirect('/unauthorized')
+        return response as ApiResponse<T>
       }
     }
   }

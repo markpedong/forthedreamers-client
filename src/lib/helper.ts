@@ -1,3 +1,5 @@
+import { toast } from 'sonner'
+
 import { getLocalStorage } from '@/lib/xLocalStorage'
 
 export const clearUserData = () => {
@@ -23,3 +25,14 @@ export const clearUserData = () => {
 }
 
 export const isLoggedIn = () => localStorage && !!getLocalStorage('token')
+
+export const invalidUser = () => {
+  clearUserData()
+
+  toast('Session expired, login again', {
+    description: 'Redirecting you to login page',
+  })
+  setTimeout(() => {
+    window.location.replace('/login')
+  }, 1500)
+}

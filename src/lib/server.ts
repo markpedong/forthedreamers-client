@@ -40,4 +40,4 @@ export const getTestimonials = async () => (await get<TTestimonials[]>({ url: '/
 export const getAddress = async () => (await get<TAddressItem[]>({ url: '/address/get', tags: API_TAGS.ADDRESS }))?.data
 
 // /cart/get
-export const getCart = async () => (await get<TCartItem[]>({ url: '/carts/get', tags: API_TAGS.CART }))?.data ?? []
+export const getCart = async () => await get<TCartItem[]>({ url: '/carts/get', tags: API_TAGS.CART })
