@@ -1,12 +1,5 @@
 import { post } from './http'
-import {
-  LoginResponse,
-  TCollectionDetails,
-  TLoginPayload,
-  TProductDetails,
-  TUserInfo,
-  TVariationItem
-} from './types'
+import { LoginResponse, TCollectionDetails, TLoginPayload, TProductDetails, TUserInfo, TVariationItem } from './types'
 
 // /public/login
 export const login = (params: TLoginPayload) => post<LoginResponse>('/public/login', params)
@@ -37,3 +30,6 @@ export const deleteAddress = params => post('/address/delete', params)
 
 // /address/update
 export const updateAddress = params => post('/address/update', params)
+
+// carts/delete
+export const deleteCart = params => post('/carts/delete', params)

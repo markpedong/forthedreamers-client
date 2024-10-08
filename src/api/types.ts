@@ -34,6 +34,7 @@ export type TCartItem = Omit<TProductItem, 'variations' | 'features' | 'collecti
   color: string
   price: number
   images: string[]
+  product_id: string
 }
 
 export type TVariationItem = {
@@ -137,4 +138,6 @@ export type TToastParams = {
   sec?: number
 }
 
-export type TSearchProduct = { isCart?: boolean; product?: TProductItem | TCartItem; setSearch: () => void }
+export type TSearchProduct = { product?: TProductItem; setSearch: () => void }
+
+export type TCartProduct = { cart: TCartItem; setSearch: () => void; refetch: () => void }

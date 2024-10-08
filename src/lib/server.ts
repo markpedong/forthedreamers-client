@@ -11,8 +11,8 @@ export const revalidate = (tag?: string) => revalidateTag(tag || '')
 
 export const setCookie = (name: string, value: string) => {
   const date = new Date()
-  const minutes = 60
-  date.setTime(date.getTime() + minutes * 60 * 1000)
+  const hours = 12
+  date.setTime(date.getTime() + hours * 60 * 60 * 1000)
 
   cookies().set(name, value, {
     expires: date,
@@ -20,7 +20,7 @@ export const setCookie = (name: string, value: string) => {
     sameSite: 'lax',
     secure: false,
     httpOnly: false,
-    maxAge: minutes * 60,
+    maxAge: hours * 60 * 60,
   })
 }
 

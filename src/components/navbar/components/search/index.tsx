@@ -14,7 +14,7 @@ import { getCollections, getProducts } from '@/lib/server'
 import Drawer from '@/components/drawer'
 import { Question } from '@/components/page-components'
 
-import SearchProduct from '../../products'
+import { SearchProduct } from '../../products'
 import styles from './styles.module.scss'
 
 const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
@@ -68,7 +68,7 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
                 exit={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
               >
-                {products?.map(product => <SearchProduct isCart={false} product={product} setSearch={setSearch} />)}
+                {products?.map(product => <SearchProduct product={product} setSearch={setSearch} key={product?.id} />)}
               </motion.div>
               <motion.div
                 whileTap={{ scale: 0.97 }}
