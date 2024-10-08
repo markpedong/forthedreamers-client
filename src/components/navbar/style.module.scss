@@ -5,6 +5,7 @@
     transition: all 0.3s ease-in;
 
     @media screen and (max-width: 576px) {
+        @apply px-[1rem];
         grid-template-columns: 1fr 3fr 2fr;
     }
 }

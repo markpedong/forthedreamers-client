@@ -18,8 +18,8 @@ export const setCookie = (name: string, value: string) => {
     expires: date,
     path: '/',
     sameSite: 'lax',
-    secure: true,
-    httpOnly: true,
+    secure: false,
+    httpOnly: false,
     maxAge: minutes * 60,
   })
 }
