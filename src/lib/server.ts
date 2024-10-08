@@ -2,7 +2,7 @@
 
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
-import { get } from '@/api/http'
+import { get, postServer } from '@/api/http'
 import { TAddressItem, TCartItem, TCollectionItem, TProductItem, TTestimonials, TWebsiteItem } from '@/api/types'
 
 import { API_TAGS } from '@/app/(main)/constants/enums'
@@ -45,3 +45,6 @@ export const getCart = async () => await get<TCartItem[]>({ url: '/carts/get', t
 // /public/collections
 export const getCollections = async params =>
   (await get<TCollectionItem[]>({ url: '/public/collections', tags: API_TAGS.COLLECTIONS, passCookies: params.passCookies }))?.data
+
+// carts/addQuantity
+export const addQuantity = params => postServer({ url: '/carts/addQuantity', tags: API_TAGS.CART_QTY, data: params })

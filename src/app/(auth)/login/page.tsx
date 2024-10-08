@@ -25,7 +25,7 @@ const loginSchema = z.object({
 
 const Login = () => {
   const router = useRouter()
-  const { storeUserInfo } = useWithDispatch()
+  const { storeUserInfo, getNewCartData } = useWithDispatch()
   const form = useForm<FormSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: { username: '', password: '' },
@@ -42,6 +42,7 @@ const Login = () => {
 
     if (res?.status === 200) {
       storeUserInfo(res)
+      getNewCartData()
     }
   }
 
