@@ -1,12 +1,12 @@
-import { useRouter } from 'next/navigation'
 import { addToCart, getNewUserInfo } from '@/api'
 import { LoginResponse, TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
 import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-import { clearUserData } from '@/lib/helper'
+import { clearUserData, invalidUser } from '@/lib/helper'
 import { getCart, getWebsiteData } from '@/lib/server'
 
 export const useWithDispatch = () => {
@@ -33,7 +33,11 @@ export const useWithDispatch = () => {
   const getNewCartData = async () => {
     const res = await getCart()
 
-    dispatch(setCartData(res ?? []))
+    if (res?.status === 200) {
+      dispatch(setCartData(res?.data ?? []))
+    } else if (res?.status === 401) {
+      invalidUser()
+    }
   }
 
   const getUserInfo = async () => {
