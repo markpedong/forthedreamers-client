@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type TAppDataState = {
   website: TWebsiteItem
+  orderNote: string
 }
 const initialState: TAppDataState = {
   website: {
@@ -16,6 +17,7 @@ const initialState: TAppDataState = {
     product_length: 0,
     collection_length: 0,
   },
+  orderNote: '',
 }
 
 const appDataSlice = createSlice({
@@ -24,9 +26,10 @@ const appDataSlice = createSlice({
   reducers: {
     resetAppDataSlice: () => initialState,
     setWebsiteData: (state, action: PayloadAction<TWebsiteItem>) => ({ ...state, website: action.payload }),
+    setOrderNote: (state, action: PayloadAction<string>) => ({ ...state, orderNote: action.payload }),
   },
 })
 
-export const { resetAppDataSlice, setWebsiteData } = appDataSlice.actions
+export const { resetAppDataSlice, setWebsiteData, setOrderNote } = appDataSlice.actions
 
 export default appDataSlice.reducer

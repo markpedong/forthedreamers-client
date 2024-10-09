@@ -2,7 +2,8 @@
 
 import { FC, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAppSelector } from '@/redux/store'
+import { setOrderNote } from '@/redux/features/appData'
+import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -24,6 +25,9 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   const [isUserAgree, setIsUserAgree] = useState(false)
   const [showNote, setShowNote] = useState(false)
   const carts = useAppSelector(state => state.userData.cart)
+  const orderNote = useAppSelector(state => state.appData.orderNote)
+  const [note, setNote] = useState(orderNote || '')
+  const dispatch = useAppDispatch()
 
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
@@ -101,8 +105,14 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
                 animate={{ y: 0, opacity: 1, transition: { duration: 0.25 } }}
               >
                 <span>add order note</span>
-                <textarea />
-                <div className={styles.btn} onClick={() => setShowNote(false)}>
+                <textarea value={note} onChange={e => setNote(e.target.value)} />
+                <div
+                  className={styles.btn}
+                  onClick={() => {
+                    setShowNote(false)
+                    dispatch(setOrderNote(note))
+                  }}
+                >
                   save
                 </div>
               </motion.div>

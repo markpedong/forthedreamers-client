@@ -131,7 +131,7 @@ const Navbar: FC = () => {
               }}
             />
           </motion.span>
-          {isLoggedIn() && (
+          {isLoggedIn() && pathname !== '/checkout' && (
             <motion.div
               whileTap={{ scale: 0.9 }}
               className={styles.cartIcon}
