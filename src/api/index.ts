@@ -13,8 +13,6 @@ export const getVariations = params => get<TVariationItem[]>({ url: '/public/pro
 // /public/collectionsByID
 export const getCollectionsByID = params => post<TCollectionDetails>({ url: '/public/collectionsByID', data: params })
 
-// /carts/add
-export const addToCart = params => post({ url: '/carts/add', data: params })
 
 // /users/update
 export const updateUser = params => post({ url: '/users/update', data: params })

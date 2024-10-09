@@ -6,9 +6,11 @@ import { useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import { debounce } from 'lodash'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
+import { toast } from 'sonner'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import Drawer from '@/components/drawer'
@@ -19,12 +21,22 @@ import styles from './styles.module.scss'
 const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   const { push } = useRouter()
   const { getNewCartData } = useWithDispatch()
+  const [isUserAgree, setIsUserAgree] = useState(false)
   const [showNote, setShowNote] = useState(false)
   const carts = useAppSelector(state => state.userData.cart)
+
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
     return acc
   }, 0)
+
+  const debounceCheckout = debounce(() => {
+    if (isUserAgree) {
+      push('/checkout')
+    } else {
+      toast('Please agree to the terms and conditions')
+    }
+  }, 500)
 
   useLockBodyScroll()
   return (
@@ -50,7 +62,7 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
           <div className={styles.footer}>
             <span>Taxes and shipping calculated at checkout</span>
             <div className={styles.footer__checkbox}>
-              <input type="checkbox" id="agree_checkbox" /> I agree with the{' '}
+              <input type="checkbox" id="agree_checkbox" onChange={() => setIsUserAgree(!isUserAgree)} /> I agree with the{' '}
               <span className="underline underline-offset-4" onClick={() => push('/support/terms-of-service')}>
                 terms and conditions
               </span>
@@ -58,7 +70,9 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
                 <span className="fa fa-check" />
               </label>
             </div>
-            <div className={styles.btn}>checkout • ₱{totalPrice}</div>
+            <motion.div whileTap={{ scale: 0.98 }} className={styles.btn} onClick={debounceCheckout}>
+              checkout • ₱{totalPrice}
+            </motion.div>
             <div
               className="uppercase tracking-wider underline underline-offset-8"
               onClick={() => {
