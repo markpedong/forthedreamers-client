@@ -1,20 +1,21 @@
-import React from 'react'
+import { redirect } from 'next/navigation'
 
-import Footer from '@/components/footer'
-import Navbar from '@/components/navbar'
+import { getAddress, getCart } from '@/lib/server'
 
-import Checkout from './checkout'
+import Checkout from './components/checkout'
 
-type Props = {}
+const Page = async () => {
+  const cart = await getCart()
+  const address = await getAddress()
 
-const Page = (props: Props) => {
-  return (
-    <div>
-      <Navbar />
-      <Checkout />
-      <Footer />
-    </div>
-  )
+  if (cart?.data?.length === 0) {
+    redirect('/')
+  } else
+    return (
+      <div>
+        <Checkout address={address} />
+      </div>
+    )
 }
 
 export default Page
