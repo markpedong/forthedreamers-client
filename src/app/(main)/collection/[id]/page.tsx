@@ -15,14 +15,12 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const collections = await getCollections({ passCookies: false })
-
-  const params =
-    collections?.map(collection => ({
+  const collections =
+    (await getCollections({ passCookies: false }))?.map(collection => ({
       id: collection.id,
     })) || []
 
-  return params
+  return collections
 }
 
 const Page = async ({ params: { id } }: PageProps) => {
