@@ -5,14 +5,12 @@ import { getProducts } from '@/lib/server'
 import Product from './product'
 
 export async function generateStaticParams() {
-  const products = await getProducts({ passCookies: false })
-
-  const params =
-    products?.map(product => ({
+  const products =
+    (await getProducts({ passCookies: false }))?.map(product => ({
       id: product.id,
     })) || []
 
-  return params
+  return products
 }
 
 const Page = async ({ params }: { params: { id: string } }) => {
