@@ -93,7 +93,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
           <div className={styles.features}>
             <DynamicListAnswers answers={product?.features} />
           </div>
-          {variations?.length && (
+          {!!variations?.length && (
             <>
               <div className={styles.sizeContainer}>
                 <span>SIZE:</span>
@@ -109,7 +109,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
               />
             </>
           )}
-          {variations?.length && (
+          {!!variations?.length && (
             <>
               <div className={styles.sizeContainer}>
                 <span>COLOR:</span>

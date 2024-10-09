@@ -31,12 +31,12 @@ const Product: FC<{ className?: string; product?: TProductItem }> = ({ className
         <span className={styles.title} onClick={() => push(`/shop/${product?.id}`)}>
           {product?.name}
         </span>
-        {product?.variations?.length! > 0 && (
+        {!!product?.variations?.length && (
           <>
             <span>₱{curr?.price || product?.variations?.[0]?.price}.00</span>
             <span className={styles.avail}>Available Colors</span>
             <div className={styles.colors}>
-              {arr?.map(item => <span style={{ background: item.color }} onMouseEnter={() => setCurr(item)} key={item?.id} />)}
+              {arr?.map(item => <span style={{ backgroundColor: item.color?.toLowerCase() }} onMouseEnter={() => setCurr(item)} key={item?.id} />)}
             </div>
           </>
         )}

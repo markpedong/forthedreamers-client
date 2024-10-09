@@ -1,14 +1,14 @@
-import { post } from './http'
+import { get, post } from './http'
 import { LoginResponse, TCollectionDetails, TLoginPayload, TProductDetails, TUserInfo, TVariationItem } from './types'
 
 // /public/login
 export const login = (params: TLoginPayload) => post<LoginResponse>({ url: '/public/login', data: params })
 
 // /products/details
-export const getProductDetails = params => post<TProductDetails>({ url: '/products/details', data: params })
+export const getProductDetails = params => get<TProductDetails>({ url: '/public/products/details', data: params })
 
 // /products/variations
-export const getVariations = params => post<TVariationItem[]>({ url: '/products/variations', data: params })
+export const getVariations = params => get<TVariationItem[]>({ url: '/public/products/variations', data: params })
 
 // /public/collectionsByID
 export const getCollectionsByID = params => post<TCollectionDetails>({ url: '/public/collectionsByID', data: params })
