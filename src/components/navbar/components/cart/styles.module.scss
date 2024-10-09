@@ -42,6 +42,12 @@
     font-size: toRem(12);
     color: black
   }
+
+  &__checkbox {
+    input {
+      @apply cursor-pointer
+    }
+  }
 }
 
 .note {
