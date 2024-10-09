@@ -33,7 +33,7 @@ export const isLoggedIn = () => {
   return !!(tokenFromLocalStorage && cookieToken)
 }
 
-export const invalidUser = () => {
+export const unauthorized = () => {
   clearUserData()
 
   toast('Session expired, login again', {

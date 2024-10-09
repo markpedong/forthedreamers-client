@@ -1,7 +1,7 @@
 import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
 
-import { invalidUser } from '@/lib/helper'
+import { unauthorized } from '@/lib/helper'
 import { getCookie, setCookie } from '@/lib/server'
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
@@ -24,7 +24,7 @@ const handleResponse = async <T>(response: Response): Promise<ApiResponse<T>> =>
   if (data.status !== 200) {
     throttleAlert(data.message)
     if (data.status === 401 && typeof window !== 'undefined') {
-      invalidUser()
+      unauthorized()
     }
     return data
   }
