@@ -6,7 +6,7 @@ import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
-import { clearUserData, invalidUser } from '@/lib/helper'
+import { clearUserData, unauthorized } from '@/lib/helper'
 import { addQuantity, getCart, getWebsiteData, revalidate } from '@/lib/server'
 import { API_TAGS } from '@/app/(main)/constants/enums'
 
@@ -46,7 +46,7 @@ export const useWithDispatch = () => {
     if (res?.status === 200) {
       dispatch(setCartData(res?.data ?? []))
     } else if (res?.status === 401) {
-      invalidUser()
+      unauthorized()
     }
   }
 
