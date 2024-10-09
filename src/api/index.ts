@@ -2,34 +2,34 @@ import { post } from './http'
 import { LoginResponse, TCollectionDetails, TLoginPayload, TProductDetails, TUserInfo, TVariationItem } from './types'
 
 // /public/login
-export const login = (params: TLoginPayload) => post<LoginResponse>('/public/login', params)
+export const login = (params: TLoginPayload) => post<LoginResponse>({ url: '/public/login', data: params })
 
 // /products/details
-export const getProductDetails = params => post<TProductDetails>('/public/products/details', params)
+export const getProductDetails = params => post<TProductDetails>({ url: '/products/details', data: params })
 
 // /products/variations
-export const getVariations = params => post<TVariationItem[]>('/public/products/variations', params)
+export const getVariations = params => post<TVariationItem[]>({ url: '/products/variations', data: params })
 
 // /public/collectionsByID
-export const getCollectionsByID = params => post<TCollectionDetails>('/public/collectionsByID', params)
+export const getCollectionsByID = params => post<TCollectionDetails>({ url: '/public/collectionsByID', data: params })
 
 // /carts/add
-export const addToCart = params => post('/carts/add', params)
+export const addToCart = params => post({ url: '/carts/add', data: params })
 
 // /users/update
-export const updateUser = params => post('/users/update', params)
+export const updateUser = params => post({ url: '/users/update', data: params })
 
 // /users/info
-export const getNewUserInfo = () => post<TUserInfo>('/users/info')
+export const getNewUserInfo = () => post<TUserInfo>({ url: '/users/info' })
 
 // /address/add
-export const addNewAddress = params => post('/address/add', params)
+export const addNewAddress = params => post({ url: '/address/add', data: params })
 
 // /address/delete
-export const deleteAddress = params => post('/address/delete', params)
+export const deleteAddress = params => post({ url: '/address/delete', data: params })
 
 // /address/update
-export const updateAddress = params => post('/address/update', params)
+export const updateAddress = params => post({ url: '/address/update', data: params })
 
 // carts/delete
-export const deleteCart = params => post('/carts/delete', params)
+export const deleteCart = params => post({ url: '/carts/delete', data: params })
