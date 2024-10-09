@@ -76,5 +76,5 @@
 
 
 .btn {
-  @apply bg-black text-white w-full h-10 uppercase flex items-center justify-center tracking-widest font-bold;
+  @apply bg-black text-white w-full h-10 uppercase flex items-center justify-center tracking-widest font-bold cursor-pointer select-none;
 }

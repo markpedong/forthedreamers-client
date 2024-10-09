@@ -1,13 +1,13 @@
 import { useRouter } from 'next/navigation'
-import { addToCart, getNewUserInfo } from '@/api'
+import { getNewUserInfo } from '@/api'
 import { LoginResponse, TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
 import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
-import { clearUserData, unauthorized } from '@/lib/helper'
-import { addQuantity, getCart, getWebsiteData, revalidate } from '@/lib/server'
+import { clearUserData, isLoggedIn, unauthorized } from '@/lib/helper'
+import { addQuantity, addToCart, getCart, getWebsiteData, revalidate } from '@/lib/server'
 import { API_TAGS } from '@/app/(main)/constants/enums'
 
 export const useWithDispatch = () => {
@@ -20,6 +20,10 @@ export const useWithDispatch = () => {
   }
 
   const addItemToCart = async ({ product_id, variation_id, quantity }: TAddCartPayload) => {
+    if (!!!isLoggedIn()) {
+      toast('Please login first')
+      return
+    }
     const res = await addToCart({
       product_id,
       quantity,

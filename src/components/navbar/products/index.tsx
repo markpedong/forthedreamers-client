@@ -1,15 +1,15 @@
-import { FC, useEffect, useState } from 'react'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { deleteCart } from '@/api'
 import { TCartProduct, TSearchProduct } from '@/api/types'
 import { useDebounce } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { FC, useEffect, useState } from 'react'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
-import { useWithDispatch } from '@/hooks/useWithDispatch'
 import PopOver from '@/app/(main)/components/popover'
+import { useWithDispatch } from '@/hooks/useWithDispatch'
 
 import styles from './styles.module.scss'
 
@@ -95,3 +95,4 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
 }
 
 export { CartProduct, SearchProduct }
+

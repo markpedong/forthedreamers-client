@@ -48,3 +48,6 @@ export const getCollections = async params =>
 
 // carts/addQuantity
 export const addQuantity = params => post({ url: '/carts/addQuantity', tags: API_TAGS.CART_QTY, data: params })
+
+// /carts/add
+export const addToCart = params => post({ url: '/carts/add', data: params })

@@ -6,11 +6,13 @@ import { useRouter } from 'next/navigation'
 import { TProductDetails, TVariationItem } from '@/api/types'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import { debounce } from 'lodash'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import { BsBox } from 'react-icons/bs'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoIosReturnLeft } from 'react-icons/io'
 import { MdLocalLaundryService } from 'react-icons/md'
+import { toast } from 'sonner'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { DynamicCareGuide, DynamicListAnswers } from '@/components/dynamic-import'
@@ -76,6 +78,15 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
   const selectedColor = variations?.find(i => i.id === color)?.color
   const selectedVariation = variations?.find(item => item.size === selectedSize && item.color === selectedColor)
 
+  const debounceAddToCart = debounce(() => {
+    if (!selectedVariation) {
+      toast('Please select variation')
+      return
+    }
+
+    addItemToCart({ product_id: product?.id, quantity, variation_id: selectedVariation?.id })
+  }, 500)
+
   return (
     <div className={styles.mainWrapper}>
       <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
@@ -137,13 +148,8 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
                 background: 'black',
                 color: 'white',
               }}
-              onClick={() => {
-                addItemToCart({
-                  product_id: product?.id,
-                  quantity,
-                  ...(selectedVariation ? { variation_id: selectedVariation?.id } : {}),
-                })
-              }}
+              whileTap={{ scale: 0.98 }}
+              onClick={debounceAddToCart}
             >
               add to cart
             </motion.div>
