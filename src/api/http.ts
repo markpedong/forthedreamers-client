@@ -68,7 +68,7 @@ const post = async <T>({ url, data = {}, tags }: RequestParams): Promise<ApiResp
 
 const get = async <T>({ url, data, tags, passCookies = true }: RequestParams): Promise<ApiResponse<T>> => {
   const response = await fetchWithToken(
-    `${process.env.NEXT_PUBLIC_DOMAIN}${url}${stringify(data) ? '?' + stringify(data) : ''}`,
+    `${process.env.NEXT_PUBLIC_DOMAIN}${url}${!!stringify(data) ? '?' + stringify(data) : ''}`,
     {
       method: 'GET',
       next: { tags: [tags || ''] },
