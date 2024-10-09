@@ -12,6 +12,13 @@ export const errorRootResponse = {
   success: false,
 } satisfies ApiResponse<any>
 
+export type RequestParams = {
+  url: string
+  data?: any
+  tags?: string
+  passCookies?: boolean
+}
+
 export type TProductItem = {
   id: string
   name: string
