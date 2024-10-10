@@ -2,7 +2,7 @@ import { getCollectionsByID } from '@/api'
 import classNames from 'classnames'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 
-import { getCollections } from '@/lib/server'
+import { getCollections } from '@/api'
 import Header from '@/components/header'
 import Product from '@/components/product'
 

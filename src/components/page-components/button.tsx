@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { setLocalStorage } from '@/lib/xLocalStorage'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
-import { setCookie } from '@/lib/server'
+import { setCookie } from '@/api'
 
 export const GoogleButton = () => {
   const { storeUserInfo } = useWithDispatch()

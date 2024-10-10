@@ -1,6 +1,6 @@
 import { getProductDetails, getVariations } from '@/api'
 
-import { getProducts } from '@/lib/server'
+import { getProducts } from '@/api'
 
 import Product from './product'
 

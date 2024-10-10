@@ -1,4 +1,4 @@
-import { getCollections } from '@/lib/server'
+import { getCollections } from '@/api'
 import { PageTitle } from '@/components/page-components'
 
 import Collection from './collection'
