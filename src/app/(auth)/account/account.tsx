@@ -8,7 +8,7 @@ import { GetProp, message, Upload, UploadProps } from 'antd'
 import { FaAddressCard, FaRegCreditCard, FaShoppingCart, FaStar, FaUser } from 'react-icons/fa'
 
 import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
-import { DynamicAddress, DynamicOrders, DynamicPaymentMethods, DynamicProfile, DynamicReviews } from '@/components/dynamic-import'
+import { Address, Orders, PaymentMethods, Profile, Reviews } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
 
 import styles from '../styles.module.scss'
@@ -124,11 +124,11 @@ const AccountPage = () => {
           </CommandList>
         </Command>
         <div className={styles.detailsWrapper}>
-          {currTab === 1 && <DynamicProfile />}
-          {currTab === 2 && <DynamicAddress />}
-          {currTab === 3 && <DynamicPaymentMethods />}
-          {currTab === 4 && <DynamicOrders />}
-          {currTab === 5 && <DynamicReviews />}
+          {currTab === 1 && <Profile />}
+          {currTab === 2 && <Address />}
+          {currTab === 3 && <PaymentMethods />}
+          {currTab === 4 && <Orders />}
+          {currTab === 5 && <Reviews />}
         </div>
       </div>
     </div>
