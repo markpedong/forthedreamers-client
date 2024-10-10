@@ -17,7 +17,7 @@ import { toast } from 'sonner'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { DynamicCareGuide, DynamicListAnswers } from '@/components/dynamic-import'
 import Header from '@/components/header'
-import { CARE_GUIDE } from '@/app/(main)/constants/enums'
+import { CARE_GUIDE } from '@/constants/enums'
 
 import styles from './styles.module.scss'
 
