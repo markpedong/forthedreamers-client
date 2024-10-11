@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { login } from '@/api'
+import { login } from '@/api/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
