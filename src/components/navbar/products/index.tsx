@@ -1,15 +1,14 @@
-import { deleteCart } from '@/api'
-import { TCartProduct, TSearchProduct } from '@/api/types'
-import { useDebounce } from '@uidotdev/usehooks'
-import classNames from 'classnames'
-import { motion } from 'framer-motion'
+import { FC, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { FC, useEffect, useState } from 'react'
+import { deleteCart } from '@/api'
+import { TCartProduct, TSearchProduct } from '@/api/types'
+import classNames from 'classnames'
+import { motion } from 'framer-motion'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
-import PopOver from '@/app/(main)/components/popover'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
+import PopOver from '@/app/(main)/components/popover'
 
 import styles from './styles.module.scss'
 
@@ -42,7 +41,6 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
   const { updateQty } = useWithDispatch()
   const [open, setOpen] = useState(false)
   const [quantity, setQuantity] = useState(cart?.quantity ?? 1)
-  const delayedValue = useDebounce(quantity, 500)
 
   const clickedHandler = () => {
     router.push(`/shop/${cart?.product_id}`)
@@ -53,10 +51,6 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
     deleteCart({ cart_id: cart?.id })
     refetch()
   }
-
-  useEffect(() => {
-    updateQty({ id: cart?.id, quantity: delayedValue })
-  }, [delayedValue])
 
   return (
     <div className={classNames(styles.products__item, styles.isCart)}>
@@ -71,9 +65,23 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
         </div>
         <div className={styles.quantityContainer}>
           <div className={styles.addMinusContainer}>
-            <FaMinus onClick={() => setQuantity(qty => (qty > 1 ? qty - 1 : qty))} />
+            <FaMinus
+              onClick={() => {
+                if (quantity > 1) {
+                  setQuantity(qty => qty - 1)
+                  updateQty({ id: cart?.id, quantity })
+                }
+              }}
+            />
             <span className={styles.qty}>{quantity}</span>
-            <FaPlus onClick={() => setQuantity(qty => (qty < 10 ? qty + 1 : qty))} />
+            <FaPlus
+              onClick={() => {
+                if (quantity < 10) {
+                  setQuantity(qty => qty + 1)
+                  updateQty({ id: cart?.id, quantity })
+                }
+              }}
+            />
           </div>
 
           <PopOver
@@ -95,4 +103,3 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
 }
 
 export { CartProduct, SearchProduct }
-
