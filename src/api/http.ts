@@ -6,14 +6,14 @@ import { unauthorized } from '@/lib/helper'
 import { getCookie, setCookie } from '@/lib/server'
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
-import { ApiResponse, errorRootResponse, RequestParams } from './types'
+import { ApiResponse, serverErr, RequestParams } from './types'
 
 export const throttleAlert = (msg: string) => throttle(() => console.error(msg), 1500, { trailing: false, leading: true })
 
 const handleResponse = async <T>(response: Response, url?: string): Promise<ApiResponse<T>> => {
-  if (!response.ok) return errorRootResponse as ApiResponse<T>
+  if (!response.ok) return serverErr as ApiResponse<T>
+  
   const isClient = typeof window !== 'undefined'
-
   const data: ApiResponse<T> = await response.json()
 
   if (url && ['/public/login', '/public/signup'].includes(url!)) {
@@ -25,6 +25,7 @@ const handleResponse = async <T>(response: Response, url?: string): Promise<ApiR
 
   if (data.status !== 200) {
     isClient && toast(data.message)
+    
     if (data.status === 401 && typeof window !== 'undefined') {
       unauthorized()
     }

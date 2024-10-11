@@ -5,7 +5,7 @@ export type ApiResponse<T> = {
   status: number
 }
 
-export const errorRootResponse = {
+export const serverErr = {
   message: 'server error',
   data: {},
   status: 500,
