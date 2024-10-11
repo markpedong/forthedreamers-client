@@ -1,12 +1,12 @@
 import { FC, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { deleteCart } from '@/api'
 import { TCartProduct, TSearchProduct } from '@/api/types'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
+import { deleteCart } from '@/lib/server'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 import PopOver from '@/app/(main)/components/popover'
 
@@ -36,9 +36,9 @@ const SearchProduct: FC<TSearchProduct> = ({ product, setSearch }) => {
   )
 }
 
-const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
+const CartProduct: FC<TCartProduct> = ({ cart, setSearch }) => {
   const router = useRouter()
-  const { updateQty } = useWithDispatch()
+  const { updateQty, getNewCartData } = useWithDispatch()
   const [open, setOpen] = useState(false)
   const [quantity, setQuantity] = useState(cart?.quantity ?? 1)
 
@@ -49,7 +49,7 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
 
   const handleDelete = async () => {
     deleteCart({ cart_id: cart?.id })
-    refetch()
+    getNewCartData()
   }
 
   return (
@@ -91,7 +91,7 @@ const CartProduct: FC<TCartProduct> = ({ cart, setSearch, refetch }) => {
             title="Remove this item from cart?"
             trigger={
               <motion.span whileTap={{ scale: 0.9 }}>
-                <FaRegTrashAlt color="red" onClick={handleDelete} />
+                <FaRegTrashAlt color="red" />
               </motion.span>
             }
             key={cart.id}

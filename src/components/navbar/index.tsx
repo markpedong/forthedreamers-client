@@ -1,20 +1,20 @@
 'use client'
 
+import { FC, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/store'
 import { useQuery } from '@tanstack/react-query'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { usePathname, useRouter } from 'next/navigation'
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
-import { FC, useState } from 'react'
 import { CiShoppingCart } from 'react-icons/ci'
 import { FaChevronDown } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
 import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
-import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { isLoggedIn } from '@/lib/helper'
+import { useWithDispatch } from '@/hooks/useWithDispatch'
 
 import { DynamicCart, DynamicSearch } from '../dynamic-import'
 import Marquee from '../marquee'
@@ -143,7 +143,7 @@ const Navbar: FC = () => {
                 setSearch(false)
               }}
             >
-              {!!cart?.length && <span>{cart?.length}</span>}
+              {!!cart?.length && <span>{cart?.reduce((acc, curr) => acc + curr.quantity, 0)}</span>}
               <CiShoppingCart className="cursor-pointer" size={20} />
             </motion.div>
           )}
