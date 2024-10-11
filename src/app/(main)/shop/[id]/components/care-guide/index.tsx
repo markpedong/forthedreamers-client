@@ -9,7 +9,7 @@ import { IoIosCloseCircle } from 'react-icons/io'
 import { CARE_GUIDE_ANSWERS } from '@/app/(main)/constants'
 import { CARE_GUIDE } from '@/constants/enums'
 import Drawer from '@/components/drawer'
-import { ListAnswers, Returns, Shipping } from '@/components/dynamic-import'
+import { DynamicListAnswers, DynamicReturns, DynamicShipping } from '@/components/dynamic-import'
 
 import styles from './styles.module.scss'
 
@@ -33,9 +33,9 @@ const CareGuide: FC<{ setOpenCareGuide: () => void; activeTab: string }> = ({ se
         ))}
       </div>
       <div className={styles.content}>
-        {selectedTab === CARE_GUIDE.CARE_GUIDE && <ListAnswers answers={CARE_GUIDE_ANSWERS} />}
-        {selectedTab === CARE_GUIDE.SHIPPING && <Shipping />}
-        {selectedTab === CARE_GUIDE.RETURNS && <Returns />}
+        {selectedTab === CARE_GUIDE.CARE_GUIDE && <DynamicListAnswers answers={CARE_GUIDE_ANSWERS} />}
+        {selectedTab === CARE_GUIDE.SHIPPING && <DynamicShipping />}
+        {selectedTab === CARE_GUIDE.RETURNS && <DynamicReturns />}
       </div>
     </Drawer>
   )
