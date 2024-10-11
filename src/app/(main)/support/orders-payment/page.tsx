@@ -1,4 +1,4 @@
-import { AMEND_ANSWERS, PAYMENT_ANSWERS } from '@/constants/static'
+import { AMEND_ANSWERS, PAYMENT_ANSWERS } from '@/app/(main)/constants'
 import { ListAnswers } from '@/components/dynamic-import'
 import { PageTitle, Question } from '@/components/page-components'
 import Image from 'next/image'
