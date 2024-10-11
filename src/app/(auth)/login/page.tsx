@@ -1,8 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { login } from '@/api'
+import { login } from '@/api/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
@@ -24,8 +25,10 @@ const loginSchema = z.object({
 })
 
 const Login = () => {
-  const router = useRouter()
   const { storeUserInfo, getNewCartData } = useWithDispatch()
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+
   const form = useForm<FormSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: { username: '', password: '' },
@@ -38,11 +41,19 @@ const Login = () => {
   } = form
 
   const onSubmitForm = async (data: FormSchema) => {
-    const res = await login(data)
+    setIsLoading(true)
+    
+    try {
+      const res = await login(data)
 
-    if (res?.status === 200) {
-      storeUserInfo(res)
-      getNewCartData()
+      if (res?.status === 200) {
+        storeUserInfo(res)
+        getNewCartData()
+      }
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 2000)
     }
   }
 
@@ -78,7 +89,11 @@ const Login = () => {
             <div className={styles.forgot}>
               <span onClick={() => router.push('/forgot-password')}>Forgot Password?</span>
             </div>
-            <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
+            <motion.button
+              type="submit"
+              whileTap={{ scale: 0.97 }}
+              className={classNames(styles.signInBtn, { ['pointer-events-none']: isLoading })}
+            >
               Sign In
             </motion.button>
           </form>
