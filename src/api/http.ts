@@ -1,3 +1,4 @@
+import { STALE_TIME } from '@/constants'
 import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
 import { toast } from 'sonner'
@@ -58,23 +59,23 @@ const upload = async <T>(url: string, file: File): Promise<ApiResponse<T>> => {
   return handleResponse<T>(response)
 }
 
-const post = async <T>({ url, data = {}, tags }: RequestParams): Promise<ApiResponse<T>> => {
+const post = async <T>({ url, data = {} }: RequestParams): Promise<ApiResponse<T>> => {
   const response = await fetchWithToken(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
-    ...(tags && { next: { tags: [tags] } }),
   })
 
   return handleResponse<T>(response, url)
 }
 
 const get = async <T>({ url, data, tags, passCookies = true }: RequestParams): Promise<ApiResponse<T>> => {
+  console.log('URL: ', url)
   const response = await fetchWithToken(
     `${process.env.NEXT_PUBLIC_DOMAIN}${url}${!!stringify(data) ? '?' + stringify(data) : ''}`,
     {
       method: 'GET',
-      next: { tags: [tags || ''] },
+      next: { tags: [tags || ''], revalidate: STALE_TIME },
     },
     passCookies,
   )
