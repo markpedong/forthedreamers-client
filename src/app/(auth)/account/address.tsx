@@ -1,10 +1,9 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { addNewAddress, getAddress, revalidate, updateAddress } from '@/api'
+import { addNewAddress, updateAddress } from '@/api'
 import { TAddressItem } from '@/api/types'
 import { addressTypes } from '@/constants'
-import { API_TAGS } from '@/constants/enums'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons'
 import { useQuery } from '@tanstack/react-query'
@@ -14,6 +13,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { getAddress, revalidate } from '@/api'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
@@ -21,6 +21,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import InputWithLabel from '@/components/inputWithLabel'
+import { API_TAGS } from '@/constants/enums'
 
 import styles from '../styles.module.scss'
 import { AddressItem } from './components'
@@ -180,18 +181,17 @@ const Address = () => {
                   <Command>
                     <CommandList>
                       <CommandGroup>
-                        {addressTypes.map(types => (
+                        {addressTypes.map(framework => (
                           <CommandItem
-                            key={types.value}
-                            value={types.value}
-                            disabled={address?.some(item => String(item.is_default) === types.value)}
+                            key={framework.value}
+                            value={framework.value}
                             onSelect={currentValue => {
                               setValue(currentValue === value ? '' : currentValue)
                               setDropdownOpen(false)
                             }}
                           >
-                            <CheckIcon className={cn('mr-2 h-4 w-4', value === types.value ? 'opacity-100' : 'opacity-0')} />
-                            {types.label}
+                            <CheckIcon className={cn('mr-2 h-4 w-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
+                            {framework.label}
                           </CommandItem>
                         ))}
                       </CommandGroup>
