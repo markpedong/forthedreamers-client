@@ -54,4 +54,7 @@ export const addQuantity = params => post({ url: '/carts/addQuantity', data: par
 export const addToCart = params => post({ url: '/carts/add', data: params })
 
 // /cart/get
-export const getCart = () => get<TCartItem[]>({ url: '/carts/get' })
+export const getCart = () => get<TCartItem[]>({ url: '/carts/get', tags: API_TAGS.CART })
+
+// carts/delete
+export const deleteCart = params => post({ url: '/carts/delete', data: params })

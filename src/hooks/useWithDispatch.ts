@@ -1,13 +1,14 @@
+import { useRouter } from 'next/navigation'
 import { getNewUserInfo } from '@/api'
 import { LoginResponse, TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
 import { setCartData, setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
-import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { clearUserData, isLoggedIn, unauthorized } from '@/lib/helper'
-import { addQuantity, addToCart, getCart, getWebsiteData } from '@/lib/server'
+import { addQuantity, addToCart, getCart, getWebsiteData, revalidate } from '@/lib/server'
+import { API_TAGS } from '@/app/(main)/constants/enums'
 
 export const useWithDispatch = () => {
   const dispatch = useAppDispatch()
@@ -46,6 +47,7 @@ export const useWithDispatch = () => {
     const res = await getCart()
 
     if (res?.status === 200) {
+      revalidate(API_TAGS.CART)
       dispatch(setCartData(res?.data ?? []))
     } else if (res?.status === 401) {
       unauthorized()

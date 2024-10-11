@@ -92,7 +92,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
       <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
       <div className={styles.productWrapper}>
         <div className={styles.productImgContainer}>
-          <Image src={product?.images?.[0]} alt="product" width={500} height={500} draggable={false} />
+          <Image src={product?.images?.[0]} alt="product" width={200} height={200} draggable={false} quality={50} placeholder="empty" />
         </div>
         <div className={classNames(styles.descriptionContainer, SF_PRO_DISPLAY.className)}>
           <h1>{product?.name}</h1>
