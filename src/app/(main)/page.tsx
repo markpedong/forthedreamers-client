@@ -1,7 +1,7 @@
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 
 import { getProducts, getTestimonials, getWebsiteData } from '@/api'
-import { DCityProduct, DProducts } from '@/components/dynamic-import'
+import { CityProduct, Products } from '@/components/dynamic-import'
 import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
 import styles from '@/styles/styles.module.scss'
@@ -28,7 +28,7 @@ const Page = async () => {
 					</div>
 				</div> */}
       </div>
-      <DProducts products={products ?? []} />
+      <Products products={products ?? []} />
       <Marquee text={website?.marquee_text ?? ''} landing />
       {/* <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image2 ?? ''} alt="" height={300} width={300} sizes="100vw" />
@@ -40,7 +40,7 @@ const Page = async () => {
             Inspired by the vibrant aesthetics of the urban and the cozy spirit of a hometown.p
           </span>
         </div>
-        <DCityProduct products={products ?? []} />
+        <CityProduct products={products ?? []} />
       </div>
       {/* <div className={styles.dudeWrapper}>
         <Image src={website?.landing_image3 ?? ''} alt="" height={300} width={300} sizes="100vw" />

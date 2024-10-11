@@ -6,7 +6,7 @@ import { FC } from 'react'
 import { TProductItem } from '@/api/types'
 import { useKeenSlider } from 'keen-slider/react'
 
-import { DProduct } from '@/components/dynamic-import'
+import { Product } from '@/components/dynamic-import'
 
 const CityProduct: FC<{ products: TProductItem[] }> = ({ products }) => {
   const [ref] = useKeenSlider<HTMLDivElement>({
@@ -23,8 +23,8 @@ const CityProduct: FC<{ products: TProductItem[] }> = ({ products }) => {
 
   return (
     <div className="keen-slider mt-10" ref={ref}>
-      <DProduct className="keen-slider__slide" product={products?.[0]} />
-      <DProduct className="keen-slider__slide" product={products?.[1]} />
+      <Product className="keen-slider__slide" product={products?.[0]} />
+      <Product className="keen-slider__slide" product={products?.[1]} />
     </div>
   )
 }
