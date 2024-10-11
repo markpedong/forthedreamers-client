@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-import { getAddress, getCart } from '@/api'
+import { getAddress, getCart } from '@/lib/server'
 
 import Checkout from './components/checkout'
 

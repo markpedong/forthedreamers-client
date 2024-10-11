@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import { IoIosCloseCircle } from 'react-icons/io'
 
-import { getCollections, getProducts } from '@/api'
+import { getCollections, getProducts } from '@/lib/server'
 import Drawer from '@/components/drawer'
 import { Question } from '@/components/page-components'
 

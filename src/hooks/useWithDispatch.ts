@@ -7,7 +7,7 @@ import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
 import { clearUserData, isLoggedIn, unauthorized } from '@/lib/helper'
-import { addQuantity, addToCart, getCart, getWebsiteData, revalidate } from '@/api'
+import { addQuantity, addToCart, getCart, getWebsiteData, revalidate } from '@/lib/server'
 import { API_TAGS } from '@/app/(main)/constants/enums'
 
 export const useWithDispatch = () => {
