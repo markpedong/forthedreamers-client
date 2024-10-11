@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 
 import { clearUserData, isLoggedIn, unauthorized } from '@/lib/helper'
 import { addQuantity, addToCart, getCart, getWebsiteData, revalidate } from '@/api'
-import { API_TAGS } from '@/app/(main)/constants/enums'
+import { API_TAGS } from '@/constants/enums'
 
 export const useWithDispatch = () => {
   const dispatch = useAppDispatch()
