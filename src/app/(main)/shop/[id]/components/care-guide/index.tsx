@@ -6,7 +6,7 @@ import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FC, useState } from 'react'
 import { IoIosCloseCircle } from 'react-icons/io'
 
-import { CARE_GUIDE_ANSWERS } from '@/constants/static'
+import { CARE_GUIDE_ANSWERS } from '@/app/(main)/constants'
 import { CARE_GUIDE } from '@/constants/enums'
 import Drawer from '@/components/drawer'
 import { ListAnswers, Returns, Shipping } from '@/components/dynamic-import'
