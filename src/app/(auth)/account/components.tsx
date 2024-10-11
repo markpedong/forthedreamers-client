@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 
 import PopOver from '@/app/(main)/components/popover'
 import { API_TAGS } from '@/app/(main)/constants/enums'
-import { revalidate } from '@/lib/server'
+import { revalidate } from '@/api'
 
 import styles from '../styles.module.scss'
 

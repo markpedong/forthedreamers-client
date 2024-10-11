@@ -3,7 +3,7 @@ import { TProductItem } from '@/api/types'
 import classNames from 'classnames'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 
-import { getProducts } from '@/lib/server'
+import { getProducts } from '@/api'
 import Header from '@/components/header'
 import { PageTitle } from '@/components/page-components'
 

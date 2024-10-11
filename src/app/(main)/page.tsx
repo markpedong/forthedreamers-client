@@ -1,6 +1,6 @@
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 
-import { getProducts, getTestimonials, getWebsiteData } from '@/lib/server'
+import { getProducts, getTestimonials, getWebsiteData } from '@/api'
 import { DCityProduct, DProducts } from '@/components/dynamic-import'
 import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
