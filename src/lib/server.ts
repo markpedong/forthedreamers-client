@@ -3,7 +3,7 @@
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
 import { get, post } from '@/api/http'
-import { TAddressItem, TCartItem, TCollectionItem, TProductItem, TTestimonials, TWebsiteItem } from '@/api/types'
+import { TAddressItem, TCartItem, TCollectionDetails, TCollectionItem, TProductItem, TTestimonials, TWebsiteItem } from '@/api/types'
 
 import { API_TAGS } from '@/app/(main)/constants/enums'
 
@@ -32,6 +32,10 @@ export const getProducts = async params =>
 
 // /public/website
 export const getWebsiteData = async () => (await get<TWebsiteItem>({ url: '/public/website', tags: API_TAGS.WEBSITE }))?.data
+
+// /public/collectionsByID
+export const getCollectionsByID = async params =>
+  (await get<TCollectionDetails>({ url: '/public/collectionsByID', data: params, tags: API_TAGS.COLLECTIONS_BY_ID }))?.data
 
 // /public/testimonials
 export const getTestimonials = async () => (await get<TTestimonials[]>({ url: '/public/testimonials', tags: API_TAGS.TESTIMONIALS }))?.data

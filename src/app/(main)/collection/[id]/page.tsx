@@ -1,8 +1,7 @@
-import { getCollectionsByID } from '@/api'
 import classNames from 'classnames'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 
-import { getCollections } from '@/lib/server'
+import { getCollections, getCollectionsByID } from '@/lib/server'
 import Header from '@/components/header'
 import Product from '@/components/product'
 
@@ -25,17 +24,16 @@ export async function generateStaticParams() {
 
 const Page = async ({ params: { id } }: PageProps) => {
   const collections = await getCollectionsByID({ id })
-  const data = collections?.data
 
   return (
     <div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
-      <Header arr={['HOME', 'SHOP', `${data?.name}`]} />
-      <div className={styles.titleContainer}>{data?.name}</div>
+      <Header arr={['HOME', 'SHOP', `${collections?.name}`]} />
+      <div className={styles.titleContainer}>{collections?.name}</div>
       <div className={styles.filterContainer}>
         <div></div>
-        {!!data?.products?.length && <div>{data?.products?.length} PRODUCTS</div>}
+        {!!collections?.products?.length && <div>{collections?.products?.length} PRODUCTS</div>}
       </div>
-      <div className={styles.productWrapper}>{data?.products?.map(item => <Product product={item} key={item?.id} />)}</div>
+      <div className={styles.productWrapper}>{collections?.products?.map(item => <Product product={item} key={item?.id} />)}</div>
     </div>
   )
 }

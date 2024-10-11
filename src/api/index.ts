@@ -1,5 +1,5 @@
 import { get, post } from './http'
-import { LoginResponse, TCollectionDetails, TLoginPayload, TProductDetails, TUserInfo, TVariationItem } from './types'
+import { LoginResponse, TLoginPayload, TProductDetails, TUserInfo, TVariationItem } from './types'
 
 // /public/login
 export const login = (params: TLoginPayload) => post<LoginResponse>({ url: '/public/login', data: params })
@@ -9,9 +9,6 @@ export const getProductDetails = params => get<TProductDetails>({ url: '/public/
 
 // /products/variations
 export const getVariations = params => get<TVariationItem[]>({ url: '/public/products/variations', data: params })
-
-// /public/collectionsByID
-export const getCollectionsByID = params => post<TCollectionDetails>({ url: '/public/collectionsByID', data: params })
 
 // /users/update
 export const updateUser = params => post({ url: '/users/update', data: params })
