@@ -1,4 +1,4 @@
-import { FAQ_ANSWERS, TERMS_CONDITIONS } from '@/app/(main)/constants'
+import { FAQ_ANSWERS, TERMS_CONDITIONS } from '@/constants/static'
 import { ListAnswers } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
 import classNames from 'classnames'

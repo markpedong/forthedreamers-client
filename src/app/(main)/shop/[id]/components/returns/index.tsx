@@ -1,4 +1,4 @@
-import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/app/(main)/constants'
+import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/constants/static'
 import { ListAnswers } from '@/components/dynamic-import'
 import { Question } from '@/components/page-components'
 
