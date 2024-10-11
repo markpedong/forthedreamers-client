@@ -75,7 +75,7 @@ const get = async <T>({ url, data, tags, passCookies = true }: RequestParams): P
     `${process.env.NEXT_PUBLIC_DOMAIN}${url}${!!stringify(data) ? '?' + stringify(data) : ''}`,
     {
       method: 'GET',
-      next: { tags: [tags || ''], revalidate: STALE_TIME },
+      next: { tags: [tags || ''], revalidate: STALE_TIME * 6 },
     },
     passCookies,
   )
