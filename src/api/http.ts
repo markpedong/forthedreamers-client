@@ -2,7 +2,7 @@ import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
 
 import { unauthorized } from '@/lib/helper'
-import { getCookie, setCookie } from '@/api'
+import { getCookie, setCookie } from '@/lib/server'
 import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
 import { ApiResponse, errorRootResponse, RequestParams } from './types'
