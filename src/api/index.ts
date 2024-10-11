@@ -2,7 +2,8 @@
 
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
-import { API_TAGS } from '@/constants/enums'
+
+import { API_TAGS } from '@/app/(main)/constants/enums'
 
 import { get, post } from './http'
 import {
@@ -43,12 +44,10 @@ export const getCookie = async name => cookies().get(name)?.value || ''
 export const login = (params: TLoginPayload) => post<LoginResponse>({ url: '/public/login', data: params })
 
 // /products/details
-export const getProductDetails = params =>
-  get<TProductDetails>({ url: '/public/products/details', data: params, tags: API_TAGS.PRODUCT_VARIATIONS })
+export const getProductDetails = params => get<TProductDetails>({ url: '/public/products/details', data: params })
 
 // /products/variations
-export const getVariations = params =>
-  get<TVariationItem[]>({ url: '/public/products/variations', data: params, tags: API_TAGS.PRODUCT_VARIATIONS })
+export const getVariations = params => get<TVariationItem[]>({ url: '/public/products/variations', data: params })
 
 // /public/collectionsByID
 export const getCollectionsByID = params => post<TCollectionDetails>({ url: '/public/collectionsByID', data: params })

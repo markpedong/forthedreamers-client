@@ -15,8 +15,6 @@ export enum API_TAGS {
   CART_QTY = 'cartQty',
   COLLECTIONS = 'collections',
   PRODUCTS = 'products',
-  PRODUCT_DETAILS = 'product_details',
-  PRODUCT_VARIATIONS = 'product_variations',
   WEBSITE = 'website',
   TESTIMONIALS = 'testimonials',
   ADDRESS = 'address',
