@@ -8,7 +8,7 @@ import Product from '@/components/product'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import Search from './search'
 import styles from './styles.module.scss'
-import { getProducts } from '@/api'
+import { getProducts } from '@/lib/server'
 
 interface PageProps {
   searchParams?: {
