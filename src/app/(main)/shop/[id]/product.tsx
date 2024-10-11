@@ -15,7 +15,7 @@ import { MdLocalLaundryService } from 'react-icons/md'
 import { toast } from 'sonner'
 
 import { useWithDispatch } from '@/hooks/useWithDispatch'
-import { CareGuide, ListAnswers } from '@/components/dynamic-import'
+import { DynamicCareGuide, DynamicListAnswers } from '@/components/dynamic-import'
 import Header from '@/components/header'
 import { CARE_GUIDE } from '@/constants/enums'
 
@@ -102,7 +102,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
           </p>
           <span className={styles.description}>{product?.description}</span>
           <div className={styles.features}>
-            <ListAnswers answers={product?.features} />
+            <DynamicListAnswers answers={product?.features} />
           </div>
           {!!variations?.length && (
             <>
@@ -195,7 +195,7 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
         </div>
       </div>
       <AnimatePresence>
-        {openCareGuide && <CareGuide setOpenCareGuide={() => setOpenCareGuide(false)} activeTab={selectedCare} />}
+        {openCareGuide && <DynamicCareGuide setOpenCareGuide={() => setOpenCareGuide(false)} activeTab={selectedCare} />}
       </AnimatePresence>
     </div>
   )
