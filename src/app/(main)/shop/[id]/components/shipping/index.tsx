@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/(main)/constants'
 import { Question } from '@/components/page-components'
 
-import { ListAnswers } from '@/components/dynamic-import'
+import { DynamicListAnswers } from '@/components/dynamic-import'
 import { SF_PRO_DISPLAY } from 'public/fonts'
 import styles from './styles.module.scss'
 
@@ -12,7 +12,7 @@ const Shipping = () => {
     <div className={classNames(styles.wrapper, SF_PRO_DISPLAY.className)}>
       <Question question="WHAT SHIPPING TYPES DO YOU HAVE?" />
       <Question question="STANDARD" normal className="mb-0 mt-4" />
-      <ListAnswers answers={SHIPPING_ANSWERS} />
+      <DynamicListAnswers answers={SHIPPING_ANSWERS} />
       <Question question="SAME DAY DELIVERY" className="mt-10" />
       <Question
         normal
@@ -21,7 +21,7 @@ const Shipping = () => {
 				vary."
         className="text-[0.8rem]"
       />
-      <ListAnswers answers={SAMEDAY_ANSWERS} />
+      <DynamicListAnswers answers={SAMEDAY_ANSWERS} />
       <Question question="HOW LONG WILL IT TAKE TO RECEIVE MY ORDER?" className="mt-10" />
       <table>
         <tbody>
