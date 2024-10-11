@@ -14,7 +14,7 @@ import {
 	SITE_INFORMATION_TERMS,
 	TERMS_ARRAY,
 	USER_GENERATED_CONTENT_TERMS
-} from '@/app/(main)/constants'
+} from '@/constants/static'
 import { PageTitle } from '@/components/page-components'
 import classNames from 'classnames'
 import { SF_PRO_DISPLAY } from 'public/fonts'
