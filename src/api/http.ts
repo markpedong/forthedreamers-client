@@ -1,5 +1,6 @@
 import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
+import { toast } from 'sonner'
 
 import { unauthorized } from '@/lib/helper'
 import { getCookie, setCookie } from '@/lib/server'
@@ -9,20 +10,21 @@ import { ApiResponse, errorRootResponse, RequestParams } from './types'
 
 export const throttleAlert = (msg: string) => throttle(() => console.error(msg), 1500, { trailing: false, leading: true })
 
-const handleResponse = async <T>(response: Response): Promise<ApiResponse<T>> => {
+const handleResponse = async <T>(response: Response, url?: string): Promise<ApiResponse<T>> => {
   if (!response.ok) return errorRootResponse as ApiResponse<T>
+  const isClient = typeof window !== 'undefined'
 
   const data: ApiResponse<T> = await response.json()
 
-  if (['/public/login', '/public/signup'].includes(response.url)) {
-    const token = (data.data as { token: string }).token
+  if (url && ['/public/login', '/public/signup'].includes(url!)) {
+    const token = (data.data as { token: string })?.token
 
     setCookie('token', token)
     setLocalStorage('token', token)
   }
 
   if (data.status !== 200) {
-    throttleAlert(data.message)
+    isClient && toast(data.message)
     if (data.status === 401 && typeof window !== 'undefined') {
       unauthorized()
     }
@@ -63,7 +65,7 @@ const post = async <T>({ url, data = {}, tags }: RequestParams): Promise<ApiResp
     ...(tags && { next: { tags: [tags] } }),
   })
 
-  return handleResponse<T>(response)
+  return handleResponse<T>(response, url)
 }
 
 const get = async <T>({ url, data, tags, passCookies = true }: RequestParams): Promise<ApiResponse<T>> => {
