@@ -1,5 +1,5 @@
 import { FAQ_ANSWERS, TERMS_CONDITIONS } from '@/app/(main)/constants'
-import { DynamicListAnswers } from '@/components/dynamic-import'
+import { ListAnswers } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -11,10 +11,10 @@ const Page = () => {
 		<div className={styles.mainWrapper}>
 			<PageTitle title="GIFT CARD MANUAL" />
 			<PageTitle title="TERMS AND CONDITIONS" medium />
-			<DynamicListAnswers answers={TERMS_CONDITIONS} />
+			<ListAnswers answers={TERMS_CONDITIONS} />
 			<div className="mt-10" />
 			<PageTitle title="FAQ'S" medium />
-			<DynamicListAnswers answers={FAQ_ANSWERS} />
+			<ListAnswers answers={FAQ_ANSWERS} />
 			<PageTitle title="HOW TO USE THE GIFT CARD (WEB)" medium />
 			<ul className={classNames(styles.answers, SF_PRO_DISPLAY.className)}>
 				<li>After receiving your UNIQUE GIFT CARD CODE, you may shop in our webstore.</li>

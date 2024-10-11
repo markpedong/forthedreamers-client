@@ -7,7 +7,7 @@ import 'keen-slider/keen-slider.min.css'
 
 import { TProductItem } from '@/api/types'
 
-import { DProduct } from '@/components/dynamic-import'
+import { Product } from '@/components/dynamic-import'
 
 const Products: FC<{ products: TProductItem[] }> = ({ products }) => {
   const [ref] = useKeenSlider<HTMLDivElement>({
@@ -28,7 +28,7 @@ const Products: FC<{ products: TProductItem[] }> = ({ products }) => {
 
   return (
     <div className="keen-slider my-10" ref={ref}>
-      {products?.map(product => <DProduct className="keen-slider__slide" product={product} key={product?.id} />)}
+      {products?.map(product => <Product className="keen-slider__slide" product={product} key={product?.id} />)}
     </div>
   )
 }
