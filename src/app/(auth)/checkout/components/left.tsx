@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { checkoutOrder } from '@/api'
 import { CheckoutAddressProps, TCheckoutLeft, TPaymentMethods } from '@/api/types'
+import { PAYMENT_METHODS_VALUES } from '@/constants'
 import { setPaymentMethod } from '@/redux/features/userData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import classNames from 'classnames'
@@ -66,16 +68,39 @@ const PaymentMethods: FC<TPaymentMethods> = ({ logos, title, value, disabled }) 
 const Left: FC<TCheckoutLeft> = ({ address }) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [defaultAddress, setDefaultAddress] = useState(address?.find(address => address?.is_default === 1) ?? address?.[0])
+
   const paymentMethod = useAppSelector(s => s.userData.paymentMethod)
+  const carts = useAppSelector(state => state.userData.cart)
 
   const checkoutHandler = debounce(async () => {
-    paymentMethod === '' && toast('Please select payment method')
+    if (paymentMethod === '') {
+      toast('Please select payment method')
+      return
+    }
+
+    const res = await checkoutOrder({
+      ids: carts?.map(cart => cart?.id),
+      address_id: defaultAddress?.id,
+      payment_method: PAYMENT_METHODS_VALUES[paymentMethod as keyof typeof PAYMENT_METHODS_VALUES],
+    })
+
+    if (res?.status === 200) {
+      toast('Order Placed')
+
+      setTimeout(() => {
+        router.push('/account')
+      }, 500)
+    }
   }, 500)
 
   useEffect(() => {
-    dispatch(setPaymentMethod(''))
+    return () => {
+      setDefaultAddress(address?.find(address => address?.is_default === 1) ?? address?.[0])
+      dispatch(setPaymentMethod(''))
+    }
   }, [])
 
   return (
@@ -113,11 +138,11 @@ const Left: FC<TCheckoutLeft> = ({ address }) => {
       )}
       <div className={styles.payment}>PAYMENT</div>
       <div className={styles.paymentMethods}>
-        <PaymentMethods title="COD" logos={[<BsCash />]} value={PAYMENT_METHODS.CASH_ON_DELIVERY} key={1} />
+        <PaymentMethods title="COD" logos={[<BsCash />]} value={PAYMENT_METHODS.COD} key={1} />
         <PaymentMethods
           title="Credit/ Debit Card"
           logos={[<FaCcVisa />, <RiMastercardFill />]}
-          value={PAYMENT_METHODS.CREDIT_CARD}
+          value={PAYMENT_METHODS.CARD}
           disabled
           key={2}
         />

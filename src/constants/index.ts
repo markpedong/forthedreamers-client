@@ -24,3 +24,8 @@ export const addressTypes = [
     value: '3',
   },
 ]
+
+export const PAYMENT_METHODS_VALUES = {
+  COD: 1,
+  CARD: 2,
+}
