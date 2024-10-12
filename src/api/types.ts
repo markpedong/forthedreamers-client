@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 import { PAYMENT_METHODS } from '@/app/(main)/constants/enums'
 
@@ -162,3 +162,5 @@ export type CheckoutAddressProps = {
 }
 
 export type TCheckoutLeft = { address: TAddressItem[] }
+
+export type TPaymentMethods = { title: string; logos: (string | ReactNode)[]; value: PAYMENT_METHODS; disabled?: boolean }

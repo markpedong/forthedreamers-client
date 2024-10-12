@@ -147,6 +147,10 @@
       }
     }
   }
+
+  &.disabled {
+    @apply pointer-events-none bg-gray-100 text-gray-500;
+  }
 }
 
 .placeOrderBtn {

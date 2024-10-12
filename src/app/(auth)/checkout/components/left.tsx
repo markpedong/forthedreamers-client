@@ -1,7 +1,7 @@
-import { FC, ReactNode, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { CheckoutAddressProps, TCheckoutLeft } from '@/api/types'
+import { CheckoutAddressProps, TCheckoutLeft, TPaymentMethods } from '@/api/types'
 import { setPaymentMethod } from '@/redux/features/userData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import classNames from 'classnames'
@@ -39,13 +39,13 @@ const AddressContainer: FC<CheckoutAddressProps> = ({ address, setCurrAddress, s
   )
 }
 
-const PaymentMethods: FC<{ title: string; logos: (string | ReactNode)[]; value: PAYMENT_METHODS }> = ({ logos, title, value }) => {
+const PaymentMethods: FC<TPaymentMethods> = ({ logos, title, value, disabled }) => {
   const paymentMethod = useAppSelector(s => s.userData.paymentMethod)
   const dispatch = useAppDispatch()
   return (
     <div
-      className={classNames(styles.methodContainer, { [styles.selected]: paymentMethod === value })}
-      onClick={() => dispatch(setPaymentMethod(value))}
+      className={classNames(styles.methodContainer, { [styles.selected]: paymentMethod === value, [styles.disabled]: disabled })}
+      onClick={() => !disabled && dispatch(setPaymentMethod(value))}
     >
       <div>{title}</div>
       <div>
@@ -114,7 +114,12 @@ const Left: FC<TCheckoutLeft> = ({ address }) => {
       <div className={styles.payment}>PAYMENT</div>
       <div className={styles.paymentMethods}>
         <PaymentMethods title="COD" logos={[<BsCash />]} value={PAYMENT_METHODS.CASH_ON_DELIVERY} />
-        <PaymentMethods title="Credit/ Debit Card" logos={[<FaCcVisa />, <RiMastercardFill />]} value={PAYMENT_METHODS.CREDIT_CARD} />
+        <PaymentMethods
+          title="Credit/ Debit Card"
+          logos={[<FaCcVisa />, <RiMastercardFill />]}
+          value={PAYMENT_METHODS.CREDIT_CARD}
+          disabled
+        />
       </div>
       <motion.div whileTap={{ scale: 0.99 }} className={styles.placeOrderBtn} onClick={checkoutHandler}>
         PLACE ORDER
