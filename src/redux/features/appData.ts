@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export type TAppDataState = {
   website: TWebsiteItem
   orderNote: string
+  beforeCheckoutPage: string
 }
 const initialState: TAppDataState = {
   website: {
@@ -18,6 +19,7 @@ const initialState: TAppDataState = {
     collection_length: 0,
   },
   orderNote: '',
+  beforeCheckoutPage: '',
 }
 
 const appDataSlice = createSlice({
@@ -27,9 +29,10 @@ const appDataSlice = createSlice({
     resetAppDataSlice: () => initialState,
     setWebsiteData: (state, action: PayloadAction<TWebsiteItem>) => ({ ...state, website: action.payload }),
     setOrderNote: (state, action: PayloadAction<string>) => ({ ...state, orderNote: action.payload }),
+    setBeforeCheckoutPage: (state, action: PayloadAction<string>) => ({ ...state, beforeCheckoutPage: action.payload }),
   },
 })
 
-export const { resetAppDataSlice, setWebsiteData, setOrderNote } = appDataSlice.actions
+export const { resetAppDataSlice, setWebsiteData, setOrderNote, setBeforeCheckoutPage } = appDataSlice.actions
 
 export default appDataSlice.reducer

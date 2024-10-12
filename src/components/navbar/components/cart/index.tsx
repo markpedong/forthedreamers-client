@@ -1,8 +1,8 @@
 'use client'
 
 import { FC, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { setOrderNote } from '@/redux/features/appData'
+import { usePathname, useRouter } from 'next/navigation'
+import { setBeforeCheckoutPage, setOrderNote } from '@/redux/features/appData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
@@ -20,14 +20,16 @@ import { CartProduct } from '../../products'
 import styles from './styles.module.scss'
 
 const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
+  const pathname = usePathname()
+  const dispatch = useAppDispatch()
   const { push } = useRouter()
   const { getNewCartData } = useWithDispatch()
-  const [isUserAgree, setIsUserAgree] = useState(false)
-  const [showNote, setShowNote] = useState(false)
+
   const carts = useAppSelector(state => state.userData.cart)
   const orderNote = useAppSelector(state => state.appData.orderNote)
+  const [isUserAgree, setIsUserAgree] = useState(false)
+  const [showNote, setShowNote] = useState(false)
   const [note, setNote] = useState(orderNote || '')
-  const dispatch = useAppDispatch()
 
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
@@ -36,6 +38,7 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
 
   const debounceCheckout = debounce(() => {
     if (isUserAgree) {
+      dispatch(setBeforeCheckoutPage(pathname))
       push('/checkout')
     } else {
       toast('Please agree to the terms and conditions')

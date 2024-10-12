@@ -156,3 +156,11 @@
 .placeOrderBtn {
   @apply my-5 mt-10 w-full rounded-sm bg-gray-900 py-3 text-center text-lg font-bold uppercase tracking-widest text-white;
 }
+
+.back {
+  @apply absolute left-[1rem] top-[3rem];
+
+  > * {
+    @apply size-[2rem];
+  }
+}
