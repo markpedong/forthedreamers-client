@@ -24,3 +24,6 @@ export const deleteAddress = params => post({ url: '/address/delete', data: para
 
 // /address/update
 export const updateAddress = params => post({ url: '/address/update', data: params })
+
+// /users/checkout
+export const checkoutOrder = params => post({ url: '/users/checkout', data: params })
