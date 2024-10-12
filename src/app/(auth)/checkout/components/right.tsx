@@ -48,7 +48,7 @@ const Right: FC = () => {
       <div className={styles.checkoutProducts}>
         {carts?.map(cart => (
           <div className={styles.product} key={cart?.id}>
-            <Image src={cart?.images?.[0] ?? ''} alt={cart?.name ?? ''} height={100} width={100} />
+            <Image src={cart?.images?.[0] ?? ''} alt={cart?.name ?? ''} height={50} width={50} quality={20} priority />
             <div className={styles.productDetails}>
               <span>{cart?.name}</span>
               <span>₱{cart?.price}</span>

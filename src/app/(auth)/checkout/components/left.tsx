@@ -49,13 +49,13 @@ const PaymentMethods: FC<TPaymentMethods> = ({ logos, title, value, disabled }) 
     >
       <div>{title}</div>
       <div>
-        {logos?.map(item =>
+        {logos?.map((item, idx) =>
           typeof item === 'string' ? (
-            <div key={item}>
+            <div key={`${item}${idx}`}>
               <Image src={item} alt={item} />
             </div>
           ) : (
-            <div key={String(item)}>{item}</div>
+            <div key={`${item}${idx}`}>{item}</div>
           ),
         )}
       </div>
@@ -113,12 +113,13 @@ const Left: FC<TCheckoutLeft> = ({ address }) => {
       )}
       <div className={styles.payment}>PAYMENT</div>
       <div className={styles.paymentMethods}>
-        <PaymentMethods title="COD" logos={[<BsCash />]} value={PAYMENT_METHODS.CASH_ON_DELIVERY} />
+        <PaymentMethods title="COD" logos={[<BsCash />]} value={PAYMENT_METHODS.CASH_ON_DELIVERY} key={1} />
         <PaymentMethods
           title="Credit/ Debit Card"
           logos={[<FaCcVisa />, <RiMastercardFill />]}
           value={PAYMENT_METHODS.CREDIT_CARD}
           disabled
+          key={2}
         />
       </div>
       <motion.div whileTap={{ scale: 0.99 }} className={styles.placeOrderBtn} onClick={checkoutHandler}>
