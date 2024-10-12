@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react'
+
 export type ApiResponse<T> = {
   data: T
   message: string
@@ -148,3 +150,9 @@ export type TToastParams = {
 export type TSearchProduct = { product?: TProductItem; setSearch: () => void }
 
 export type TCartProduct = { cart: TCartItem; setSearch: () => void; refetch: () => void }
+
+export type CheckoutAddressProps = {
+  address: TAddressItem
+  setCurrAddress: Dispatch<SetStateAction<TAddressItem>>
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>
+}

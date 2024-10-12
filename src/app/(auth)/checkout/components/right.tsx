@@ -25,7 +25,7 @@ const Right: FC = () => {
       <div className={styles.details}>
         <div>
           <span>{carts?.length} item</span>
-          <span>₱{totalPrice - 0.12 * totalPrice}</span>
+          <span>₱{(totalPrice - 0.12 * totalPrice)?.toFixed(2)}</span>
         </div>
         <div>
           <span>Sales Tax</span>

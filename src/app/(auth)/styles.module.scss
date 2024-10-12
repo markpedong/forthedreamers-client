@@ -1,3 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
 .mainWrapper {
   @apply mx-auto max-w-[56rem] p-5;
   margin-top: toRem(90);
@@ -55,7 +66,7 @@
 }
 
 .signInBtn {
-  @apply mt-4 flex w-full items-center justify-center rounded-lg bg-[#162D3A] py-3 text-white select-none;
+  @apply mt-4 flex w-full select-none items-center justify-center rounded-lg bg-[#162D3A] py-3 text-white;
 }
 
 .or {
@@ -75,7 +86,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .loginWrapper,
   .registerWrapper {
     @apply grid-cols-1;
@@ -94,7 +104,7 @@
   }
 }
 
-.addressWrapper{
+.addressWrapper {
   @apply relative;
 }
 
@@ -134,7 +144,7 @@
     div:nth-child(3) {
       @apply flex gap-[0.5rem] pt-2;
 
-      >* {
+      > * {
         @apply rounded-sm bg-gray-50 px-[1rem] py-[0.2rem] text-gray-800;
         font-weight: 500;
         font-size: toRem(12);
@@ -159,7 +169,7 @@
     }
   }
 
-  &:first-child{
+  &:first-child {
     @apply mt-0;
   }
 }
@@ -170,5 +180,5 @@
 }
 
 .addAddressBtn {
-  @apply absolute top-[-2.5rem] right-[0.8rem]
+  @apply absolute right-[0.8rem] top-[-2.5rem];
 }

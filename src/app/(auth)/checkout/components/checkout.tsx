@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { TAddressItem } from '@/api/types'
+import { CheckoutAddressProps, TAddressItem } from '@/api/types'
 import { useAppSelector } from '@/redux/store'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
@@ -15,9 +15,16 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import styles from '../styles.module.scss'
 import Right from './right'
 
-const AddressContainer: FC<{ address: TAddressItem }> = ({ address }) => {
+const AddressContainer: FC<CheckoutAddressProps> = ({ address, setCurrAddress, setIsModalOpen }) => {
+  console.log(address)
   return (
-    <div className={classNames(styles.addressContainer, styles.isModal)}>
+    <div
+      className={classNames(styles.addressContainer, styles.isModal)}
+      onClick={() => {
+        setCurrAddress(address)
+        setIsModalOpen(false)
+      }}
+    >
       <div>
         <span>
           {address?.first_name} {address?.last_name} / {address?.phone}
@@ -32,7 +39,7 @@ const AddressContainer: FC<{ address: TAddressItem }> = ({ address }) => {
 const Checkout = ({ address }: { address: TAddressItem[] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const carts = useAppSelector(state => state.userData.cart)
-  const defaultAddress = address?.find(address => address?.is_default === 1)
+  const [defaultAddress, setDefaultAddress] = useState(address?.find(address => address?.is_default === 1) ?? address?.[0])
   const router = useRouter()
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
@@ -64,7 +71,14 @@ const Checkout = ({ address }: { address: TAddressItem[] }) => {
                     </motion.span>
                   </DialogTrigger>
                   <DialogContent className="pt-[3rem] sm:max-w-[550px]" onClose={() => setIsModalOpen(false)} title="Change Address">
-                    {address?.map(address => <AddressContainer key={address?.id} address={address} />)}
+                    {address?.map(address => (
+                      <AddressContainer
+                        key={address?.id}
+                        setIsModalOpen={setIsModalOpen}
+                        address={address}
+                        setCurrAddress={setDefaultAddress}
+                      />
+                    ))}
                   </DialogContent>
                 </Dialog>
               </div>
