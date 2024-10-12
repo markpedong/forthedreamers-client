@@ -21,7 +21,6 @@ export enum API_TAGS {
 }
 
 export enum PAYMENT_METHODS {
-  CREDIT_CARD = 'credit card',
-  CASH_ON_DELIVERY = 'cash on delivery',
-  PAYPAL = 'paypal',
+  CARD = 'CARD',
+  COD = 'COD',
 }
