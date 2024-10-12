@@ -1,122 +1,154 @@
 .checkoutWrapper {
-    @apply mt-[3rem];
+  @apply mt-[3rem];
 
-    .titleContainer {
-        @apply flex flex-col justify-center items-center;
+  .titleContainer {
+    @apply flex flex-col items-center justify-center;
 
-        h1 {
-            @apply text-center text-[2rem] font-bold uppercase tracking-wide;
-        }
-
-        span {
-            @apply text-gray-500;
-        }
+    h1 {
+      @apply text-center text-[2rem] font-bold uppercase tracking-wide;
     }
+
+    span {
+      @apply text-gray-500;
+    }
+  }
 }
 
 .detailsContainer {
-    @apply grid grid-cols-2 gap-[5rem] mt-[2rem] mx-[1rem];
+  @apply mx-[1rem] mt-[2rem] grid grid-cols-2 gap-[5rem];
 }
 
 .right {
-    @apply bg-gray-100 p-[1.5rem];
+  @apply bg-gray-100 p-[1.5rem];
 
-    .header {
-        @apply flex justify-between items-center mb-[1rem];
+  .header {
+    @apply mb-[1rem] flex items-center justify-between;
 
+    h1 {
+      @apply text-xl font-semibold;
+    }
 
-        h1 {
-            @apply font-semibold text-xl;
-        }
+    span {
+      @apply text-xs uppercase underline;
+    }
+  }
+
+  .details,
+  .total {
+    @apply mb-[1rem];
+  }
+
+  .details {
+    div {
+      @apply flex justify-between;
+      font-size: toRem(12);
+    }
+  }
+
+  .total {
+    @apply flex justify-between text-lg font-bold;
+  }
+
+  .voucher {
+    @apply flex items-center justify-start gap-1;
+
+    span {
+      @apply text-xs font-semibold uppercase underline;
+    }
+  }
+
+  .checkoutProducts {
+    @apply flex flex-col gap-5;
+
+    .product {
+      @apply flex items-center justify-start gap-3;
+
+      img {
+        @apply size-[6rem] object-cover;
+      }
+
+      .productDetails {
+        @apply flex flex-col;
 
         span {
-            @apply uppercase underline text-xs
+          @apply text-[0.8rem];
+
+          &:nth-child(1),
+          &:nth-child(2) {
+            @apply font-normal text-gray-700;
+          }
+
+          &:nth-child(3),
+          &:nth-child(4) {
+            @apply font-light text-gray-500;
+          }
         }
+      }
     }
-
-    .details, .total {
-        @apply mb-[1rem];
-    }
-
-    .details {
-        div {
-            @apply flex justify-between;
-            font-size: toRem(12)
-        }
-    }
-
-    .total {
-        @apply flex justify-between font-bold text-lg;
-    }
-
-    .voucher {
-        @apply flex justify-start items-center gap-1;
-
-        span {
-            @apply underline uppercase font-semibold text-xs
-        }
-    }
-
-    .checkoutProducts {
-        @apply flex-col flex gap-5;
-
-        .product {
-            @apply flex justify-start items-center gap-3;
-
-            img {
-                @apply size-[6rem] object-cover;
-            }
-
-            .productDetails {
-                @apply flex flex-col;
-
-                span {
-                    @apply text-[0.8rem];
-
-                    &:nth-child(1),
-                    &:nth-child(2) {
-                        @apply text-gray-700 font-normal;
-                    }
-
-                    &:nth-child(3),
-                    &:nth-child(4) {
-                        @apply text-gray-500 font-light;
-                    }
-                }
-            }
-        }
-
-    }
+  }
 }
 
+.addressContainer,
+.methodContainer {
+  @apply border border-slate-200 p-4;
+}
 
 .addressContainer {
-    @apply border border-slate-200 p-4;
+  div:first-child,
+  div:nth-child(2) {
+    @apply flex items-center justify-between font-bold;
+  }
 
-    div:first-child,
-    div:nth-child(2) {
-        @apply flex justify-between items-center font-bold;
-    }
+  div:first-child {
+    @apply mb-[0.7rem];
+  }
 
-    div:first-child {
-        @apply mb-[0.7rem]
-    }
+  div:nth-child(2) {
+    @apply mb-[0.5rem];
+  }
 
-    div:nth-child(2) {
-        @apply mb-[0.5rem]
-    }
+  div:last-child {
+    @apply text-gray-500;
+  }
 
-    div:last-child {
-        @apply text-gray-500;
-    }
-
-    &.isModal {
-        @apply text-sm mb-[1rem];
-    }
+  &.isModal {
+    @apply mb-[1rem] text-sm;
+  }
 }
 
+.selected {
+  @apply border-slate-600;
+}
 .left {
-    .payment {
-        @apply text-xl font-bold my-4;
+  .payment {
+    @apply my-4 text-xl font-bold;
+  }
+}
+
+.paymentMethods {
+  @apply gap-3 fcol;
+}
+
+.methodContainer {
+  @apply flex items-center justify-between;
+
+  div:first-child {
+    @apply font-bold;
+  }
+
+  div:last-child {
+    @apply flex items-center;
+
+    div {
+      @apply gap-3 bg-gray-100 px-1;
+
+      > * {
+        @apply size-[1.3rem];
+      }
     }
+  }
+}
+
+.placeOrderBtn {
+  @apply my-5 mt-10 w-full rounded-sm bg-gray-900 py-3 text-center text-lg font-bold uppercase tracking-widest text-white;
 }

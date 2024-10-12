@@ -19,3 +19,9 @@ export enum API_TAGS {
   TESTIMONIALS = 'testimonials',
   ADDRESS = 'address',
 }
+
+export enum PAYMENT_METHODS {
+  CREDIT_CARD = 'credit card',
+  CASH_ON_DELIVERY = 'cash on delivery',
+  PAYPAL = 'paypal',
+}

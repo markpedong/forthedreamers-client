@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 
+import { PAYMENT_METHODS } from '@/app/(main)/constants/enums'
+
 export type ApiResponse<T> = {
   data: T
   message: string
@@ -96,6 +98,7 @@ export type TUserInfo = {
 export type TUserDataState = {
   cart: TCartItem[]
   user: TUserInfo
+  paymentMethod: string
 }
 
 export type TAddCartPayload = {
@@ -153,6 +156,9 @@ export type TCartProduct = { cart: TCartItem; setSearch: () => void; refetch: ()
 
 export type CheckoutAddressProps = {
   address: TAddressItem
+  defaultAddress: TAddressItem
   setCurrAddress: Dispatch<SetStateAction<TAddressItem>>
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
 }
+
+export type TCheckoutLeft = { address: TAddressItem[] }

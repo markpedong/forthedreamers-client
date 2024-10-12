@@ -12,6 +12,7 @@ const initialState: TUserDataState = {
     image: '',
   },
   cart: [],
+  paymentMethod: '',
 }
 
 const userDataSlice = createSlice({
@@ -21,9 +22,10 @@ const userDataSlice = createSlice({
     resetUserDataSlice: () => initialState,
     setUserData: (s, a: PayloadAction<TUserInfo>) => ({ ...s, user: a.payload }),
     setCartData: (s, a: PayloadAction<TCartItem[]>) => ({ ...s, cart: a.payload }),
+    setPaymentMethod: (s, a: PayloadAction<string>) => ({ ...s, paymentMethod: a.payload }),
   },
 })
 
-export const { resetUserDataSlice, setCartData, setUserData } = userDataSlice.actions
+export const { resetUserDataSlice, setCartData, setUserData, setPaymentMethod } = userDataSlice.actions
 
 export default userDataSlice.reducer
