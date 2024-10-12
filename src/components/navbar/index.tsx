@@ -38,7 +38,10 @@ const Navbar: FC = () => {
   const {} = useQuery({
     queryKey: ['website'],
     staleTime: Infinity,
-    queryFn: async () => dispatchWebData(),
+    queryFn: async () => {
+      dispatchWebData()
+      return 0
+    },
   })
 
   const handlePush = (path: string) => {
@@ -103,25 +106,9 @@ const Navbar: FC = () => {
           {website?.website_name}
         </div>
         <div className={classNames(styles.rightBtnWrapper, SF_PRO_DISPLAY.className)}>
-          <div className={styles.loginBtn}>
-            {!isLoggedIn() ? (
-              <span
-                onClick={() => {
-                  setOpen(false)
-                  setShowCart(false)
-                  setSearch(false)
-                  push('/login')
-                }}
-              >
-                LOGIN
-              </span>
-            ) : (
-              <span onClick={logoutUser}>LOGOUT</span>
-            )}
-            <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
-              <FiUser className="cursor-pointer" size={20} onClick={() => (isLoggedIn() ? push('/account') : push('/login'))} />
-            </motion.span>
-          </div>
+          <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
+            <FiUser className="cursor-pointer" size={20} onClick={() => (isLoggedIn() ? push('/account') : push('/login'))} />
+          </motion.span>
           <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
             <IoSearchOutline
               className="cursor-pointer"
@@ -147,6 +134,22 @@ const Navbar: FC = () => {
               <CiShoppingCart className="cursor-pointer" size={20} />
             </motion.div>
           )}
+          <div className={styles.loginBtn}>
+            {!isLoggedIn() ? (
+              <span
+                onClick={() => {
+                  setOpen(false)
+                  setShowCart(false)
+                  setSearch(false)
+                  push('/login')
+                }}
+              >
+                LOGIN
+              </span>
+            ) : (
+              <span onClick={logoutUser}>LOGOUT</span>
+            )}
+          </div>
         </div>
         <AnimatePresence>{showCart && <DynamicCart setShowCart={() => setShowCart(false)} />}</AnimatePresence>
         <AnimatePresence>{search && <DynamicSearch setSearch={() => setSearch(false)} />}</AnimatePresence>
