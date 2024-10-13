@@ -31,8 +31,6 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
   const [showNote, setShowNote] = useState(false)
   const [note, setNote] = useState(orderNote || '')
 
-  console.log('carts', carts)
-
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
     return acc
