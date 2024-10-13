@@ -14,6 +14,7 @@ export const throttleAlert = (msg: string) => throttle(() => console.error(msg),
 
 const handleResponse = async <T>(response: Response, url?: string): Promise<ApiResponse<T>> => {
   if (!response.ok) return serverErr as ApiResponse<T>
+  console.log('URL: ', url)
 
   const isClient = typeof window !== 'undefined'
   const data: ApiResponse<T> = await response.json()
@@ -29,7 +30,7 @@ const handleResponse = async <T>(response: Response, url?: string): Promise<ApiR
     isClient && toast(data.message)
 
     if (data.status === 401) {
-      if (typeof window !== 'undefined') {
+      if (isClient) {
         unauthorized()
       } else {
         redirect('/login')
@@ -65,6 +66,7 @@ const upload = async <T>(url: string, file: File): Promise<ApiResponse<T>> => {
 }
 
 const post = async <T>({ url, data = {} }: RequestParams): Promise<ApiResponse<T>> => {
+  console.log(data)
   const response = await fetchWithToken(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -75,7 +77,6 @@ const post = async <T>({ url, data = {} }: RequestParams): Promise<ApiResponse<T
 }
 
 const get = async <T>({ url, data, tags, passCookies = true }: RequestParams): Promise<ApiResponse<T>> => {
-  console.log('URL: ', url)
   const response = await fetchWithToken(
     `${process.env.NEXT_PUBLIC_DOMAIN}${url}${!!stringify(data) ? '?' + stringify(data) : ''}`,
     {

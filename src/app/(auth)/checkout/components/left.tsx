@@ -15,6 +15,7 @@ import { GrLocation } from 'react-icons/gr'
 import { RiMastercardFill } from 'react-icons/ri'
 import { toast } from 'sonner'
 
+import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { PAYMENT_METHODS } from '@/app/(main)/constants/enums'
@@ -68,6 +69,7 @@ const PaymentMethods: FC<TPaymentMethods> = ({ logos, title, value, disabled }) 
 const Left: FC<TCheckoutLeft> = ({ address }) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
+  const { getNewCartData } = useWithDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [defaultAddress, setDefaultAddress] = useState(address?.find(address => address?.is_default === 1) ?? address?.[0])
@@ -92,6 +94,7 @@ const Left: FC<TCheckoutLeft> = ({ address }) => {
 
       setTimeout(() => {
         router.push('/account')
+        getNewCartData()
       }, 500)
     }
   }, 500)
