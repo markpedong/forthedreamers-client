@@ -48,7 +48,7 @@ export const getCollections = async params =>
   (await get<TCollectionItem[]>({ url: '/public/collections', tags: API_TAGS.COLLECTIONS, passCookies: params.passCookies }))?.data
 
 // carts/addQuantity
-export const addQuantity = params => post({ url: '/carts/addQuantity', data: params })
+export const addQuantity = params => get<TCartItem[]>({ url: '/carts/addQuantity', data: params, tags: API_TAGS.CART })
 
 // /carts/add
 export const addToCart = params => post({ url: '/carts/add', data: params })

@@ -40,7 +40,8 @@ export const useWithDispatch = () => {
     const res = await addQuantity({ cart_id: id, quantity })
 
     if (res?.status === 200) {
-      getNewCartData()
+      revalidate(API_TAGS.CART)
+      dispatch(setCartData(res?.data ?? []))
     }
   }
 
