@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import { STALE_TIME } from '@/constants'
 import throttle from 'lodash/throttle'
 import { stringify } from 'qs'
@@ -27,8 +28,12 @@ const handleResponse = async <T>(response: Response, url?: string): Promise<ApiR
   if (data.status !== 200) {
     isClient && toast(data.message)
 
-    if (data.status === 401 && typeof window !== 'undefined') {
-      unauthorized()
+    if (data.status === 401) {
+      if (typeof window !== 'undefined') {
+        unauthorized()
+      } else {
+        redirect('/login')
+      }
     }
     return data
   }
