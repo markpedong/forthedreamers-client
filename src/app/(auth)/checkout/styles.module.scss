@@ -154,7 +154,7 @@
 }
 
 .placeOrderBtn {
-  @apply my-5 mt-10 w-full rounded-sm bg-gray-900 py-3 text-center text-lg font-bold uppercase tracking-widest text-white cursor-pointer;
+  @apply my-5 mt-10 w-full cursor-pointer select-none rounded-sm bg-gray-900 py-3 text-center text-lg font-bold uppercase tracking-widest text-white;
 }
 
 .back {

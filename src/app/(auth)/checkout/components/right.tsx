@@ -33,12 +33,12 @@ const Right: FC = () => {
         </div>
         <div>
           <span>Delivery</span>
-          <span>₱120</span>
+          <span>₱0</span>
         </div>
       </div>
       <div className={styles.total}>
         <span>Total</span>
-        <span>₱{totalPrice + 120}</span>
+        <span>₱{totalPrice + 0}</span>
       </div>
       <div className={styles.voucher}>
         <MdOutlineLabel />
