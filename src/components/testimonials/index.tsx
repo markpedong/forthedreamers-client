@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 
 import Testimonial from '../testimonial'

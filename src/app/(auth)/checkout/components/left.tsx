@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { checkoutOrder } from '@/api'
 import { CheckoutAddressProps, TCheckoutLeft, TPaymentMethods } from '@/api/types'
 import { PAYMENT_METHODS_VALUES } from '@/constants'
+import { setBeforeCheckoutPage } from '@/redux/features/appData'
 import { setPaymentMethod } from '@/redux/features/userData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import classNames from 'classnames'
@@ -93,7 +94,7 @@ const Left: FC<TCheckoutLeft> = ({ address }) => {
       toast('Order Placed')
 
       setTimeout(() => {
-        router.push('/account')
+        dispatch(setBeforeCheckoutPage(''))
         getNewCartData()
       }, 500)
     }
