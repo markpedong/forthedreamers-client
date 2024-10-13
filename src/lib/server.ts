@@ -58,3 +58,6 @@ export const getCart = () => get<TCartItem[]>({ url: '/carts/get', tags: API_TAG
 
 // carts/delete
 export const deleteCart = params => post({ url: '/carts/delete', data: params })
+
+// /users/orders
+export const getOrders = () => get<TCartItem[]>({ url: '/users/orders', tags: API_TAGS.ORDERS })

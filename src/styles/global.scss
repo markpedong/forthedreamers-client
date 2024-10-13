@@ -58,7 +58,6 @@
     --chart-5: 340 75% 55%;
   }
 
-
   @font-face {
     font-family: 'SF Pro Display';
     src: url('../../public/fonts/SF-Pro-Display-Light.otf') format('opentype');
@@ -81,12 +80,14 @@
   }
 }
 
-
 body {
   font-family: 'SF Pro Display', sans-serif;
   /* Apply the font globally */
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
 
 // @layer base {
 //   * {

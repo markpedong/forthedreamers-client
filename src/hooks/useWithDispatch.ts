@@ -29,6 +29,7 @@ export const useWithDispatch = () => {
       quantity,
       ...(variation_id ? { variation_id } : {}),
     })
+    console.log('res', res)
     if (res?.status === 200) {
       toast(res?.message)
       getNewCartData()

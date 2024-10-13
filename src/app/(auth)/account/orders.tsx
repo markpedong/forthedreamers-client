@@ -1,8 +1,20 @@
-import React from 'react'
+'use client'
 
-type Props = {}
+import { useQuery } from '@tanstack/react-query'
 
-const Orders = (props: Props) => {
+import { getOrders } from '@/lib/server'
+
+const Orders = () => {
+  const {} = useQuery({
+    queryKey: ['orders'],
+    queryFn: async () => {
+      const res = await getOrders()
+
+      console.log('res', res?.data)
+      return res ?? []
+    },
+  })
+
   return <div>Orders</div>
 }
 
