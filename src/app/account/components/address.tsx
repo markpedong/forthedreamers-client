@@ -21,7 +21,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import InputWithLabel from '@/components/inputWithLabel'
-import { API_TAGS } from '@/app/(main)/constants/enums'
+import { API_TAGS } from '@/app/constants/enums'
 
 import styles from '../../styles.module.scss'
 import { AddressItem } from './components'

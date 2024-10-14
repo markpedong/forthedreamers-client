@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/(main)/constants'
+import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/constants'
 import { PageTitle, Question } from '@/components/page-components'
 
 import { DynamicListAnswers } from '@/components/dynamic-import'

@@ -1,29 +1,28 @@
 'use client'
 
-import { FC, useEffect, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
 import { TCartItem } from '@/api/types'
 import { useAppSelector } from '@/redux/store'
 import { useQuery } from '@tanstack/react-query'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
+import { usePathname, useRouter } from 'next/navigation'
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
+import { FC, useState } from 'react'
 import { CiShoppingCart } from 'react-icons/ci'
 import { FaChevronDown } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
 import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
-import { isLoggedIn } from '@/lib/helper'
-import { getCart } from '@/lib/server'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
+import { isLoggedIn } from '@/lib/helper'
 
 import { DynamicCart, DynamicSearch } from '../dynamic-import'
 import Marquee from '../marquee'
 import MobileMenu from './components/mobile-menu'
 import styles from './style.module.scss'
 
-const Navbar: FC = () => {
+const Navbar: FC<{ carts: TCartItem[] }> = ({ carts }) => {
   const { push, refresh } = useRouter()
   const { dispatchWebData, logoutUser } = useWithDispatch()
   const { website } = useAppSelector(state => state.appData)
@@ -35,7 +34,6 @@ const Navbar: FC = () => {
   const { width } = useWindowSize()
   const [{ y }] = useWindowScroll()
   const [showDropdown, setShowDropdown] = useState(false)
-  const [carts, setCart] = useState<TCartItem[]>([])
   const isWhiteBG = isHovering || y! > 40
   const {} = useQuery({
     queryKey: ['website'],
@@ -52,19 +50,6 @@ const Navbar: FC = () => {
     push(path)
     refresh()
   }
-
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const data = await getCart()
-        setCart(data)
-      } catch (error) {
-        console.error('Error fetching cart:', error)
-      }
-    }
-
-    fetchCart()
-  }, [])
 
   if (pathname !== '/login') {
     return (

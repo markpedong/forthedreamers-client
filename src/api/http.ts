@@ -14,10 +14,10 @@ export const throttleAlert = (msg: string) => throttle(() => console.error(msg),
 
 const handleResponse = async <T>(response: Response, url?: string): Promise<ApiResponse<T>> => {
   if (!response.ok) return serverErr as ApiResponse<T>
-  
+
   const isClient = typeof window !== 'undefined'
   const data: ApiResponse<T> = await response.json()
-  
+
   if (!!url && ['/public/login', '/public/signup'].includes(url)) {
     const token = (data.data as { token: string })?.token
 

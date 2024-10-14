@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { get, post } from '@/api/http'
 import { TAddressItem, TCartItem, TCollectionDetails, TCollectionItem, TProductItem, TTestimonials, TWebsiteItem } from '@/api/types'
 
-import { API_TAGS } from '@/app/(main)/constants/enums'
+import { API_TAGS } from '@/app/constants/enums'
 
 export const revalidate = (tag?: string) => revalidateTag(tag || '')
 
@@ -48,7 +48,7 @@ export const getCollections = async params =>
   (await get<TCollectionItem[]>({ url: '/public/collections', tags: API_TAGS.COLLECTIONS, passCookies: params.passCookies }))?.data
 
 // carts/addQuantity
-export const addQuantity = params => post<TCartItem[]>({ url: '/carts/addQuantity', data: params })
+export const addQuantity = params => post({ url: '/carts/addQuantity', data: params })
 
 // /carts/add
 export const addToCart = params => post({ url: '/carts/add', data: params })
@@ -61,11 +61,3 @@ export const deleteCart = params => post({ url: '/carts/delete', data: params })
 
 // /users/orders
 export const getOrders = () => get<TCartItem[]>({ url: '/users/orders', tags: API_TAGS.ORDERS })
-
-export const updateQty = async ({ id, quantity }: { id: string; quantity: number }) => {
-  const res = await addQuantity({ cart_id: id, quantity })
-
-  if (res?.status === 200) {
-    revalidate(API_TAGS.CART)
-  }
-}
