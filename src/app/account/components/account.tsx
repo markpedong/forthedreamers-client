@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import Image from 'next/image'
 import { FileType } from '@/api/types'
 import { useAppSelector } from '@/redux/store'
@@ -42,7 +42,7 @@ const menus = [
   },
 ]
 
-const AccountPage = () => {
+const AccountPage: FC = () => {
   const dp = useAppSelector(s => s.userData.user?.image)
   const [currTab, setCurrTab] = useState(1)
   const [loading, setLoading] = useState(false)

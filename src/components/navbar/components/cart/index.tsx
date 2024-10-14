@@ -20,6 +20,7 @@ import { CartProduct } from '../../products'
 import styles from './styles.module.scss'
 
 const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart, carts }) => {
+  const isCartLength = !!carts?.length
   const pathname = usePathname()
   const dispatch = useAppDispatch()
   const { push } = useRouter()
@@ -52,15 +53,15 @@ const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart
           <IoMdClose onClick={setShowCart} color="black" />
         </div>
         <div className={styles.products}>
-          {!!carts?.length && carts?.map(product => <CartProduct cart={product} key={product?.id} setSearch={setShowCart} />)}
+          {isCartLength && carts?.map(product => <CartProduct cart={product} key={product?.id} setSearch={setShowCart} />)}
         </div>
-        {!!carts?.length && (
+        {isCartLength && (
           <div className={styles.addNoteContainer}>
             <span>Add order note</span>
             <FaPlus onClick={() => setShowNote(true)} />
           </div>
         )}
-        {!!carts?.length && (
+        {isCartLength && (
           <div className={styles.footer}>
             <span>Taxes and shipping calculated at checkout</span>
             <div className={styles.footer__checkbox}>

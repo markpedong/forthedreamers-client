@@ -1,14 +1,12 @@
-import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/app/(main)/constants'
+import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/app/constants'
 import { DynamicListAnswers } from '@/components/dynamic-import'
-import { PageTitle, Question } from '@/components/page-components'
-import classNames from 'classnames'
-import { SF_PRO_DISPLAY } from 'public/fonts'
-import styles from './styles.module.scss'
+import { Question } from '@/components/page-components'
 
-const Page = () => {
+type Props = {}
+
+const Returns = (props: Props) => {
 	return (
-		<div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
-			<PageTitle title="returns" />
+		<div>
 			<Question question="WHAT IS FOR THE DREAMERS RETURN POLICY?" />
 			<DynamicListAnswers answers={RETURN_POLICY} />
 			<div className="py-5" />
@@ -23,4 +21,4 @@ const Page = () => {
 	)
 }
 
-export default Page
+export default Returns

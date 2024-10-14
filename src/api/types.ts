@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 import { GetProp, UploadProps } from 'antd'
 
-import { PAYMENT_METHODS } from '@/app/(main)/constants/enums'
+import { PAYMENT_METHODS } from '@/app/constants/enums'
 
 export type ApiResponse<T> = {
   data: T

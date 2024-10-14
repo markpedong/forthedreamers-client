@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { API_TAGS, PAYMENT_METHODS } from '@/app/(main)/constants/enums'
+import { API_TAGS, PAYMENT_METHODS } from '@/app/constants/enums'
 
 import styles from '../styles.module.scss'
 import { revalidate } from '@/lib/server'

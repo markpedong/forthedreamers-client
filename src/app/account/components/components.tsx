@@ -7,8 +7,8 @@ import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 
 import { revalidate } from '@/lib/server'
-import PopOver from '@/app/(main)/components/popover'
-import { API_TAGS } from '@/app/(main)/constants/enums'
+import PopOver from '@/app/components/popover'
+import { API_TAGS } from '@/app/constants/enums'
 
 import styles from '../../styles.module.scss'
 

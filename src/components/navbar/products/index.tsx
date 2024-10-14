@@ -7,9 +7,9 @@ import { motion } from 'framer-motion'
 import { debounce } from 'lodash'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
-import { deleteCart, revalidate, updateQty } from '@/lib/server'
-import PopOver from '@/app/(main)/components/popover'
-import { API_TAGS } from '@/app/(main)/constants/enums'
+import { addQuantity, deleteCart, revalidate } from '@/lib/server'
+import PopOver from '@/app/components/popover'
+import { API_TAGS } from '@/app/constants/enums'
 
 import styles from './styles.module.scss'
 
@@ -38,7 +38,6 @@ const SearchProduct: FC<TSearchProduct> = memo(({ product, setSearch }) => {
 const CartProduct: FC<TCartProduct> = memo(({ cart, setSearch }) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
-  const [quantity, setQuantity] = useState(cart?.quantity ?? 1)
 
   const clickedHandler = () => {
     router.push(`/shop/${cart?.product_id}`)
@@ -46,16 +45,26 @@ const CartProduct: FC<TCartProduct> = memo(({ cart, setSearch }) => {
   }
 
   const handleDelete = async () => {
-    await deleteCart({ cart_id: cart?.id })
-    revalidate(API_TAGS.CART)
+    const res = await deleteCart({ cart_id: cart?.id })
+
+    if (res?.status === 200) {
+      revalidate(API_TAGS.CART)
+    }
   }
 
-  const updateQuantity = debounce((newQuantity: number) => {
-    if (newQuantity >= 1 && newQuantity <= 10) {
-      setQuantity(newQuantity)
-      updateQty({ id: cart?.id, quantity: quantity })
+  const updateQty = async ({ id, quantity }: { id: string; quantity: number }) => {
+    const res = await addQuantity({ cart_id: id, quantity })
+
+    if (res?.status === 200) {
+      revalidate(API_TAGS.CART)
     }
-  }, 300)
+  }
+
+  const updateQuantity = debounce((updateType: 'ADD' | 'SUB') => {
+    if (cart?.quantity && (updateType === 'ADD' ? cart.quantity < 10 : cart.quantity > 1)) {
+      updateQty({ id: cart?.id, quantity: updateType === 'ADD' ? cart.quantity + 1 : cart.quantity - 1 })
+    }
+  }, 100)
 
   return (
     <div className={classNames(styles.products__item, styles.isCart)}>
@@ -63,16 +72,16 @@ const CartProduct: FC<TCartProduct> = memo(({ cart, setSearch }) => {
       <div className={classNames(styles.products__textContainer)}>
         <div className={styles.products__titleContainer} onClick={clickedHandler}>
           <span>{cart?.name}</span>
-          <span>₱ {cart?.price * quantity}</span>
+          <span>₱ {cart?.price * cart?.quantity}</span>
         </div>
         <div className={styles.products__variation}>
           {cart?.size}, {cart?.color}
         </div>
         <div className={styles.quantityContainer}>
           <div className={styles.addMinusContainer}>
-            <FaMinus onClick={() => updateQuantity(quantity - 1)} />
-            <span className={styles.qty}>{quantity}</span>
-            <FaPlus onClick={() => updateQuantity(quantity + 1)} />
+            <FaMinus onClick={() => updateQuantity('SUB')} />
+            <span className={styles.qty}>{cart?.quantity}</span>
+            <FaPlus onClick={() => updateQuantity('ADD')} />
           </div>
 
           <PopOver
