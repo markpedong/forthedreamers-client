@@ -5,23 +5,23 @@ const __dirname = new URL('.', import.meta.url).pathname
 
 const nextConfig = {
   reactStrictMode: false,
-  async headers() {
-    return [
-      {
-        source: '/login',
-        headers: [
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'unsafe-none',
-          },
-        ],
-      },
-    ]
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/login',
+  //       headers: [
+  //         {
+  //           key: 'Cross-Origin-Embedder-Policy',
+  //           value: 'unsafe-none',
+  //         },
+  //       ],
+  //     },
+  //   ]
+  // },
   output: 'standalone',
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-    additionalData: `@import "./src/styles/_helpers.scss";`,
+    includePaths: [path.join(__dirname, './styles')],
+    additionalData: `@import "./styles/_helpers.scss";`,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
