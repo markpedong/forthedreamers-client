@@ -1,3 +1,5 @@
+'use client'
+
 import { TCartProduct, TSearchProduct } from '@/api/types'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
