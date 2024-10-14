@@ -2,12 +2,12 @@ import { useRouter } from 'next/navigation'
 import { getNewUserInfo } from '@/api'
 import { LoginResponse, TAddCartPayload } from '@/api/types'
 import { setWebsiteData } from '@/redux/features/appData'
-import { setCartData, setUserData } from '@/redux/features/userData'
+import { setUserData } from '@/redux/features/userData'
 import { useAppDispatch } from '@/redux/store'
 import { toast } from 'sonner'
 
-import { clearUserData, isLoggedIn, unauthorized } from '@/lib/helper'
-import { addQuantity, addToCart, getCart, getWebsiteData, revalidate } from '@/lib/server'
+import { clearUserData, isLoggedIn } from '@/lib/helper'
+import { addToCart, getWebsiteData, revalidate } from '@/lib/server'
 import { API_TAGS } from '@/app/(main)/constants/enums'
 
 export const useWithDispatch = () => {
@@ -29,30 +29,9 @@ export const useWithDispatch = () => {
       quantity,
       ...(variation_id ? { variation_id } : {}),
     })
-    console.log('res', res)
     if (res?.status === 200) {
       toast(res?.message)
-      getNewCartData()
-    }
-  }
-
-  const updateQty = async ({ id, quantity }: { id: string; quantity: number }) => {
-    const res = await addQuantity({ cart_id: id, quantity })
-
-    if (res?.status === 200) {
       revalidate(API_TAGS.CART)
-      dispatch(setCartData(res?.data ?? []))
-    }
-  }
-
-  const getNewCartData = async () => {
-    const res = await getCart()
-
-    if (res?.status === 200) {
-      revalidate(API_TAGS.CART)
-      dispatch(setCartData(res?.data ?? []))
-    } else if (res?.status === 401) {
-      unauthorized()
     }
   }
 
@@ -102,9 +81,7 @@ export const useWithDispatch = () => {
     getUserInfo,
     storeUserInfo,
     dispatchWebData,
-    getNewCartData,
     addItemToCart,
     logoutUser,
-    updateQty,
   }
 }

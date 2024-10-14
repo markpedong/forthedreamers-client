@@ -16,12 +16,12 @@ import { GrLocation } from 'react-icons/gr'
 import { RiMastercardFill } from 'react-icons/ri'
 import { toast } from 'sonner'
 
-import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { PAYMENT_METHODS } from '@/app/(main)/constants/enums'
+import { API_TAGS, PAYMENT_METHODS } from '@/app/(main)/constants/enums'
 
 import styles from '../styles.module.scss'
+import { revalidate } from '@/lib/server'
 
 const AddressContainer: FC<CheckoutAddressProps> = ({ address, setCurrAddress, setIsModalOpen, defaultAddress }) => {
   return (
@@ -67,16 +67,14 @@ const PaymentMethods: FC<TPaymentMethods> = ({ logos, title, value, disabled }) 
   )
 }
 
-const Left: FC<TCheckoutLeft> = ({ address }) => {
+const Left: FC<TCheckoutLeft> = ({ address, carts }) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { getNewCartData } = useWithDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [defaultAddress, setDefaultAddress] = useState(address?.find(address => address?.is_default === 1) ?? address?.[0])
 
   const paymentMethod = useAppSelector(s => s.userData.paymentMethod)
-  const carts = useAppSelector(state => state.userData.cart)
 
   const checkoutHandler = debounce(async () => {
     if (paymentMethod === '') {
@@ -95,7 +93,7 @@ const Left: FC<TCheckoutLeft> = ({ address }) => {
 
       setTimeout(() => {
         dispatch(setBeforeCheckoutPage(''))
-        getNewCartData()
+        revalidate(API_TAGS.CART)
       }, 500)
     }
   }, 500)

@@ -23,7 +23,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import InputWithLabel from '@/components/inputWithLabel'
 import { API_TAGS } from '@/app/(main)/constants/enums'
 
-import styles from '../styles.module.scss'
+import styles from '../../styles.module.scss'
 import { AddressItem } from './components'
 
 type TAddressSchema = z.infer<typeof addressSchema>

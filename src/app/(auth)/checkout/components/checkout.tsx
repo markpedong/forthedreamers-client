@@ -1,7 +1,8 @@
 'use client'
 
+import { FC } from 'react'
 import { useRouter } from 'next/navigation'
-import { TAddressItem } from '@/api/types'
+import { TCheckoutLeft } from '@/api/types'
 import { setBeforeCheckoutPage } from '@/redux/features/appData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import classNames from 'classnames'
@@ -13,10 +14,9 @@ import styles from '../styles.module.scss'
 import Left from './left'
 import Right from './right'
 
-const Checkout = ({ address }: { address: TAddressItem[] }) => {
+const Checkout: FC<TCheckoutLeft> = ({ address, carts }) => {
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const carts = useAppSelector(state => state.userData.cart)
   const beforeCheckoutPage = useAppSelector(state => state.appData.beforeCheckoutPage)
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
@@ -43,8 +43,8 @@ const Checkout = ({ address }: { address: TAddressItem[] }) => {
         </span>
       </div>
       <div className={styles.detailsContainer}>
-        <Left address={address} />
-        <Right />
+        <Left address={address} carts={carts} />
+        <Right carts={carts} />
       </div>
     </div>
   )

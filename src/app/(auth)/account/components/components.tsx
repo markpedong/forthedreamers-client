@@ -1,16 +1,16 @@
+import { FC, useState } from 'react'
 import { deleteAddress } from '@/api'
 import { AddressProps, TAddressItem } from '@/api/types'
 import { addressTypes } from '@/constants'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import { FC, useState } from 'react'
 import { toast } from 'sonner'
 
+import { revalidate } from '@/lib/server'
 import PopOver from '@/app/(main)/components/popover'
 import { API_TAGS } from '@/app/(main)/constants/enums'
-import { revalidate } from '@/lib/server'
 
-import styles from '../styles.module.scss'
+import styles from '../../styles.module.scss'
 
 export const AddressItem: FC<AddressProps> = ({ data, refetch, setCurrAddress, ...props }) => {
   const [open, setOpen] = useState(false)

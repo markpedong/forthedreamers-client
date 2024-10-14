@@ -6,8 +6,6 @@ import Marquee from '@/components/marquee'
 import Testimonials from '@/components/testimonials'
 import styles from '@/styles/styles.module.scss'
 
-export const revalidate = 60 * 60
-
 const Page = async () => {
   const [products, website, testimonials] = await Promise.all([getProducts({}), getWebsiteData(), getTestimonials()])
 

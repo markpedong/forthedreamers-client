@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Navbar from '@/components/navbar'
 
 import styles from '../styles.module.scss'
-import AccountPage from './account'
+import AccountPage from './components/account'
 
 const Footer = dynamic(() => import('@/components/footer'), {
   ssr: false,
