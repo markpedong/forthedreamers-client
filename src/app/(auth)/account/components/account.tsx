@@ -2,18 +2,17 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { FileType } from '@/api/types'
 import { useAppSelector } from '@/redux/store'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import { GetProp, message, Upload, UploadProps } from 'antd'
+import { message, Upload } from 'antd'
 import { FaAddressCard, FaRegCreditCard, FaShoppingCart, FaStar, FaUser } from 'react-icons/fa'
 
 import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
 import { DynamicAddress, DynamicOrders, DynamicPaymentMethods, DynamicProfile, DynamicReviews } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
 
-import styles from '../styles.module.scss'
-
-type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0]
+import styles from '../../styles.module.scss'
 
 const menus = [
   {

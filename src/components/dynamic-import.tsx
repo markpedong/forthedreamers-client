@@ -18,15 +18,15 @@ const DynamicCart = dynamic(() => import('../components/navbar/components/cart')
 
 const DynamicSearch = dynamic(() => import('../components/navbar/components/search'), { loading: () => <></> })
 
-const DynamicProfile = dynamic(() => import('../app/(auth)/account/profile'), { loading: () => <></>, ssr: false })
+const DynamicProfile = dynamic(() => import('../app/(auth)/account/components/profile'), { loading: () => <></>, ssr: false })
 
-const DynamicAddress = dynamic(() => import('../app/(auth)/account/address'), { loading: () => <></>, ssr: false })
+const DynamicAddress = dynamic(() => import('../app/(auth)/account/components/address'), { loading: () => <></>, ssr: false })
 
-const DynamicOrders = dynamic(() => import('../app/(auth)/account/orders'), { loading: () => <></>, ssr: false })
+const DynamicOrders = dynamic(() => import('../app/(auth)/account/components/orders'), { loading: () => <></>, ssr: false })
 
-const DynamicPaymentMethods = dynamic(() => import('../app/(auth)/account/payment-methods'), { loading: () => <></>, ssr: false })
+const DynamicPaymentMethods = dynamic(() => import('../app/(auth)/account/components/payment-methods'), { loading: () => <></>, ssr: false })
 
-const DynamicReviews = dynamic(() => import('../app/(auth)/account/reviews'), { loading: () => <></>, ssr: false })
+const DynamicReviews = dynamic(() => import('../app/(auth)/account/components/reviews'), { loading: () => <></>, ssr: false })
 
 export {
   DProduct,

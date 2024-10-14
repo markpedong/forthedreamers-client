@@ -7,9 +7,9 @@ import { motion } from 'framer-motion'
 import { debounce } from 'lodash'
 import { FaMinus, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 
-import { deleteCart } from '@/lib/server'
-import { useWithDispatch } from '@/hooks/useWithDispatch'
+import { deleteCart, revalidate, updateQty } from '@/lib/server'
 import PopOver from '@/app/(main)/components/popover'
+import { API_TAGS } from '@/app/(main)/constants/enums'
 
 import styles from './styles.module.scss'
 
@@ -37,7 +37,6 @@ const SearchProduct: FC<TSearchProduct> = memo(({ product, setSearch }) => {
 
 const CartProduct: FC<TCartProduct> = memo(({ cart, setSearch }) => {
   const router = useRouter()
-  const { updateQty, getNewCartData } = useWithDispatch()
   const [open, setOpen] = useState(false)
   const [quantity, setQuantity] = useState(cart?.quantity ?? 1)
 
@@ -48,7 +47,7 @@ const CartProduct: FC<TCartProduct> = memo(({ cart, setSearch }) => {
 
   const handleDelete = async () => {
     await deleteCart({ cart_id: cart?.id })
-    getNewCartData()
+    revalidate(API_TAGS.CART)
   }
 
   const updateQuantity = debounce((newQuantity: number) => {

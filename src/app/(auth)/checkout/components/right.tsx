@@ -1,16 +1,15 @@
-import { FC } from 'react'
-import Image from 'next/image'
-import { useAppSelector } from '@/redux/store'
+import { TCartItem } from '@/api/types'
 import classNames from 'classnames'
+import Image from 'next/image'
 import { SF_PRO_DISPLAY } from 'public/fonts'
+import { FC } from 'react'
 import { MdOutlineLabel } from 'react-icons/md'
 
 import { Separator } from '@/components/ui/separator'
 
 import styles from '../styles.module.scss'
 
-const Right: FC = () => {
-  const carts = useAppSelector(state => state.userData.cart)
+const Right: FC<{ carts: TCartItem[] }> = ({ carts }) => {
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
     return acc

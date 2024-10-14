@@ -2,6 +2,7 @@
 
 import { FC, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
+import { TCartItem } from '@/api/types'
 import { setBeforeCheckoutPage, setOrderNote } from '@/redux/features/appData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
@@ -13,19 +14,16 @@ import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
 import { toast } from 'sonner'
 
-import { useWithDispatch } from '@/hooks/useWithDispatch'
 import Drawer from '@/components/drawer'
 
 import { CartProduct } from '../../products'
 import styles from './styles.module.scss'
 
-const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
+const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart, carts }) => {
   const pathname = usePathname()
   const dispatch = useAppDispatch()
   const { push } = useRouter()
-  const { getNewCartData } = useWithDispatch()
 
-  const carts = useAppSelector(state => state.userData.cart)
   const orderNote = useAppSelector(state => state.appData.orderNote)
   const [isUserAgree, setIsUserAgree] = useState(false)
   const [showNote, setShowNote] = useState(false)
@@ -54,10 +52,7 @@ const Cart: FC<{ setShowCart: () => void }> = ({ setShowCart }) => {
           <IoMdClose onClick={setShowCart} color="black" />
         </div>
         <div className={styles.products}>
-          {!!carts?.length &&
-            carts?.map(product => (
-              <CartProduct cart={product} key={product?.id} setSearch={setShowCart} refetch={() => getNewCartData()} />
-            ))}
+          {!!carts?.length && carts?.map(product => <CartProduct cart={product} key={product?.id} setSearch={setShowCart} />)}
         </div>
         {!!carts?.length && (
           <div className={styles.addNoteContainer}>

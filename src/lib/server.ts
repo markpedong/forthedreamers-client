@@ -48,16 +48,24 @@ export const getCollections = async params =>
   (await get<TCollectionItem[]>({ url: '/public/collections', tags: API_TAGS.COLLECTIONS, passCookies: params.passCookies }))?.data
 
 // carts/addQuantity
-export const addQuantity = params => get<TCartItem[]>({ url: '/carts/addQuantity', data: params, tags: API_TAGS.CART })
+export const addQuantity = params => post<TCartItem[]>({ url: '/carts/addQuantity', data: params })
 
 // /carts/add
 export const addToCart = params => post({ url: '/carts/add', data: params })
 
 // /cart/get
-export const getCart = () => get<TCartItem[]>({ url: '/carts/get', tags: API_TAGS.CART })
+export const getCart = async () => (await get<TCartItem[]>({ url: '/carts/get', tags: API_TAGS.CART }))?.data
 
 // carts/delete
 export const deleteCart = params => post({ url: '/carts/delete', data: params })
 
 // /users/orders
 export const getOrders = () => get<TCartItem[]>({ url: '/users/orders', tags: API_TAGS.ORDERS })
+
+export const updateQty = async ({ id, quantity }: { id: string; quantity: number }) => {
+  const res = await addQuantity({ cart_id: id, quantity })
+
+  if (res?.status === 200) {
+    revalidate(API_TAGS.CART)
+  }
+}

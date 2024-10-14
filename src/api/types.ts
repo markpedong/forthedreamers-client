@@ -1,4 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react'
+import { GetProp, UploadProps } from 'antd'
 
 import { PAYMENT_METHODS } from '@/app/(main)/constants/enums'
 
@@ -152,7 +153,7 @@ export type TToastParams = {
 
 export type TSearchProduct = { product?: TProductItem; setSearch: () => void }
 
-export type TCartProduct = { cart: TCartItem; setSearch: () => void; refetch: () => void }
+export type TCartProduct = { cart: TCartItem; setSearch: () => void }
 
 export type CheckoutAddressProps = {
   address: TAddressItem
@@ -161,6 +162,8 @@ export type CheckoutAddressProps = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export type TCheckoutLeft = { address: TAddressItem[] }
+export type TCheckoutLeft = { address: TAddressItem[]; carts: TCartItem[] }
 
 export type TPaymentMethods = { title: string; logos: (string | ReactNode)[]; value: PAYMENT_METHODS; disabled?: boolean }
+
+export type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0]

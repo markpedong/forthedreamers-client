@@ -8,12 +8,12 @@ const Page = async () => {
   const cart = await getCart()
   const address = await getAddress()
 
-  if (!!!cart?.data) {
+  if (!cart?.length) {
     redirect('/')
   } else
     return (
       <div>
-        <Checkout address={address} />
+        <Checkout address={address} carts={cart} />
       </div>
     )
 }

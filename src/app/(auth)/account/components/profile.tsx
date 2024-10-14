@@ -11,7 +11,7 @@ import { useWithDispatch } from '@/hooks/useWithDispatch'
 import { Form } from '@/components/ui/form'
 import InputWithLabel from '@/components/inputWithLabel'
 
-import styles from '../styles.module.scss'
+import styles from '../../styles.module.scss'
 
 const Profile = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
