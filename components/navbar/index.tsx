@@ -1,6 +1,5 @@
 'use client'
 
-import { TCartItem } from '@/api/types'
 import { useAppSelector } from '@/redux/store'
 import { useQuery } from '@tanstack/react-query'
 import { useWindowScroll, useWindowSize } from '@uidotdev/usehooks'
@@ -22,10 +21,11 @@ import Marquee from '../marquee'
 import MobileMenu from './components/mobile-menu'
 import styles from './style.module.scss'
 
-const Navbar: FC<{ carts: TCartItem[] }> = ({ carts }) => {
+const Navbar: FC = () => {
   const { push, refresh } = useRouter()
   const { dispatchWebData, logoutUser } = useWithDispatch()
   const { website } = useAppSelector(state => state.appData)
+  const carts = useAppSelector(state => state.userData.cart)
   const pathname = usePathname()
   const [isHovering, setIsHovering] = useState(false)
   const [open, setOpen] = useState(false)
