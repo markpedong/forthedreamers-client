@@ -36,7 +36,9 @@ const Variations = ({ variations, selectedId, setSelectedId, type, size, color }
     <div className={styles.variations}>
       {variations?.map(item => {
         const isDisabled =
-          type === 'size' ? color && item.color !== color && selectedId !== item.id : size && item.size !== size && selectedId !== item.id
+          type === 'size'
+            ? color && item.color !== color && selectedId !== item.id
+            : size && item.size !== size && selectedId !== item.id
 
         const handleClick = () => {
           if (selectedId === item.id) {
@@ -92,7 +94,15 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
       <Header arr={['HOME', 'SHOP', 'PRODUCTS']} />
       <div className={styles.productWrapper}>
         <div className={styles.productImgContainer}>
-          <Image src={product?.images?.[0]} alt="product" width={200} height={200} draggable={false} quality={50} placeholder="empty" />
+          <Image
+            src={product?.images?.[0]}
+            alt="product"
+            width={350}
+            height={350}
+            draggable={false}
+            quality={100}
+            placeholder="empty"
+          />
         </div>
         <div className={classNames(styles.descriptionContainer, SF_PRO_DISPLAY.className)}>
           <h1>{product?.name}</h1>
@@ -195,7 +205,9 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
         </div>
       </div>
       <AnimatePresence>
-        {openCareGuide && <DynamicCareGuide setOpenCareGuide={() => setOpenCareGuide(false)} activeTab={selectedCare} />}
+        {openCareGuide && (
+          <DynamicCareGuide setOpenCareGuide={() => setOpenCareGuide(false)} activeTab={selectedCare} />
+        )}
       </AnimatePresence>
     </div>
   )

@@ -1,18 +1,25 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { FileType } from '@/api/types'
-import { useAppSelector } from '@/redux/store'
+import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload } from 'antd'
 import { FaAddressCard, FaRegCreditCard, FaShoppingCart, FaStar, FaUser } from 'react-icons/fa'
 
 import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
-import { DynamicAddress, DynamicOrders, DynamicPaymentMethods, DynamicProfile, DynamicReviews } from '@/components/dynamic-import'
+import {
+  DynamicAddress,
+  DynamicOrders,
+  DynamicPaymentMethods,
+  DynamicProfile,
+  DynamicReviews,
+} from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
 
 import styles from '../../styles.module.scss'
+import { setBeforeCheckoutPage } from '@/redux/features/appData'
 
 const menus = [
   {
@@ -47,6 +54,8 @@ const AccountPage: FC = () => {
   const [currTab, setCurrTab] = useState(1)
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState<string>(dp)
+  const beforeCheckoutPage = useAppSelector(s => s.appData.beforeCheckoutPage)
+  const dispatch = useAppDispatch()
 
   const uploadButton = (
     <button style={{ border: 0, background: 'none' }} type="button">
@@ -66,6 +75,13 @@ const AccountPage: FC = () => {
     }
     return isJpgOrPng && isLt2M
   }
+
+  useEffect(() => {
+    if (beforeCheckoutPage === '/checkout') {
+      dispatch(setBeforeCheckoutPage('/'))
+      setCurrTab(4)
+    }
+  }, [])
 
   return (
     <div className={styles.mainWrapper}>
@@ -97,7 +113,14 @@ const AccountPage: FC = () => {
                 }}
               >
                 {imageUrl ? (
-                  <Image priority className={styles.profileImage} src={imageUrl} alt="avatar" width={100} height={100} />
+                  <Image
+                    priority
+                    className={styles.profileImage}
+                    src={imageUrl}
+                    alt="avatar"
+                    width={100}
+                    height={100}
+                  />
                 ) : (
                   uploadButton
                 )}
