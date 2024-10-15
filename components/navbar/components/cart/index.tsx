@@ -1,7 +1,5 @@
 'use client'
 
-import { FC, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
 import { TCartItem } from '@/api/types'
 import { setBeforeCheckoutPage, setOrderNote } from '@/redux/features/appData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
@@ -9,7 +7,9 @@ import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import { debounce } from 'lodash'
+import { useRouter } from 'next/navigation'
 import { SF_PRO_DISPLAY } from 'public/fonts'
+import { FC, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
 import { toast } from 'sonner'
@@ -21,7 +21,6 @@ import styles from './styles.module.scss'
 
 const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart, carts }) => {
   const isCartLength = !!carts?.length
-  const pathname = usePathname()
   const dispatch = useAppDispatch()
   const { push } = useRouter()
 
@@ -37,7 +36,8 @@ const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart
 
   const debounceCheckout = debounce(() => {
     if (isUserAgree) {
-      dispatch(setBeforeCheckoutPage(pathname))
+      dispatch(setBeforeCheckoutPage('/checkout'))
+      setShowCart()
       push('/checkout')
     } else {
       toast('Please agree to the terms and conditions')
@@ -53,7 +53,8 @@ const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart
           <IoMdClose onClick={setShowCart} color="black" />
         </div>
         <div className={styles.products}>
-          {isCartLength && carts?.map(product => <CartProduct cart={product} key={product?.id} setSearch={setShowCart} />)}
+          {isCartLength &&
+            carts?.map(product => <CartProduct cart={product} key={product?.id} setSearch={setShowCart} />)}
         </div>
         {isCartLength && (
           <div className={styles.addNoteContainer}>
@@ -65,7 +66,8 @@ const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart
           <div className={styles.footer}>
             <span>Taxes and shipping calculated at checkout</span>
             <div className={styles.footer__checkbox}>
-              <input type="checkbox" id="agree_checkbox" onChange={() => setIsUserAgree(!isUserAgree)} /> I agree with the{' '}
+              <input type="checkbox" id="agree_checkbox" onChange={() => setIsUserAgree(!isUserAgree)} /> I agree with
+              the{' '}
               <span className="underline underline-offset-4" onClick={() => push('/support/terms-of-service')}>
                 terms and conditions
               </span>

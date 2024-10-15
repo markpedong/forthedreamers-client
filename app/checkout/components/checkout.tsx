@@ -1,10 +1,10 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { TCheckoutLeft } from '@/api/types'
 import { setBeforeCheckoutPage } from '@/redux/features/appData'
-import { useAppDispatch, useAppSelector } from '@/redux/store'
+import { useAppDispatch } from '@/redux/store'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { darkerGrotesque } from 'public/fonts'
@@ -17,21 +17,26 @@ import Right from './right'
 const Checkout: FC<TCheckoutLeft> = ({ address, carts }) => {
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const beforeCheckoutPage = useAppSelector(state => state.appData.beforeCheckoutPage)
   const totalPrice = carts?.reduce((acc, curr) => {
     acc += curr?.price * curr?.quantity
     return acc
   }, 0)
+
+  useEffect(() => {
+    return () => {
+      dispatch(setBeforeCheckoutPage('/checkout'))
+    }
+  }, [])
 
   return (
     <div className={classNames(styles.checkoutWrapper, darkerGrotesque.className)}>
       <motion.span className={styles.back} whileTap={{ scale: 0.9 }}>
         <MdArrowBack
           onClick={() => {
-            router.push(beforeCheckoutPage)
+            router.back()
 
             setTimeout(() => {
-              dispatch(setBeforeCheckoutPage(''))
+              dispatch(setBeforeCheckoutPage('/checkout'))
             }, 300)
           }}
         />

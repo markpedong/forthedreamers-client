@@ -20,7 +20,7 @@ const Footer = () => {
   const small = useMediaQuery('only screen and (max-width : 576px)')
   const medium = useMediaQuery('only screen and (min-width : 993px)')
 
-  if (pathname !== '/login') {
+  if (!['/login', '/checkout'].includes(pathname)) {
     return (
       <div className={classNames(styles.footerContainer, SF_PRO_DISPLAY.className)}>
         <div className={styles.footerWrapper}>

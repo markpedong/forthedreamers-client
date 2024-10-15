@@ -51,7 +51,7 @@ const Navbar: FC = () => {
     refresh()
   }
 
-  if (pathname !== '/login') {
+  if (!['/login', '/checkout'].includes(pathname)) {
     return (
       <>
         {pathname !== '/' && <Marquee text={website?.promo_text ?? ''} landing />}
@@ -68,7 +68,9 @@ const Navbar: FC = () => {
           <motion.div
             className={styles.background}
             initial={{ y: pathname === '/' ? '-100%' : 0 }}
-            animate={pathname === '/' ? { y: isWhiteBG ? 0 : '-100%', transition: { duration: 0.15, ease: 'easeIn' } } : {}}
+            animate={
+              pathname === '/' ? { y: isWhiteBG ? 0 : '-100%', transition: { duration: 0.15, ease: 'easeIn' } } : {}
+            }
           />
           {width! > 992 && (
             <div className={classNames(styles.leftBtnWrapper, SF_PRO_DISPLAY.className)}>
@@ -99,7 +101,12 @@ const Navbar: FC = () => {
                 />
               )}
               <AnimatePresence>
-                {open && <MobileMenu setOpen={() => setOpen(false)} setShowLogin={() => (isLoggedIn() ? logoutUser() : push('/login'))} />}
+                {open && (
+                  <MobileMenu
+                    setOpen={() => setOpen(false)}
+                    setShowLogin={() => (isLoggedIn() ? logoutUser() : push('/login'))}
+                  />
+                )}
               </AnimatePresence>
             </div>
           )}
@@ -108,7 +115,11 @@ const Navbar: FC = () => {
           </div>
           <div className={classNames(styles.rightBtnWrapper, SF_PRO_DISPLAY.className)}>
             <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
-              <FiUser className="cursor-pointer" size={20} onClick={() => (isLoggedIn() ? push('/account') : push('/login'))} />
+              <FiUser
+                className="cursor-pointer"
+                size={20}
+                onClick={() => (isLoggedIn() ? push('/account') : push('/login'))}
+              />
             </motion.span>
             <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
               <IoSearchOutline
@@ -152,7 +163,9 @@ const Navbar: FC = () => {
               )}
             </div>
           </div>
-          <AnimatePresence>{showCart && <DynamicCart carts={carts ?? []} setShowCart={() => setShowCart(false)} />}</AnimatePresence>
+          <AnimatePresence>
+            {showCart && <DynamicCart carts={carts ?? []} setShowCart={() => setShowCart(false)} />}
+          </AnimatePresence>
           <AnimatePresence>{search && <DynamicSearch setSearch={() => setSearch(false)} />}</AnimatePresence>
           <AnimatePresence>
             {width! > 1068 && showDropdown && (

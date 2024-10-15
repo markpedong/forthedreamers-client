@@ -10,12 +10,7 @@ const Page = async () => {
 
   if (!cart?.length) {
     redirect('/')
-  } else
-    return (
-      <div>
-        <Checkout address={address} carts={cart} />
-      </div>
-    )
+  } else return <Checkout address={address} carts={cart} />
 }
 
 export default Page

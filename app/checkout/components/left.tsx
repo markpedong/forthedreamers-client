@@ -1,32 +1,32 @@
-import { FC, useEffect, useState } from 'react'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { checkoutOrder } from '@/api'
 import { CheckoutAddressProps, TCheckoutLeft, TPaymentMethods } from '@/api/types'
 import { PAYMENT_METHODS_VALUES } from '@/constants'
-import { setBeforeCheckoutPage } from '@/redux/features/appData'
-import { setPaymentMethod } from '@/redux/features/userData'
+import { setCartData, setPaymentMethod } from '@/redux/features/userData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { debounce } from 'lodash'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { FC, useEffect, useState } from 'react'
 import { BsCash } from 'react-icons/bs'
 import { FaCcVisa } from 'react-icons/fa'
 import { GrLocation } from 'react-icons/gr'
 import { RiMastercardFill } from 'react-icons/ri'
 import { toast } from 'sonner'
 
+import { PAYMENT_METHODS } from '@/app/constants/enums'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { API_TAGS, PAYMENT_METHODS } from '@/app/constants/enums'
 
 import styles from '../styles.module.scss'
-import { revalidate } from '@/lib/server'
 
 const AddressContainer: FC<CheckoutAddressProps> = ({ address, setCurrAddress, setIsModalOpen, defaultAddress }) => {
   return (
     <div
-      className={classNames(styles.addressContainer, styles.isModal, { [styles.selected]: address?.id === defaultAddress?.id })}
+      className={classNames(styles.addressContainer, styles.isModal, {
+        [styles.selected]: address?.id === defaultAddress?.id,
+      })}
       onClick={() => {
         setCurrAddress(address)
         setIsModalOpen(false)
@@ -48,7 +48,10 @@ const PaymentMethods: FC<TPaymentMethods> = ({ logos, title, value, disabled }) 
   const dispatch = useAppDispatch()
   return (
     <div
-      className={classNames(styles.methodContainer, { [styles.selected]: paymentMethod === value, [styles.disabled]: disabled })}
+      className={classNames(styles.methodContainer, {
+        [styles.selected]: paymentMethod === value,
+        [styles.disabled]: disabled,
+      })}
       onClick={() => !disabled && dispatch(setPaymentMethod(value))}
     >
       <div>{title}</div>
@@ -72,7 +75,9 @@ const Left: FC<TCheckoutLeft> = ({ address, carts }) => {
   const dispatch = useAppDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [defaultAddress, setDefaultAddress] = useState(address?.find(address => address?.is_default === 1) ?? address?.[0])
+  const [defaultAddress, setDefaultAddress] = useState(
+    address?.find(address => address?.is_default === 1) ?? address?.[0],
+  )
 
   const paymentMethod = useAppSelector(s => s.userData.paymentMethod)
 
@@ -92,8 +97,8 @@ const Left: FC<TCheckoutLeft> = ({ address, carts }) => {
       toast('Order Placed')
 
       setTimeout(() => {
-        dispatch(setBeforeCheckoutPage(''))
-        revalidate(API_TAGS.CART)
+        dispatch(setCartData([]))
+        router.push('/account')
       }, 500)
     }
   }, 500)
@@ -101,7 +106,6 @@ const Left: FC<TCheckoutLeft> = ({ address, carts }) => {
   useEffect(() => {
     return () => {
       setDefaultAddress(address?.find(address => address?.is_default === 1) ?? address?.[0])
-      dispatch(setPaymentMethod(''))
     }
   }, [])
 
@@ -121,7 +125,11 @@ const Left: FC<TCheckoutLeft> = ({ address, carts }) => {
                   <GrLocation className="cursor-pointer" />
                 </motion.span>
               </DialogTrigger>
-              <DialogContent className="pt-[3rem] sm:max-w-[550px]" onClose={() => setIsModalOpen(false)} title="Change Address">
+              <DialogContent
+                className="pt-[3rem] sm:max-w-[550px]"
+                onClose={() => setIsModalOpen(false)}
+                title="Change Address"
+              >
                 {address?.map(address => (
                   <AddressContainer
                     key={address?.id}
