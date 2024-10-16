@@ -180,12 +180,49 @@
 }
 
 .ordersWrapper {
-  @apply fcol;
+  @apply fcol divide-y;
+  font-size: toRem(12);
 
   .orderContainer {
+    @apply mb-4 py-1;
+
+    .status {
+      @apply flex justify-end;
+
+      span {
+        @apply bg-[#162D3A] text-white px-[0.7rem] py-[0.1rem] rounded-sm;
+      }
+    }
+
+    .total {
+      font-size: toRem(14);
+    }
+
+    .status,
+    .total {
+      @apply text-end;
+    }
+
+    .item {
+      @apply flex gap-3;
+      img {
+        @apply size-[5rem] object-cover object-center;
+      }
+
+      .details {
+        @apply fcol flex-1;
+
+        div:nth-child(2) {
+          @apply flex justify-between;
+        }
+        div:nth-child(3) {
+          @apply text-end;
+        }
+      }
+    }
+
     .btnContainer {
-      @apply flex justify-end items-center;
-      font-size: toRem(12);
+      @apply flex justify-end items-center mt-1;
 
       > * {
         @apply px-2 py-1 rounded-sm;
