@@ -29,3 +29,12 @@ export const PAYMENT_METHODS_VALUES = {
   COD: 1,
   CARD: 2,
 }
+
+export const ORDER_STATUS = {
+  0: 'Pending',
+  4: 'Delivered',
+}
+
+export const ORDER_METHODS = {
+  1: 'COD',
+}

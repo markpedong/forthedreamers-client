@@ -88,7 +88,7 @@ const AccountPage: FC<{ orders: OrderItems[] }> = ({ orders }) => {
       <PageTitle title={menus[currTab - 1]?.name} medium className="!select-none !text-[1.3rem] !capitalize" />
       <div className={styles.menuWrapper}>
         {/* causes error on console #incorrect use of label */}
-        <Command className="max-w-[200px] rounded-lg border shadow-md">
+        <Command className={styles.command}>
           <CommandList>
             <CommandGroup heading="Display Picture">
               <Upload
@@ -145,7 +145,7 @@ const AccountPage: FC<{ orders: OrderItems[] }> = ({ orders }) => {
             </CommandGroup>
           </CommandList>
         </Command>
-        <div className={styles.detailsWrapper}>
+        <div className={styles.detailsWrapper} data-currtab={currTab}>
           {currTab === 1 && <DynamicProfile />}
           {currTab === 2 && <DynamicAddress />}
           {currTab === 3 && <DynamicPaymentMethods />}

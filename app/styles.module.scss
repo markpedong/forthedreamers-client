@@ -12,10 +12,20 @@
 
 .menuWrapper {
   @apply flex gap-3;
+
+  @media screen and (max-width: 992px) {
+    @apply flex-col;
+  }
 }
 
 .detailsWrapper {
-  @apply flex-1 rounded-lg border shadow-md;
+  @apply flex-1 rounded-lg border shadow-md bg-slate-50;
+
+  @media screen and (max-width: 992px) {
+    &[data-currtab='2'] {
+      @apply mt-[3rem];
+    }
+  }
 }
 
 .forgotPassWrapper {
@@ -110,7 +120,7 @@
 }
 
 .btnContainer {
-  @apply mt-5 flex select-none justify-end gap-3;
+  @apply mt-5 flex select-none justify-end gap-3 text-xs;
 
   button:first-child {
     @apply flex items-center justify-center rounded-lg bg-[#eeeeee] px-4 py-2 text-[0.8rem] text-gray-800;
@@ -180,17 +190,24 @@
 }
 
 .ordersWrapper {
-  @apply fcol divide-y;
-  font-size: toRem(12);
+  @apply fcol;
 
   .orderContainer {
-    @apply mb-4 py-1;
+    @apply mb-4 px-6 p-3 bg-white rounded-lg shadow-md;
+
+    &:first-child {
+      border-top: none;
+    }
 
     .status {
       @apply flex justify-end;
 
       span {
-        @apply bg-[#162D3A] text-white px-[0.7rem] py-[0.1rem] rounded-sm;
+        @apply bg-[#162D3A] text-white px-[0.7rem] py-[0.1rem] rounded-sm text-xs;
+
+        &[data-status='4'] {
+          @apply bg-green-800;
+        }
       }
     }
 
@@ -210,10 +227,19 @@
       }
 
       .details {
-        @apply fcol flex-1;
+        @apply fcol flex-1 text-ellipsis overflow-hidden;
+        font-size: toRem(12) !important;
+
+        .name {
+          @apply whitespace-nowrap text-ellipsis overflow-hidden font-normal;
+        }
 
         div:nth-child(2) {
-          @apply flex justify-between;
+          @apply flex justify-between font-normal;
+
+          > * {
+            @apply whitespace-nowrap text-ellipsis overflow-hidden normal-case font-normal;
+          }
         }
         div:nth-child(3) {
           @apply text-end;
@@ -236,5 +262,55 @@
         @apply bg-[#eeeeee] text-gray-800;
       }
     }
+  }
+}
+
+.command {
+  @apply max-w-[200px] rounded-lg border shadow-md;
+
+  @media screen and (max-width: 992px) {
+    @apply max-w-[100%];
+  }
+}
+
+.delivery {
+  @apply fcol bg-white p-4 rounded-md shadow-md mt-5;
+
+  &__title {
+    @apply mb-3;
+    font-size: toRem(14);
+  }
+
+  &__details {
+    font-size: toRem(12);
+    @apply flex items-center gap-3;
+  }
+}
+
+.itemsContainer {
+  @apply w-full mt-[1rem];
+
+  .total_price {
+    @apply text-end  bg-white px-4 py-2 rounded-md rounded-t-none shadow-md;
+    border-top: toRem(1) solid rgba(0, 0, 0, 0.2);
+    font-size: toRem(14);
+  }
+}
+
+.orderFooter {
+  @apply bg-white px-4 mt-5 py-3 rounded-md shadow-md;
+  font-size: toRem(12);
+
+  &__id {
+    @apply mb-2;
+  }
+
+  &__payment, &__time {
+    @apply text-gray-700;
+    font-size: toRem(10);
+  }
+
+  div {
+    @apply flex justify-between;
   }
 }
