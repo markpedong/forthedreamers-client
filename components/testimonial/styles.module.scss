@@ -1,10 +1,27 @@
+.testimonial {
+    @apply fcol gap-3 items-center max-w-[300px];
 
-.testimonialContainer {
-    @apply fcol items-center justify-center gap-4;
-    height: toRem(300);
+    >* {
+        font-size: toRem(12)
+    }
 
-    h1 {
-        font-size: toRem(20);
-        font-weight: 500;
+    &__header {
+        @apply flex justify-start items-center gap-3;
+
+        img {
+            @apply size-[2rem] object-cover rounded-full;
+        }
+
+        div {
+            @apply fcol;
+        }
+    }
+
+    &__body {
+        @apply text-start;
+    }
+
+    &__footer {
+        @apply flex justify-between items-center;
     }
 }

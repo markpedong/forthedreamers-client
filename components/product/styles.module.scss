@@ -2,7 +2,7 @@
     @apply fcol items-center justify-start gap-4;
 
     img {
-        @apply cursor-pointer size-[9.9rem];
+        @apply cursor-pointer size-[6rem] rounded-sm; 
     }
 
     div {
@@ -15,11 +15,11 @@
 
    .title {
         @apply uppercase cursor-pointer font-bold;
-        font-size: toRem(16);
+        font-size: toRem(14);
     }
 
     .avail {
-        font-size: toRem(12);
+        font-size: toRem(10);
         font-weight: 300;
     }
 }

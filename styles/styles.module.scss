@@ -53,8 +53,12 @@
         @apply fcol self-start;
 
         span:first-child {
-            font-size: toRem(40);
+            font-size: toRem(25);
             font-weight: 600;
+        }
+
+        span:last-child {
+            font-size: toRem(14);
         }
     }
 

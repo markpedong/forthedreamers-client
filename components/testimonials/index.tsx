@@ -48,7 +48,7 @@ const Testimonials: FC<{ data: TTestimonials[] }> = ({ data }) => {
 
   return (
     <div>
-      <div className="keen-slider" ref={sliderRef}>
+      <div className="keen-slider my-5" ref={sliderRef}>
         {data?.map(item => <Testimonial className="keen-slider__slide" key={item?.id} data={item} />)}
       </div>
     </div>
