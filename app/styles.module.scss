@@ -8,7 +8,6 @@
 .mainWrapper {
   @apply mx-auto w-full max-w-[56rem] p-2;
   margin-block: toRem(90);
-
 }
 
 .menuWrapper {
@@ -82,7 +81,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .loginWrapper,
   .registerWrapper {
     @apply grid-cols-1;
@@ -106,7 +104,8 @@
 }
 
 .addressWrapper,
-.profileWrapper {
+.profileWrapper,
+.ordersWrapper {
   @apply p-3 py-6;
 }
 
@@ -141,7 +140,7 @@
     div:nth-child(3) {
       @apply flex gap-[0.5rem] pt-2;
 
-      >* {
+      > * {
         @apply rounded-sm bg-gray-50 px-[1rem] py-[0.2rem] text-gray-800;
         font-weight: 500;
         font-size: toRem(12);
@@ -178,4 +177,8 @@
 
 .addAddressBtn {
   @apply absolute right-[0.8rem] top-[-2.5rem];
+}
+
+.ordersWrapper{
+  @apply fcol;
 }

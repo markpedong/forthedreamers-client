@@ -164,6 +164,36 @@ export type CheckoutAddressProps = {
 
 export type TCheckoutLeft = { address: TAddressItem[]; carts: TCartItem[] }
 
-export type TPaymentMethods = { title: string; logos: (string | ReactNode)[]; value: PAYMENT_METHODS; disabled?: boolean }
+export type TPaymentMethods = {
+  title: string
+  logos: (string | ReactNode)[]
+  value: PAYMENT_METHODS
+  disabled?: boolean
+}
 
 export type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0]
+
+export type OrderItems = {
+  id: string
+  total_price: number
+  payment_method: number
+  address: {
+    first_name: string
+    last_name: string
+    phone: string
+    address: string
+    is_default: number
+  }
+  items: Array<{
+    id: string
+    quantity: number
+    name: string
+    product_id: string
+    size: string
+    color: string
+    price: number
+    images: string
+  }>
+  created_at: number
+  status: number
+}
