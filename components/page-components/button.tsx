@@ -9,7 +9,11 @@ export const GoogleButton = () => {
   const { storeUserInfo } = useWithDispatch()
 
   const handleLogin = () => {
-    const popup = window.open(`${process.env.NEXT_PUBLIC_DOMAIN}/public/googleLogin`, 'Google Login', 'width=600,height=600')
+    const popup = window.open(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/public/googleLogin`,
+      'Google Login',
+      'width=600,height=600',
+    )
 
     const timer = setInterval(() => {
       if (popup?.closed) {
@@ -19,7 +23,7 @@ export const GoogleButton = () => {
   }
 
   useEffect(() => {
-    const handleMessage = (data) => {
+    const handleMessage = data => {
       if (data.origin === process.env.NEXT_PUBLIC_DOMAIN) {
         if (data.data.data.code === 200) {
           setLocalStorage('token', data.data.data.token)
@@ -50,7 +54,10 @@ export const GoogleButton = () => {
 
 export const FacebookButton = () => {
   return (
-    <div className="mb-2 flex w-full items-center justify-center bg-[#F3F9FA]">
+    <div
+      className="mb-2 flex w-full items-center justify-center bg-[#F3F9FA] select-none"
+      style={{ filter: 'grayscale(1)', pointerEvents: 'none' }}
+    >
       <button className="flex items-center gap-2 px-6 py-2 text-xs text-[#313957]">
         <Image src={'/assets/facebook.svg'} width={20} height={20} alt="google_logo" />
         <span>Sign in with Facebook</span>
