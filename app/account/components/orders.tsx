@@ -1,21 +1,19 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { OrderItems } from '@/api/types'
+import { FC } from 'react'
+import styles from '../../styles.module.scss'
 
-import { getOrders } from '@/lib/server'
-
-const Orders = () => {
-  const {} = useQuery({
-    queryKey: ['orders'],
-    queryFn: async () => {
-      const res = await getOrders()
-
-      console.log('res', res?.data)
-      return res ?? []
-    },
-  })
-
-  return <div>Orders</div>
+const OrderItem: FC<{ order: OrderItems }> = ({ order }) => {
+  return (
+    <div className={styles.order} key={order.id}>
+      <div className={styles.orderId}>Order #{order.id}</div>
+      <div className={styles.orderDate}>Date: {order.created_at}</div>
+    </div>
+  )
+}
+const Orders: FC<{ orders: OrderItems[] }> = ({ orders }) => {
+  return <div className={styles.ordersWrapper}>{orders?.map(order => <OrderItem key={order.id} order={order} />)}</div>
 }
 
 export default Orders

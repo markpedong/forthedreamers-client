@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { FileType } from '@/api/types'
+import { FileType, OrderItems } from '@/api/types'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload } from 'antd'
@@ -49,7 +49,7 @@ const menus = [
   },
 ]
 
-const AccountPage: FC = () => {
+const AccountPage: FC<{ orders: OrderItems[] }> = ({ orders }) => {
   const dp = useAppSelector(s => s.userData.user?.image)
   const [currTab, setCurrTab] = useState(1)
   const [loading, setLoading] = useState(false)
@@ -149,7 +149,7 @@ const AccountPage: FC = () => {
           {currTab === 1 && <DynamicProfile />}
           {currTab === 2 && <DynamicAddress />}
           {currTab === 3 && <DynamicPaymentMethods />}
-          {currTab === 4 && <DynamicOrders />}
+          {currTab === 4 && <DynamicOrders orders={orders} />}
           {currTab === 5 && <DynamicReviews />}
         </div>
       </div>

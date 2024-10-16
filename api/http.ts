@@ -10,13 +10,16 @@ import { getLocalStorage, setLocalStorage } from '@/lib/xLocalStorage'
 
 import { ApiResponse, RequestParams, serverErr } from './types'
 
-export const throttleAlert = (msg: string) => throttle(() => console.error(msg), 1500, { trailing: false, leading: true })
+export const throttleAlert = (msg: string) =>
+  throttle(() => console.error(msg), 1500, { trailing: false, leading: true })
 
 const handleResponse = async <T>(response: Response, url?: string): Promise<ApiResponse<T>> => {
   if (!response.ok) return serverErr as ApiResponse<T>
 
   const isClient = typeof window !== 'undefined'
   const data: ApiResponse<T> = await response.json()
+
+  console.log('url', url, data?.status)
 
   if (!!url && ['/public/login', '/public/signup'].includes(url)) {
     const token = (data.data as { token: string })?.token
