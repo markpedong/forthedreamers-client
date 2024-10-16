@@ -167,15 +167,15 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
           <div className={classNames(styles.guideContainer, SF_PRO_DISPLAY.className)}>
             <div>
               <MdLocalLaundryService />
-              <motion.span
+              <span
                 onClick={() => {
                   setSelectedCare(CARE_GUIDE.CARE_GUIDE)
                   setOpenCareGuide(true)
                 }}
-                whileHover={{ scale: 1.2 }}
+                className="btn"
               >
                 CARE GUIDE
-              </motion.span>
+              </span>
             </div>
             <div>
               <BsBox />

@@ -75,9 +75,9 @@ const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart
                 <span className="fa fa-check" />
               </label>
             </div>
-            <motion.div whileTap={{ scale: 0.98 }} className={styles.btn} onClick={debounceCheckout}>
+            <div className={classNames(styles.btn, 'btn')} onClick={debounceCheckout}>
               checkout • ₱{totalPrice}
-            </motion.div>
+            </div>
             <div
               className="uppercase tracking-wider underline underline-offset-8"
               onClick={() => {

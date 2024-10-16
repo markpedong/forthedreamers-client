@@ -2,7 +2,6 @@
 
 import { TCartProduct, TSearchProduct } from '@/api/types'
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import { debounce } from 'lodash'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -99,9 +98,9 @@ const CartProduct: FC<TCartProduct> = memo(({ cart, setSearch }) => {
             setOpen={setOpen}
             title="Remove this item from cart?"
             trigger={
-              <motion.span whileTap={{ scale: 0.9 }}>
+              <span className="btn">
                 <FaRegTrashAlt color="red" />
-              </motion.span>
+              </span>
             }
             key={cart.id}
           />

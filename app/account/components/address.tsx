@@ -8,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -17,7 +16,15 @@ import { getAddress, revalidate } from '@/lib/server'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import InputWithLabel from '@/components/inputWithLabel'
@@ -105,15 +112,15 @@ const Address = () => {
       <Dialog open={isModalOpen || !!currAddress?.id}>
         <DialogTrigger asChild>
           <div className={classNames(styles.btnContainer, styles.addAddressBtn, '!mt-0')}>
-            <motion.button
-              whileTap={{ scale: 0.95 }}
+            <button
+              className="btn"
               onClick={() => {
                 currAddress?.id && setCurrAddress(undefined)
                 setIsModalOpen(true)
               }}
             >
               New Address
-            </motion.button>
+            </button>
           </div>
         </DialogTrigger>
         <DialogContent
@@ -172,8 +179,15 @@ const Address = () => {
               />
               <Popover open={dropdownOpen} onOpenChange={setDropdownOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" role="combobox" aria-expanded={dropdownOpen} className="mb-[2rem] w-full justify-between">
-                    {value ? addressTypes.find(framework => framework.value === value)?.label : 'Select Address type...'}
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={dropdownOpen}
+                    className="mb-[2rem] w-full justify-between"
+                  >
+                    {value
+                      ? addressTypes.find(framework => framework.value === value)?.label
+                      : 'Select Address type...'}
                     <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </PopoverTrigger>
@@ -190,7 +204,9 @@ const Address = () => {
                               setDropdownOpen(false)
                             }}
                           >
-                            <CheckIcon className={cn('mr-2 h-4 w-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
+                            <CheckIcon
+                              className={cn('mr-2 h-4 w-4', value === framework.value ? 'opacity-100' : 'opacity-0')}
+                            />
                             {framework.label}
                           </CommandItem>
                         ))}
@@ -207,7 +223,9 @@ const Address = () => {
         </DialogContent>
       </Dialog>
       <div className="divide-y-2">
-        {address?.map(item => <AddressItem data={item} key={item?.id} refetch={refetch} setCurrAddress={setCurrAddress} />)}
+        {address?.map(item => (
+          <AddressItem data={item} key={item?.id} refetch={refetch} setCurrAddress={setCurrAddress} />
+        ))}
       </div>
     </div>
   )

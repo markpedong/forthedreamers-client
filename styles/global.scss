@@ -96,3 +96,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.btn {
+  @apply transition-all duration-200 active:scale-95 cursor-pointer;
+}

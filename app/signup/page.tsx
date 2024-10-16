@@ -1,7 +1,6 @@
 'use client'
 
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -38,7 +37,9 @@ const Signup = () => {
       </div>
       <div className={styles.formContainer}>
         <h1>Create New Account 👋</h1>
-        <span className={styles.subHeader}>Today is a new day. It's your day. You shape it. Sign in to start managing your projects.</span>
+        <span className={styles.subHeader}>
+          Today is a new day. It's your day. You shape it. Sign in to start managing your projects.
+        </span>
         <Form {...form}>
           <form className="w-full" onSubmit={handleSubmit(onSubmitForm, onError)}>
             <div className="flex w-full gap-2">
@@ -105,9 +106,9 @@ const Signup = () => {
             <div className={styles.forgot}>
               <span onClick={() => router.push('/forgot-password')}>Forgot Password?</span>
             </div>
-            <motion.button whileTap={{ scale: 0.97 }} type="submit" className={styles.signInBtn}>
+            <button type="submit" className={classNames(styles.signInBtn, 'btn')}>
               Sign Up
-            </motion.button>
+            </button>
           </form>
         </Form>
         {/* <OrDivider /> */}

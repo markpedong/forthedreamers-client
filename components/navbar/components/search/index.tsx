@@ -45,7 +45,12 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
           {!!products?.length && value !== '' && (
             <>
               <div className={classNames(styles.suggestions, SF_PRO_DISPLAY.className)}>
-                <motion.span className={styles.suggestions__header} initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <motion.span
+                  className={styles.suggestions__header}
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
                   SUGGESTIONS
                 </motion.span>
                 <motion.div
@@ -70,16 +75,15 @@ const Search: FC<{ setSearch: () => void }> = ({ setSearch }) => {
               >
                 {products?.map(product => <SearchProduct product={product} setSearch={setSearch} key={product?.id} />)}
               </motion.div>
-              <motion.div
-                whileTap={{ scale: 0.97 }}
-                className={classNames(styles.footer, SF_PRO_DISPLAY.className)}
+              <div
+                className={classNames(styles.footer, SF_PRO_DISPLAY.className, 'btn')}
                 onClick={() => {
                   push(`/search?search=${delayedValue?.toLowerCase()}`)
                   setSearch()
                 }}
               >
                 view all results
-              </motion.div>
+              </div>
             </>
           )}
         </AnimatePresence>

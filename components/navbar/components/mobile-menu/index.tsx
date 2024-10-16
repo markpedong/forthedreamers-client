@@ -32,7 +32,12 @@ const MobileMenu: FC<{ setOpen: () => void; setShowLogin: () => void }> = ({ set
       })}
       initial={{ opacity: 0, top: '150%%' }}
       exit={{ opacity: 0, top: '150%%' }}
-      animate={{ opacity: 1, top: pathname === '/' ? '3.75rem' : '5.6rem', animation: 'ease-out', transition: { duration: 0.5 } }}
+      animate={{
+        opacity: 1,
+        top: pathname === '/' ? '3.75rem' : '5.6rem',
+        animation: 'ease-out',
+        transition: { duration: 0.5 },
+      }}
     >
       <div className={styles.menuContainer}>
         <span onClick={() => handlePush('/')}>HOME</span>
@@ -70,9 +75,9 @@ const MobileMenu: FC<{ setOpen: () => void; setShowLogin: () => void }> = ({ set
       </div>
       <div className={styles.loginBtn}>
         <FiUser size={25} color="black" />
-        <motion.span whileTap={{ scale: 0.95 }} onClick={setShowLogin}>
+        <span className="btn" onClick={setShowLogin}>
           {isLoggedIn() ? 'Logout' : 'Login'}
-        </motion.span>
+        </span>
       </div>
     </motion.div>
   )

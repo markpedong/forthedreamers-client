@@ -3,7 +3,6 @@
 import { login } from '@/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -64,7 +63,9 @@ const Login = () => {
     <div className={styles.loginWrapper}>
       <div className={styles.formContainer}>
         <h1>Welcome Back 👋</h1>
-        <span className={styles.subHeader}>Today is a new day. It's your day. You shape it. Sign in to start managing your projects.</span>
+        <span className={styles.subHeader}>
+          Today is a new day. It's your day. You shape it. Sign in to start managing your projects.
+        </span>
         <Form {...form}>
           <form className={styles.loginForm} onSubmit={handleSubmit(onSubmitForm, onError)}>
             <InputWithLabel
@@ -88,13 +89,12 @@ const Login = () => {
             <div className={styles.forgot}>
               <span onClick={() => router.push('/forgot-password')}>Forgot Password?</span>
             </div>
-            <motion.button
+            <button
               type="submit"
-              whileTap={{ scale: 0.97 }}
-              className={classNames(styles.signInBtn, { ['pointer-events-none']: isLoading })}
+              className={classNames(styles.signInBtn, 'btn', { ['pointer-events-none']: isLoading })}
             >
               Sign In
-            </motion.button>
+            </button>
           </form>
         </Form>
         <OrDivider />

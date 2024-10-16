@@ -6,9 +6,14 @@ import styles from '../../styles.module.scss'
 
 const OrderItem: FC<{ order: OrderItems }> = ({ order }) => {
   return (
-    <div className={styles.order} key={order.id}>
-      <div className={styles.orderId}>Order #{order.id}</div>
-      <div className={styles.orderDate}>Date: {order.created_at}</div>
+    <div className={styles.orderContainer} key={order.id}>
+      <div>
+        Total {order?.items.length} item: ₱{order?.total_price}
+      </div>
+      <div className={styles.btnContainer}>
+        <div className="btn">Return/ Refund</div>
+        <div className="btn">Order Received</div>
+      </div>
     </div>
   )
 }

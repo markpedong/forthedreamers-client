@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { updateUser } from '@/api'
 import { useAppSelector } from '@/redux/store'
-import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 
 import { useProfileSchema } from '@/hooks/useUserSchema'
@@ -146,12 +145,12 @@ const Profile = () => {
             />
           </div>
           <div className={styles.btnContainer}>
-            <motion.button whileTap={{ scale: 0.95 }} onClick={() => reset()}>
+            <button className="btn" onClick={() => reset()}>
               Reset
-            </motion.button>
-            <motion.button whileTap={{ scale: 0.95 }} type="submit" className={isSubmitting ? 'pointer-events-none' : ''}>
+            </button>
+            <button type="submit" className={isSubmitting ? 'pointer-events-none' : 'btn'}>
               Submit
-            </motion.button>
+            </button>
           </div>
         </form>
       </Form>
