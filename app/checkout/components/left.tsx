@@ -4,7 +4,6 @@ import { PAYMENT_METHODS_VALUES } from '@/constants'
 import { setCartData, setPaymentMethod } from '@/redux/features/userData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import { debounce } from 'lodash'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -121,9 +120,9 @@ const Left: FC<TCheckoutLeft> = ({ address, carts }) => {
             </span>
             <Dialog open={isModalOpen}>
               <DialogTrigger asChild>
-                <motion.span whileTap={{ scale: 0.9 }} onClick={() => setIsModalOpen(true)}>
+                <span className="btn" onClick={() => setIsModalOpen(true)}>
                   <GrLocation className="cursor-pointer" />
-                </motion.span>
+                </span>
               </DialogTrigger>
               <DialogContent
                 className="pt-[3rem] sm:max-w-[550px]"
@@ -157,9 +156,9 @@ const Left: FC<TCheckoutLeft> = ({ address, carts }) => {
           key={2}
         />
       </div>
-      <motion.div whileTap={{ scale: 0.99 }} className={styles.placeOrderBtn} onClick={checkoutHandler}>
+      <div className={classNames(styles.placeOrderBtn, 'btn')} onClick={checkoutHandler}>
         PLACE ORDER
-      </motion.div>
+      </div>
     </div>
   )
 }

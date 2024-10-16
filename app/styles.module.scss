@@ -179,6 +179,25 @@
   @apply absolute right-[0.8rem] top-[-2.5rem];
 }
 
-.ordersWrapper{
+.ordersWrapper {
   @apply fcol;
+
+  .orderContainer {
+    .btnContainer {
+      @apply flex justify-end items-center;
+      font-size: toRem(12);
+
+      > * {
+        @apply px-2 py-1 rounded-sm;
+      }
+
+      div:first-child {
+        @apply bg-[#162D3A] text-white;
+      }
+
+      div:last-child {
+        @apply bg-[#eeeeee] text-gray-800;
+      }
+    }
+  }
 }

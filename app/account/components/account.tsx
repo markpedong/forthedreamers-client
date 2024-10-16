@@ -51,7 +51,7 @@ const menus = [
 
 const AccountPage: FC<{ orders: OrderItems[] }> = ({ orders }) => {
   const dp = useAppSelector(s => s.userData.user?.image)
-  const [currTab, setCurrTab] = useState(1)
+  const [currTab, setCurrTab] = useState(4)
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState<string>(dp)
   const beforeCheckoutPage = useAppSelector(s => s.appData.beforeCheckoutPage)

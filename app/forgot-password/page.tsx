@@ -1,7 +1,6 @@
 'use client'
 
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 
 import InputWithLabel from '@/components/inputWithLabel'
@@ -54,9 +53,9 @@ const Login = () => {
                 err={errors?.email?.message as string}
                 {...register('email')}
               />
-              <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
+              <button type="submit" className={classNames(styles.signInBtn, 'btn')}>
                 Send OTP
-              </motion.button>
+              </button>
             </form>
           )}
           {steps === 2 && (
@@ -72,9 +71,9 @@ const Login = () => {
                   onChange: e => setValue('otp', e.target.value.replace(/\D/g, '')),
                 })}
               />
-              <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
+              <button type="submit" className={classNames(styles.signInBtn, 'btn')}>
                 Verify OTP
-              </motion.button>
+              </button>
             </form>
           )}
           {steps === 3 && (
@@ -97,9 +96,9 @@ const Login = () => {
                 err={errors?.otp?.message as string}
                 {...register('confirm_password')}
               />
-              <motion.button type="submit" whileTap={{ scale: 0.97 }} className={styles.signInBtn}>
+              <button type="submit" className={classNames(styles.signInBtn, 'btn')}>
                 Verify OTP
-              </motion.button>
+              </button>
             </form>
           )}
         </Form>

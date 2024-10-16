@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 import { RiErrorWarningFill } from 'react-icons/ri'
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
@@ -24,20 +23,18 @@ const PopOver = ({ trigger, open, setOpen, title, handleOk }: Props) => {
           <span className="text-[0.8rem] leading-4">{title}</span>
         </div>
         <div className="mt-3 flex items-center justify-end gap-2">
-          <motion.span
-            whileTap={{ scale: 0.95 }}
+          <span
             onClick={handleOk}
-            className="cursor-pointer select-none rounded-sm bg-red-800 px-2 py-1 text-[0.6rem] text-white"
+            className="cursor-pointer select-none rounded-sm bg-red-800 px-2 py-1 text-[0.6rem] text-white btn"
           >
             Yes
-          </motion.span>
-          <motion.span
-            whileTap={{ scale: 0.95 }}
+          </span>
+          <span
             onClick={() => setOpen(false)}
-            className="cursor-pointer select-none rounded-sm bg-gray-800 px-2 py-1 text-[0.6rem] text-white"
+            className="cursor-pointer select-none rounded-sm bg-gray-800 px-2 py-1 text-[0.6rem] text-white btn"
           >
             No
-          </motion.span>
+          </span>
         </div>
       </PopoverContent>
     </Popover>

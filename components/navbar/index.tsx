@@ -114,14 +114,14 @@ const Navbar: FC = () => {
             {website?.website_name}
           </div>
           <div className={classNames(styles.rightBtnWrapper, SF_PRO_DISPLAY.className)}>
-            <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
+            <span className="btn before:hidden">
               <FiUser
                 className="cursor-pointer"
                 size={20}
                 onClick={() => (isLoggedIn() ? push('/account') : push('/login'))}
               />
-            </motion.span>
-            <motion.span whileTap={{ scale: 0.9 }} className="before:hidden">
+            </span>
+            <span className="btn before:hidden">
               <IoSearchOutline
                 className="cursor-pointer"
                 size={20}
@@ -131,11 +131,10 @@ const Navbar: FC = () => {
                   setSearch(true)
                 }}
               />
-            </motion.span>
+            </span>
             {isLoggedIn() && pathname !== '/checkout' && (
-              <motion.div
-                whileTap={{ scale: 0.9 }}
-                className={styles.cartIcon}
+              <div
+                className={classNames(styles.cartIcon, 'btn')}
                 onClick={() => {
                   setOpen(false)
                   setShowCart(true)
@@ -144,7 +143,7 @@ const Navbar: FC = () => {
               >
                 {!!carts?.length && <span>{carts?.reduce((acc, curr) => acc + curr.quantity, 0)}</span>}
                 <CiShoppingCart className="cursor-pointer" size={20} />
-              </motion.div>
+              </div>
             )}
             <div className={styles.loginBtn}>
               {!isLoggedIn() ? (

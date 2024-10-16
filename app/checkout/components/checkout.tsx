@@ -6,7 +6,6 @@ import { TCheckoutLeft } from '@/api/types'
 import { setBeforeCheckoutPage } from '@/redux/features/appData'
 import { useAppDispatch } from '@/redux/store'
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import { darkerGrotesque } from 'public/fonts'
 import { MdArrowBack } from 'react-icons/md'
 
@@ -30,7 +29,7 @@ const Checkout: FC<TCheckoutLeft> = ({ address, carts }) => {
 
   return (
     <div className={classNames(styles.checkoutWrapper, darkerGrotesque.className)}>
-      <motion.span className={styles.back} whileTap={{ scale: 0.9 }}>
+      <span className={classNames(styles.back, 'btn')}>
         <MdArrowBack
           onClick={() => {
             router.back()
@@ -40,7 +39,7 @@ const Checkout: FC<TCheckoutLeft> = ({ address, carts }) => {
             }, 300)
           }}
         />
-      </motion.span>
+      </span>
       <div className={styles.titleContainer}>
         <h1>CHECKOUT</h1>
         <span>

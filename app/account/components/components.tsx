@@ -3,7 +3,6 @@ import { deleteAddress } from '@/api'
 import { AddressProps, TAddressItem } from '@/api/types'
 import { addressTypes } from '@/constants'
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 
 import { revalidate } from '@/lib/server'
@@ -49,15 +48,15 @@ export const AddressItem: FC<AddressProps> = ({ data, refetch, setCurrAddress, .
         </div>
       </div>
       <div className={styles.actions}>
-        <motion.span whileTap={{ scale: 0.95 }} onClick={() => setCurrAddress(data as TAddressItem)}>
+        <span className="btn" onClick={() => setCurrAddress(data as TAddressItem)}>
           EDIT
-        </motion.span>
+        </span>
         <PopOver
           handleOk={handleDelete}
           open={open}
           setOpen={setOpen}
           title="Are you sure you want to delete this address?"
-          trigger={<motion.span whileTap={{ scale: 0.95 }}>DELETE</motion.span>}
+          trigger={<span className="btn">DELETE</span>}
           key={data?.id}
         />
       </div>
