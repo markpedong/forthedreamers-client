@@ -197,3 +197,5 @@ export type OrderItems = {
   created_at: number
   status: number
 }
+
+export type TOrderItem = { order: OrderItems; setDetails?: Dispatch<SetStateAction<string>>; type: 'details' | 'page' }
