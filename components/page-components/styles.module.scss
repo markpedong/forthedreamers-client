@@ -18,8 +18,8 @@
   @apply list-disc mt-4;
 
   li {
-    font-size: toRem(14);
-    margin-bottom: toRem(15)
+    font-size: toRem(12);
+    margin-bottom: toRem(10)
   }
 
   &[data-numbers="true"] {

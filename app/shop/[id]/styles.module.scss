@@ -1,15 +1,10 @@
 .mainWrapper {
-  @apply m-12;
-  margin-top: toRem(120);
-
-  @media screen and (max-width: 576px) {
-    @apply m-6;
-    margin-top: toRem(140);
-  }
+  @apply m-6;
+  margin-top: toRem(100);
 }
 
 .productWrapper {
-  @apply my-10 grid gap-10;
+  @apply my-5 grid gap-10;
   grid-template-columns: 1.5fr 1fr;
 
   @media screen and (max-width: 992px) {
@@ -30,15 +25,15 @@
 
   h1 {
     @apply mb-2;
-    font-size: toRem(28);
-    line-height: toRem(28);
+    font-size: toRem(20);
+    line-height: toRem(20);
     font-weight: 600;
   }
 
   .price {
     font-weight: 500;
-    font-size: toRem(20);
-    line-height: toRem(20);
+    font-size: toRem(15);
+    line-height: toRem(15);
   }
 
   .shipping {
@@ -56,8 +51,8 @@
   .description {
     @apply mt-10;
     font-weight: 500;
-    font-size: toRem(14);
-    line-height: toRem(14);
+    font-size: toRem(12);
+    line-height: toRem(12);
   }
 }
 
@@ -70,7 +65,7 @@
   }
 
   span:first-child {
-    @apply font-[500];
+    @apply font-[400];
   }
 
   span:last-child {
