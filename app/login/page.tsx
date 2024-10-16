@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import InputWithLabel from '@/components/inputWithLabel'
-import { GoogleButton, OrDivider } from '@/components/page-components/button'
+import { FacebookButton, GoogleButton, OrDivider } from '@/components/page-components/button'
 import { Form } from '@/components/ui/form'
 import { useWithDispatch } from '@/hooks/useWithDispatch'
 
@@ -99,7 +99,7 @@ const Login = () => {
         </Form>
         <OrDivider />
         <GoogleButton />
-        {/* <FacebookButton /> */}
+        <FacebookButton />
         <div className={styles.dontHaveAccount}>
           Don't you have an account?{' '}
           <span className="cursor-pointer" onClick={() => router.push('/signup')}>
