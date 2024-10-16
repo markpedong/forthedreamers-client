@@ -25,3 +25,7 @@ export enum PAYMENT_METHODS {
   CARD = 'CARD',
   COD = 'COD',
 }
+
+export const ORDER_STATUS = {
+  0: 'Pending',
+}
