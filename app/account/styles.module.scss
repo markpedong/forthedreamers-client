@@ -1,0 +1,236 @@
+// .container {
+// height: 100%;
+// display: flex;
+// flex-direction: column;
+// min-height: 100vh;
+// }
+
+.mainWrapper {
+  @apply mx-auto w-full max-w-[56rem] p-2;
+  margin-block: toRem(90);
+}
+
+.menuWrapper {
+  @apply flex gap-3;
+
+  @media screen and (max-width: 992px) {
+    @apply flex-col;
+  }
+}
+
+.detailsWrapper {
+  @apply flex-1 rounded-lg border shadow-md bg-slate-50;
+
+  @media screen and (max-width: 992px) {
+    &[data-currtab='2'] {
+      @apply mt-[3rem];
+    }
+  }
+}
+
+.addressWrapper {
+  @apply relative;
+}
+
+.addressWrapper,
+.profileWrapper,
+.ordersWrapper {
+  @apply p-3 py-6;
+}
+
+.btnContainer {
+  @apply mt-5 flex select-none justify-end gap-3 text-xs;
+
+  button:first-child {
+    @apply flex items-center justify-center rounded-lg bg-[#eeeeee] px-4 py-2 text-[0.8rem] text-gray-800;
+  }
+
+  button:last-child {
+    @apply flex items-center justify-center rounded-lg bg-[#162D3A] px-4 py-2 text-[0.8rem] text-white;
+  }
+}
+
+.detailsContainer {
+  @apply my-4 flex gap-3;
+
+  div {
+    font-size: toRem(11);
+  }
+
+  .details {
+    @apply flex-1;
+
+    div:nth-child(1) {
+      @apply capitalize;
+      font-weight: 600;
+      font-size: toRem(14);
+    }
+
+    div:nth-child(3) {
+      @apply flex gap-[0.5rem] pt-2;
+
+      > * {
+        @apply rounded-sm bg-gray-50 px-[1rem] py-[0.2rem] text-gray-800;
+        font-weight: 500;
+        font-size: toRem(12);
+        line-height: toRem(12);
+
+        &.activeAddress {
+          @apply bg-gray-800 text-gray-50;
+        }
+      }
+    }
+  }
+
+  .actions {
+    @apply flex items-center justify-center gap-3;
+
+    span {
+      @apply cursor-pointer select-none rounded-sm bg-gray-800 px-4 py-1 text-gray-50;
+
+      &:last-child {
+        @apply bg-red-700;
+      }
+    }
+  }
+
+  &:first-child {
+    @apply mt-0;
+  }
+}
+
+.profileImage {
+  @apply h-full rounded-full object-cover;
+  background-color: #f8f8f8;
+}
+
+.addAddressBtn {
+  @apply absolute right-[0.8rem] top-[-2.5rem];
+}
+
+.ordersWrapper {
+  @apply fcol;
+
+  .orderContainer {
+    @apply mb-4 px-6 p-3 bg-white rounded-lg shadow-md;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    .status {
+      @apply flex justify-end;
+
+      span {
+        @apply bg-[#162D3A] text-white px-[0.7rem] py-[0.1rem] rounded-sm text-xs;
+
+        &[data-status='4'] {
+          @apply bg-green-800;
+        }
+      }
+    }
+
+    .total {
+      font-size: toRem(14);
+    }
+
+    .status,
+    .total {
+      @apply text-end;
+    }
+
+    .item {
+      @apply flex gap-3;
+      img {
+        @apply size-[5rem] object-cover object-center;
+      }
+
+      .details {
+        @apply fcol flex-1 text-ellipsis overflow-hidden;
+        font-size: toRem(12) !important;
+
+        .name {
+          @apply whitespace-nowrap text-ellipsis overflow-hidden font-normal;
+        }
+
+        div:nth-child(2) {
+          @apply flex justify-between font-normal;
+
+          > * {
+            @apply whitespace-nowrap text-ellipsis overflow-hidden normal-case font-normal;
+          }
+        }
+        div:nth-child(3) {
+          @apply text-end;
+        }
+      }
+    }
+
+    .btnContainer {
+      @apply flex justify-end items-center mt-1;
+
+      > * {
+        @apply px-2 py-1 rounded-sm;
+      }
+
+      div:first-child {
+        @apply bg-[#162D3A] text-white;
+      }
+
+      div:last-child {
+        @apply bg-[#eeeeee] text-gray-800;
+      }
+    }
+  }
+}
+
+.command {
+  @apply max-w-[200px] rounded-lg border shadow-md;
+
+  @media screen and (max-width: 992px) {
+    @apply max-w-[100%];
+  }
+}
+
+.delivery {
+  @apply fcol bg-white p-4 rounded-md shadow-md mt-5;
+
+  &__title {
+    @apply mb-3;
+    font-size: toRem(14);
+  }
+
+  &__details {
+    font-size: toRem(12);
+    @apply flex items-center gap-3;
+  }
+}
+
+.itemsContainer {
+  @apply w-full mt-[1rem];
+
+  .total_price {
+    @apply text-end  bg-white px-4 py-2 rounded-md rounded-t-none shadow-md;
+    border-top: toRem(1) solid rgba(0, 0, 0, 0.2);
+    font-size: toRem(14);
+  }
+}
+
+.orderFooter {
+  @apply bg-white px-4 mt-5 py-3 rounded-md shadow-md;
+  font-size: toRem(12);
+
+  &__id {
+    @apply mb-2;
+  }
+
+  &__payment,
+  &__time {
+    @apply text-gray-700;
+    font-size: toRem(10);
+  }
+
+  div {
+    @apply flex justify-between;
+  }
+}
