@@ -9,7 +9,7 @@ import { revalidate } from '@/lib/server'
 import PopOver from '@/app/components/popover'
 import { API_TAGS } from '@/app/constants/enums'
 
-import styles from '../../styles.module.scss'
+import styles from '../styles.module.scss'
 
 export const AddressItem: FC<AddressProps> = ({ data, refetch, setCurrAddress, ...props }) => {
   const [open, setOpen] = useState(false)
