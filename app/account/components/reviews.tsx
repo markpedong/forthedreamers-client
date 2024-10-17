@@ -12,6 +12,7 @@ import { Rate } from 'antd'
 import { Textarea } from '@/components/ui/textarea'
 import { addReview } from '@/api'
 import { toast } from 'sonner'
+import { debounce } from 'lodash'
 
 const Reviews: FC<{ reviews: TCartItem[] }> = ({ reviews }) => {
 	const [open, setOpen] = useState(false)
@@ -24,6 +25,7 @@ const Reviews: FC<{ reviews: TCartItem[] }> = ({ reviews }) => {
 				rating,
 				description,
 				product_id: review?.product_id,
+				cart_id: review?.id,
 			})
 
 			if (res?.status === 200) {
@@ -40,8 +42,8 @@ const Reviews: FC<{ reviews: TCartItem[] }> = ({ reviews }) => {
 	return (
 		<div className={styles.reviewWrapper}>
 			{reviews?.map(review => (
-				<>
-					<div key={review.id} className={styles.review}>
+				<div key={review.id}>
+					<div className={styles.review}>
 						<div className={styles.review__container}>
 							<Image src={review?.images as unknown as string} alt="" width={100} height={100} />
 							<div className={styles.review__details}>
@@ -55,7 +57,17 @@ const Reviews: FC<{ reviews: TCartItem[] }> = ({ reviews }) => {
 								</div>
 							</div>
 						</div>
-						<div className={classNames(styles.review__add, 'btn')} onClick={() => setOpen(true)}>
+						<div
+							className={classNames(styles.review__add, 'btn')}
+							onClick={debounce(() => {
+								if (review?.is_reviewed === 1) {
+									toast.error('Already reviewed')
+									return
+								} else {
+									setOpen(true)
+								}
+							}, 500)}
+						>
 							Write review
 						</div>
 					</div>
@@ -78,13 +90,19 @@ const Reviews: FC<{ reviews: TCartItem[] }> = ({ reviews }) => {
 								</div>
 							</DialogHeader>
 							<DialogFooter>
-								<Button className="px-2 py-1" size="sm" type="button" onClick={() => handleConfirm(review)}>
+								<Button
+									disabled={review?.is_reviewed === 1}
+									className="px-2 py-1"
+									size="sm"
+									type="button"
+									onClick={() => handleConfirm(review)}
+								>
 									Submit
 								</Button>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
-				</>
+				</div>
 			))}
 		</div>
 	)

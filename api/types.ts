@@ -48,6 +48,7 @@ export type TCartItem = Omit<TProductItem, 'variations' | 'features' | 'collecti
   images: string[]
   product_id: string
   created_at: number
+  is_reviewed: number
 }
 
 export type TVariationItem = {
