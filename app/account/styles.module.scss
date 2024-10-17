@@ -124,6 +124,10 @@
       span {
         @apply bg-[#162D3A] text-white px-[0.7rem] py-[0.1rem] rounded-sm text-xs;
 
+        &[data-status='3'] {
+          @apply bg-yellow-600;
+        }
+
         &[data-status='4'] {
           @apply bg-green-800;
         }
@@ -174,11 +178,11 @@
       }
 
       div:first-child {
-        @apply bg-[#162D3A] text-white;
+        @apply bg-[#eeeeee] text-gray-800 grayscale pointer-events-none;
       }
 
       div:last-child {
-        @apply bg-[#eeeeee] text-gray-800;
+        @apply bg-[#162D3A] text-white;
       }
     }
   }
@@ -233,4 +237,41 @@
   div {
     @apply flex justify-between;
   }
+}
+
+.reviewWrapper {
+  @apply m-5;
+
+  .review {
+    @apply p-5 shadow-lg bg-white rounded-md flex gap-4;
+    font-size: toRem(12);
+
+    img {
+      @apply object-cover size-[4.5rem];
+    }
+
+    &__container {
+      @apply flex flex-1 gap-3;
+    }
+    &__details {
+      @apply flex flex-col gap-0;
+
+      h1 {
+        @apply font-bold;
+        font-size: toRem(14);
+      }
+    }
+
+    &__variation {
+      @apply flex flex-col gap-0;
+    }
+
+    &__add {
+      @apply self-end bg-gray-700 text-gray-50 px-2 py-1 rounded-md;
+    }
+  }
+}
+
+.starContainer {
+  @apply flex items-center gap-4 !text-[0.8rem];
 }

@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { FileType, OrderItems } from '@/api/types'
+import { FileType, OrderItems, TCartItem } from '@/api/types'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload } from 'antd'
@@ -10,11 +10,11 @@ import { FaAddressCard, FaRegCreditCard, FaShoppingCart, FaStar, FaUser } from '
 
 import { Command, CommandGroup, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
 import {
-	DynamicAddress,
-	DynamicOrders,
-	DynamicPaymentMethods,
-	DynamicProfile,
-	DynamicReviews,
+  DynamicAddress,
+  DynamicOrders,
+  DynamicPaymentMethods,
+  DynamicProfile,
+  DynamicReviews,
 } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'
 
@@ -47,13 +47,12 @@ const menus = [
     id: 5,
     name: 'Reviews',
     icon: <FaStar className="mr-2 h-4 w-4" />,
-    disabled: true,
   },
 ]
 
-const AccountPage: FC<{ orders: OrderItems[] }> = ({ orders }) => {
+const AccountPage: FC<{ orders: OrderItems[]; reviews: TCartItem[] }> = ({ orders, reviews }) => {
   const dp = useAppSelector(s => s.userData.user?.image)
-  const [currTab, setCurrTab] = useState(1)
+  const [currTab, setCurrTab] = useState(5)
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState<string>(dp)
   const beforeCheckoutPage = useAppSelector(s => s.appData.beforeCheckoutPage)
@@ -159,8 +158,8 @@ const AccountPage: FC<{ orders: OrderItems[] }> = ({ orders }) => {
           {currTab === 1 && <DynamicProfile />}
           {currTab === 2 && <DynamicAddress />}
           {currTab === 3 && <DynamicPaymentMethods />}
-          {currTab === 4 && <DynamicOrders orders={orders} />}
-          {currTab === 5 && <DynamicReviews />}
+          {currTab === 4 && <DynamicOrders orders={orders} setCurrTab={setCurrTab} />}
+          {currTab === 5 && <DynamicReviews reviews={reviews} />}
         </div>
       </div>
     </div>

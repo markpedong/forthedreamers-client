@@ -19,6 +19,7 @@ export enum API_TAGS {
   TESTIMONIALS = 'testimonials',
   ADDRESS = 'address',
   ORDERS = 'orders',
+  REVIEWS = 'reviews',
 }
 
 export enum PAYMENT_METHODS {
