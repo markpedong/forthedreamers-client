@@ -13,6 +13,12 @@ const Testimonials: FC<{ data: TTestimonials[] }> = ({ data }) => {
   const [sliderRef] = useKeenSlider<HTMLDivElement>(
     {
       loop: true,
+      slides: () =>
+        data?.map(() => ({
+          size: 0.3,
+          spacing: 1,
+          origin: 0.35,
+        })),
     },
     [
       slider => {
@@ -48,7 +54,7 @@ const Testimonials: FC<{ data: TTestimonials[] }> = ({ data }) => {
 
   return (
     <div>
-      <div className="keen-slider my-5" ref={sliderRef}>
+      <div className="keen-slider py-10" ref={sliderRef}>
         {data?.map(item => <Testimonial className="keen-slider__slide" key={item?.id} data={item} />)}
       </div>
     </div>
