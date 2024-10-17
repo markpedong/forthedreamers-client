@@ -32,7 +32,10 @@ export const PAYMENT_METHODS_VALUES = {
 
 export const ORDER_STATUS = {
   0: 'Pending',
-  4: 'Delivered',
+  1: 'Processing',
+  2: 'In Transit',
+  3: 'Delivered',
+  4: 'Finished',
 }
 
 export const ORDER_METHODS = {

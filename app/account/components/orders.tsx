@@ -1,64 +1,25 @@
 'use client'
 
-import { OrderItems, TOrderItem } from '@/api/types'
-import { FC, useState } from 'react'
-import styles from '../styles.module.scss'
-import Image from 'next/image'
-import classNames from 'classnames'
-import { MdArrowBack } from 'react-icons/md'
-import { CiLocationOn } from 'react-icons/ci'
-import { ORDER_METHODS, ORDER_STATUS } from '@/constants'
+import { OrderItems } from '@/api/types'
+import OrderItem from '@/components/order'
+import { ORDER_METHODS } from '@/constants'
 import dayjs from 'dayjs'
+import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { CiLocationOn } from 'react-icons/ci'
+import { MdArrowBack } from 'react-icons/md'
+import styles from '../styles.module.scss'
 
-const OrderItem: FC<TOrderItem> = ({ order, setDetails, type }) => {
-  const first = order.items?.[0]
-  return (
-    <div
-      className={classNames(
-        styles.orderContainer,
-        `${type === 'details' && 'mb-0 [&:last-child]:rounded-t-none [&:first-child]:rounded-b-none [&:not(:first-child):not(:last-child)]:rounded-none'}`,
-      )}
-      key={order.id}
-    >
-      <div className={classNames(styles.status, `${type === 'details' && 'hidden'}`)}>
-        <span data-status={order?.status}>{ORDER_STATUS[order?.status]}</span>
-      </div>
-      <div
-        className={classNames(styles.item, `${type === 'page' && 'cursor-pointer'}`)}
-        onClick={() => type === 'page' && setDetails?.(order.id)}
-      >
-        <Image src={first?.images} alt="pic" width={100} height={100} />
-        <div className={styles.details}>
-          <div className={styles.name}>{first?.name}</div>
-          <div>
-            <div>
-              {first?.color} {first?.size}
-            </div>
-            <div>×{first?.quantity}</div>
-          </div>
-          <div>₱{first?.price}</div>
-        </div>
-      </div>
-      <div className={classNames(styles.total, `${type === 'details' && 'hidden'}`)}>
-        Total {order?.items.length} item: ₱{order?.total_price}
-      </div>
-      <div className={classNames(styles.btnContainer, `${type === 'details' && '!hidden'}`)}>
-        {order?.status === 3 && <div className="btn">Return/ Refund</div>}
-        <div className={classNames('btn', `${order?.status !== 4 && `grayscale pointer-events-none`}`)}>
-          {order?.status === 4 ? 'View Details' : 'Order Received'}
-        </div>
-      </div>
-    </div>
-  )
-}
-const Orders: FC<{ orders: OrderItems[] }> = ({ orders }) => {
+
+const Orders: FC<{ orders: OrderItems[]; setCurrTab: Dispatch<SetStateAction<number>> }> = ({ orders, setCurrTab }) => {
   const [details, setDetails] = useState('')
   const selectedOrder = orders.find(o => o.id === details)
 
   return (
     <div className={styles.ordersWrapper}>
       {details === '' &&
-        orders?.map(order => <OrderItem key={order.id} order={order} setDetails={setDetails} type="page" />)}
+        orders?.map(order => (
+          <OrderItem key={order.id} order={order} setDetails={setDetails} type="page" setCurrTab={setCurrTab} />
+        ))}
       {details !== '' && (
         <>
           <MdArrowBack
@@ -86,7 +47,7 @@ const Orders: FC<{ orders: OrderItems[] }> = ({ orders }) => {
           <div className={styles.itemsContainer}>
             {selectedOrder?.items.map(item => (
               <div key={item.id}>
-                <OrderItem order={selectedOrder} type="details" />
+                <OrderItem order={selectedOrder} type="details" setCurrTab={setCurrTab} />
                 <div className={styles.total_price}>Order Total: ₱{selectedOrder?.total_price}</div>
               </div>
             ))}

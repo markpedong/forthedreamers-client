@@ -27,3 +27,6 @@ export const updateAddress = params => post({ url: '/address/update', data: para
 
 // /users/checkout
 export const checkoutOrder = params => post({ url: '/users/checkout', data: params })
+
+// /reviews/add
+export const addReview = params => post({ url: '/reviews/add', data: params })

@@ -99,5 +99,5 @@ body {
 }
 
 .btn {
-  @apply transition-all duration-200 active:scale-95 cursor-pointer;
+  @apply transition-all duration-200 active:scale-95 cursor-pointer select-none;
 }

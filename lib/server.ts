@@ -86,3 +86,9 @@ export const deleteCart = params => post({ url: '/carts/delete', data: params })
 
 // /users/orders
 export const getOrders = async () => (await get<OrderItems[]>({ url: '/users/orders', tags: API_TAGS.ORDERS }))?.data
+
+// /reviews/get
+export const getReviews = async () => (await get<TCartItem[]>({ url: '/reviews/get', tags: API_TAGS.REVIEWS }))?.data
+
+// /products/finish
+export const finishOrder = async params => post({ url: '/products/finish', data: params })
