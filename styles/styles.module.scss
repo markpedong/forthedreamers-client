@@ -1,68 +1,64 @@
 .mainWrapper {
-    @apply relative h-dvh bg-center bg-cover bg-no-repeat;
+  @apply relative h-dvh bg-center bg-cover bg-no-repeat;
 
-    &:after {
-        @apply absolute top-0 left-0 size-full;
-        content: '';
-        background: rgb(0, 0, 0, 0.3);
-    }
+  &:after {
+    @apply absolute top-0 left-0 size-full;
+    content: '';
+    background: rgb(0, 0, 0, 0.3);
+  }
 }
 
 .timelessContainer {
-    @apply absolute top-[23rem] w-full text-white whitespace-nowrap text-lg uppercase z-10 fcol items-center justify-center;
+  @apply absolute top-[23rem] w-full text-white whitespace-nowrap text-lg uppercase z-10 fcol items-center justify-center;
 
+  span:first-child {
+    @apply text-[2.2rem] pb-5 font-bold;
+  }
+
+  div:last-child {
+    @apply flex justify-center items-center gap-10 pt-12;
+  }
+
+  @media screen and (max-width: 576px) {
     span:first-child {
-        @apply text-[2.2rem] pb-5 font-bold;
+      @apply text-[1.5rem];
     }
 
-    div:last-child {
-        @apply flex justify-center items-center gap-10 pt-12;
+    span:nth-of-type(2) {
+      @apply text-[1rem];
     }
-
-    @media screen and (max-width: 576px) {
-        span:first-child {
-            @apply text-[1.5rem];
-        }
-
-        span:nth-of-type(2) {
-            @apply text-[1rem];
-        }
-    }
+  }
 }
 
 .wrapper {
-    max-width: 100%;
-    overflow: hidden;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .wrapper {
-    max-width: 100%;
-    overflow: hidden;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .dudeWrapper {
-    img {
-        @apply object-contain object-center h-dvh w-full;
-    }
+  img {
+    @apply object-contain object-center h-dvh w-full;
+  }
 }
 
 .afterProductWrapper {
-    @apply fcol justify-center items-center p-10;
+  @apply fcol justify-center items-center py-5 container;
 
-    .header {
-        @apply fcol self-start;
+  .header {
+    @apply fcol self-start;
 
-        span:first-child {
-            font-size: toRem(20);
-            font-weight: 600;
-        }
-
-        span:last-child {
-            font-size: toRem(12);
-        }
+    span:first-child {
+      font-size: toRem(20);
+      font-weight: 600;
     }
 
-    @media screen and (max-width:576px) {
-        @apply p-5;
+    span:last-child {
+      font-size: toRem(12);
     }
+  }
 }

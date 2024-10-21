@@ -53,7 +53,7 @@ const Testimonials: FC<{ data: TTestimonials[] }> = ({ data }) => {
   )
 
   return (
-    <div>
+    <div className='container'>
       <div className="keen-slider py-10" ref={sliderRef}>
         {data?.map(item => <Testimonial className="keen-slider__slide" key={item?.id} data={item} />)}
       </div>
