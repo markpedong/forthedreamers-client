@@ -9,6 +9,7 @@ import { PageTitle } from '@/components/page-components'
 
 import ShopPagination from './shop-pagination'
 import styles from './styles.module.scss'
+import { FaAngleDown, FaFilter } from 'react-icons/fa'
 
 const Page = async () => {
   const products = await getProducts({})
@@ -21,13 +22,13 @@ const Page = async () => {
       <PageTitle title="PRODUCTS" />
       <div className={classNames(styles.filterContainer, SF_PRO_DISPLAY.className)}>
         <div>
-          {/* <FaFilter /> */}
-          {/* <span>FILTER AND SORT</span> */}
+          <FaFilter />
+          <span>FILTER AND SORT</span>
         </div>
         <div>
-          {/* <span className={styles.sort}>ALPHABETICALLY, A-Z</span> */}
-          {/* <FaAngleDown />
-          <span>{products?.data?.length} PRODUCTS</span> */}
+          <span className={classNames(styles.sort, 'text-gray-400')}>ALPHABETICALLY, A-Z</span>
+          <FaAngleDown className="text-gray-400" />
+          <span>{products?.length} PRODUCTS</span>
         </div>
       </div>
       <ShopPagination data={products} />

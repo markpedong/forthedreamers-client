@@ -27,7 +27,7 @@ const Page = async ({ searchParams }: PageProps) => {
       <Search />
       <div className={styles.searchText}>{search !== '' && `${products?.length ?? 0} results found for "${search}"`}</div>
       <div className={styles.filterContainer}>
-        <div>
+        <div className='text-gray-400'>
           <MdFilterListAlt />
           <span>FILTER AND SORT</span>
         </div>
