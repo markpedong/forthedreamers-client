@@ -28,7 +28,7 @@ export default async function RootLayout({
         <ReduxProvider>
           <Toaster />
           <Navbar />
-          {children}
+          <div className="content">{children}</div>
           <Footer />
         </ReduxProvider>
       </body>

@@ -79,10 +79,21 @@
   font-style: normal;
 }
 
+html,
 body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
   font-weight: 400;
   font-family: 'SF Pro Display', sans-serif;
-  /* Apply the font globally */
+}
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 ::-webkit-scrollbar {
