@@ -3,16 +3,40 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { CiSearch } from 'react-icons/ci'
-
 import styles from './styles.module.scss'
+import { debounce } from 'lodash'
 
 const Search = () => {
   const pathname = usePathname()
   const router = useRouter()
   const [search, setSearch] = useState('')
 
+  const debouncedSearch = debounce(query => {
+    router.push(`${pathname}?search=${query}`)
+  }, 300)
+
   useEffect(() => {
-    router.push(`${pathname}?search=${search || ''}`)
+    setSearch('')
+
+    const clearSearchParam = () => {
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.has('search')) {
+        urlParams.delete('search')
+        router.replace(`${pathname}?${urlParams.toString()}`)
+      }
+    }
+
+    clearSearchParam()
+
+    return () => {
+      clearSearchParam()
+    }
+  }, [pathname, router])
+
+  useEffect(() => {
+    if (search) {
+      debouncedSearch(search)
+    }
   }, [search, pathname, router])
 
   return (
