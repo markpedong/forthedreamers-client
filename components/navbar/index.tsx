@@ -114,13 +114,15 @@ const Navbar: FC = () => {
             {website?.website_name}
           </div>
           <div className={classNames(styles.rightBtnWrapper, SF_PRO_DISPLAY.className)}>
-            <span className="btn before:hidden">
-              <FiUser
-                className="cursor-pointer"
-                size={20}
-                onClick={() => (isLoggedIn() ? push('/account') : push('/login'))}
-              />
-            </span>
+            {isLoggedIn() && (
+              <span className="btn before:hidden">
+                <FiUser
+                  className="cursor-pointer"
+                  size={20}
+                  onClick={() => push('/account')}
+                />
+              </span>
+            )}
             <span className="btn before:hidden">
               <IoSearchOutline
                 className="cursor-pointer"
