@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useMediaQuery } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -13,6 +13,7 @@ import { IoLogoFacebook, IoLogoInstagram, IoLogoPinterest } from 'react-icons/io
 import styles from './styles.module.scss'
 
 const Footer = () => {
+  const { push } = useRouter()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [showLanguage, setShowLanguage] = useState(false)
@@ -42,12 +43,11 @@ const Footer = () => {
                   exit={{ opacity: 0, height: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span>Search</span>
-                  <span>Orders & Payment</span>
-                  <span>Shipping</span>
-                  <span>Returns</span>
-                  <span>Contact Us</span>
-                  <span>Terms and Service</span>
+                  <span onClick={() => push('/search')}>Search</span>
+                  <span onClick={() => push('/support/orders-payment')}>Orders & Payment</span>
+                  <span onClick={() => push('/support/shipping')}>Shipping</span>
+                  <span onClick={() => push('/support/returns')}>Returns</span>
+                  <span onClick={() => push('/support/terms-of-service')}>Terms of Service</span>
                 </motion.div>
               )}
             </AnimatePresence>

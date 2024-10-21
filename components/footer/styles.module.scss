@@ -35,6 +35,10 @@
     @apply fcol  gap-3;
     font-weight: 300;
     font-size: toRem(12);
+
+    span {
+        @apply cursor-pointer
+    }
 }
 
 .socmedContainer {
