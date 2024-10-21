@@ -26,9 +26,6 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  eslint: {
-    ignoreDuringBuilds: true
-  },
   env: {
     NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
   },
