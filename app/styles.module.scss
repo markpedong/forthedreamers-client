@@ -1,10 +1,10 @@
 .forgotPassWrapper {
-  @apply grid h-dvh w-full grid-cols-1 p-2;
+  @apply grid h-dvh w-full grid-cols-1 p-2 container;
 }
 
 .loginWrapper,
 .registerWrapper {
-  @apply grid h-dvh w-full grid-cols-2 gap-2 p-2;
+  @apply grid h-dvh w-full grid-cols-2 gap-2 p-2 container;
 }
 
 .imgWrapper {
