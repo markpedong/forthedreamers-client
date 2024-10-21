@@ -1,6 +1,6 @@
 .mainWrapper {
-  @apply m-6;
-  margin-top: toRem(100);
+  @apply container;
+  margin-top: toRem(50);
 }
 
 .productWrapper {
