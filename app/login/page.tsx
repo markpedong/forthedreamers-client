@@ -51,7 +51,7 @@ const Login = () => {
     } finally {
       setTimeout(() => {
         setIsLoading(false)
-      }, 2000)
+      }, 500)
     }
   }
 

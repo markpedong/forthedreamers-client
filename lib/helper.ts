@@ -43,5 +43,5 @@ export const unauthorized = () => {
   })
   setTimeout(() => {
     window.location.replace('/login')
-  }, 1500)
+  }, 500)
 }
