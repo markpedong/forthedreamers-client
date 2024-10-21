@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
