@@ -9,7 +9,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { poppins, SF_PRO_DISPLAY } from 'public/fonts'
 import { FC, useState } from 'react'
 import { CiShoppingCart } from 'react-icons/ci'
-import { FaChevronDown } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
 import { IoClose, IoMenu, IoSearchOutline } from 'react-icons/io5'
 
@@ -33,7 +32,6 @@ const Navbar: FC = () => {
   const [showCart, setShowCart] = useState(false)
   const { width } = useWindowSize()
   const [{ y }] = useWindowScroll()
-  const [showDropdown, setShowDropdown] = useState(false)
   const isWhiteBG = isHovering || y! > 40
   const {} = useQuery({
     queryKey: ['website'],
@@ -46,7 +44,6 @@ const Navbar: FC = () => {
 
   const handlePush = (path: string) => {
     setOpen(false)
-    setShowDropdown(false)
     push(path)
     refresh()
   }
@@ -61,7 +58,7 @@ const Navbar: FC = () => {
           })}
         >
           <motion.div
-            className={classNames(styles.navbar, {})}
+            className={classNames(styles.navbar)}
             onHoverStart={() => setIsHovering(!search && true)}
             onHoverEnd={() => setIsHovering(false)}
             style={pathname === '/' ? { color: isWhiteBG ? 'black' : 'white' } : {}}
@@ -78,16 +75,7 @@ const Navbar: FC = () => {
                 <span onClick={() => handlePush('/')}>HOME</span>
                 <span onClick={() => handlePush('/shop')}>SHOP</span>
                 <span onClick={() => handlePush('/collection')}>COLLECTIONS</span>
-                <motion.div className={styles.supportContainer} onClick={() => handlePush('/support')}>
-                  <span
-                    onMouseEnter={() => {
-                      setShowDropdown(true)
-                    }}
-                  >
-                    SUPPORT
-                  </span>
-                  <FaChevronDown />
-                </motion.div>
+                <span onClick={() => handlePush('/suppo')}>SUPPORT</span>
               </div>
             )}
             {width! < 993 && (
@@ -165,22 +153,6 @@ const Navbar: FC = () => {
               {showCart && <DynamicCart carts={carts ?? []} setShowCart={() => setShowCart(false)} />}
             </AnimatePresence>
             <AnimatePresence>{search && <DynamicSearch setSearch={() => setSearch(false)} />}</AnimatePresence>
-            <AnimatePresence>
-              {width! > 1068 && showDropdown && (
-                <motion.div
-                  className={styles.dropdownMenu}
-                  onMouseLeave={() => setShowDropdown(false)}
-                  initial={{ opacity: 0 }}
-                  exit={{ opacity: 0 }}
-                  animate={{ opacity: 1, animation: 'ease-out', transition: { duration: 0.5 } }}
-                >
-                  <span onClick={() => handlePush('/support/orders-payment')}>ORDERS & PAYMENT</span>
-                  <span onClick={() => handlePush('/support/shipping')}>SHIPPING</span>
-                  <span onClick={() => handlePush('/support/returns')}>RETURNS</span>
-                  <span onClick={() => handlePush('/support/gift-card-manual')}>GIFT CARD MANUAL</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </motion.div>
         </div>
       </>
