@@ -89,6 +89,7 @@ export type TTestimonials = {
   username: string
   image: string
   created_at: number
+  rating: number
 }
 
 export type TUserInfo = {
