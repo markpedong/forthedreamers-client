@@ -1,19 +1,19 @@
 import {
-  CANCELLATION_TERMS,
-  CHANGE_OF_MIND_RETURNS_TERMS,
-  DEFINITIONS_AND_INTERPRETATION_TERMS,
-  DELIVERY_TERMS,
-  DISCLAIMER_AND_LIABILITY_TERMS,
-  DISPUTE_RESOLUTION_TERMS,
-  FAULTY_PRODUCT_RETURNS_TERMS,
-  GENERAL_TERMS,
-  GIFT_CARDS_TERMS,
-  INDEMNITY_TERMS,
-  ORDER_AND_CONTRACT_TERMS,
-  PRIVACY_POLICY_TERMS,
-  SITE_INFORMATION_TERMS,
-  TERMS_ARRAY,
-  USER_GENERATED_CONTENT_TERMS
+	CANCELLATION_TERMS,
+	CHANGE_OF_MIND_RETURNS_TERMS,
+	DEFINITIONS_AND_INTERPRETATION_TERMS,
+	DELIVERY_TERMS,
+	DISCLAIMER_AND_LIABILITY_TERMS,
+	DISPUTE_RESOLUTION_TERMS,
+	FAULTY_PRODUCT_RETURNS_TERMS,
+	GENERAL_TERMS,
+	GIFT_CARDS_TERMS,
+	INDEMNITY_TERMS,
+	ORDER_AND_CONTRACT_TERMS,
+	PRIVACY_POLICY_TERMS,
+	SITE_INFORMATION_TERMS,
+	TERMS_ARRAY,
+	USER_GENERATED_CONTENT_TERMS
 } from '@/app/constants'
 import { PageTitle } from '@/components/page-components'
 import classNames from 'classnames'
@@ -37,10 +37,10 @@ const Page = () => {
 		<div className={classNames(styles.mainWrapper, SF_PRO_DISPLAY.className)}>
 			<PageTitle title="Terms of Service" className="!capitalize" />
 			<div className="fcol gap-3">
-				<span className="font-bold">Welcome to CHARLOTTE FOLK.</span>
+				<span className="font-bold">Welcome to FOR THE DREAMERS.</span>
 				<span>
-					The website https://charlottefolk.co/ and its associated features (“Site") is owned and operated by
-					CHARLOTTE FOLK (“CHARLOTTE FOLK”, "we", "our", "us").
+					The website https://forthedreamers.vercel.app and its associated features (“Site") is owned and operated by
+					FOR THE DREAMERS (“FOR THE DREAMERS”, "we", "our", "us").
 				</span>
 				<span>
 					These Terms and Conditions (“Terms”), which incorporate our Privacy Policy and other documents
