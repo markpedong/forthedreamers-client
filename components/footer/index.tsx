@@ -9,6 +9,7 @@ import { FaAngleDown, FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoLogoFacebook, IoLogoInstagram, IoLogoPinterest } from 'react-icons/io'
 
 import styles from './styles.module.scss'
+import classNames from 'classnames'
 
 const Footer = () => {
   const { push } = useRouter()
@@ -60,10 +61,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className='container'>
+        <div className="container">
           <div className={styles.dropdownContainer}>
             <motion.div
-              className={styles.dropdown}
+              className={classNames(styles.dropdown, 'pointer-events-none text-gray-300')}
               onClick={() => {
                 setShowCurrency(false)
                 setShowLanguage(!showLanguage)
@@ -93,7 +94,7 @@ const Footer = () => {
               </AnimatePresence>
             </motion.div>
             <motion.div
-              className={styles.dropdown}
+              className={classNames(styles.dropdown, 'pointer-events-none text-gray-300')}
               onClick={() => {
                 setShowLanguage(false)
                 setShowCurrency(!showCurrency)
