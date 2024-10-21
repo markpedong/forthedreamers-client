@@ -97,10 +97,10 @@ const Product: FC<{ product: TProductDetails; variations: TVariationItem[] }> = 
           <Image
             src={product?.images?.[0]}
             alt="product"
-            width={350}
-            height={350}
+            width={500}
+            height={500}
             draggable={false}
-            quality={100}
+            quality={75}
             placeholder="empty"
           />
         </div>
