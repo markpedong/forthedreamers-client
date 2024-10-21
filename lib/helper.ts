@@ -12,9 +12,11 @@ export const clearUserData = () => {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT'
   }
 
-  caches.keys().then(keys => {
-    keys.forEach(key => caches.delete(key))
-  })
+  if ('caches' in window) {
+    caches.keys().then(keys => {
+      keys.forEach(key => caches.delete(key))
+    })
+  }
 
   indexedDB.databases().then(dbs => {
     dbs.forEach(db => indexedDB.deleteDatabase(db.name!))
@@ -37,7 +39,7 @@ export const unauthorized = () => {
   clearUserData()
 
   toast('Session expired, login again', {
-    description: 'Redirecting you to login page',
+    description: 'Redirecting you to login page'
   })
   setTimeout(() => {
     window.location.replace('/login')
