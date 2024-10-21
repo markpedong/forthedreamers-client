@@ -12,7 +12,7 @@ type InputWithLabelProps = {
   label?: string
   placeholder?: string
   type?: string
-  err?: string
+  err?: string | undefined
   form: any
   name: string
 }
@@ -44,7 +44,7 @@ const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-0 bottom-[-1.2rem] mt-0 text-red-500"
+                  className="absolute bottom-[-1.2rem] left-0 mt-0 text-[0.7rem] text-red-500"
                 >
                   {err}
                 </motion.p>
