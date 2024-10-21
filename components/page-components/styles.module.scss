@@ -1,17 +1,17 @@
 
 .pageTitle {
   @apply font-bold tracking-tight text-center py-[3rem] uppercase;
-  font-size: toRem(40);
+  font-size: toRem(30);
 
   &[data-medium="true"] {
     @apply py-[0.5rem] text-start;
-    font-size: toRem(30);
     font-weight: 600
   }
 }
 
 .question {
   @apply mb-1 font-bold;
+  font-size: toRem(12)
 }
 
 .answers {

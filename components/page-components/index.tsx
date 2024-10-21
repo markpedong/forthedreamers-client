@@ -24,12 +24,7 @@ export const Question: FC<{ question?: string; className?: string; normal?: bool
   normal,
   children
 }) => {
-  const commonClassName = classNames(
-    className,
-    SF_PRO_DISPLAY.className,
-    `font-${normal ? 'normal' : 'bold'}`,
-    styles.question
-  )
+  const commonClassName = classNames(className, `font-${normal ? 'normal' : 'bold'}`, styles.question)
 
   return question ? (
     <div className={commonClassName} dangerouslySetInnerHTML={{ __html: question }} />

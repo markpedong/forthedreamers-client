@@ -11,7 +11,7 @@
 }
 
 .footerWrapper {
-    @apply flex gap-5 pb-7;
+    @apply flex gap-5 pb-7 container;
 
 
     div:first-child {

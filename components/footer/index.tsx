@@ -3,9 +3,7 @@
 import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useMediaQuery } from '@uidotdev/usehooks'
-import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { SF_PRO_DISPLAY } from 'public/fonts'
 import { FaTiktok } from 'react-icons/fa'
 import { FaAngleDown, FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoLogoFacebook, IoLogoInstagram, IoLogoPinterest } from 'react-icons/io'
@@ -23,7 +21,7 @@ const Footer = () => {
 
   if (!['/login', '/checkout'].includes(pathname)) {
     return (
-      <div className={classNames(styles.footerContainer, SF_PRO_DISPLAY.className)}>
+      <div className={styles.footerContainer}>
         <div className={styles.footerWrapper}>
           <div>
             <h2>
@@ -62,7 +60,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className='container'>
           <div className={styles.dropdownContainer}>
             <motion.div
               className={styles.dropdown}
