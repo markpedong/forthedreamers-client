@@ -76,7 +76,7 @@ const Navbar: FC = () => {
 								<span onClick={() => handlePush('/')}>HOME</span>
 								<span onClick={() => handlePush('/shop')}>SHOP</span>
 								<span onClick={() => handlePush('/collection')}>COLLECTIONS</span>
-								<span onClick={() => handlePush('/suppo')}>SUPPORT</span>
+								<span onClick={() => handlePush('/support')}>SUPPORT</span>
 							</div>
 						)}
 						{width! < 993 && (
