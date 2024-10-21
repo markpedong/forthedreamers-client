@@ -11,85 +11,83 @@ import { addToCart, getCart, getWebsiteData, revalidate } from '@/lib/server'
 import { API_TAGS } from '@/app/constants/enums'
 
 export const useWithDispatch = () => {
-  const dispatch = useAppDispatch()
-  const router = useRouter()
+	const dispatch = useAppDispatch()
+	const router = useRouter()
 
-  const dispatchWebData = async () => {
-    const res = await getWebsiteData()
-    dispatch(setWebsiteData(res))
-  }
+	const dispatchWebData = async () => {
+		const res = await getWebsiteData()
+		dispatch(setWebsiteData(res))
+	}
 
-  const addItemToCart = async ({ product_id, variation_id, quantity }: TAddCartPayload) => {
-    if (!!!isLoggedIn()) {
-      toast('Please login first')
-      return
-    }
-    const res = await addToCart({
-      product_id,
-      quantity,
-      ...(variation_id ? { variation_id } : {}),
-    })
-    if (res?.status === 200) {
-      toast(res?.message)
-      getCartData()
-    }
-  }
+	const addItemToCart = async ({ product_id, variation_id, quantity }: TAddCartPayload) => {
+		if (!!!isLoggedIn()) {
+			toast('Please login first')
+			return
+		}
+		const res = await addToCart({
+			product_id,
+			quantity,
+			...(variation_id ? { variation_id } : {})
+		})
+		if (res?.status === 200) {
+			toast(res?.message)
+			getCartData()
+		}
+	}
 
-  const getUserInfo = async () => {
-    const res = await getNewUserInfo()
-    if (res?.status === 200) {
-      dispatch(setUserData(res?.data))
-    }
-  }
+	const getUserInfo = async () => {
+		const res = await getNewUserInfo()
+		if (res?.status === 200) {
+			dispatch(setUserData(res?.data))
+		}
+	}
 
-  const getCartData = async () => {
-    revalidate(API_TAGS.CART)
+	const getCartData = async () => {
+		revalidate(API_TAGS.CART)
 
-    const cart = await getCart()
-    dispatch(setCartData(cart))
-  }
+		const cart = await getCart()
+		dispatch(setCartData(cart))
+	}
 
-  const storeUserInfo = async (res: { data: LoginResponse; message: string }) => {
-    dispatch(setUserData(res?.data?.userInfo))
-    getCartData()
-    toast(res?.message, {
-      description: 'Redirecting you to account page',
-      action: {
-        label: 'View Account',
-        onClick: () => {
-          router.push('/account')
-        },
-      },
-      duration: 1500,
-    })
+	const storeUserInfo = async (res: { data: LoginResponse; message: string }) => {
+		dispatch(setUserData(res?.data?.userInfo))
+		getCartData()
+		toast(res?.message, {
+			description: 'Redirecting you to account page',
+			action: {
+				label: 'View Account',
+				onClick: () => {
+					router.push('/account')
+				}
+			},
+			duration: 1500
+		})
 
-    setTimeout(() => {
-      router.push('/account')
-    }, 500)
-  }
+		router.push('/account')
+	}
 
-  const logoutUser = async () => {
-    clearUserData()
-    toast('Logout Successfully', {
-      description: 'Redirecting you to login page',
-      action: {
-        label: 'Login',
-        onClick: () => {
-          router.push('/login')
-        },
-      },
-      duration: 1500,
-    })
+	const logoutUser = async () => {
+		clearUserData()
+		toast('Logout Successfully', {
+			description: 'Redirecting you to login page',
+			action: {
+				label: 'Login',
+				onClick: () => {
+					router.push('/login')
+				}
+			},
+			duration: 1500
+		})
 
-    router.push('/login')
-  }
+		router.push('/login')
+	}
 
-  return {
-    getUserInfo,
-    storeUserInfo,
-    dispatchWebData,
-    addItemToCart,
-    logoutUser,
-    getCartData,
-  }
+	return {
+		getUserInfo,
+		storeUserInfo,
+		dispatchWebData,
+		addItemToCart,
+		logoutUser,
+		getCartData
+	}
 }
