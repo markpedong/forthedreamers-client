@@ -1,16 +1,16 @@
 .marquee {
-    @apply relative w-dvw max-w-full overflow-hidden py-10;
+    @apply relative w-dvw max-w-full overflow-hidden py-5;
     height: toRem(135);
 
 
 }
 
 .landing {
-    @apply py-1 bg-black relative;
+    @apply bg-black;
     height: toRem(40);
 
     .track {
-        @apply text-white font-normal top-[0.8rem];
+        @apply text-white font-bold top-[0.8rem];
         font-size: toRem(12);
         line-height: toRem(12);
     }

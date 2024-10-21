@@ -65,7 +65,7 @@ export const useWithDispatch = () => {
 
     setTimeout(() => {
       router.push('/account')
-    }, 1500)
+    }, 500)
   }
 
   const logoutUser = async () => {
@@ -80,9 +80,8 @@ export const useWithDispatch = () => {
       },
       duration: 1500,
     })
-    setTimeout(() => {
-      router.push('/login')
-    }, 1500)
+
+    router.push('/login')
   }
 
   return {
