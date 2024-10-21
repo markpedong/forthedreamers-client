@@ -1,7 +1,7 @@
 'use client'
 
 import { TCartItem } from '@/api/types'
-import { setBeforeCheckoutPage, setOrderNote } from '@/redux/features/appData'
+import { setOrderNote } from '@/redux/features/appData'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
@@ -36,7 +36,6 @@ const Cart: FC<{ setShowCart: () => void; carts: TCartItem[] }> = ({ setShowCart
 
   const debounceCheckout = debounce(() => {
     if (isUserAgree) {
-      dispatch(setBeforeCheckoutPage('/checkout'))
       setShowCart()
       push('/checkout')
     } else {
