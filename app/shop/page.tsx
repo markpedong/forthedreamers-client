@@ -26,8 +26,8 @@ const Page = async () => {
           <span>FILTER AND SORT</span>
         </div>
         <div>
-          <span className={classNames(styles.sort, 'text-gray-400')}>ALPHABETICALLY, A-Z</span>
-          <FaAngleDown className="text-gray-400" />
+          <span className={classNames(styles.sort, 'text-gray-400 pointer-events-none')}>ALPHABETICALLY, A-Z</span>
+          <FaAngleDown className="text-gray-400 pointer-events-none" />
           <span>{products?.length} PRODUCTS</span>
         </div>
       </div>
