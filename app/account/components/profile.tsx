@@ -54,7 +54,7 @@ const Profile = () => {
     } finally {
       setTimeout(() => {
         setIsSubmitting(false)
-      }, 1500)
+      }, 500)
     }
   }
 
