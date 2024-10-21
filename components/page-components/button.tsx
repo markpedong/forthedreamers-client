@@ -12,7 +12,7 @@ export const GoogleButton = () => {
     const popup = window.open(
       `${process.env.NEXT_PUBLIC_DOMAIN}/public/googleLogin`,
       'Google Login',
-      'width=600,height=600',
+      'width=600,height=600'
     )
 
     const timer = setInterval(() => {
@@ -70,7 +70,7 @@ export const OrDivider = () => {
   return (
     <div className="relative flex w-full items-center py-5">
       <div className="flex-grow border-t border-gray-400"></div>
-      <span className="mx-4 flex-shrink text-gray-400">Or</span>
+      <span className="mx-4 flex-shrink text-gray-400 pointer-events-none">Or</span>
       <div className="flex-grow border-t border-gray-400"></div>
     </div>
   )
