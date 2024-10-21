@@ -51,8 +51,8 @@
 }
 
 .detailsContainer {
-  @apply my-4 flex gap-3;
-
+  @apply mb-2 flex gap-3 bg-white p-5 shadow-lg rounded-md;
+ 
   div {
     font-size: toRem(11);
   }

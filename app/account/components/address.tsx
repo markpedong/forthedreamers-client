@@ -23,7 +23,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
@@ -39,7 +39,7 @@ const addressSchema = z.object({
   first_name: z.string({ message: 'First Name is required' }).min(3, 'First Name should be at least 3 characters'),
   last_name: z.string({ message: 'Last Name is required' }).min(3, 'Last Name should be at least 3 characters'),
   phone: z.string({ message: 'Phone is required' }).min(9, 'Phone should be at least 9 characters'),
-  address: z.string({ message: 'Address is required' }).min(3, 'Address should be at least 3 characters'),
+  address: z.string({ message: 'Address is required' }).min(3, 'Address should be at least 3 characters')
 })
 
 const Address = () => {
@@ -52,12 +52,12 @@ const Address = () => {
     queryFn: async () => {
       const res = await getAddress()
       return res ?? []
-    },
+    }
   })
 
   const form = useForm<TAddressSchema>({
     resolver: zodResolver(addressSchema),
-    defaultValues: { address: '', first_name: '', last_name: '', phone: '' },
+    defaultValues: { address: '', first_name: '', last_name: '', phone: '' }
   })
 
   const {
@@ -65,7 +65,7 @@ const Address = () => {
     handleSubmit,
     reset,
     setValue: setFormValue,
-    formState: { errors },
+    formState: { errors }
   } = form
 
   const onSubmitForm = useCallback(
@@ -85,7 +85,7 @@ const Address = () => {
         setCurrAddress(undefined)
       }
     },
-    [currAddress, refetch, reset, setValue, value],
+    [currAddress, refetch, reset, setValue, value]
   )
 
   const onError = (errors: any) => {
@@ -222,11 +222,9 @@ const Address = () => {
           </Form>
         </DialogContent>
       </Dialog>
-      <div className="divide-y-2">
-        {address?.map(item => (
-          <AddressItem data={item} key={item?.id} refetch={refetch} setCurrAddress={setCurrAddress} />
-        ))}
-      </div>
+      {address?.map(item => (
+        <AddressItem data={item} key={item?.id} refetch={refetch} setCurrAddress={setCurrAddress} />
+      ))}
     </div>
   )
 }
