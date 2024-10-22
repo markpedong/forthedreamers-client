@@ -26,7 +26,7 @@ const loginSchema = z.object({
 const Login = () => {
 	const { storeUserInfo } = useWithDispatch()
 	const router = useRouter()
-	const [isLoading, setIsLoading] = useState(false)
+	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	const form = useForm<FormSchema>({
 		resolver: zodResolver(loginSchema),
@@ -40,7 +40,7 @@ const Login = () => {
 	} = form
 
 	const onSubmitForm = async (data: FormSchema) => {
-		setIsLoading(true)
+		setIsSubmitting(true)
 
 		try {
 			const res = await login(data)
@@ -50,7 +50,7 @@ const Login = () => {
 			}
 		} finally {
 			setTimeout(() => {
-				setIsLoading(false)
+				setIsSubmitting(false)
 			}, 500)
 		}
 	}
@@ -91,7 +91,7 @@ const Login = () => {
 						</div>
 						<button
 							type="submit"
-							className={classNames(styles.signInBtn, 'btn', { ['pointer-events-none']: isLoading })}
+							className={classNames(styles.signInBtn, 'btn', { ['pointer-events-none']: isSubmitting })}
 						>
 							Sign In
 						</button>
@@ -106,8 +106,8 @@ const Login = () => {
 						Sign up
 					</span>
 				</div>
-				<div className={classNames(styles.copyright, 'absolute bottom-0')}>© 2023 ALL RIGHTS RESERVED</div>
 			</div>
+			<div className={classNames(styles.copyright, 'absolute bottom-0')}>© 2023 ALL RIGHTS RESERVED</div>
 			<div className={styles.imgWrapper}>
 				<Image src={'/assets/login_cover.webp'} fill quality={100} priority alt="login_cover" sizes="(100vw, 100vh)" />
 			</div>

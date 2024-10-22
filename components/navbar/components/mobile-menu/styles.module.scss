@@ -51,7 +51,7 @@
 }
 
 .drawerContainer {
-    @apply fixed top-[2rem] left-0 bg-white w-full fcol justify-between px-5 pb-3 z-[9999];
+    @apply fixed top-[2rem] left-0 bg-white w-full fcol justify-between px-5 pb-3 z-50 cursor-auto;
     height: calc(100dvh - 3.6rem);
 
     &.notHome {

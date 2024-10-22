@@ -104,7 +104,7 @@ const Navbar: FC = () => {
 							{website?.website_name}
 						</div>
 						<div className={classNames(styles.rightBtnWrapper, SF_PRO_DISPLAY.className)}>
-							{isLoggedIn() && (
+							{isLoggedIn() && width! > 992 && (
 								<span className="btn before:hidden">
 									<FiUser className="cursor-pointer" size={20} onClick={() => push('/account')} />
 								</span>

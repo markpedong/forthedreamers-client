@@ -4,6 +4,9 @@ import { LoginResponse, TLoginPayload, TProductDetails, TUserInfo, TVariationIte
 // /public/login
 export const login = (params: TLoginPayload) => post<LoginResponse>({ url: '/public/login', data: params })
 
+// /public/signup
+export const signup = params => post<LoginResponse>({ url: '/public/signup', data: params })
+
 // /products/details
 export const getProductDetails = params => get<TProductDetails>({ url: '/public/products/details', data: params })
 

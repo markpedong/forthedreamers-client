@@ -63,7 +63,9 @@ export const useWithDispatch = () => {
 			duration: 1500
 		})
 
-		router.push('/account')
+		setTimeout(() => {
+			router.push('/account')
+		}, 200);
 	}
 
 	const logoutUser = async () => {

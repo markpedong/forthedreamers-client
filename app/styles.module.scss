@@ -60,7 +60,7 @@
   @apply w-full text-center text-[0.8rem] font-[300] text-[#8897AD];
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 993px) {
   .loginWrapper,
   .registerWrapper {
     @apply grid-cols-1;
