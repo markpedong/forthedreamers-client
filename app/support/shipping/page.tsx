@@ -1,3 +1,5 @@
+'use client'
+
 import { SAMEDAY_ANSWERS, SHIPPING_ANSWERS } from '@/app/constants'
 import { PageTitle, Question } from '@/components/page-components'
 

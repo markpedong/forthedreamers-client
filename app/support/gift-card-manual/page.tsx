@@ -1,3 +1,5 @@
+'use client'
+
 import { FAQ_ANSWERS, TERMS_CONDITIONS } from '@/app/constants'
 import { DynamicListAnswers } from '@/components/dynamic-import'
 import { PageTitle } from '@/components/page-components'

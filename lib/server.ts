@@ -11,29 +11,34 @@ import {
   TCollectionItem,
   TProductItem,
   TTestimonials,
-  TWebsiteItem,
+  TWebsiteItem
 } from '@/api/types'
 
 import { API_TAGS } from '@/app/constants/enums'
 
-export const revalidate = (tag?: string) => revalidateTag(tag || '')
+export const revalidate = async (tag?: string) => revalidateTag(tag || '')
 
-export const setCookie = (name: string, value: string) => {
+export const setCookie = async (name: string, value: string) => {
   const date = new Date()
   const hours = 12
+  const cookiesStore = await cookies()
   date.setTime(date.getTime() + hours * 60 * 60 * 1000)
 
-  cookies().set(name, value, {
+  cookiesStore.set(name, value, {
     expires: date,
     path: '/',
     sameSite: 'lax',
     secure: false,
     httpOnly: false,
-    maxAge: hours * 60 * 60,
+    maxAge: hours * 60 * 60
   })
 }
 
-export const getCookie = async name => cookies().get(name)?.value || ''
+export const getCookie = async name => {
+  const cookiesStore = await cookies()
+
+  return cookiesStore.get(name)?.value || ''
+}
 
 // /public/products
 export const getProducts = async params =>
@@ -42,7 +47,7 @@ export const getProducts = async params =>
       url: '/public/products',
       data: params,
       tags: API_TAGS.PRODUCTS,
-      passCookies: params.passCookies,
+      passCookies: params.passCookies
     })
   )?.data
 
@@ -68,21 +73,21 @@ export const getCollections = async params =>
     await get<TCollectionItem[]>({
       url: '/public/collections',
       tags: API_TAGS.COLLECTIONS,
-      passCookies: params.passCookies,
+      passCookies: params.passCookies
     })
   )?.data
 
 // carts/addQuantity
-export const addQuantity = params => post({ url: '/carts/addQuantity', data: params })
+export const addQuantity = async params => await post({ url: '/carts/addQuantity', data: params })
 
 // /carts/add
-export const addToCart = params => post({ url: '/carts/add', data: params })
+export const addToCart = async params => await post({ url: '/carts/add', data: params })
 
 // /cart/get
 export const getCart = async () => (await get<TCartItem[]>({ url: '/carts/get', tags: API_TAGS.CART }))?.data
 
 // carts/delete
-export const deleteCart = params => post({ url: '/carts/delete', data: params })
+export const deleteCart = async params => await post({ url: '/carts/delete', data: params })
 
 // /users/orders
 export const getOrders = async () => (await get<OrderItems[]>({ url: '/users/orders', tags: API_TAGS.ORDERS }))?.data
@@ -91,4 +96,4 @@ export const getOrders = async () => (await get<OrderItems[]>({ url: '/users/ord
 export const getReviews = async () => (await get<TCartItem[]>({ url: '/reviews/get', tags: API_TAGS.REVIEWS }))?.data
 
 // /products/finish
-export const finishOrder = async params => post({ url: '/products/finish', data: params })
+export const finishOrder = async params => await post({ url: '/products/finish', data: params })

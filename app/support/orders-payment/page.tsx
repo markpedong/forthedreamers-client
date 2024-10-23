@@ -1,3 +1,5 @@
+'use client'
+
 import { AMEND_ANSWERS, PAYMENT_ANSWERS } from '@/app/constants'
 import { DynamicListAnswers } from '@/components/dynamic-import'
 import { PageTitle, Question } from '@/components/page-components'

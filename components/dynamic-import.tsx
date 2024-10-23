@@ -13,25 +13,26 @@ const DynamicShipping = dynamic(() => import('../app/shop/[id]/components/shippi
 const DynamicReturns = dynamic(() => import('../app/shop/[id]/components/returns'), { loading: () => <></> })
 
 const DynamicListAnswers = dynamic(() => import('../components/page-components/index').then(m => m.ListAnswers), {
-  loading: () => <></>,
+  loading: () => <></>
 })
 
 const DynamicCart = dynamic(() => import('../components/navbar/components/cart'), { loading: () => <></> })
 
 const DynamicSearch = dynamic(() => import('../components/navbar/components/search'), { loading: () => <></> })
 
-const DynamicProfile = dynamic(() => import('../app/account/components/profile'), { loading: () => <></>, ssr: false })
+const DynamicProfile = dynamic(() => import('../app/account/components/profile'), { loading: () => <></> })
 
-const DynamicAddress = dynamic(() => import('../app/account/components/address'), { loading: () => <></>, ssr: false })
+const DynamicAddress = dynamic(() => import('../app/account/components/address'), { loading: () => <></> })
 
-const DynamicOrders = dynamic(() => import('../app/account/components/orders'), { loading: () => <></>, ssr: false })
+const DynamicOrders = dynamic(() => import('../app/account/components/orders'), { loading: () => <></> })
 
 const DynamicPaymentMethods = dynamic(() => import('../app/account/components/payment-methods'), {
-  loading: () => <></>,
-  ssr: false,
+  loading: () => <></>
 })
 
-const DynamicReviews = dynamic(() => import('../app/account/components/reviews'), { loading: () => <></>, ssr: false })
+const DynamicReviews = dynamic(() => import('../app/account/components/reviews'), { loading: () => <></> })
+
+const Footer = dynamic(() => import('@/components/footer'))
 
 export {
   DProduct,
@@ -48,4 +49,5 @@ export {
   DynamicOrders,
   DynamicPaymentMethods,
   DynamicReviews,
+  Footer
 }

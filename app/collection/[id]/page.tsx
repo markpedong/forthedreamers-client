@@ -7,22 +7,17 @@ import Product from '@/components/product'
 
 import styles from './styles.module.scss'
 
-interface PageProps {
-  params: {
-    id: string
-  }
-}
-
 export async function generateStaticParams() {
   const collections =
     (await getCollections({ passCookies: false }))?.map(collection => ({
-      id: collection.id,
+      id: collection.id
     })) || []
 
   return collections
 }
 
-const Page = async ({ params: { id } }: PageProps) => {
+const Page = async ({ params }) => {
+  const { id } = await params
   const collections = await getCollectionsByID({ id })
 
   return (
@@ -33,7 +28,9 @@ const Page = async ({ params: { id } }: PageProps) => {
         <div></div>
         {!!collections?.products?.length && <div>{collections?.products?.length} PRODUCTS</div>}
       </div>
-      <div className={styles.productWrapper}>{collections?.products?.map(item => <Product product={item} key={item?.id} />)}</div>
+      <div className={styles.productWrapper}>
+        {collections?.products?.map(item => <Product product={item} key={item?.id} />)}
+      </div>
     </div>
   )
 }

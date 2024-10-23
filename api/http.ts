@@ -24,7 +24,7 @@ const handleResponse = async <T>(response: Response, url?: string): Promise<ApiR
   if (!!url && ['/public/login', '/public/signup'].includes(url)) {
     const token = (data.data as { token: string })?.token
 
-    setCookie('token', token)
+    await setCookie('token', token)
     setLocalStorage('token', token)
   }
 
@@ -50,8 +50,8 @@ const fetchWithToken = async (url: string, options: RequestInit, passCookies = t
     ...options,
     headers: {
       ...options.headers,
-      token: String(token).replace(/"/g, ''),
-    },
+      token: String(token).replace(/"/g, '')
+    }
   })
 }
 
@@ -61,7 +61,7 @@ const upload = async <T>(url: string, file: File): Promise<ApiResponse<T>> => {
 
   const response = await fetchWithToken(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
-    body: form,
+    body: form
   })
 
   return handleResponse<T>(response)
@@ -71,7 +71,7 @@ const post = async <T>({ url, data = {} }: RequestParams): Promise<ApiResponse<T
   const response = await fetchWithToken(`${process.env.NEXT_PUBLIC_DOMAIN}${url}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   })
 
   return handleResponse<T>(response, url)
@@ -82,9 +82,9 @@ const get = async <T>({ url, data, tags, passCookies = true }: RequestParams): P
     `${process.env.NEXT_PUBLIC_DOMAIN}${url}${!!stringify(data) ? '?' + stringify(data) : ''}`,
     {
       method: 'GET',
-      next: { tags: [tags || ''], revalidate: STALE_TIME * 6 },
+      next: { tags: [tags || ''], revalidate: STALE_TIME * 6 }
     },
-    passCookies,
+    passCookies
   )
 
   return handleResponse<T>(response)

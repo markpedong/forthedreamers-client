@@ -10,13 +10,7 @@ import Search from './search'
 import styles from './styles.module.scss'
 import { getProducts } from '@/lib/server'
 
-interface PageProps {
-  searchParams?: {
-    search?: string
-  }
-}
-
-const Page = async ({ searchParams }: PageProps) => {
+const Page = async ({ searchParams }) => {
   const search = searchParams && typeof searchParams.search === 'string' ? searchParams.search : ''
   const products = await getProducts({ search })
 

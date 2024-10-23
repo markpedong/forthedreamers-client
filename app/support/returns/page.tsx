@@ -1,3 +1,5 @@
+'use client'
+
 import { CANCEL_ANSWERS, RETURN_ANSWERS, RETURN_POLICY, WRONGITEM_ANSWERS } from '@/app/constants'
 import { DynamicListAnswers } from '@/components/dynamic-import'
 import { PageTitle, Question } from '@/components/page-components'
