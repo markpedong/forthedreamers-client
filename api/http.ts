@@ -48,6 +48,7 @@ const fetchWithToken = async (url: string, options: RequestInit, passCookies = t
   const token = typeof window !== 'undefined' ? getLocalStorage('token') : passCookies && (await getCookie('token'))
   return fetch(url, {
     ...options,
+    cache: 'force-cache',
     headers: {
       ...options.headers,
       token: String(token).replace(/"/g, '')
